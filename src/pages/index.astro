@@ -3,16 +3,170 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="OTC Hedge - Greatness Coming Soon">
-  <div class="hero">
+  <div class="hero" data-navbar-theme="hero">
     <div class="hero-content fade-in">
       <h1 class="hero-title">
-        Greatness <span class="text-accent">Coming Soon</span>
+        Custom AI Solutions for Finance, Legal & Beyond
       </h1>
       <p class="hero-subtitle">
-        AI-powered solutions for legal and financial excellence
+        Unlock the potential of AI Documentation Management at scale, AI contract data analysis, and the latest AI technologies.
       </p>
+      <button type="button" class="hero-cta">Get Started</button>
     </div>
   </div>
+
+  <section class="workflow-section" data-navbar-theme="light">
+    <div class="container">
+      <div class="workflow-content">
+        <h2 class="workflow-text">
+          <strong>OTC Hedge is AI designed for legal and professional services.</strong>
+          <span class="text-grey"> Advance your expertise on a secure platform that lets you focus on high-value work.</span>
+        </h2>
+        
+        <div class="video-container">
+          <iframe 
+            id="workflow-video"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&mute=1" 
+            title="AI Workflow Integration"
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen
+            class="workflow-video">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="clients-section" data-navbar-theme="light" aria-label="Trusted by leading firms">
+    <div class="clients-marquee-wrapper">
+      <div class="clients-marquee-track" aria-hidden="true">
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+          <div class="clients-logo-cell">
+            <div
+              class="clients-logo-img"
+              style={`background-position: ${(i / 10) * 100}% 0;`}
+              role="img"
+              aria-label="Company logo"
+            />
+          </div>
+        ))}
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+          <div class="clients-logo-cell">
+            <div
+              class="clients-logo-img"
+              style={`background-position: ${(i / 10) * 100}% 0;`}
+              role="img"
+              aria-label="Company logo"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section" data-navbar-theme="light">
+    <div class="container">
+      <p class="features-section-label">Powerful Features</p>
+      <h2 class="features-section-title">Empowering sales teams & management with AI-driven speed & success</h2>
+      <p class="features-section-desc">Leverage a comprehensive suite of cutting-edge services designed to accomplish high performance contracting and trade execution.</p>
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon-wrap feature-icon-blue" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <h3 class="feature-card-title">Contract Lifecycle Speeds</h3>
+          <p class="feature-card-desc">From onboarding to trade execution - increased by over 50%</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon-wrap feature-icon-green" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+            </svg>
+          </div>
+          <h3 class="feature-card-title">AI Contract Management</h3>
+          <p class="feature-card-desc">Organize all contracts with an AI powered repository - single source of truth. Stay on top of all contract obligations.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon-wrap feature-icon-yellow" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="5" r="1" />
+              <circle cx="5" cy="19" r="1" />
+              <circle cx="19" cy="19" r="1" />
+              <line x1="12" y1="7" x2="12" y2="13" />
+              <line x1="5" y1="19" x2="12" y2="13" />
+              <line x1="19" y1="19" x2="12" y2="13" />
+            </svg>
+          </div>
+          <h3 class="feature-card-title">AI Contract Data Analysis</h3>
+          <p class="feature-card-desc">Using AI, run a query on all contracts and know exactly what advantages and risks live in each contract type.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon-wrap feature-icon-purple" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </div>
+          <h3 class="feature-card-title">Risk Profile Dashboards</h3>
+          <p class="feature-card-desc">Understand the regulatory risks associated with each contract type. Protect against specific risk profiles.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Legal modernization, delivered - diagram section -->
+  <section class="legal-modernization-section" data-navbar-theme="dark">
+    <div class="container legal-modernization-container">
+      <h2 class="legal-modernization-title">Legal modernization, delivered.</h2>
+      <div class="legal-modernization-diagram">
+        <svg class="legal-modernization-svg" viewBox="0 0 900 580" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" shape-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+          <!-- Donut: outer R=128, inner r=112 — larger hole so center copy stays inside the ring visually. -->
+          <g transform="translate(450, 280)">
+            <path d="M -114.05 -58.13 A 128 128 0 0 1 19.95 -126.51 L 17.5 -110.74 A 112 112 0 0 0 -99.82 -50.82 Z" fill="#D4A853" />
+            <path d="M 19.95 -126.51 A 128 128 0 0 1 58.13 114.05 L 50.82 99.82 A 112 112 0 0 0 17.5 -110.74 Z" fill="#6BB4D9" />
+            <path d="M 58.13 114.05 A 128 128 0 0 1 -114.05 -58.13 L -99.82 -50.82 A 112 112 0 0 0 50.82 99.82 Z" fill="#E87B9C" />
+          </g>
+          <!-- Short radial stubs — decorative only so lines never cross card paragraphs -->
+          <g class="legal-modernization-connectors">
+            <!-- Contract Acceleration (gold) -->
+            <line x1="553.8" y1="205.1" x2="596" y2="174.6" stroke="#D4A853" stroke-width="1.5" stroke-dasharray="6 5" stroke-linecap="round" />
+            <circle cx="601.5" cy="171.5" r="5" fill="#D4A853" />
+            <!-- AI Enablement (pink) -->
+            <line x1="322" y1="280" x2="274" y2="280" stroke="#E87B9C" stroke-width="1.5" stroke-dasharray="6 5" stroke-linecap="round" />
+            <circle cx="269" cy="280" r="5" fill="#E87B9C" />
+            <!-- Managed Contracting (blue) -->
+            <line x1="553.5" y1="355.4" x2="595.5" y2="386" stroke="#6BB4D9" stroke-width="1.5" stroke-dasharray="6 5" stroke-linecap="round" />
+            <circle cx="601" cy="389.6" r="5" fill="#6BB4D9" />
+          </g>
+        </svg>
+        <div class="legal-modernization-center">
+          <h3 class="legal-modernization-center-title">Factor lives here</h3>
+          <ul class="legal-modernization-center-list">
+            <li>Superior performance</li>
+            <li>Improved outcomes</li>
+            <li>Better human experience</li>
+          </ul>
+        </div>
+        <div class="legal-modernization-card legal-modernization-card--ai">
+          <h4 class="legal-modernization-card-title">AI Enablement</h4>
+          <p class="legal-modernization-card-desc">Advancing AI strategy and organizational readiness, enabling in-house legal teams to fully harness the AI-ubiquitous world for an evolving Legal remit.</p>
+        </div>
+        <div class="legal-modernization-card legal-modernization-card--contract">
+          <h4 class="legal-modernization-card-title">Contract Acceleration</h4>
+          <p class="legal-modernization-card-desc">Delivering the AI-enabled operating model for inhouse contracting functions with AI accelerators, tools, and solutions.</p>
+        </div>
+        <div class="legal-modernization-card legal-modernization-card--managed">
+          <h4 class="legal-modernization-card-title">Managed Contracting</h4>
+          <p class="legal-modernization-card-desc">Executing legal work within Factor's areas of specialization, operating in an integrated fashion with in-house teams to "do while transforming / transform while doing."</p>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <style>
@@ -20,9 +174,63 @@ import Layout from '../layouts/Layout.astro';
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 80px);
+    min-height: 100vh;
     padding: 2rem;
     text-align: center;
+  }
+
+  .workflow-section {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 8rem 0;
+  }
+
+  .workflow-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .workflow-text {
+    font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+    line-height: 1.25;
+    margin-bottom: 5rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    max-width: min(55%, 580px);
+  }
+
+  .workflow-text strong {
+    font-weight: 600;
+    color: #000000;
+  }
+
+  .text-grey {
+    color: #999999;
+  }
+
+  .video-container {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .hero-content {
@@ -44,9 +252,492 @@ import Layout from '../layouts/Layout.astro';
     letter-spacing: 0.01em;
   }
 
+  .hero-cta {
+    margin-top: 2rem;
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    background-color: var(--color-accent);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .hero-cta:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .hero-cta:active {
+    transform: translateY(0);
+  }
+
+  /* When viewport shrinks: text scales down a little, less right padding */
+  @media (max-width: 900px) {
+    .workflow-text {
+      font-size: clamp(1.4rem, 2.6vw, 2rem);
+      max-width: min(70%, 100%);
+    }
+  }
+
   @media (max-width: 768px) {
     .hero {
-      min-height: calc(100vh - 120px);
+      min-height: 100vh;
+    }
+
+    .workflow-text {
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      max-width: 85%;
+    }
+  }
+
+  /* Clients section – horizontal scrolling bar: white bg, black logos, clearly separated */
+  .clients-section {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 2.5rem 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .clients-marquee-wrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .clients-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: max-content;
+    animation: clients-marquee 40s linear infinite;
+    padding: 0.5rem 0;
+  }
+
+  .clients-logo-cell {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 2.5rem;
+    margin-right: 2rem;
+  }
+
+  .clients-logo-img {
+    width: 140px;
+    height: 40px;
+    background-image: url('/clients-logos.png');
+    background-size: 1100% 100%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    filter: brightness(0);
+  }
+
+  @keyframes clients-marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Features section */
+  .features-section {
+    background-color: #fafaf9;
+    color: #000000;
+    padding: 12rem 0 14rem;
+    min-height: 100vh;
+    text-align: left;
+  }
+
+  .features-section-label {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 1.5rem;
+    text-align: center;
+  }
+
+  .features-section-title {
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: #000000;
+    margin: 0 auto 1.5rem;
+    max-width: 900px;
+    text-align: center;
+  }
+
+  .features-section-desc {
+    font-size: clamp(1.0625rem, 1.75vw, 1.25rem);
+    line-height: 1.55;
+    color: rgba(0, 0, 0, 0.75);
+    margin: 0 auto 6rem;
+    max-width: 680px;
+    text-align: center;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem 3rem;
+    max-width: 1040px;
+    margin: 0 auto;
+    justify-items: center;
+  }
+
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 420px;
+  }
+
+  .feature-icon-wrap {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.75rem;
+    flex-shrink: 0;
+    color: #ffffff;
+    box-shadow: 0 0 20px currentColor;
+  }
+
+  .feature-icon-wrap svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .feature-icon-blue {
+    background-color: #3b82f6;
+    box-shadow: 0 0 24px rgba(59, 130, 246, 0.5);
+  }
+
+  .feature-icon-green {
+    background-color: #22c55e;
+    box-shadow: 0 0 24px rgba(34, 197, 94, 0.5);
+  }
+
+  .feature-icon-yellow {
+    background-color: #eab308;
+    box-shadow: 0 0 24px rgba(234, 179, 8, 0.5);
+  }
+
+  .feature-icon-purple {
+    background-color: #a855f7;
+    box-shadow: 0 0 24px rgba(168, 85, 247, 0.5);
+  }
+
+  .feature-card-title {
+    font-size: clamp(1.3125rem, 1.8vw, 1.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    margin: 0 0 0.875rem;
+    color: #000000;
+  }
+
+  .feature-card-desc {
+    font-size: clamp(1.03125rem, 1.3vw, 1.125rem);
+    font-weight: 400;
+    line-height: 1.55;
+    margin: 0;
+    color: #000000;
+  }
+
+  @media (max-width: 900px) {
+    .features-grid {
+      justify-items: center;
+    }
+
+    .features-section .feature-card {
+      align-items: center;
+      text-align: center;
+      max-width: 420px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .features-section {
+      padding: 6rem 0;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+      justify-items: center;
+    }
+
+    .features-section .feature-card {
+      max-width: 420px;
+    }
+
+    .feature-icon-wrap {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-icon-wrap svg {
+      width: 34px;
+      height: 34px;
+    }
+  }
+
+  /* Legal modernization section – black bg, white text, donut diagram */
+  .legal-modernization-section {
+    background-color: #000000;
+    color: #ffffff;
+    padding: clamp(4.5rem, 10vw, 8rem) 0 clamp(5rem, 12vw, 10rem);
+  }
+
+  .legal-modernization-container {
+    max-width: 1000px;
+  }
+
+  .legal-modernization-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+    color: #ffffff;
+  }
+
+  .legal-modernization-diagram {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    aspect-ratio: 900 / 580;
+    min-height: min(460px, 72vw);
+    isolation: isolate;
+    container-type: inline-size;
+    container-name: legal-modernization-diag;
+  }
+
+  .legal-modernization-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .legal-modernization-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: min(230px, 23cqw);
+    max-width: min(230px, 23cqw);
+    z-index: 2;
+    box-sizing: border-box;
+    padding: 0 0.35rem;
+  }
+
+  .legal-modernization-center-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.65rem;
+    line-height: 1.2;
+  }
+
+  .legal-modernization-center-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: clamp(0.8125rem, 1.35vw, 0.9375rem);
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.55;
+  }
+
+  .legal-modernization-center-list li {
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .legal-modernization-center-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+  }
+
+  .legal-modernization-card {
+    position: absolute;
+    max-width: min(260px, 30%);
+    z-index: 3;
+    padding: 0 0.125rem;
+    box-sizing: border-box;
+  }
+
+  .legal-modernization-card--ai {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .legal-modernization-card--contract {
+    right: 0;
+    top: 0;
+  }
+
+  .legal-modernization-card--managed {
+    right: 0;
+    bottom: 0;
+  }
+
+  .legal-modernization-card-title {
+    font-size: clamp(0.9375rem, 1.4vw, 1.0625rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .legal-modernization-card--ai .legal-modernization-card-title {
+    color: #E87B9C;
+  }
+
+  .legal-modernization-card--contract .legal-modernization-card-title {
+    color: #D4A853;
+  }
+
+  .legal-modernization-card--managed .legal-modernization-card-title {
+    color: #6BB4D9;
+  }
+
+  .legal-modernization-card-desc {
+    font-size: clamp(0.8125rem, 1.35vw, 0.9375rem);
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-weight: 400;
+  }
+
+  @media (max-width: 900px) {
+    .legal-modernization-diagram {
+      aspect-ratio: auto;
+      min-height: unset;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(1.25rem, 4vw, 2rem);
+      padding-bottom: 0.5rem;
+    }
+
+    .legal-modernization-svg {
+      position: relative;
+      inset: auto;
+      width: min(100%, 400px);
+      height: auto;
+      aspect-ratio: 900 / 580;
+      flex-shrink: 0;
+    }
+
+    .legal-modernization-center {
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      order: -1;
+      width: min(100%, 22rem);
+      max-width: 22rem;
+      padding: 0 0.75rem;
+    }
+
+    .legal-modernization-card {
+      position: relative;
+      left: auto;
+      right: auto;
+      top: auto;
+      bottom: auto;
+      transform: none;
+      width: min(100%, 26rem);
+      max-width: 26rem;
+      text-align: center;
+      padding: 0 0.5rem;
+    }
+
+    .legal-modernization-card--ai {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .legal-modernization-center-title {
+      font-size: clamp(1rem, 4.5vw, 1.2rem);
+    }
+
+    .legal-modernization-center-list {
+      font-size: clamp(0.78rem, 3.8vw, 0.875rem);
+    }
+
+    .legal-modernization-svg {
+      width: min(100%, 340px);
     }
   }
 </style>
+
+<script is:inline>
+  // Load YouTube IFrame API
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var player;
+  var hasStarted = false;
+
+  // This function is called by the YouTube API when it's ready
+  window.onYouTubeIframeAPIReady = function() {
+    player = new YT.Player('workflow-video', {
+      playerVars: {
+        'enablejsapi': 1,
+        'mute': 1,
+        'controls': 1,
+        'rel': 0,
+        'autoplay': 0
+      },
+      events: {
+        'onReady': onPlayerReady
+      }
+    });
+  };
+
+  function onPlayerReady(event) {
+    // Set up intersection observer to detect when video is visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasStarted) {
+          hasStarted = true;
+          // Play muted (browsers allow this)
+          player.mute();
+          player.playVideo();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const videoContainer = document.querySelector('.video-container');
+    if (videoContainer) {
+      observer.observe(videoContainer);
+    }
+  }
+</script>

@@ -1,11 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SolutionsBreadcrumb from '../components/SolutionsBreadcrumb.astro';
 ---
 
-<Layout title="About - OTC Hedge">
+<Layout title="Finance & Capital Markets - OTC Hedge">
   <div class="page-container" data-navbar-theme="hero">
     <div class="content fade-in">
-      <h1>About OTC Hedge</h1>
+      <SolutionsBreadcrumb pageName="Finance & Capital Markets" />
+      <h1>Finance & Capital Markets</h1>
       <p class="subtitle">Coming Soon</p>
     </div>
   </div>
@@ -23,6 +25,7 @@ import Layout from '../layouts/Layout.astro';
   .content {
     text-align: center;
     max-width: 800px;
+    width: 100%;
   }
 
   h1 {
