@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css?v=4">
+<link rel="stylesheet" href="assets/css/styles.css?v=5">
 <script>document.documentElement.classList.add("js");</script>
 </head>
 <body data-page="ps">
@@ -77,19 +77,30 @@
       </button>
     </div>
     <nav class="mobile-menu__nav" aria-label="Mobile">
-      <div class="mobile-menu__section">
-        <span class="mobile-menu__label">Solutions</span>
-        <a class="mobile-menu__link" data-nav="law" href="law.html">Law</a>
-        <a class="mobile-menu__link" data-nav="finance" href="finance.html">Finance</a>
-        <a class="mobile-menu__link" data-nav="ps" href="professional-services.html">Professional Services</a>
+      <a class="mobile-menu__item mobile-menu__item--link" data-nav="home" href="index.html">Home</a>
+      <div class="mobile-menu__item mobile-menu__item--dd">
+        <button class="mobile-menu__toggle" data-nav="solutions" type="button" aria-expanded="false" aria-controls="mobile-solutions">
+          Solutions
+          <svg class="chev" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1 3.5 5 7l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="mobile-menu__sub" id="mobile-solutions" hidden>
+          <a class="mobile-menu__sub-link" data-nav="law" href="law.html">
+            <b>Law</b>
+            <span>Legal execution with ease — drafting, review, diligence, knowledge.</span>
+          </a>
+          <a class="mobile-menu__sub-link" data-nav="finance" href="finance.html">
+            <b>Finance</b>
+            <span>Reduce risk, amplify returns — built for market-maker rigor.</span>
+          </a>
+          <a class="mobile-menu__sub-link" data-nav="ps" href="professional-services.html">
+            <b>Professional Services</b>
+            <span>Win clients, keep clients — institutional knowledge as advantage.</span>
+          </a>
+        </div>
       </div>
-      <div class="mobile-menu__section">
-        <span class="mobile-menu__label">Company</span>
-        <a class="mobile-menu__link" data-nav="home" href="index.html">Home</a>
-        <a class="mobile-menu__link" data-nav="about" href="about.html">About</a>
-        <a class="mobile-menu__link" data-nav="insights" href="insights.html">Industry Analysis</a>
-        <a class="mobile-menu__link" href="#contact">Contact</a>
-      </div>
+      <a class="mobile-menu__item mobile-menu__item--link" data-nav="about" href="about.html">About</a>
+      <a class="mobile-menu__item mobile-menu__item--link" data-nav="insights" href="insights.html">Industry Analysis</a>
+      <a class="mobile-menu__item mobile-menu__item--link" href="#contact">Contact</a>
     </nav>
     <div class="mobile-menu__footer">
       <a class="btn btn--primary" href="#contact">Contact sales <span class="arr" aria-hidden="true">→</span></a>
@@ -289,6 +300,6 @@
   <div class="footer__ghost" aria-hidden="true">OTC Hedge</div>
 </footer>
 
-<script src="assets/js/site.js?v=3" defer></script>
+<script src="assets/js/site.js?v=4" defer></script>
 </body>
 </html>

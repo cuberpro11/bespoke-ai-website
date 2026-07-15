@@ -62,18 +62,35 @@
 
   // active link
   const page = doc.body.dataset.page;
+  const solutionPages = new Set(["law", "finance", "ps"]);
   if (page) {
-    doc.querySelectorAll(`[data-nav="${page}"]`).forEach((a) => a.classList.add("is-active"));
+    doc.querySelectorAll(`[data-nav="${page}"]`).forEach((el) => el.classList.add("is-active"));
+    if (solutionPages.has(page)) {
+      doc.querySelectorAll('[data-nav="solutions"]').forEach((el) => el.classList.add("is-active"));
+    }
   }
+
+  const BURGER_MQ = window.matchMedia("(max-width: 960px)");
 
   // mobile menu
   const burger = doc.querySelector(".nav__burger");
   const mobileMenu = doc.getElementById("mobile-menu");
   const menuPanel = mobileMenu ? mobileMenu.querySelector(".mobile-menu__panel") : null;
+  const mobileSolutionsDd = mobileMenu ? mobileMenu.querySelector(".mobile-menu__item--dd") : null;
+  const mobileSolutionsBtn = mobileSolutionsDd ? mobileSolutionsDd.querySelector(".mobile-menu__toggle") : null;
+  const mobileSolutionsSub = mobileMenu ? mobileMenu.querySelector("#mobile-solutions") : null;
   const menuFocusables = () =>
     menuPanel
       ? [...menuPanel.querySelectorAll('a[href], button:not([disabled])')]
       : [];
+
+  const setMobileSolutionsOpen = (open) => {
+    if (!mobileSolutionsDd || !mobileSolutionsBtn || !mobileSolutionsSub) return;
+    mobileSolutionsDd.classList.toggle("is-open", open);
+    mobileSolutionsBtn.setAttribute("aria-expanded", String(open));
+    if (open) mobileSolutionsSub.removeAttribute("hidden");
+    else mobileSolutionsSub.setAttribute("hidden", "");
+  };
 
   const setMenuOpen = (open) => {
     if (!burger || !mobileMenu) return;
@@ -82,9 +99,11 @@
     burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     mobileMenu.setAttribute("aria-hidden", String(!open));
     if (open) {
-      const first = menuPanel ? menuPanel.querySelector(".mobile-menu__link, .mobile-menu__close") : null;
+      if (page && solutionPages.has(page)) setMobileSolutionsOpen(true);
+      const first = menuPanel ? menuPanel.querySelector(".mobile-menu__close") : null;
       if (first) requestAnimationFrame(() => first.focus());
     } else {
+      setMobileSolutionsOpen(false);
       burger.focus();
     }
   };
@@ -92,9 +111,23 @@
   if (burger && mobileMenu) {
     burger.addEventListener("click", () => setMenuOpen(!doc.body.classList.contains("nav-open")));
 
-    mobileMenu.querySelectorAll("[data-menu-close], .mobile-menu__link, .mobile-menu__footer a").forEach((el) => {
+    mobileMenu.querySelectorAll("[data-menu-close], .mobile-menu__header .brand, .mobile-menu__item--link, .mobile-menu__sub-link, .mobile-menu__footer a").forEach((el) => {
       el.addEventListener("click", () => setMenuOpen(false));
     });
+
+    if (mobileSolutionsBtn) {
+      mobileSolutionsBtn.addEventListener("click", () => {
+        const open = mobileSolutionsBtn.getAttribute("aria-expanded") !== "true";
+        setMobileSolutionsOpen(open);
+      });
+    }
+
+    const syncMenuOnBreakpoint = () => {
+      if (!BURGER_MQ.matches && doc.body.classList.contains("nav-open")) {
+        setMenuOpen(false);
+      }
+    };
+    BURGER_MQ.addEventListener("change", syncMenuOnBreakpoint);
 
     doc.addEventListener("keydown", (e) => {
       if (!doc.body.classList.contains("nav-open")) return;
