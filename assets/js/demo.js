@@ -11,6 +11,10 @@
   if (!stage) return;
 
   const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const MOBILE = window.matchMedia("(max-width: 860px)").matches;
+  const COARSE = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  const HIDE_CURSOR = MOBILE || COARSE;
+  if (HIDE_CURSOR && el.cursor) el.cursor.style.display = "none";
   const PLAYBACK_RATE = 1.2;
   const realMs = (ms) => ms / PLAYBACK_RATE;
   const $ = (key) => stage.querySelector(`[data-el="${key}"]`);
@@ -177,6 +181,7 @@
   const CURSOR_HOTSPOT = { x: 5.5 / 24, y: 3.2 / 24 };
 
   const cursorTo = (target, opts = {}) => {
+    if (HIDE_CURSOR) return;
     const { dur = 850, ox = 0, oy = 0 } = opts;
     const node = typeof target === "string" ? $(target) : target;
     if (!node) return;
@@ -192,10 +197,12 @@
     el.cursor.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
   };
   const cursorClick = () => {
+    if (HIDE_CURSOR) return;
     el.cursor.classList.add("is-click");
     setTimeout(() => el.cursor.classList.remove("is-click"), realMs(340));
   };
   const cursorHome = () => {
+    if (HIDE_CURSOR) return;
     const root = cursorRoot();
     const rr = root.getBoundingClientRect();
     const cr = el.cursor.getBoundingClientRect();

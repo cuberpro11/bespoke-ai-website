@@ -9,6 +9,8 @@
   const doc = document;
   const root = doc.documentElement;
   const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const MOBILE = window.matchMedia("(max-width: 860px)").matches;
+  const COARSE = window.matchMedia("(hover: none), (pointer: coarse)").matches;
 
   /* ---------------------------------------------------------------- nav -- */
 
@@ -64,6 +66,58 @@
     doc.querySelectorAll(`[data-nav="${page}"]`).forEach((a) => a.classList.add("is-active"));
   }
 
+  // mobile menu
+  const burger = doc.querySelector(".nav__burger");
+  const mobileMenu = doc.getElementById("mobile-menu");
+  const menuPanel = mobileMenu ? mobileMenu.querySelector(".mobile-menu__panel") : null;
+  const menuFocusables = () =>
+    menuPanel
+      ? [...menuPanel.querySelectorAll('a[href], button:not([disabled])')]
+      : [];
+
+  const setMenuOpen = (open) => {
+    if (!burger || !mobileMenu) return;
+    doc.body.classList.toggle("nav-open", open);
+    burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    mobileMenu.setAttribute("aria-hidden", String(!open));
+    if (open) {
+      const first = menuPanel ? menuPanel.querySelector(".mobile-menu__link, .mobile-menu__close") : null;
+      if (first) requestAnimationFrame(() => first.focus());
+    } else {
+      burger.focus();
+    }
+  };
+
+  if (burger && mobileMenu) {
+    burger.addEventListener("click", () => setMenuOpen(!doc.body.classList.contains("nav-open")));
+
+    mobileMenu.querySelectorAll("[data-menu-close], .mobile-menu__link, .mobile-menu__footer a").forEach((el) => {
+      el.addEventListener("click", () => setMenuOpen(false));
+    });
+
+    doc.addEventListener("keydown", (e) => {
+      if (!doc.body.classList.contains("nav-open")) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setMenuOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = menuFocusables().filter((el) => el.offsetParent !== null);
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && doc.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && doc.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+  }
+
   // solutions dropdown (hover intent + click + keyboard)
   doc.querySelectorAll(".nav__item--dd").forEach((item) => {
     const btn = item.querySelector("button.nav__link");
@@ -91,21 +145,6 @@
     doc.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
   });
 
-  // mobile menu
-  const burger = doc.querySelector(".nav__burger");
-  if (burger) {
-    burger.addEventListener("click", () => {
-      const openNow = doc.body.classList.toggle("nav-open");
-      burger.setAttribute("aria-expanded", String(openNow));
-    });
-    doc.querySelectorAll(".mobile-menu a").forEach((a) =>
-      a.addEventListener("click", () => {
-        doc.body.classList.remove("nav-open");
-        burger.setAttribute("aria-expanded", "false");
-      })
-    );
-  }
-
   /* ------------------------------------------------------------- reveals -- */
 
   // auto-assign stagger indices
@@ -127,7 +166,7 @@
             }
           });
         },
-        { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+        { rootMargin: MOBILE ? "0px 0px -2% 0px" : "0px 0px -8% 0px", threshold: 0.08 }
       );
       revealEls.forEach((el) => io.observe(el));
     }
@@ -328,7 +367,8 @@
     };
 
     build();
-    if (REDUCED) {
+    const staticCanvas = REDUCED || MOBILE || COARSE;
+    if (staticCanvas) {
       frame(); // single static frame
     } else {
       const vis = new IntersectionObserver(
@@ -355,7 +395,7 @@
     let rT = null;
     window.addEventListener("resize", () => {
       clearTimeout(rT);
-      rT = setTimeout(() => { build(); if (REDUCED) frame(); }, 180);
+      rT = setTimeout(() => { build(); if (staticCanvas) frame(); }, 180);
     });
   }
 
@@ -544,6 +584,8 @@
         setCasePanelOpen(panel, !panel.classList.contains("is-open"), true);
       });
     });
+
+    if (MOBILE || COARSE) return;
 
     const updateCaseReveal = () => {
       const rect = group.getBoundingClientRect();
