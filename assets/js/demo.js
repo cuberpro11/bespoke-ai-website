@@ -107,7 +107,7 @@
       d.style.left = f.sx + "%";
       d.style.top = f.sy + "%";
       d.innerHTML = `<span class="f-ico">${f.kind}</span>
-        <span style="min-width:0"><span class="f-name">${f.name}</span><span class="f-sub">${f.sub}</span></span>
+        <span class="f-body"><span class="f-name">${f.name}</span><span class="f-sub">${f.sub}</span></span>
         <span class="f-check">${checkIcon}</span>
         <span class="f-scan"></span>`;
       el.fileLayer.appendChild(d);
@@ -126,13 +126,16 @@
       const idx = (perFolder[f.folder] = (perFolder[f.folder] ?? -1) + 1);
       const fr = folder.getBoundingClientRect();
       const head = folder.querySelector(".folder__head").getBoundingClientRect();
-      const tags = folder.querySelector(".folder__tags").getBoundingClientRect();
       const chipH = chip.offsetHeight;
-      const x = fr.left - layerR.left + fr.width * 0.045;
-      const y = head.bottom - layerR.top + tags.height + chipH * 0.28 + idx * (chipH + chipH * 0.16);
+      const chipW = fr.width * 0.91;
+      const gap = chipH * 0.18;
+      const x = fr.left - layerR.left + (fr.width - chipW) / 2;
+      const y = head.bottom - layerR.top + chipH * 0.28 + idx * (chipH + gap);
       chip.classList.add("is-grouped");
+      chip.style.width = chipW + "px";
       chip.style.left = x + "px";
       chip.style.top = y + "px";
+      folder.classList.add("is-packed");
     });
   };
 
@@ -208,7 +211,7 @@
     el.dropzone.classList.remove("is-hidden");
     buildFolders();
     buildChips();
-    el.folderGrid.querySelectorAll(".folder").forEach((f) => f.classList.remove("is-in", "is-lit"));
+    el.folderGrid.querySelectorAll(".folder").forEach((f) => f.classList.remove("is-in", "is-lit", "is-packed"));
     el.docsStatus.textContent = "Waiting for upload…";
     el.docsStatus.classList.remove("is-good");
     el.badgeDocs.classList.remove("is-on");
@@ -362,13 +365,6 @@
           },
         })),
         { t: 2600, run: () => (el.docsStatus.textContent = "Extracting parties, dates, governing law…") },
-        ...[0, 1, 2, 3, 4, 5, 6, 7].map((i) => ({
-          t: 2900 + i * 160,
-          run: () => {
-            const tags = el.folderGrid.querySelectorAll(".tag");
-            if (tags[i]) tags[i].classList.add("is-in");
-          },
-        })),
         { t: 4600, run: () => el.folderGrid.querySelectorAll(".folder").forEach((f) => f.classList.remove("is-lit")) },
         { t: 5200, run: () => { el.docsStatus.textContent = "Organized · 8 documents across 4 matters"; el.docsStatus.classList.add("is-good"); el.badgeDocs.classList.add("is-on"); } },
         { t: 6200, run: () => { el.cursor.classList.add("is-on"); cursorTo(el.sideChat, { dur: 800 }); } },
