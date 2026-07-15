@@ -1,5 +1,5 @@
 /* ==========================================================================
-   OTC HEDGE — scripted product demonstration
+   BESPOKE — scripted product demonstration
    A deterministic, seekable timeline that plays like a screen recording:
    ingest → organize → ask → trace citation → draft → deliver.
    Pauses offscreen, pausable by the user, static poster under reduced motion.
@@ -14,7 +14,6 @@
   const MOBILE = window.matchMedia("(max-width: 860px)").matches;
   const COARSE = window.matchMedia("(hover: none), (pointer: coarse)").matches;
   const HIDE_CURSOR = MOBILE || COARSE;
-  if (HIDE_CURSOR && el.cursor) el.cursor.style.display = "none";
   const PLAYBACK_RATE = 1.2;
   const realMs = (ms) => ms / PLAYBACK_RATE;
   const $ = (key) => stage.querySelector(`[data-el="${key}"]`);
@@ -36,6 +35,7 @@
     checks: [$("check-1"), $("check-2"), $("check-3")],
     exportBtn: $("export-btn"), toast: $("toast"), cursor: $("cursor"),
   };
+  if (HIDE_CURSOR && el.cursor) el.cursor.style.display = "none";
   const scenes = {
     docs: stage.querySelector('[data-scene="docs"]'),
     chat: stage.querySelector('[data-scene="chat"]'),
@@ -741,7 +741,7 @@
     })
   );
 
-  const io = new IntersectionObserver(([en]) => { inView = en.isIntersecting; syncLoop(); }, { threshold: 0.12 });
+  const io = new IntersectionObserver(([en]) => { inView = en.isIntersecting; syncLoop(); }, { threshold: MOBILE ? 0.06 : 0.12 });
   io.observe(stage);
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) inView = false;

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   OTC HEDGE — shared site behaviour
+   BESPOKE — shared site behaviour
    Motion charter: transform/opacity only · enter ease-out · ≤520ms interactive
    · everything gated behind prefers-reduced-motion.
    ========================================================================== */
