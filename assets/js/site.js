@@ -86,10 +86,24 @@
 
   const setMobileSolutionsOpen = (open) => {
     if (!mobileSolutionsDd || !mobileSolutionsBtn || !mobileSolutionsSub) return;
-    mobileSolutionsDd.classList.toggle("is-open", open);
     mobileSolutionsBtn.setAttribute("aria-expanded", String(open));
-    if (open) mobileSolutionsSub.removeAttribute("hidden");
-    else mobileSolutionsSub.setAttribute("hidden", "");
+
+    if (open) {
+      mobileSolutionsDd.classList.add("is-open");
+      mobileSolutionsSub.removeAttribute("hidden");
+      mobileSolutionsDd.classList.remove("is-sub-reveal");
+      if (REDUCED) {
+        mobileSolutionsDd.classList.add("is-sub-reveal");
+        return;
+      }
+      void mobileSolutionsSub.offsetHeight;
+      requestAnimationFrame(() => {
+        mobileSolutionsDd.classList.add("is-sub-reveal");
+      });
+    } else {
+      mobileSolutionsDd.classList.remove("is-open", "is-sub-reveal");
+      mobileSolutionsSub.setAttribute("hidden", "");
+    }
   };
 
   const setMenuOpen = (open) => {
@@ -99,7 +113,11 @@
     burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     mobileMenu.setAttribute("aria-hidden", String(!open));
     if (open) {
-      if (page && solutionPages.has(page)) setMobileSolutionsOpen(true);
+      if (page && solutionPages.has(page)) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => setMobileSolutionsOpen(true));
+        });
+      }
       const first = menuPanel ? menuPanel.querySelector(".mobile-menu__close") : null;
       if (first) requestAnimationFrame(() => first.focus());
     } else {

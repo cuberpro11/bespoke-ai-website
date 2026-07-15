@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css?v=5">
+<link rel="stylesheet" href="assets/css/styles.css?v=7">
 <script>document.documentElement.classList.add("js","animate-headlines");</script>
 </head>
 <body data-page="home">
@@ -239,17 +239,11 @@
                 </div>
                 <div class="draft-wrap">
                   <div class="draft-page">
-                    <h4 data-el="draft-title"></h4>
-                    <div class="d-meta" data-el="draft-meta"></div>
-                    <div class="d-rule"></div>
-                    <div class="d-h" data-el="draft-h1"></div>
-                    <p class="d-p" data-el="draft-p1"></p>
-                    <div class="d-h" data-el="draft-h2"></div>
-                    <p class="d-p" data-el="draft-p2"></p>
-                    <div class="skel-group" data-el="draft-skel">
-                      <div class="doc-line w-95"></div>
-                      <div class="doc-line w-80"></div>
-                      <div class="doc-line w-60"></div>
+                    <div class="draft-body" data-el="draft-body">
+                      <div class="draft-think" data-el="draft-think" aria-hidden="true">
+                        <i></i><span>Composing…</span>
+                      </div>
+                      <div class="draft-lines" data-el="draft-lines"></div>
                     </div>
                   </div>
                   <div class="draft-side">
@@ -722,7 +716,7 @@
   <div class="footer__ghost" aria-hidden="true">OTC Hedge</div>
 </footer>
 
-<script src="assets/js/site.js?v=4" defer></script>
-<script src="assets/js/demo.js?v=5" defer></script>
+<script src="assets/js/site.js?v=5" defer></script>
+<script src="assets/js/demo.js?v=10" defer></script>
 </body>
 </html>

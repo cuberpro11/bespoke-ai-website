@@ -30,9 +30,9 @@
     sendBtn: $("send-btn"),
     src: [null, $("src-1"), $("src-2"), $("src-3")],
     viewer: $("viewer"), docLines: $("doc-lines"), docClause: $("doc-clause"), citeFlag: $("cite-flag"),
-    draftStatus: $("draft-status"), draftTitle: $("draft-title"), draftMeta: $("draft-meta"),
-    draftH1: $("draft-h1"), draftP1: $("draft-p1"), draftH2: $("draft-h2"), draftP2: $("draft-p2"),
-    draftSkel: $("draft-skel"), draftCheckTitle: $("draft-check-title"),
+    draftStatus: $("draft-status"), draftBody: $("draft-body"),
+    draftThink: $("draft-think"), draftLines: $("draft-lines"),
+    draftCheckTitle: $("draft-check-title"),
     checks: [$("check-1"), $("check-2"), $("check-3")],
     exportBtn: $("export-btn"), toast: $("toast"), cursor: $("cursor"),
   };
@@ -81,11 +81,77 @@
   const DRAFT = {
     title: "Client Memorandum — Meridian Trading Exposure",
     meta: "PRIVILEGED & CONFIDENTIAL · ATTORNEY WORK PRODUCT · DRAFT v1",
-    h1: "I. Termination & Cross-Default",
-    p1: "Cross-default under the ISDA Master Agreement is triggered at USD 10,000,000 of Specified Indebtedness [1]; termination events extend to the GMSLA by operation of §14 [3].",
-    h2: "II. Margin & Collateral — 2024 Amendment",
-    p2: "The 2024 CSA Amendment reduces Party B's Threshold to USD 100,000 and shortens the Delivery Amount cure period to one Business Day [2].",
+    sections: [
+      {
+        h: "I. Termination & Cross-Default",
+        lines: [
+          "Cross-default under the ISDA Master Agreement is triggered at USD 10,000,000 of Specified Indebtedness [1];",
+          "termination events extend to the GMSLA by operation of §14 [3].",
+          "A default under either agreement would permit the non-defaulting party to designate an Early Termination Date across all outstanding Transactions,",
+          "subject to the close-out netting provisions in §6.",
+        ],
+      },
+      {
+        h: "II. Margin & Collateral — 2024 Amendment",
+        lines: [
+          "The 2024 CSA Amendment reduces Party B's Threshold to USD 100,000 and shortens the Delivery Amount cure period to one Business Day [2].",
+          "Independent Amount obligations remain unchanged, but the tighter Threshold materially increases the frequency of margin calls",
+          "and reduces the buffer before a dispute escalates to a failure-to-deliver event.",
+        ],
+      },
+      {
+        h: "III. GMSLA Close-Out & Netting",
+        lines: [
+          "The GMSLA with Meridian Securities incorporates close-out netting on a transaction-by-transaction basis,",
+          "with market-value adjustments calculated under the 2010 GMSLA Pricing Annex [3].",
+          "In a simultaneous ISDA termination scenario, collateral posted under the CSA may be applied against GMSLA exposure,",
+          "but the cross-lien schedule in the Credit Agreement limits set-off rights to USD 50,000,000 aggregate [7].",
+          "We note the GMSLA's default-inclusion language mirrors the ISDA Specified Indebtedness definition,",
+          "creating a single trigger point across both agreements.",
+        ],
+      },
+      {
+        h: "IV. Fund LP Side Letter Considerations",
+        lines: [
+          "The Side Letter with Anchor LP contains a most-favored-nation clause that could extend preferential fee or liquidity terms",
+          "if triggered by a material adverse change in the Fund's portfolio [5].",
+          "While trading-agreement defaults do not directly constitute a MAC under the LPA,",
+          "a cross-default event that impairs the Fund's ability to meet capital calls could activate the side-letter notification provisions.",
+          "Fund counsel should confirm whether the current exposure profile satisfies the side letter's disclosure thresholds.",
+        ],
+      },
+      {
+        h: "V. Credit Facility Cross-Reference",
+        lines: [
+          "Facility B under the Credit Agreement includes a financial covenant requiring consolidated net leverage below 3.5× EBITDA, tested quarterly [6].",
+          "Termination payments crystallizing under the ISDA or GMSLA could affect the leverage calculation if recognized in the current reporting period.",
+          "The Guarantee & Security Agreement cross-collateralizes trading exposures with the revolving credit facility,",
+          "meaning margin disputes on the CSA could trigger review under the credit agreement's material-contract representation.",
+        ],
+      },
+      {
+        h: "VI. Recommended Actions",
+        lines: [
+          "We recommend the following before month-end:",
+          "(1) refresh collateral monitoring triggers to reflect the USD 100,000 Threshold and one-day cure period [2];",
+          "(2) confirm set-off sequencing with treasury in the event of a simultaneous ISDA/GMSLA close-out;",
+          "(3) notify fund administration of the revised margin profile for NAV impact modeling; and",
+          "(4) schedule a covenant compliance review with the credit team if termination exposure exceeds USD 25,000,000 on a mark-to-market basis.",
+        ],
+      },
+      {
+        h: "VII. Source Index",
+        lines: [
+          "This memorandum is grounded in twelve citations across eight ingested documents:",
+          "ISDA Master — Meridian [1], CSA Amendment (2024) [2], GMSLA — Meridian Sec [3], Fund II LPA [4],",
+          "Side Letter — Anchor LP [5], Credit Agreement — B [6], Guarantee & Security [7], and Board Minutes — Q3 [8].",
+          "All defined terms, cross-references, and numerical thresholds have been verified against source text.",
+        ],
+      },
+    ],
   };
+
+  const DRAFT_LINE_MS = 105;
 
   const folderIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2Z"/></svg>';
   const checkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
@@ -247,13 +313,12 @@
     // draft
     el.draftStatus.textContent = "Composing from cited sources…";
     el.draftStatus.classList.remove("is-good");
-    el.draftTitle.textContent = "";
-    el.draftMeta.textContent = "";
-    el.draftH1.textContent = "";
-    el.draftP1.innerHTML = "";
-    el.draftH2.textContent = "";
-    el.draftP2.innerHTML = "";
-    el.draftSkel.classList.remove("is-on");
+    if (el.draftLines) {
+      el.draftLines.innerHTML = "";
+      el.draftLines.classList.remove("is-on");
+    }
+    if (el.draftThink) el.draftThink.classList.remove("is-on");
+    if (el.draftBody) el.draftBody.scrollTop = 0;
     el.draftCheckTitle.textContent = "Verifying…";
     el.checks.forEach((c) => (c.style.opacity = "0.25"));
     el.exportBtn.classList.remove("is-hot");
@@ -295,13 +360,9 @@
   };
 
   const composeDrafted = () => {
-    el.draftTitle.textContent = DRAFT.title;
-    el.draftMeta.textContent = DRAFT.meta;
-    el.draftH1.textContent = DRAFT.h1;
-    el.draftP1.innerHTML = draftRich(DRAFT.p1);
-    el.draftH2.textContent = DRAFT.h2;
-    el.draftP2.innerHTML = draftRich(DRAFT.p2);
-    el.draftSkel.classList.add("is-on");
+    if (el.draftThink) el.draftThink.classList.remove("is-on");
+    renderDraftLines(true);
+    if (el.draftBody) el.draftBody.scrollTop = 0;
     el.draftCheckTitle.textContent = "Ready for review";
     el.checks.forEach((c) => (c.style.opacity = "1"));
     el.draftStatus.textContent = "Draft complete · 12 citations retained";
@@ -311,7 +372,62 @@
 
   // render [n] citation markers inside draft paragraphs as chips
   const draftRich = (text) =>
-    text.replace(/\[(\d)\]/g, '<span class="cite" data-n="$1">$1</span>');
+    text.replace(/\[(\d+)\]/g, '<span class="cite" data-n="$1">$1</span>');
+
+  const renderDraftLines = (revealed = false) => {
+    if (!el.draftLines) return;
+    let n = 0;
+    const delay = () => `${n++ * DRAFT_LINE_MS}ms`;
+    const rows = [
+      `<h4 class="draft-line draft-line--title" style="--delay:${delay()}">${DRAFT.title}</h4>`,
+      `<div class="draft-line draft-line--meta" style="--delay:${delay()}">${DRAFT.meta}</div>`,
+      `<div class="draft-line draft-line--rule" style="--delay:${delay()}"></div>`,
+    ];
+    for (const s of DRAFT.sections) {
+      rows.push(`<div class="draft-line draft-line--h" style="--delay:${delay()}">${s.h}</div>`);
+      for (const line of s.lines) {
+        rows.push(`<p class="draft-line draft-line--p" style="--delay:${delay()}">${draftRich(line)}</p>`);
+      }
+    }
+    el.draftLines.innerHTML = rows.join("");
+    el.draftLines.classList.toggle("is-on", revealed);
+  };
+
+  const revealDraftLines = () => {
+    renderDraftLines(false);
+    void el.draftLines.offsetWidth;
+    el.draftLines.classList.add("is-on");
+  };
+
+  const showDraftThink = () => {
+    if (el.draftLines) {
+      el.draftLines.innerHTML = "";
+      el.draftLines.classList.remove("is-on");
+    }
+    if (el.draftThink) el.draftThink.classList.add("is-on");
+  };
+
+  const revealDraftFromThink = () => {
+    if (el.draftThink) el.draftThink.classList.remove("is-on");
+    revealDraftLines();
+  };
+
+  const scrollDraftTo = (target, dur = 2600) => {
+    const body = el.draftBody;
+    if (!body) return;
+    const max = body.scrollHeight - body.clientHeight;
+    if (max <= 4) return;
+    const to = target === "max" ? max : Math.max(0, Math.min(max, target));
+    const from = body.scrollTop;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min(1, (now - start) / realMs(dur));
+      const ease = 1 - Math.pow(1 - p, 3);
+      body.scrollTop = from + (to - from) * ease;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
 
   /* ------------------------------------------------------------ chapters -- */
 
@@ -469,7 +585,7 @@
 
     /* 4 — DRAFT --------------------------------------------------------------- */
     {
-      key: "draft", dur: 8200,
+      key: "draft", dur: 7600,
       init() {
         clearAll();
         setScene("chat");
@@ -481,45 +597,42 @@
         { t: 300, run: () => cursorTo(el.chipDraft, { dur: 800 }) },
         { t: 1250, run: () => { cursorClick(); el.chipDraft.classList.add("is-hot"); } },
         { t: 1650, run: () => { setScene("draft"); el.badgeDraft.classList.add("is-on"); } },
-        { t: 2000, dur: 900, tick: typeText(el.draftTitle, DRAFT.title) },
-        { t: 2950, run: () => (el.draftMeta.textContent = DRAFT.meta) },
-        { t: 3150, dur: 500, tick: typeText(el.draftH1, DRAFT.h1) },
+        { t: 1780, run: () => showDraftThink() },
         {
-          t: 3700, dur: 1500,
-          tick: (p) => {
-            const take = Math.round(p * DRAFT.p1.length);
-            el.draftP1.innerHTML = draftRich(DRAFT.p1.slice(0, take)) + (p < 1 ? '<span class="caret"></span>' : "");
+          t: 2480,
+          run: () => {
+            revealDraftFromThink();
+            el.checks[0].style.opacity = "1";
           },
         },
-        { t: 5300, dur: 500, tick: typeText(el.draftH2, DRAFT.h2) },
+        { t: 4280, run: () => (el.checks[1].style.opacity = "1") },
         {
-          t: 5850, dur: 1300,
-          tick: (p) => {
-            const take = Math.round(p * DRAFT.p2.length);
-            el.draftP2.innerHTML = draftRich(DRAFT.p2.slice(0, take)) + (p < 1 ? '<span class="caret"></span>' : "");
+          t: 6680,
+          run: () => {
+            el.checks[2].style.opacity = "1";
+            el.draftCheckTitle.textContent = "Ready for review";
+            el.draftStatus.textContent = "Draft complete · 12 citations retained";
+            el.draftStatus.classList.add("is-good");
           },
         },
-        { t: 7200, run: () => el.draftSkel.classList.add("is-on") },
-        { t: 7300, run: () => (el.checks[0].style.opacity = "1") },
-        { t: 7550, run: () => (el.checks[1].style.opacity = "1") },
-        { t: 7800, run: () => { el.checks[2].style.opacity = "1"; el.draftCheckTitle.textContent = "Ready for review"; } },
       ],
     },
 
     /* 5 — DELIVER ---------------------------------------------------------------- */
     {
-      key: "deliver", dur: 6500,
+      key: "deliver", dur: 9200,
       init() {
         clearAll();
         setScene("draft");
         composeDrafted();
         el.cursor.classList.add("is-on");
-        cursorTo(el.draftSkel, { dur: 0, oy: 40 });
+        cursorTo(el.draftBody, { dur: 0, oy: 20 });
       },
       cues: [
-        { t: 300, run: () => cursorTo(el.exportBtn, { dur: 850 }) },
-        { t: 1300, run: () => { cursorClick(); el.exportBtn.classList.add("is-hot"); } },
-        { t: 1700, run: () => el.toast.classList.add("is-in") },
+        { t: 350, run: () => scrollDraftTo("max", 3000) },
+        { t: 3600, run: () => cursorTo(el.exportBtn, { dur: 850 }) },
+        { t: 4600, run: () => { cursorClick(); el.exportBtn.classList.add("is-hot"); } },
+        { t: 5000, run: () => el.toast.classList.add("is-in") },
       ],
     },
   ];
