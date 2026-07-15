@@ -11,6 +11,10 @@
   const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const MOBILE = window.matchMedia("(max-width: 860px)").matches;
   const COARSE = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  // iPadOS 13+ reports as Mac; classic iPads include "iPad" in the UA.
+  const IPAD =
+    /iPad/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
   /* ---------------------------------------------------------------- nav -- */
 
@@ -532,12 +536,21 @@
       });
       items.forEach((it) => it.classList.toggle("is-hot", it.dataset.seg === key));
     };
-    [...segs, ...items].forEach((el) => {
-      el.addEventListener("pointerenter", () => setHot(el.dataset.seg));
-      el.addEventListener("pointerleave", () => setHot(null));
-      el.addEventListener("focusin", () => setHot(el.dataset.seg));
-      el.addEventListener("focusout", () => setHot(null));
-    });
+    if (IPAD) {
+      // Touch taps fire pointerleave immediately after pointerenter, so hover
+      // handlers never hold the highlight. Tap-to-select matches desktop intent.
+      [...segs, ...items].forEach((el) => {
+        el.addEventListener("click", () => setHot(el.dataset.seg));
+        el.addEventListener("focusin", () => setHot(el.dataset.seg));
+      });
+    } else {
+      [...segs, ...items].forEach((el) => {
+        el.addEventListener("pointerenter", () => setHot(el.dataset.seg));
+        el.addEventListener("pointerleave", () => setHot(null));
+        el.addEventListener("focusin", () => setHot(el.dataset.seg));
+        el.addEventListener("focusout", () => setHot(null));
+      });
+    }
 
     // draw-in on first view
     const circles = ring.querySelectorAll(".ring-svg .seg circle");
@@ -667,7 +680,8 @@
       });
     });
 
-    if (MOBILE || COARSE) return;
+    // Scroll-reveal is disabled on phones (coarse + narrow); iPad keeps it.
+    if (!IPAD && (MOBILE || COARSE)) return;
 
     const updateCaseReveal = () => {
       const rect = group.getBoundingClientRect();
