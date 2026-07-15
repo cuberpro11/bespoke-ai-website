@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industry Analysis — OTC Hedge</title>
+<meta name="description" content="Research and field notes from the desks where AI meets regulated work — capital markets documentation, legal operations, and production AI systems.">
+<meta property="og:title" content="Industry Analysis — OTC Hedge">
+<meta property="og:description" content="Research and field notes from the desks where AI meets regulated work — capital markets documentation, legal operations, and production AI systems.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css?v=2">
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body data-page="insights">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a class="brand" href="index.html" aria-label="OTC Hedge — home">
+      <svg class="brand__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect width="32" height="32" rx="9" fill="#070D1D"/>
+        <circle cx="16" cy="16" r="8.5" fill="none" stroke="#4A72F0" stroke-width="2.25"
+          stroke-linecap="round" stroke-dasharray="41.5 12" transform="rotate(-52 16 16)"/>
+        <circle cx="23.25" cy="10.25" r="2.5" fill="#C9D9F6"/>
+      </svg>
+      <span class="brand__wordmark">OTC Hedge</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a class="nav__link" data-nav="home" href="index.html">Home</a>
+      <div class="nav__item nav__item--dd">
+        <button class="nav__link" data-nav="solutions" type="button" aria-expanded="false" aria-haspopup="true">
+          Solutions
+          <svg class="chev" width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1 3.5 5 7l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dropdown">
+          <a href="law.html" style="--i:0">
+            <span class="dd-ico" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7l7-4 7 4M5 7v4a7 7 0 0 0 14 0V7M8 21h8"/></svg></span>
+            <span><b>Law</b><span>Legal execution with ease — drafting, review, diligence, knowledge.</span></span>
+          </a>
+          <a href="finance.html" style="--i:1">
+            <span class="dd-ico" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 17V9m5 8V5m5 12v-6"/></svg></span>
+            <span><b>Finance</b><span>Reduce risk, amplify returns — built for market-maker rigor.</span></span>
+          </a>
+          <a href="professional-services.html" style="--i:2">
+            <span class="dd-ico" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM21 21v-2a4 4 0 0 0-3-3.87M15 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <span><b>Professional Services</b><span>Win clients, keep clients — institutional knowledge as advantage.</span></span>
+          </a>
+        </div>
+      </div>
+      <a class="nav__link" data-nav="about" href="about.html">About</a>
+      <a class="nav__link is-active" href="insights.html">Industry Analysis</a>
+      <a class="nav__link" href="#contact">Contact</a>
+      <a class="btn btn--primary nav__cta" href="#contact">Contact sales <span class="arr" aria-hidden="true">→</span></a>
+    </nav>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mm-item" style="--i:0"><a class="mm-link" href="index.html">Home <small>01</small></a></div>
+  <div class="mm-item" style="--i:1">
+    <span class="mm-link" aria-hidden="true">Solutions <small>02</small></span>
+    <div class="mm-group">
+      <a href="law.html" style="--i:0">Law</a>
+      <a href="finance.html" style="--i:1">Finance</a>
+      <a href="professional-services.html" style="--i:2">Professional Services</a>
+    </div>
+  </div>
+  <div class="mm-item" style="--i:2"><a class="mm-link" href="about.html">About <small>03</small></a></div>
+  <div class="mm-item" style="--i:3"><a class="mm-link" href="insights.html">Industry Analysis <small>04</small></a></div>
+  <div class="mm-item" style="--i:4"><a class="mm-link" href="#contact">Contact <small>05</small></a></div>
+  <div class="mm-item mm-cta" style="--i:5"><a class="btn btn--primary" href="#contact">Contact sales <span class="arr" aria-hidden="true">→</span></a></div>
+</div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero hero--page" aria-label="Industry analysis">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="halftone halftone--ambient" aria-hidden="true"></div>
+  <div class="container--wide container hero__content">
+    <p class="kicker">The research desk</p>
+    <h1 class="display">Industry<br><em>Analysis.</em></h1>
+    <p class="lede">Field notes from the desks where AI meets regulated work — what's actually changing in documentation, diligence, and markets operations.</p>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="section section--paper on-light section--flush-top insight-featured--flush" aria-label="Featured analysis">
+  <div class="container--wide container">
+    <div class="insight-featured spot-card" data-reveal="scale">
+      <div data-stagger>
+        <p class="kicker" data-reveal="draw">Featured · Q3 2026</p>
+        <h2 class="h3 insight-featured__title" data-reveal>The margin-terms blind spot: what the 2024 CSA cycle revealed</h2>
+        <p class="body-dim insight-featured__lede" data-reveal>Thousands of credit-support annexes were amended in 2024 — and most firms still can't answer, portfolio-wide, which thresholds moved. We analyze why margin terms drift out of sight after execution, what it costs when volatility returns, and the monitoring architecture that closes the gap.</p>
+        <div class="insight-featured__actions" data-reveal>
+          <a class="link-arrow" href="#contact">Read the full analysis — on request <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="if-art" aria-hidden="true">
+        <svg viewBox="0 0 480 300" fill="none">
+          <defs>
+            <linearGradient id="ifg" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#2454D8" stop-opacity=".45"/>
+              <stop offset="1" stop-color="#9A9CA6" stop-opacity=".06"/>
+            </linearGradient>
+          </defs>
+          <g stroke="rgba(148,178,240,.16)">
+            <path d="M0 60h480M0 120h480M0 180h480M0 240h480"/>
+            <path d="M80 0v300M160 0v300M240 0v300M320 0v300M400 0v300"/>
+          </g>
+          <path d="M0 232 60 226 120 218 180 208 240 196 300 148 360 132 420 96 480 84 480 300 0 300Z" fill="url(#ifg)"/>
+          <path d="M0 232 60 226 120 218 180 208 240 196 300 148 360 132 420 96 480 84" stroke="#2454D8" stroke-width="2"/>
+          <path d="M0 250 60 249 120 247 180 246 240 244 300 220 360 216 420 205 480 202" stroke="#9A9CA6" stroke-width="1.4" stroke-dasharray="5 6"/>
+          <circle cx="300" cy="148" r="4.5" fill="#2454D8"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRID -->
+<section class="section section--paper on-light section--flush-top" aria-label="All analysis">
+  <div class="container--wide container">
+    <div class="insight-grid" data-stagger>
+      <article class="insight-card spot-card" data-reveal>
+        <span class="in-cat">Capital markets</span>
+        <h3>Repapering at scale: what ISDA migrations teach us about AI readiness</h3>
+        <p>Every repapering wave exposes the same weakness — nobody knows what's in the back book. The firms that fixed extraction first finished quarters ahead.</p>
+        <div class="in-meta"><span>Q2 2026</span><span>11 MIN</span><a class="u-line in-meta__cta" href="#contact">ON REQUEST</a></div>
+      </article>
+      <article class="insight-card spot-card" data-reveal>
+        <span class="in-cat">Legal operations</span>
+        <h3>From CLM selection to CLM adoption: why implementations stall</h3>
+        <p>Selection takes six months; adoption takes judgment. Where contract-lifecycle programs actually break — and the operating pattern that saves them.</p>
+        <div class="in-meta"><span>Q2 2026</span><span>9 MIN</span><a class="u-line in-meta__cta" href="#contact">ON REQUEST</a></div>
+      </article>
+      <article class="insight-card spot-card" data-reveal>
+        <span class="in-cat">Deal advisory</span>
+        <h3>Due diligence in hours, not weeks: rebuilding the deal-review stack</h3>
+        <p>A CFO told us his team spent twelve hours a day in diligence documents. The redesign that took it to two — without lowering the bar.</p>
+        <div class="in-meta"><span>Q1 2026</span><span>12 MIN</span><a class="u-line in-meta__cta" href="#contact">ON REQUEST</a></div>
+      </article>
+      <article class="insight-card spot-card" data-reveal>
+        <span class="in-cat">Trading documentation</span>
+        <h3>Standing orders as living documents</h3>
+        <p>Most standing orders are written once and obeyed loosely. Rebuilt as living, monitored documents, one desk cut time-to-execution by half.</p>
+        <div class="in-meta"><span>Q1 2026</span><span>8 MIN</span><a class="u-line in-meta__cta" href="#contact">ON REQUEST</a></div>
+      </article>
+      <article class="insight-card spot-card" data-reveal>
+        <span class="in-cat">AI governance</span>
+        <h3>The build-vs-buy question for regulated AI</h3>
+        <p>Generic tools are cheap until the first audit. A framework for deciding what to buy, what to build, and what to never let leave your enclave.</p>
+        <div class="in-meta"><span>Q4 2025</span><span>10 MIN</span><a class="u-line in-meta__cta" href="#contact">ON REQUEST</a></div>
+      </article>
+      <article class="insight-card spot-card" data-reveal>
+        <span class="in-cat">Legal operations</span>
+        <h3>Knowledge management that lawyers actually use</h3>
+        <p>Precedent databases fail quietly: nobody searches them. Grounded retrieval inside the drafting flow changed usage from monthly to hourly.</p>
+        <div class="in-meta"><span>Q4 2025</span><span>7 MIN</span><a class="u-line in-meta__cta" href="#contact">ON REQUEST</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section section--navy dark news-band" aria-label="Newsletter">
+  <div class="container" data-contact-form>
+    <p class="kicker kicker--center" data-reveal="draw">The institutional brief</p>
+    <h2 class="h2" data-reveal>One analysis a month. <em>No noise.</em></h2>
+    <p class="lede news-band__lede" data-reveal>What we're seeing across live engagements in law and capital markets — written for operators, not algorithms.</p>
+    <div class="f-form" data-reveal="fade">
+      <form class="news-form" novalidate>
+        <input type="email" name="email" placeholder="Work email" autocomplete="email" required>
+        <button class="btn btn--primary" type="submit">Subscribe</button>
+      </form>
+      <div class="f-form__ok news-form__ok" role="status">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        You're on the list — first brief arrives this month.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-band dark" aria-label="Get started">
+  <div class="container">
+    <p class="kicker kicker--center" data-reveal="draw">Put analysis to work</p>
+    <h2 class="h1" data-reveal>Prefer results to <em>reading?</em></h2>
+    <p class="lede" data-reveal>Every piece above started as a client engagement. Yours can be the next one.</p>
+    <div class="hero__actions" data-reveal>
+      <a class="btn btn--white" href="#contact">Contact sales <span class="arr" aria-hidden="true">→</span></a>
+      <a class="btn btn--ghost" href="index.html#demo">Watch the platform <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" id="contact">
+  <div class="container--wide container">
+    <div class="footer__grid" data-stagger>
+      <div class="f-brandcol" data-reveal="fade">
+        <a class="brand" href="index.html" aria-label="OTC Hedge — home">
+          <svg class="brand__mark" width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="9" fill="#070D1D"/>
+            <circle cx="16" cy="16" r="8.5" fill="none" stroke="#4A72F0" stroke-width="2.25" stroke-linecap="round" stroke-dasharray="41.5 12" transform="rotate(-52 16 16)"/>
+            <circle cx="23.25" cy="10.25" r="2.5" fill="#C9D9F6"/>
+          </svg>
+          <span class="brand__wordmark">OTC Hedge</span>
+        </a>
+        <p>Custom AI systems built and embedded inside law firms, financial institutions, and professional-services firms.</p>
+        <a class="f-mail u-line" href="mailto:hello@otchedge.com">hello@otchedge.com</a>
+      </div>
+      <div data-reveal="fade">
+        <h4>Solutions</h4>
+        <a class="f-link" href="law.html">Law</a>
+        <a class="f-link" href="finance.html">Finance</a>
+        <a class="f-link" href="professional-services.html">Professional Services</a>
+      </div>
+      <div data-reveal="fade">
+        <h4>Company</h4>
+        <a class="f-link" href="about.html">About</a>
+        <a class="f-link" href="insights.html">Industry Analysis</a>
+        <a class="f-link" href="index.html#approach">Our Model</a>
+        <a class="f-link" href="index.html#demo">Platform Demo</a>
+      </div>
+      <div data-contact-form data-reveal="fade">
+        <h4>Contact</h4>
+        <div class="f-form">
+          <form novalidate>
+            <div class="row2">
+              <input type="text" name="name" placeholder="Name" autocomplete="name" required>
+              <input type="text" name="firm" placeholder="Firm" autocomplete="organization" required>
+            </div>
+            <input type="email" name="email" placeholder="Work email" autocomplete="email" required class="f-form__stack">
+            <textarea name="message" placeholder="Where do documents slow you down?" class="f-form__stack"></textarea>
+            <button class="btn btn--primary f-form__submit" type="submit">Request a working session</button>
+          </form>
+          <div class="f-form__ok" role="status">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Thank you — we'll reply within one business day.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>© <span id="year">2026</span> OTC Hedge. All rights reserved.</span>
+      <span class="spacer"></span>
+      <a class="u-line" href="#" aria-disabled="true">Privacy</a>
+      <a class="u-line" href="#" aria-disabled="true">Terms</a>
+      <a class="u-line" href="#contact">Security</a>
+    </div>
+  </div>
+  <div class="footer__ghost" aria-hidden="true">OTC Hedge</div>
+</footer>
+
+<script src="assets/js/site.js?v=2" defer></script>
+</body>
+</html>
