@@ -1,0 +1,506 @@
+---
+// Navigation Component
+---
+
+<nav class="navbar" id="navbar" data-theme="dark" data-past-hero="false">
+  <div class="nav-container" id="nav-container">
+    <a href="/" class="logo">
+      <span class="logo-otc">OTC</span><span class="logo-hedge"> Hedge</span>
+    </a>
+
+    <button class="burger" id="burger-menu" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="nav-item-dropdown">
+        <button type="button" class="nav-dropdown-trigger" id="solutions-trigger" aria-expanded="false" aria-haspopup="true">
+          Solutions <svg class="chevron" viewBox="0 0 12 8" width="12" height="8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="dropdown">
+          <li><a href="/legal-workflows">Legal Workflows</a></li>
+          <li><a href="/capital-markets">Finance & Capital Markets</a></li>
+          <li><a href="/repapering-reg-response">Custom AI Solutions</a></li>
+          <li><a href="/higher-education">Higher Education</a></li>
+        </ul>
+      </li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/industry-analysis">Industry Analysis</a></li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const burger = document.getElementById('burger-menu');
+  const navLinks = document.getElementById('nav-links');
+  const navbar = document.getElementById('navbar');
+
+  if (burger && navLinks) {
+    burger.addEventListener('click', () => {
+      const isOpening = !navLinks.classList.contains('active');
+      burger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      navbar?.classList.toggle('has-active-menu');
+      document.body.style.overflow = isOpening ? 'hidden' : '';
+    });
+  }
+
+  const links = document.querySelectorAll('.nav-links a');
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      burger?.classList.remove('active');
+      navLinks?.classList.remove('active');
+      navbar?.classList.remove('has-active-menu');
+      document.body.style.overflow = '';
+    });
+  });
+
+  const solutionsTrigger = document.getElementById('solutions-trigger');
+  const solutionsDropdown = solutionsTrigger?.closest('.nav-item-dropdown');
+  if (solutionsTrigger && solutionsDropdown) {
+    solutionsTrigger.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        const isExpanded = solutionsDropdown.classList.toggle('dropdown-open');
+        solutionsTrigger.setAttribute('aria-expanded', isExpanded.toString());
+      }
+    });
+  }
+
+  const navContainer = document.getElementById('nav-container');
+  if (navContainer && navbar) {
+    navContainer.addEventListener('mouseenter', () => navbar.classList.add('has-nav-hover'));
+    navContainer.addEventListener('mouseleave', () => navbar.classList.remove('has-nav-hover'));
+  }
+
+  // Scroll and Theme Logic
+  let lastScrollY = window.scrollY;
+  let isPastHero = false;
+
+  const handleScroll = () => {
+    if (!navbar) return;
+    
+    const currentScrollY = window.scrollY;
+    const scrollingDown = currentScrollY > lastScrollY;
+
+    // Show/Hide logic: only hide if we are past the hero section (solid background)
+    if (isPastHero && currentScrollY > 100) {
+      if (scrollingDown) {
+        navbar.classList.add('nav-hidden');
+      } else {
+        navbar.classList.remove('nav-hidden');
+      }
+    } else {
+      // Always show when in hero section or very top
+      navbar.classList.remove('nav-hidden');
+    }
+
+    // Background transparency logic
+    if (isPastHero) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+
+    lastScrollY = currentScrollY;
+  };
+
+  // Observer for theme changes - triggers when navbar BOTTOM touches section top
+  const themeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && navbar) {
+        const theme = entry.target.getAttribute('data-navbar-theme');
+        if (theme) {
+          navbar.setAttribute('data-theme', theme === 'hero' ? 'dark' : theme);
+        }
+      }
+    });
+  }, {
+    // Trigger when section top is 80px from viewport top (navbar height)
+    rootMargin: '-80px 0px -100% 0px',
+    threshold: 0
+  });
+
+  // Observer for hide behavior - triggers when navbar TOP fully enters section
+  const hideObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && navbar) {
+        const theme = entry.target.getAttribute('data-navbar-theme');
+        if (theme) {
+          isPastHero = theme !== 'hero';
+          navbar.setAttribute('data-past-hero', isPastHero.toString());
+          handleScroll(); // Update visibility immediately
+        }
+      }
+    });
+  }, {
+    // Trigger when section top reaches viewport top (navbar fully in section)
+    rootMargin: '0px 0px -100% 0px',
+    threshold: 0
+  });
+
+
+  document.querySelectorAll('[data-navbar-theme]').forEach(section => {
+    themeObserver.observe(section);
+    hideObserver.observe(section);
+  });
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+  }
+
+  .navbar.nav-hidden {
+    transform: translateY(-100%);
+  }
+
+  /* Theme Variables */
+  .navbar[data-theme="dark"] {
+    --nav-text: #ffffff;
+    --nav-bg: #000000;
+    --nav-border: rgba(255, 255, 255, 0.1);
+    --nav-link-hover: rgba(255, 255, 255, 0.4);
+  }
+
+  .navbar[data-theme="light"] {
+    --nav-text: #000000;
+    --nav-bg: #ffffff;
+    --nav-border: rgba(0, 0, 0, 0.1);
+    --nav-link-hover: rgba(0, 0, 0, 0.4);
+  }
+
+  /* Solid background for current theme so header is always visible */
+  .navbar[data-theme="dark"],
+  .navbar[data-theme="light"] {
+    background-color: var(--nav-bg);
+    border-bottom-color: var(--nav-border);
+  }
+
+  .nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: 100%;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    z-index: 1001;
+    padding: 1.5rem 0;
+  }
+
+  .logo-otc {
+    color: var(--color-accent);
+  }
+
+  .logo-hedge {
+    color: var(--nav-text);
+    transition: none; /* Instant color change */
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 0;
+    align-items: center;
+    height: 100%;
+  }
+
+  .nav-links li {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--nav-text);
+    padding: 2.2rem 1.5rem;
+    position: relative;
+    transition: opacity 0.3s ease; /* Only transition opacity, not color */
+    display: block;
+  }
+
+  .nav-links:hover a {
+    color: var(--nav-link-hover);
+  }
+
+  .nav-links li:hover a,
+  .nav-links .nav-item-dropdown:hover .nav-dropdown-trigger {
+    color: var(--nav-text);
+  }
+
+  .nav-links:hover .nav-dropdown-trigger {
+    color: var(--nav-link-hover);
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1.5rem;
+    right: 1.5rem;
+    height: 1.5px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-links li:hover a::after {
+    transform: scaleX(1);
+  }
+
+  .nav-item-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown-trigger {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--nav-text);
+    padding: 2.2rem 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .nav-dropdown-trigger .chevron {
+    flex-shrink: 0;
+    width: 10px;
+    height: 7px;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-item-dropdown:hover .nav-dropdown-trigger .chevron {
+    transform: rotate(180deg);
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 220px;
+    background-color: var(--nav-bg);
+    border: 1px solid var(--nav-border);
+    border-top: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+
+  .nav-item-dropdown:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown li {
+    height: auto;
+  }
+
+  .dropdown a {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    border-bottom: none;
+    transition: color 0.2s ease;
+  }
+
+  /* Dropdown links: grey by default, white only on link hover (override .nav-links li:hover a) */
+  .navbar .nav-links .nav-item-dropdown .dropdown a {
+    color: var(--nav-link-hover) !important;
+  }
+
+  .navbar .nav-links .nav-item-dropdown .dropdown a:hover {
+    color: var(--nav-text) !important;
+  }
+
+  .dropdown a::after {
+    display: none;
+  }
+
+  .dropdown li:last-child a {
+    border-bottom: none;
+  }
+
+  .burger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+  }
+
+  .burger span {
+    width: 100%;
+    height: 2px;
+    background-color: var(--nav-text);
+    transform-origin: left;
+  }
+
+  .burger.active span:nth-child(1) {
+    transform: rotate(45deg);
+  }
+  .burger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .burger.active span:nth-child(3) {
+    transform: rotate(-45deg);
+  }
+
+  @media (max-width: 768px) {
+    .burger {
+      display: flex;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--nav-bg);
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2.5rem;
+      z-index: 1000;
+      padding: 2rem 2.5rem;
+    }
+
+    .nav-links.active {
+      right: 0;
+    }
+
+    .nav-links a {
+      font-size: 2rem;
+      font-weight: 600;
+      padding: 0.75rem 0;
+      transition: none;
+      text-align: left;
+    }
+
+    .nav-links a::after {
+      transition: none;
+    }
+
+    .nav-links li {
+      height: auto;
+    }
+
+    .nav-links a::after {
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    /* No hover animations in burger menu */
+    .nav-links:hover a,
+    .nav-links li:hover a {
+      color: var(--nav-text);
+    }
+    .nav-links li:hover a::after {
+      transform: scaleX(0);
+    }
+
+    .nav-item-dropdown {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .nav-dropdown-trigger {
+      font-size: 2rem;
+      font-weight: 600;
+      padding: 0.75rem 0;
+      text-align: left;
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    .nav-dropdown-trigger .chevron {
+      width: 14px;
+      height: 10px;
+      margin-left: 0.25rem;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-item-dropdown.dropdown-open .nav-dropdown-trigger .chevron {
+      transform: rotate(180deg);
+    }
+
+    .dropdown {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      min-width: auto;
+      width: 100%;
+      border: none;
+      box-shadow: none;
+      background: transparent;
+      padding-left: 1rem;
+      margin-top: 0.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .nav-item-dropdown.dropdown-open .dropdown {
+      max-height: 400px;
+    }
+
+    .dropdown a {
+      font-size: 1.25rem;
+      font-weight: 500;
+      padding: 0.5rem 0;
+    }
+
+    .navbar .nav-links .nav-item-dropdown .dropdown a,
+    .navbar .nav-links .nav-item-dropdown .dropdown a:hover {
+      color: var(--nav-text) !important;
+    }
+
+    .navbar .nav-links .nav-dropdown-trigger {
+      color: var(--nav-text) !important;
+    }
+  }
+</style>
