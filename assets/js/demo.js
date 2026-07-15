@@ -30,7 +30,7 @@
     draftH1: $("draft-h1"), draftP1: $("draft-p1"), draftH2: $("draft-h2"), draftP2: $("draft-p2"),
     draftSkel: $("draft-skel"), draftCheckTitle: $("draft-check-title"),
     checks: [$("check-1"), $("check-2"), $("check-3")],
-    exportBtn: $("export-btn"), toast: $("toast"), endcard: $("endcard"), cursor: $("cursor"),
+    exportBtn: $("export-btn"), toast: $("toast"), cursor: $("cursor"),
   };
   const scenes = {
     docs: stage.querySelector('[data-scene="docs"]'),
@@ -251,7 +251,6 @@
     el.checks.forEach((c) => (c.style.opacity = "0.25"));
     el.exportBtn.classList.remove("is-hot");
     el.toast.classList.remove("is-in");
-    el.endcard.classList.remove("is-in");
     el.cursor.classList.remove("is-on", "is-click");
     cursorHome();
   };
@@ -514,7 +513,6 @@
         { t: 300, run: () => cursorTo(el.exportBtn, { dur: 850 }) },
         { t: 1300, run: () => { cursorClick(); el.exportBtn.classList.add("is-hot"); } },
         { t: 1700, run: () => el.toast.classList.add("is-in") },
-        { t: 3900, run: () => el.endcard.classList.add("is-in") },
       ],
     },
   ];

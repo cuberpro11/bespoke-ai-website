@@ -1144,9 +1144,10 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transition-delay: 
 .viewer__page {
   flex: 1;
   margin: 1.3cqw 1.6cqw 1.6cqw;
-  background: #f7f8fb;
+  background: var(--surface-card-dark);
+  border: 1px solid var(--line-dark-strong);
   border-radius: 0.5cqw;
-  color: #1d2436;
+  color: var(--t-bright);
   padding: 2cqw 2.2cqw;
   overflow: hidden;
   position: relative;
@@ -1154,28 +1155,28 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transition-delay: 
 .viewer__page h5 {
   margin: 0 0 0.4cqw;
   font-family: var(--mono); font-size: 0.82cqw; font-weight: 500; letter-spacing: 0.12em;
-  color: #5a6580;
+  color: var(--t-faint);
 }
 .doc-lines { position: relative; }
 .doc-line {
   height: 0.62cqw;
   border-radius: 999px;
-  background: #d6dbe8;
+  background: rgba(172, 174, 182, 0.18);
   margin-bottom: 0.72cqw;
 }
 .doc-line.w-90 { width: 90%; } .doc-line.w-80 { width: 80%; }
 .doc-line.w-95 { width: 95%; } .doc-line.w-70 { width: 70%; }
 .doc-line.w-60 { width: 60%; } .doc-line.w-40 { width: 40%; }
-.doc-heading { height: 0.95cqw; width: 34%; background: #b9c2d6; margin: 1.2cqw 0 1cqw; border-radius: 999px; }
+.doc-heading { height: 0.95cqw; width: 34%; background: rgba(172, 174, 182, 0.28); margin: 1.2cqw 0 1cqw; border-radius: 999px; }
 .doc-clause {
   position: relative;
   font-size: 0.98cqw; line-height: 1.6;
-  color: #232c42;
+  color: var(--t-dim);
   padding: 0.9cqw 1.1cqw;
   margin: 0.9cqw -1.1cqw;
   border-radius: 0.5cqw;
 }
-.doc-clause b { font-weight: 650; }
+.doc-clause b { font-weight: 650; color: var(--t-bright); }
 .doc-clause .hl {
   background-image: linear-gradient(rgba(61, 109, 255, 0.24), rgba(61, 109, 255, 0.24));
   background-repeat: no-repeat;
@@ -1213,9 +1214,10 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transition-delay: 
   gap: 1.4cqw;
 }
 .draft-page {
-  background: #f7f8fb;
+  background: var(--surface-card-dark);
+  border: 1px solid var(--line-dark-strong);
   border-radius: 0.7cqw;
-  color: #1a2338;
+  color: var(--t-bright);
   padding: 2.4cqw 2.8cqw;
   overflow: hidden;
   position: relative;
@@ -1224,15 +1226,15 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transition-delay: 
 .draft-page h4 {
   font-family: var(--serif);
   font-size: 1.7cqw; font-weight: 500; letter-spacing: 0;
-  color: #101a30;
+  color: var(--t-bright);
   margin: 0 0 0.4cqw;
   min-height: 2.2cqw;
 }
-.draft-page .d-meta { font-family: var(--mono); font-size: 0.72cqw; color: #6b7690; letter-spacing: 0.1em; margin-bottom: 1.4cqw; }
-.draft-page .d-rule { height: 1px; background: #dfe3ee; margin: 1.1cqw 0 1.3cqw; }
-.d-h { font-weight: 650; font-size: 1.02cqw; color: #17203a; margin: 1.1cqw 0 0.55cqw; min-height: 1.3cqw; }
-.d-p { font-size: 0.92cqw; line-height: 1.65; color: #39445f; min-height: 1.1cqw; }
-.d-p .cite { transform: scale(0.92); vertical-align: -0.05cqw; background: rgba(32, 80, 232, 0.1); border-color: rgba(32, 80, 232, 0.35); color: var(--cobalt); }
+.draft-page .d-meta { font-family: var(--mono); font-size: 0.72cqw; color: var(--t-faint); letter-spacing: 0.1em; margin-bottom: 1.4cqw; }
+.draft-page .d-rule { height: 1px; background: var(--line-dark-strong); margin: 1.1cqw 0 1.3cqw; }
+.d-h { font-weight: 650; font-size: 1.02cqw; color: var(--t-bright); margin: 1.1cqw 0 0.55cqw; min-height: 1.3cqw; }
+.d-p { font-size: 0.92cqw; line-height: 1.65; color: var(--t-dim); min-height: 1.1cqw; }
+.d-p .cite { transform: scale(0.92); vertical-align: -0.05cqw; background: rgba(61, 109, 255, 0.16); border-color: rgba(61, 109, 255, 0.4); color: var(--sky); }
 .draft-side { display: flex; flex-direction: column; gap: 1cqw; }
 .draft-card {
   border: 1px solid var(--line-dark);
@@ -1284,7 +1286,7 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transition-delay: 
 
 /* draft skeleton lines */
 .skel-group { margin-top: 1.1cqw; }
-.skel-group .doc-line { background: #dfe3ee; transform-origin: left; }
+.skel-group .doc-line { background: rgba(172, 174, 182, 0.18); transform-origin: left; }
 .js .skel-group .doc-line { transform: scaleX(0); }
 .skel-group.is-on .doc-line { transform: scaleX(1); }
 .skel-group.is-on .doc-line:nth-child(1) { transition: transform 600ms var(--ease-io) 0ms; }
@@ -1323,18 +1325,6 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transition-delay: 
 .demo-toast .t-ico svg { width: 1.1cqw; height: 1.1cqw; }
 .demo-toast b { display: block; font-size: 1cqw; }
 .demo-toast span { font-family: var(--mono); font-size: 0.75cqw; color: var(--t-faint); }
-
-/* end card */
-.demo-endcard {
-  position: absolute; inset: 0; z-index: 9;
-  display: grid; place-content: center; text-align: center; gap: 1cqw;
-  background: radial-gradient(60% 80% at 50% 50%, color-mix(in srgb, var(--navy-900) 92%, transparent), color-mix(in srgb, var(--navy-950) 97%, transparent));
-  opacity: 0; visibility: hidden;
-  transition: opacity 500ms ease-out, visibility 0s linear 500ms;
-}
-.demo-endcard.is-in { opacity: 1; visibility: visible; transition-delay: 0s; }
-.demo-endcard .ec-serif { font-family: var(--serif); font-size: 2.6cqw; color: var(--t-bright); }
-.demo-endcard .ec-sub { font-family: var(--mono); font-size: 0.85cqw; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sky); }
 
 /* fake cursor */
 .demo-cursor {
@@ -1591,18 +1581,48 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transition-delay: 
   column-gap: 1.1rem;
   padding: 1.35rem 0.4rem;
   border-bottom: 1px solid var(--line-dark);
-  transition: background-color var(--mid) linear, padding-left var(--mid) var(--ease-out);
+  position: relative;
+  transition: background-color 420ms var(--ease-out), transform 420ms var(--ease-out);
+  transform: translateX(0);
 }
-.ring-item:hover, .ring-item.is-hot { background: rgba(93, 140, 255, 0.05); padding-left: 0.9rem; }
-.ring-item .ri-dot { width: 10px; height: 10px; border-radius: 3px; transform: rotate(45deg); }
-.ring-item b { font-size: 1.14rem; font-weight: 600; color: var(--t-bright); display: block; }
+.ring-item:hover, .ring-item.is-hot {
+  background: rgba(93, 140, 255, 0.05);
+  transform: translateX(0.5rem);
+}
+.ring-item .ri-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  transform: rotate(45deg) scale(1);
+  transition: transform 420ms var(--ease-out), box-shadow 420ms var(--ease-out);
+}
+.ring-item:hover .ri-dot, .ring-item.is-hot .ri-dot {
+  transform: rotate(45deg) scale(1.15);
+  box-shadow: 0 0 10px rgba(93, 140, 255, 0.35);
+}
+.ring-item b {
+  font-size: 1.14rem;
+  font-weight: 600;
+  color: var(--t-bright);
+  display: block;
+  transition: transform 420ms var(--ease-out);
+}
+.ring-item:hover b, .ring-item.is-hot b { transform: translateX(2px); }
 .ring-item p {
   grid-column: 2 / 4;
   color: var(--t-dim); font-size: 0.95rem; line-height: 1.6;
   margin-top: 0.45rem;
   max-width: 58ch;
+  transition: transform 420ms var(--ease-out);
 }
-.ring-item .ri-idx { font-family: var(--sans); font-size: 0.72rem; color: var(--t-faint); }
+.ring-item:hover p, .ring-item.is-hot p { transform: translateX(2px); }
+.ring-item .ri-idx {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  color: var(--t-faint);
+  transition: transform 420ms var(--ease-out);
+}
+.ring-item:hover .ri-idx, .ring-item.is-hot .ri-idx { transform: translateX(-2px); }
 
 /* ---------- 14. Delivery timeline ----------------------------------------- */
 
@@ -2729,6 +2749,28 @@ body.nav-open .mobile-menu { opacity: 1; visibility: visible; transition-delay: 
     transition-delay: calc(var(--i, 0) * 80ms + var(--d, 0ms));
   }
   .js .kicker[data-reveal="draw"].is-visible::before { transform: scaleX(1); }
+
+  /* ring legend — keep reveal stagger while allowing hover motion */
+  .js .ring-item[data-reveal] {
+    transition:
+      opacity 640ms ease-out,
+      transform 700ms var(--ease-out),
+      background-color 420ms var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 80ms);
+  }
+  .js .ring-item[data-reveal].is-visible {
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+      opacity 640ms ease-out,
+      transform 420ms var(--ease-out),
+      background-color 420ms var(--ease-out);
+    transition-delay: 0ms;
+  }
+  .js .ring-item[data-reveal].is-visible:hover,
+  .js .ring-item[data-reveal].is-visible.is-hot {
+    transform: translateX(0.5rem);
+  }
 
   /* icon scale settle when parent card reveals */
   .js [data-reveal] .reveal-icon {
