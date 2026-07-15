@@ -732,6 +732,7 @@
   doc.querySelectorAll("[data-usecases]").forEach((wrap) => {
     const items = wrap.querySelectorAll(".uc-item");
     const panes = wrap.querySelectorAll(".uc-pane");
+    const sideItems = wrap.querySelectorAll(".uc-side__item");
     items.forEach((item) => {
       const btn = item.querySelector("button");
       btn.addEventListener("click", () => {
@@ -740,6 +741,7 @@
         item.classList.add("is-open");
         const key = item.dataset.uc;
         panes.forEach((p) => p.classList.toggle("is-live", p.dataset.uc === key));
+        sideItems.forEach((s) => s.classList.toggle("is-active", s.dataset.side === key));
         items.forEach((i) =>
           i.querySelector("button").setAttribute("aria-expanded", String(i === item))
         );

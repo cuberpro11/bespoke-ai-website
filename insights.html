@@ -134,76 +134,50 @@
         </div>
       </div>
       <div class="if-art" data-insight-chart aria-hidden="true">
-        <svg class="if-chart" viewBox="0 0 480 300" fill="none" role="img" aria-label="Margin threshold drift diverging from documented baseline, 2019 through 2024">
+        <svg class="if-chart" viewBox="0 0 380 220" preserveAspectRatio="xMidYMid meet" fill="none" role="img" aria-label="Margin threshold drift diverging from documented baseline, 2019 through 2024">
           <defs>
             <linearGradient id="if-area" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#2454D8" stop-opacity="0.28"/>
-              <stop offset="100%" stop-color="#2454D8" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="if-gap" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#2454D8" stop-opacity="0"/>
-              <stop offset="55%" stop-color="#2454D8" stop-opacity="0.05"/>
-              <stop offset="100%" stop-color="#2454D8" stop-opacity="0.11"/>
-            </linearGradient>
-            <linearGradient id="if-line-drift" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#6B8EF0"/>
-              <stop offset="100%" stop-color="#2454D8"/>
+              <stop offset="0%" stop-color="#4A72F0" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#4A72F0" stop-opacity="0"/>
             </linearGradient>
           </defs>
 
           <g class="if-chart__scene">
-            <text x="52" y="26" fill="rgba(169,171,177,0.72)" font-family="IBM Plex Mono, monospace" font-size="8.5" letter-spacing="0.14em">MARGIN EXPOSURE · CSA CYCLE</text>
-            <rect x="318" y="14" width="110" height="22" rx="4" fill="rgba(172,174,182,0.06)" stroke="rgba(172,174,182,0.12)" stroke-width="1"/>
-            <rect x="326" y="21" width="6" height="6" rx="1" fill="#2454D8"/>
-            <text x="336" y="28.5" fill="rgba(243,243,244,0.88)" font-family="Inter, sans-serif" font-size="9" font-weight="500">Threshold drift</text>
-            <line x1="392" y1="24.5" x2="408" y2="24.5" stroke="#8B8D95" stroke-width="1.4" stroke-dasharray="4 3"/>
-            <text x="412" y="28.5" fill="rgba(169,171,177,0.82)" font-family="Inter, sans-serif" font-size="9" font-weight="500">Baseline</text>
-
-            <rect x="52" y="44" width="412" height="208" rx="6" fill="rgba(8,9,11,0.42)" stroke="rgba(172,174,182,0.14)" stroke-width="1"/>
-            <path d="M64 236V56M64 236H464" stroke="rgba(172,174,182,0.22)" stroke-width="1"/>
+            <circle cx="20" cy="14" r="3" fill="#4A72F0"/>
+            <text x="28" y="17" fill="rgba(214,216,220,0.88)" font-family="Inter, sans-serif" font-size="9" font-weight="500">Threshold drift</text>
+            <line x1="118" y1="14" x2="130" y2="14" stroke="#7A7D87" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <text x="136" y="17" fill="rgba(169,171,177,0.72)" font-family="Inter, sans-serif" font-size="9" font-weight="500">Baseline</text>
 
             <g class="if-chart__grid" stroke="rgba(172,174,182,0.08)" stroke-width="1">
-              <path d="M64 92H464M64 128H464M64 164H464M64 200H464"/>
+              <path d="M44 89H356M44 143H356"/>
             </g>
-            <g fill="rgba(169,171,177,0.55)" font-family="IBM Plex Mono, monospace" font-size="8.5" letter-spacing="0.02em">
-              <text x="58" y="96" text-anchor="end">75</text>
-              <text x="58" y="132" text-anchor="end">50</text>
-              <text x="58" y="168" text-anchor="end">25</text>
-              <text x="58" y="234" text-anchor="end">0</text>
+            <path d="M44 196H356" stroke="rgba(172,174,182,0.18)" stroke-width="1"/>
+            <path d="M44 36V196" stroke="rgba(172,174,182,0.18)" stroke-width="1"/>
+
+            <g fill="rgba(169,171,177,0.55)" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="0.02em">
+              <text x="38" y="92" text-anchor="end">50</text>
+              <text x="38" y="146" text-anchor="end">25</text>
+              <text x="38" y="193" text-anchor="end">0</text>
             </g>
 
-            <g stroke="rgba(172,174,182,0.18)" stroke-width="1">
-              <path d="M64 236V240M144 236V240M224 236V240M304 236V240M384 236V240M464 236V240"/>
-            </g>
+            <path class="if-chart__fill if-chart__fill--area" d="M44 178 106 166 169 146 231 112 294 54 356 16 356 196 44 196Z" fill="url(#if-area)"/>
+            <path class="if-chart__line if-chart__line--baseline" d="M44 178 106 173 169 169 231 164 294 158 356 154" stroke="#6B6E77" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4"/>
+            <path class="if-chart__line if-chart__line--drift" d="M44 178 106 166 169 146 231 112 294 54 356 16" stroke="#4A72F0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 
-            <path class="if-chart__fill if-chart__fill--gap" d="M64 220 144 216 224 212 304 208 384 203 464 199 464 78 384 122 304 168 224 194 144 208 64 220Z" fill="url(#if-gap)"/>
-            <path class="if-chart__fill if-chart__fill--area" d="M64 220 144 210 224 192 304 162 384 112 464 78 464 236 64 236Z" fill="url(#if-area)"/>
-            <path class="if-chart__line if-chart__line--baseline" d="M64 220 144 216 224 212 304 208 384 203 464 199" stroke="#8B8D95" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
-            <path class="if-chart__line if-chart__line--drift" d="M64 220 144 210 224 192 304 162 384 112 464 78" stroke="url(#if-line-drift)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-
-            <g class="if-chart__markers" fill="#2454D8">
-              <circle cx="304" cy="162" r="2.75" fill="#2454D8" stroke="#0A0B0E" stroke-width="1"/>
-              <circle cx="384" cy="112" r="2.75" fill="#2454D8" stroke="#0A0B0E" stroke-width="1"/>
-              <circle cx="464" cy="78" r="3.25" fill="#2454D8" stroke="#0A0B0E" stroke-width="1.2"/>
-            </g>
-            <circle cx="464" cy="199" r="2.5" fill="#8B8D95" stroke="#0A0B0E" stroke-width="1"/>
+            <circle cx="356" cy="16" r="3" fill="#4A72F0" stroke="#0A0B0E" stroke-width="1.5"/>
 
             <g class="if-chart__callout">
-              <line x1="464" y1="78" x2="464" y2="236" stroke="rgba(36,84,216,0.22)" stroke-width="1" stroke-dasharray="3 3"/>
-              <rect x="396" y="58" width="58" height="18" rx="3" fill="rgba(36,84,216,0.12)" stroke="rgba(36,84,216,0.28)" stroke-width="1"/>
-              <text x="425" y="70" text-anchor="middle" fill="#C5D4FA" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="500">+34 PTS</text>
+              <text x="340" y="10" text-anchor="end" fill="rgba(214,216,220,0.9)" font-family="IBM Plex Mono, monospace" font-size="8" font-weight="500">+34 pts</text>
             </g>
 
-            <g fill="rgba(169,171,177,0.62)" font-family="IBM Plex Mono, monospace" font-size="8.5" letter-spacing="0.03em">
-              <text x="64" y="254" text-anchor="middle">2019</text>
-              <text x="144" y="254" text-anchor="middle">2020</text>
-              <text x="224" y="254" text-anchor="middle">2021</text>
-              <text x="304" y="254" text-anchor="middle">2022</text>
-              <text x="384" y="254" text-anchor="middle">2023</text>
-              <text x="464" y="254" text-anchor="middle">2024</text>
+            <g fill="rgba(169,171,177,0.6)" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="0.03em">
+              <text x="44" y="210" text-anchor="middle">2019</text>
+              <text x="106" y="210" text-anchor="middle">2020</text>
+              <text x="169" y="210" text-anchor="middle">2021</text>
+              <text x="231" y="210" text-anchor="middle">2022</text>
+              <text x="294" y="210" text-anchor="middle">2023</text>
+              <text x="356" y="210" text-anchor="middle">2024</text>
             </g>
-
-            <text x="464" y="284" text-anchor="end" fill="rgba(108,111,120,0.72)" font-family="IBM Plex Mono, monospace" font-size="7.5" letter-spacing="0.08em">PORTFOLIO-WIDE INDEX · NORMALIZED</text>
           </g>
         </svg>
         <span class="if-chart__sweep" aria-hidden="true"></span>

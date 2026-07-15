@@ -2324,14 +2324,95 @@ body.nav-open .mobile-menu__panel { transform: none; }
 .uc-stagewrap { position: sticky; top: calc(var(--nav-h) + 2rem); }
 .uc-stage {
   position: relative;
+  display: flex;
+  flex-direction: column;
   border-radius: 18px;
   background: var(--white);
   border: 1px solid var(--line-light-strong);
-  box-shadow: 0 24px 60px -32px rgba(17, 17, 20, 0.12), 0 8px 24px -12px rgba(17, 17, 20, 0.06);
+  box-shadow: 0 30px 70px -32px rgba(17, 17, 20, 0.16), 0 10px 28px -12px rgba(17, 17, 20, 0.08);
   aspect-ratio: 16 / 11;
   overflow: hidden;
   container-type: size;
 }
+
+/* browser-style chrome bar, echoing the platform-demo frame in light theme */
+.uc-chrome {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 1.1rem;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line-light);
+}
+.uc-chrome .dots { display: flex; gap: 6px; flex: none; }
+.uc-chrome .dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line-light-strong); }
+.uc-chrome .addr {
+  flex: 1;
+  max-width: 300px;
+  margin-inline: auto;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  font-family: var(--sans); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.01em;
+  color: var(--ink-400);
+  background: var(--white);
+  border: 1px solid var(--line-light);
+  border-radius: 7px;
+  padding: 0.32rem 0.85rem;
+}
+.uc-chrome .addr svg { opacity: 0.6; flex: none; }
+.uc-chrome-live {
+  flex: none;
+  font-family: var(--sans); font-weight: 650; font-size: 0.62rem; letter-spacing: 0.11em;
+  color: var(--cobalt);
+  display: inline-flex; align-items: center; gap: 0.42rem;
+  white-space: nowrap;
+}
+.uc-chrome-live i { width: 6px; height: 6px; border-radius: 50%; background: var(--cobalt-bright); box-shadow: 0 0 7px 1px rgba(74, 114, 240, 0.55); }
+@media (prefers-reduced-motion: no-preference) {
+  .uc-chrome-live i { animation: live-pulse 2s ease-in-out infinite; }
+}
+
+/* app shell: nav rail + content, mirroring the demo workspace layout */
+.uc-appgrid { flex: 1; display: grid; grid-template-columns: 14.5cqw 1fr; overflow: hidden; }
+.uc-side {
+  border-right: 1px solid var(--line-light);
+  background: var(--paper);
+  padding: 1.3cqw 1cqw;
+  display: flex; flex-direction: column; gap: 0.25cqw;
+}
+.uc-side__logo {
+  display: flex; align-items: center; gap: 0.7cqw;
+  font-weight: 650; letter-spacing: 0.06em; font-size: 1.05cqw;
+  color: var(--ink-900);
+  padding: 0.3cqw 0.6cqw 1.5cqw;
+}
+.uc-side__logo svg { width: 1.7cqw; height: 1.7cqw; flex: none; }
+.uc-side__item {
+  display: flex; align-items: center; gap: 0.85cqw;
+  padding: 0.72cqw 0.8cqw;
+  border-radius: 0.6cqw;
+  font-size: 1.02cqw; font-weight: 500;
+  color: var(--ink-400);
+  border: 1px solid transparent;
+  transition: background-color var(--mid) ease-out, color var(--mid) ease-out, border-color var(--mid) ease-out;
+}
+.uc-side__item svg { width: 1.2cqw; height: 1.2cqw; opacity: 0.8; flex: none; }
+.uc-side__item.is-active {
+  background: rgba(36, 84, 216, 0.08);
+  border-color: rgba(36, 84, 216, 0.22);
+  color: var(--cobalt-deep);
+}
+.uc-side__meta {
+  margin-top: auto;
+  border-top: 1px solid var(--line-light);
+  padding-top: 1cqw;
+  font-family: var(--mono); font-size: 0.62cqw; letter-spacing: 0.08em;
+  color: var(--ink-400);
+  display: grid; gap: 0.4cqw;
+}
+.uc-side__meta em { color: #2a8f7a; font-style: normal; }
+.uc-main { position: relative; overflow: hidden; }
+
 .uc-pane {
   position: absolute; inset: 0;
   padding: 2cqw;
@@ -2343,30 +2424,39 @@ body.nav-open .mobile-menu__panel { transform: none; }
 
 /* use-case pane mocks (light mini-UIs on paper) */
 .uc-mock {
-  border: 1px solid var(--line-light);
-  border-radius: 1cqw;
-  background: var(--white);
-  padding: 1.6cqw;
+  padding: 1.8cqw 2cqw;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.2cqw;
   color: var(--ink-600);
   font-size: 1.35cqw;
+  background: linear-gradient(180deg, var(--white), var(--paper) 140%);
 }
 .uc-mock__bar {
-  display: flex; align-items: center; gap: 1cqw;
-  font-weight: 600; font-size: 1.45cqw;
+  display: flex; align-items: center; gap: 0.9cqw;
+  font-weight: 600; font-size: 1.4cqw;
   color: var(--ink-900);
   padding-bottom: 1.1cqw;
   border-bottom: 1px solid var(--line-light);
 }
+.uc-mock__ico {
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: none;
+  width: 2.2cqw; height: 2.2cqw;
+  border-radius: 0.65cqw;
+  background: rgba(36, 84, 216, 0.09);
+  color: var(--cobalt);
+}
+.uc-mock__ico svg { width: 1.2cqw; height: 1.2cqw; }
 .uc-mock__bar .mono-tag {
   margin-left: auto;
-  font-family: var(--mono); font-size: 0.85cqw; letter-spacing: 0.14em;
-  color: var(--sky);
-  border: 1px solid rgba(93, 140, 255, 0.35);
+  font-family: var(--mono); font-size: 0.78cqw; letter-spacing: 0.13em;
+  color: var(--cobalt);
+  background: rgba(36, 84, 216, 0.07);
+  border: 1px solid rgba(36, 84, 216, 0.25);
   padding: 0.25cqw 0.8cqw; border-radius: 999px;
+  white-space: nowrap;
 }
 .uc-pane .doc-line { background: rgba(10, 10, 12, 0.08); }
 .uc-pane .doc-heading { background: rgba(10, 10, 12, 0.14); }
@@ -2867,6 +2957,7 @@ body.nav-open .mobile-menu__panel { transform: none; }
   border-radius: 14px;
   overflow: hidden;
   position: relative;
+  padding: clamp(0.5rem, 1.5vw, 0.85rem);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 28%),
     linear-gradient(165deg, #17181d 0%, #0a0b0e 100%);
@@ -2905,7 +2996,11 @@ body.nav-open .mobile-menu__panel { transform: none; }
 @media (max-width: 560px) { .news-form { flex-direction: column; } }
 
 /* featured insight art */
-.if-art svg { width: 100%; height: 100%; }
+.if-art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 
 .if-chart {
   overflow: visible;
@@ -3256,6 +3351,12 @@ body.nav-open .mobile-menu__panel { transform: none; }
   .people-grid { grid-template-columns: repeat(2, 1fr); }
   .uc-grid { grid-template-columns: 1fr; }
   .uc-stagewrap { position: static; }
+  .uc-appgrid { grid-template-columns: 1fr; }
+  .uc-side { display: none; }
+  .uc-chrome .dots { display: none; }
+  .uc-chrome .addr { max-width: none; margin-inline: 0; justify-content: flex-start; font-size: 0.66rem; }
+  .uc-chrome-live { font-size: 0; gap: 0; }
+  .uc-chrome-live i { width: 7px; height: 7px; }
   .fin-dash { grid-template-columns: 1fr 1fr; }
   .insight-featured { grid-template-columns: 1fr; }
   .sec-grid { grid-template-columns: 1fr 1fr; }
