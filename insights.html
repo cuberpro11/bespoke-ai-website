@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css?v=8">
+<link rel="stylesheet" href="assets/css/styles.css?v=11">
 <script>document.documentElement.classList.add("js");</script>
 </head>
 <body data-page="insights">
@@ -128,28 +128,85 @@
       <div data-stagger>
         <p class="kicker" data-reveal="draw">Featured · Q3 2026</p>
         <h2 class="h3 insight-featured__title" data-reveal>The margin-terms blind spot: what the 2024 CSA cycle revealed</h2>
-        <p class="body-dim insight-featured__lede" data-reveal>Thousands of credit-support annexes were amended in 2024 — and most firms still can't answer, portfolio-wide, which thresholds moved. We analyze why margin terms drift out of sight after execution, what it costs when volatility returns, and the monitoring architecture that closes the gap.</p>
+        <p class="body-dim insight-featured__lede" data-reveal>A single regulatory deadline over equity-options margining left the market in limbo for most of 2024 — and exposed how few firms can answer, portfolio-wide, which thresholds and CSAs it actually touched. We analyze why margin terms drift out of sight after execution, what it costs when volatility returns, and the monitoring architecture that closes the gap.</p>
         <div class="insight-featured__actions" data-reveal>
-          <a class="link-arrow" href="#contact">Read the full analysis — on request <span class="arr" aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="articles/margin-terms-blind-spot.html">Read the full analysis <span class="arr" aria-hidden="true">→</span></a>
         </div>
       </div>
-      <div class="if-art" aria-hidden="true">
-        <svg viewBox="0 0 480 300" fill="none">
+      <div class="if-art" data-insight-chart aria-hidden="true">
+        <svg class="if-chart" viewBox="0 0 480 300" fill="none" role="img" aria-label="Margin threshold drift diverging from documented baseline, 2019 through 2024">
           <defs>
-            <linearGradient id="ifg" x1="0" y1="1" x2="1" y2="0">
-              <stop offset="0" stop-color="#2454D8" stop-opacity=".45"/>
-              <stop offset="1" stop-color="#9A9CA6" stop-opacity=".06"/>
+            <linearGradient id="if-area" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2454D8" stop-opacity="0.28"/>
+              <stop offset="100%" stop-color="#2454D8" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="if-gap" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#2454D8" stop-opacity="0"/>
+              <stop offset="55%" stop-color="#2454D8" stop-opacity="0.05"/>
+              <stop offset="100%" stop-color="#2454D8" stop-opacity="0.11"/>
+            </linearGradient>
+            <linearGradient id="if-line-drift" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#6B8EF0"/>
+              <stop offset="100%" stop-color="#2454D8"/>
             </linearGradient>
           </defs>
-          <g stroke="rgba(148,178,240,.16)">
-            <path d="M0 60h480M0 120h480M0 180h480M0 240h480"/>
-            <path d="M80 0v300M160 0v300M240 0v300M320 0v300M400 0v300"/>
+
+          <g class="if-chart__scene">
+            <text x="52" y="26" fill="rgba(169,171,177,0.72)" font-family="IBM Plex Mono, monospace" font-size="8.5" letter-spacing="0.14em">MARGIN EXPOSURE · CSA CYCLE</text>
+            <rect x="318" y="14" width="110" height="22" rx="4" fill="rgba(172,174,182,0.06)" stroke="rgba(172,174,182,0.12)" stroke-width="1"/>
+            <rect x="326" y="21" width="6" height="6" rx="1" fill="#2454D8"/>
+            <text x="336" y="28.5" fill="rgba(243,243,244,0.88)" font-family="Inter, sans-serif" font-size="9" font-weight="500">Threshold drift</text>
+            <line x1="392" y1="24.5" x2="408" y2="24.5" stroke="#8B8D95" stroke-width="1.4" stroke-dasharray="4 3"/>
+            <text x="412" y="28.5" fill="rgba(169,171,177,0.82)" font-family="Inter, sans-serif" font-size="9" font-weight="500">Baseline</text>
+
+            <rect x="52" y="44" width="412" height="208" rx="6" fill="rgba(8,9,11,0.42)" stroke="rgba(172,174,182,0.14)" stroke-width="1"/>
+            <path d="M64 236V56M64 236H464" stroke="rgba(172,174,182,0.22)" stroke-width="1"/>
+
+            <g class="if-chart__grid" stroke="rgba(172,174,182,0.08)" stroke-width="1">
+              <path d="M64 92H464M64 128H464M64 164H464M64 200H464"/>
+            </g>
+            <g fill="rgba(169,171,177,0.55)" font-family="IBM Plex Mono, monospace" font-size="8.5" letter-spacing="0.02em">
+              <text x="58" y="96" text-anchor="end">75</text>
+              <text x="58" y="132" text-anchor="end">50</text>
+              <text x="58" y="168" text-anchor="end">25</text>
+              <text x="58" y="234" text-anchor="end">0</text>
+            </g>
+
+            <g stroke="rgba(172,174,182,0.18)" stroke-width="1">
+              <path d="M64 236V240M144 236V240M224 236V240M304 236V240M384 236V240M464 236V240"/>
+            </g>
+
+            <path class="if-chart__fill if-chart__fill--gap" d="M64 220 144 216 224 212 304 208 384 203 464 199 464 78 384 122 304 168 224 194 144 208 64 220Z" fill="url(#if-gap)"/>
+            <path class="if-chart__fill if-chart__fill--area" d="M64 220 144 210 224 192 304 162 384 112 464 78 464 236 64 236Z" fill="url(#if-area)"/>
+            <path class="if-chart__line if-chart__line--baseline" d="M64 220 144 216 224 212 304 208 384 203 464 199" stroke="#8B8D95" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
+            <path class="if-chart__line if-chart__line--drift" d="M64 220 144 210 224 192 304 162 384 112 464 78" stroke="url(#if-line-drift)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+
+            <g class="if-chart__markers" fill="#2454D8">
+              <circle cx="304" cy="162" r="2.75" fill="#2454D8" stroke="#0A0B0E" stroke-width="1"/>
+              <circle cx="384" cy="112" r="2.75" fill="#2454D8" stroke="#0A0B0E" stroke-width="1"/>
+              <circle cx="464" cy="78" r="3.25" fill="#2454D8" stroke="#0A0B0E" stroke-width="1.2"/>
+            </g>
+            <circle cx="464" cy="199" r="2.5" fill="#8B8D95" stroke="#0A0B0E" stroke-width="1"/>
+
+            <g class="if-chart__callout">
+              <line x1="464" y1="78" x2="464" y2="236" stroke="rgba(36,84,216,0.22)" stroke-width="1" stroke-dasharray="3 3"/>
+              <rect x="396" y="58" width="58" height="18" rx="3" fill="rgba(36,84,216,0.12)" stroke="rgba(36,84,216,0.28)" stroke-width="1"/>
+              <text x="425" y="70" text-anchor="middle" fill="#C5D4FA" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="500">+34 PTS</text>
+            </g>
+
+            <g fill="rgba(169,171,177,0.62)" font-family="IBM Plex Mono, monospace" font-size="8.5" letter-spacing="0.03em">
+              <text x="64" y="254" text-anchor="middle">2019</text>
+              <text x="144" y="254" text-anchor="middle">2020</text>
+              <text x="224" y="254" text-anchor="middle">2021</text>
+              <text x="304" y="254" text-anchor="middle">2022</text>
+              <text x="384" y="254" text-anchor="middle">2023</text>
+              <text x="464" y="254" text-anchor="middle">2024</text>
+            </g>
+
+            <text x="464" y="284" text-anchor="end" fill="rgba(108,111,120,0.72)" font-family="IBM Plex Mono, monospace" font-size="7.5" letter-spacing="0.08em">PORTFOLIO-WIDE INDEX · NORMALIZED</text>
           </g>
-          <path d="M0 232 60 226 120 218 180 208 240 196 300 148 360 132 420 96 480 84 480 300 0 300Z" fill="url(#ifg)"/>
-          <path d="M0 232 60 226 120 218 180 208 240 196 300 148 360 132 420 96 480 84" stroke="#2454D8" stroke-width="2"/>
-          <path d="M0 250 60 249 120 247 180 246 240 244 300 220 360 216 420 205 480 202" stroke="#9A9CA6" stroke-width="1.4" stroke-dasharray="5 6"/>
-          <circle cx="300" cy="148" r="4.5" fill="#2454D8"/>
         </svg>
+        <span class="if-chart__sweep" aria-hidden="true"></span>
       </div>
     </div>
   </div>
@@ -291,6 +348,6 @@
   <div class="footer__ghost" aria-hidden="true">Bespoke</div>
 </footer>
 
-<script src="assets/js/site.js?v=5" defer></script>
+<script src="assets/js/site.js?v=7" defer></script>
 </body>
 </html>

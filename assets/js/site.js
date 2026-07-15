@@ -488,6 +488,37 @@
     });
   });
 
+  /* -------------------------------------------------------- insight chart -- */
+
+  const insightChart = doc.querySelector("[data-insight-chart]");
+  if (insightChart) {
+    const startChart = () => {
+      if (insightChart.classList.contains("is-chart-ready")) return;
+      insightChart.classList.add("is-chart-ready");
+    };
+
+    if ("IntersectionObserver" in window) {
+      const chartIo = new IntersectionObserver(([en]) => {
+        if (!en.isIntersecting) return;
+        startChart();
+        chartIo.disconnect();
+      }, { threshold: 0.15 });
+      chartIo.observe(insightChart);
+
+      requestAnimationFrame(() => {
+        const rect = insightChart.getBoundingClientRect();
+        const vh = window.innerHeight || doc.documentElement.clientHeight;
+        const visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+        if (visible > 0 && visible / rect.height >= 0.15) {
+          startChart();
+          chartIo.disconnect();
+        }
+      });
+    } else {
+      startChart();
+    }
+  }
+
   /* -------------------------------------------------------- ring diagram -- */
 
   const ring = doc.querySelector("[data-ring]");
