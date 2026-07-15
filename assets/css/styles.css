@@ -2869,10 +2869,8 @@ body.nav-open .mobile-menu__panel { transform: none; }
   padding: 2rem 0.4rem;
   border-bottom: 1px solid var(--line-dark);
   color: var(--t-bright);
-  transition: padding-left var(--mid) var(--ease-out), background-color var(--mid) linear;
   position: relative;
 }
-.sector-row:hover { padding-left: 1.4rem; background: rgba(93, 140, 255, 0.04); }
 .sector-row .sr-idx { font-family: var(--sans); font-size: 0.72rem; color: var(--t-faint); }
 .sector-row h3 { font-family: var(--serif); font-size: clamp(1.6rem, 3.2vw, 2.5rem); font-weight: 400; }
 .sector-row p { grid-column: 2; color: var(--t-dim); max-width: 62ch; margin-top: 0.4rem; }
