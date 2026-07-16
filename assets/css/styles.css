@@ -1979,7 +1979,6 @@ body.nav-open .mobile-menu__panel { transform: none; }
 .ind-card:hover { transform: translateY(-4px); border-color: rgba(32, 80, 232, 0.28); box-shadow: 0 30px 60px -30px rgba(12, 26, 58, 0.18); }
 .ind-card .ic-kicker { font-family: var(--sans); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--cobalt); text-transform: uppercase; }
 .ind-card h3 { font-family: var(--serif); font-size: 1.9rem; margin-top: 0.7rem; }
-.ind-card h3 em { color: var(--cobalt); }
 .ind-card p { color: var(--ink-600); font-size: 0.95rem; margin-top: 0.6rem; max-width: 34ch; }
 .ind-card .link-arrow { margin-top: auto; padding-top: 1.6rem; color: var(--cobalt); }
 
