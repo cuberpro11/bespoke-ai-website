@@ -1877,6 +1877,7 @@ body.nav-open .mobile-menu__panel { transform: none; }
 /* ---------- 11. Switch section (Turn AI On) ------------------------------- */
 
 .switch-section { background: var(--paper); color: var(--ink-900); }
+.switch-section .switch-on { color: var(--cobalt); }
 
 .power-toggle {
   display: inline-flex;
@@ -1954,6 +1955,9 @@ body.nav-open .mobile-menu__panel { transform: none; }
 /* ---------- 12. Industries strip ------------------------------------------ */
 
 .industries { background: var(--paper); }
+.industries .section-head .h2 {
+  font-size: clamp(2.45rem, 5vw, 4.1rem);
+}
 .ind-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1975,12 +1979,17 @@ body.nav-open .mobile-menu__panel { transform: none; }
 .ind-card:hover { transform: translateY(-4px); border-color: rgba(32, 80, 232, 0.28); box-shadow: 0 30px 60px -30px rgba(12, 26, 58, 0.18); }
 .ind-card .ic-kicker { font-family: var(--sans); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--cobalt); text-transform: uppercase; }
 .ind-card h3 { font-family: var(--serif); font-size: 1.9rem; margin-top: 0.7rem; }
+.ind-card h3 em { color: var(--cobalt); }
 .ind-card p { color: var(--ink-600); font-size: 0.95rem; margin-top: 0.6rem; max-width: 34ch; }
 .ind-card .link-arrow { margin-top: auto; padding-top: 1.6rem; color: var(--cobalt); }
 
 /* ---------- 13. Ring diagram --------------------------------------------- */
 
 .diagram-section { background: var(--navy-900); }
+.diagram-section .section-head .h2 {
+  font-size: clamp(2.7rem, 5.5vw, 4.5rem);
+}
+.diagram-section .section-head .h2 em { color: var(--cobalt-bright); }
 .diagram-grid {
   display: grid;
   grid-template-columns: minmax(300px, 460px) 1fr;
@@ -2061,6 +2070,7 @@ body.nav-open .mobile-menu__panel { transform: none; }
 /* ---------- 14. Delivery timeline ----------------------------------------- */
 
 .deliver-section { background: var(--paper); }
+.deliver-section .h2 em { color: var(--cobalt); }
 .deliver-grid {
   display: grid;
   grid-template-columns: minmax(280px, 420px) 1fr;
@@ -2113,20 +2123,70 @@ body.nav-open .mobile-menu__panel { transform: none; }
 /* ---------- 15. Outcome cards --------------------------------------------- */
 
 .outcomes { background: var(--paper-2); }
-.outcome-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
-.outcome-card { padding: 2rem 1.9rem 2.2rem; display: flex; flex-direction: column; min-height: 300px; }
+.outcome-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.outcome-card {
+  padding: 2rem 1.9rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  background: linear-gradient(180deg, var(--white) 0%, color-mix(in srgb, var(--paper) 32%, var(--white)) 100%);
+  transition:
+    border-color var(--mid) ease-out,
+    transform var(--mid) var(--ease-out),
+    box-shadow var(--mid) ease-out,
+    background var(--mid) ease-out;
+}
+.outcome-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 4%, rgba(36, 84, 216, 0.55) 50%, transparent 96%);
+  opacity: 0;
+  transition: opacity var(--mid) ease-out;
+}
 .outcome-card .oc-ico {
   width: 46px; height: 46px;
   border-radius: 13px;
   display: grid; place-items: center;
   color: var(--cobalt);
-  background: rgba(32, 80, 232, 0.08);
-  border: 1px solid rgba(32, 80, 232, 0.22);
+  background: rgba(36, 84, 216, 0.07);
+  border: 1px solid rgba(36, 84, 216, 0.18);
   margin-bottom: 1.5rem;
+  transition: transform var(--mid) var(--ease-out), background var(--mid) ease-out, border-color var(--mid) ease-out;
 }
-.outcome-card h3 { font-size: 1.22rem; font-weight: 650; font-family: var(--sans); margin-bottom: 0.65rem; }
-.outcome-card p { color: var(--ink-600); font-size: 0.98rem; }
-.outcome-card .oc-idx { margin-top: auto; padding-top: 1.6rem; font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.09em; font-weight: 600; color: var(--ink-400); }
+.outcome-card h3 {
+  font-size: 1.22rem;
+  font-weight: 650;
+  font-family: var(--sans);
+  margin-bottom: 0.65rem;
+  color: var(--ink-900);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.outcome-card p { color: var(--ink-600); font-size: 0.98rem; line-height: 1.62; }
+.outcome-card .oc-idx {
+  margin-top: auto;
+  padding-top: 1.6rem;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  font-weight: 600;
+  color: var(--ink-400);
+}
+@media (hover: hover) {
+  .outcome-card.spot-card:hover {
+    background: linear-gradient(165deg, rgba(36, 84, 216, 0.05) 0%, var(--white) 58%);
+    border-color: rgba(36, 84, 216, 0.28);
+  }
+  .outcome-card.spot-card:hover::after { opacity: 1; }
+  .outcome-card.spot-card:hover .oc-ico {
+    transform: scale(1.05);
+    background: rgba(36, 84, 216, 0.11);
+    border-color: rgba(36, 84, 216, 0.3);
+  }
+}
 
 /* ---------- 16. Stats band ------------------------------------------------ */
 
@@ -2875,12 +2935,6 @@ body.nav-open .mobile-menu__panel { transform: none; }
 
 /* ---------- 23. Feature rows / prof services ------------------------------ */
 
-.feature-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
-.feature-cell { padding: 2rem 1.9rem; min-height: 280px; display: flex; flex-direction: column; }
-.feature-cell .fc-num { font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--cobalt); margin-bottom: auto; }
-.feature-cell h3 { font-family: var(--serif); font-size: 1.55rem; margin-top: 2.6rem; }
-.feature-cell p { color: var(--ink-600); font-size: 0.97rem; margin-top: 0.7rem; }
-
 .sector-list { border-top: 1px solid var(--line-dark); }
 .sector-row {
   display: grid;
@@ -3310,13 +3364,14 @@ body.nav-open .mobile-menu__panel { transform: none; }
   .display { font-size: clamp(2.75rem, 10vw, 3.5rem); }
   .hero--page .display { font-size: clamp(2.75rem, 10vw, 3.5rem); }
   .h1, .h2 { font-size: clamp(2.25rem, 7vw, 2.75rem); }
+  .industries .section-head .h2 { font-size: clamp(2.5rem, 8vw, 3.1rem); }
+  .diagram-section .section-head .h2 { font-size: clamp(2.75rem, 8vw, 3.5rem); }
   .h3,
   .outcome-card h3,
   .step-item h3,
   .ind-card h3,
   .switch-panel .sp-title,
   .insight-card h3,
-  .feature-cell h3,
   .cap-col h3 {
     font-size: clamp(1.35rem, 4.5vw, 1.6rem);
   }
@@ -3363,7 +3418,7 @@ body.nav-open .mobile-menu__panel { transform: none; }
     gap: 1rem;
     margin-top: 1.25rem;
   }
-  .outcome-grid, .ind-grid, .case-grid, .case-panels, .feature-trio, .team-grid, .insight-grid { grid-template-columns: 1fr; }
+  .outcome-grid, .ind-grid, .case-grid, .case-panels, .team-grid, .insight-grid { grid-template-columns: 1fr; }
   .people-grid { grid-template-columns: repeat(2, 1fr); }
   .uc-grid { grid-template-columns: 1fr; }
   .uc-stagewrap { position: static; }

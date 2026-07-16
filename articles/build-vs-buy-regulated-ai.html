@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The build-vs-buy question for regulated AI — Bespoke</title>
+<title>The build-vs-buy question for regulated AI | Bespoke</title>
 <meta name="description" content="A vendor can promise confidentiality; it can't accept your regulatory accountability. A working framework for what to buy, what to build or enclave, and where the two meet.">
-<meta property="og:title" content="The build-vs-buy question for regulated AI — Bespoke">
+<meta property="og:title" content="The build-vs-buy question for regulated AI | Bespoke">
 <meta property="og:description" content="A vendor can promise confidentiality; it can't accept your regulatory accountability. A working framework for what to buy, what to build or enclave, and where the two meet.">
 <meta property="og:type" content="article">
 <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
@@ -34,15 +34,15 @@
         <div class="dropdown">
           <a href="../law.html" style="--i:0">
             <span class="dd-ico" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7l7-4 7 4M5 7v4a7 7 0 0 0 14 0V7M8 21h8"/></svg></span>
-            <span><b>Law</b><span>Legal execution with ease — drafting, review, diligence, knowledge.</span></span>
+            <span><b>Law</b><span>Legal execution with ease: drafting, review, diligence, knowledge.</span></span>
           </a>
           <a href="../finance.html" style="--i:1">
             <span class="dd-ico" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 17V9m5 8V5m5 12v-6"/></svg></span>
-            <span><b>Finance</b><span>Reduce risk, amplify returns — built for market-maker rigor.</span></span>
+            <span><b>Finance</b><span>Reduce risk, amplify returns, built for market-maker rigor.</span></span>
           </a>
           <a href="../professional-services.html" style="--i:2">
             <span class="dd-ico" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM21 21v-2a4 4 0 0 0-3-3.87M15 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-            <span><b>Professional Services</b><span>Win clients, keep clients — institutional knowledge as advantage.</span></span>
+            <span><b>Professional Services</b><span>Win clients, keep clients: institutional knowledge as advantage.</span></span>
           </a>
         </div>
       </div>
@@ -77,15 +77,15 @@
         <div class="mobile-menu__sub" id="mobile-solutions" hidden>
           <a class="mobile-menu__sub-link" data-nav="law" href="../law.html">
             <b>Law</b>
-            <span>Legal execution with ease — drafting, review, diligence, knowledge.</span>
+            <span>Legal execution with ease: drafting, review, diligence, knowledge.</span>
           </a>
           <a class="mobile-menu__sub-link" data-nav="finance" href="../finance.html">
             <b>Finance</b>
-            <span>Reduce risk, amplify returns — built for market-maker rigor.</span>
+            <span>Reduce risk, amplify returns, built for market-maker rigor.</span>
           </a>
           <a class="mobile-menu__sub-link" data-nav="ps" href="../professional-services.html">
             <b>Professional Services</b>
-            <span>Win clients, keep clients — institutional knowledge as advantage.</span>
+            <span>Win clients, keep clients: institutional knowledge as advantage.</span>
           </a>
         </div>
       </div>
@@ -185,7 +185,7 @@
 <ul><li>Credit underwriting and scoring models for consumer or commercial lending</li><li>AML transaction monitoring and suspicious activity detection</li><li>Client portfolio management systems with personalized recommendations (Reg BI / fiduciary context)</li><li>Any system processing client-privileged communications in a law firm</li><li>Investment banking deal management tools touching MNPI</li><li>High-risk EU AI Act use cases (creditworthiness evaluation, insurance pricing)</li><li>Proprietary trading strategy analysis or algorithm development</li></ul>
 <p>"In-house" does not necessarily mean "on-premises." Private cloud deployment, dedicated tenant environments with contractually segregated infrastructure, and confidential computing architectures using TEEs can provide equivalent data control with reduced infrastructure burden. The criterion is not physical location — it is verifiable data sovereignty: the institution must be able to confirm, through technical means rather than contractual promises alone, that data does not flow to parties it should not reach and that the processing environment meets the institution's security and audit requirements.<sup class="fn"><a href="#src30">30</a></sup></p>
 <p>For law firms specifically, the privilege analysis does not yet yield clean answers about whether enterprise-tier deployments of commercial models adequately protect privileged material. ABA Formal Opinion 512 requires lawyers to understand the data handling practices of any GenAI tool they use. Multiple state bar opinions — including Florida Opinion 24-1 and Pennsylvania/Philadelphia Joint Opinion 2024-200 — have emphasized that even closed, firm-internal self-learning AI systems create risk that one client's information may be applied to another client's matter. A firm-internal deployment trained on the firm's own matter data is not automatically safe; the architecture must be designed to prevent cross-matter information leakage, typically through client-matter-level access controls and non-self-learning inference configurations.<sup class="fn"><a id="fnref36" href="#src36">36</a></sup><sup class="fn"><a href="#src22">22</a></sup></p>
-<h3>Category 3: Hybrid architectures — the "buy-and-control" middle</h3>
+<h3>Category 3: Hybrid architectures, the "buy-and-control" middle</h3>
 <p>This category captures a large and growing portion of practical AI deployment: use cases where a commercial foundation model provides the core capability, but the institution retains control over the deployment architecture, the data pipeline, and the inference environment.</p>
 <p><strong>Examples:</strong></p>
 <ul><li>A large commercial LLM deployed on the institution's private cloud or dedicated tenant, with no data leaving the perimeter</li><li>A retrieval-augmented generation (RAG) system built on proprietary documents, where the model is external but the data layer is internal and controlled</li><li>A regulatory reporting drafting tool that uses a commercial model for prose generation but restricts inputs to pre-processed, non-sensitive data representations</li><li>A compliance monitoring tool where a vendor model is fine-tuned on the institution's data but deployed in an environment the institution controls</li></ul>

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Standing orders as living documents — Bespoke</title>
-<meta name="description" content="A standing order is functionally a contract — but it's usually written once and left to drift. What regulators are finding when they look for the gap.">
-<meta property="og:title" content="Standing orders as living documents — Bespoke">
-<meta property="og:description" content="A standing order is functionally a contract — but it's usually written once and left to drift. What regulators are finding when they look for the gap.">
+<title>Standing orders as living documents | Bespoke</title>
+<meta name="description" content="A standing order is functionally a contract, but it's usually written once and left to drift. What regulators are finding when they look for the gap.">
+<meta property="og:title" content="Standing orders as living documents | Bespoke">
+<meta property="og:description" content="A standing order is functionally a contract, but it's usually written once and left to drift. What regulators are finding when they look for the gap.">
 <meta property="og:type" content="article">
 <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,15 +34,15 @@
         <div class="dropdown">
           <a href="../law.html" style="--i:0">
             <span class="dd-ico" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 7l7-4 7 4M5 7v4a7 7 0 0 0 14 0V7M8 21h8"/></svg></span>
-            <span><b>Law</b><span>Legal execution with ease — drafting, review, diligence, knowledge.</span></span>
+            <span><b>Law</b><span>Legal execution with ease: drafting, review, diligence, knowledge.</span></span>
           </a>
           <a href="../finance.html" style="--i:1">
             <span class="dd-ico" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 17V9m5 8V5m5 12v-6"/></svg></span>
-            <span><b>Finance</b><span>Reduce risk, amplify returns — built for market-maker rigor.</span></span>
+            <span><b>Finance</b><span>Reduce risk, amplify returns, built for market-maker rigor.</span></span>
           </a>
           <a href="../professional-services.html" style="--i:2">
             <span class="dd-ico" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM21 21v-2a4 4 0 0 0-3-3.87M15 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-            <span><b>Professional Services</b><span>Win clients, keep clients — institutional knowledge as advantage.</span></span>
+            <span><b>Professional Services</b><span>Win clients, keep clients: institutional knowledge as advantage.</span></span>
           </a>
         </div>
       </div>
@@ -77,15 +77,15 @@
         <div class="mobile-menu__sub" id="mobile-solutions" hidden>
           <a class="mobile-menu__sub-link" data-nav="law" href="../law.html">
             <b>Law</b>
-            <span>Legal execution with ease — drafting, review, diligence, knowledge.</span>
+            <span>Legal execution with ease: drafting, review, diligence, knowledge.</span>
           </a>
           <a class="mobile-menu__sub-link" data-nav="finance" href="../finance.html">
             <b>Finance</b>
-            <span>Reduce risk, amplify returns — built for market-maker rigor.</span>
+            <span>Reduce risk, amplify returns, built for market-maker rigor.</span>
           </a>
           <a class="mobile-menu__sub-link" data-nav="ps" href="../professional-services.html">
             <b>Professional Services</b>
-            <span>Win clients, keep clients — institutional knowledge as advantage.</span>
+            <span>Win clients, keep clients: institutional knowledge as advantage.</span>
           </a>
         </div>
       </div>
@@ -118,7 +118,7 @@
   <div class="container--narrow container article-layout">
     <article class="article-prose">
 <h2>The Gap Between the Written Mandate and the Trading Stack</h2>
-<p class="lede-p">A standing order — whether framed as an execution mandate, an algo parameter sheet, a smart-order-router (SOR) configuration document, or a standing settlement instruction (SSI) — is, in functional terms, a contract. One party (the desk, the client, the portfolio manager) specifies how their order flow will be handled. The other party (the execution infrastructure, the prime broker, the counterparty) agrees to act within those specifications. Legal form varies: some mandates are explicit written agreements, others exist as operational configurations embedded in an OMS or routing engine. The contractual character, however, is consistent. Breach the mandate — route orders to venues not listed, apply a participation-rate assumption that no longer matches the client's risk tolerance, settle to an account whose SWIFT details changed six months ago — and the operational, fiduciary, and regulatory consequences are real.</p>
+<p class="lede-p">A standing order, whether framed as an execution mandate, an algo parameter sheet, a smart-order-router (SOR) configuration document, or a standing settlement instruction (SSI), is, in functional terms, a contract. One party (the desk, the client, the portfolio manager) specifies how their order flow will be handled. The other party (the execution infrastructure, the prime broker, the counterparty) agrees to act within those specifications. Legal form varies: some mandates are explicit written agreements, others exist as operational configurations embedded in an OMS or routing engine. The contractual character, however, is consistent. Breach the mandate, route orders to venues not listed, apply a participation-rate assumption that no longer matches the client's risk tolerance, settle to an account whose SWIFT details changed six months ago, and the operational, fiduciary, and regulatory consequences are real.</p>
 <p>What distinguishes standing trading documentation from most commercial contracts is how it is subsequently managed. Commercial contracts get amended via a formal process: counterparty notification, redlining, signature. Standing orders, by contrast, are typically written once — at account opening, at strategy launch, or at the onboarding of a new algo product — and then obeyed loosely, while the market environment, the available venues, the algo's internal logic, and the client's actual risk parameters evolve around them.</p>
 <p>The result is a structural divergence: the document says one thing; the execution stack does another. That divergence is not inherently malicious. It accumulates through ordinary operational friction — a new dark pool launches, a SOR configuration gets updated in the system but not in the written policy, an algo vendor releases a new version with altered participation caps, a client changes custodian banks without notifying the dealing desk. At any individual moment, the drift seems trivial. Over time, the written mandate becomes an archaeology of how the firm <em>used to</em> trade rather than a specification of how it <em>currently</em> trades.</p>
 <p>FIXatdl — the FIX Trading Community's XML standard for expressing algo parameters — provides a useful illustration of the structural challenge. FIXatdl standardizes how an algorithm's controls, constraints, defaults, and validation rules are expressed across OMS and EMS platforms. It reduces bespoke integrations. But the standard describes <em>machine-readable</em> parameter expression. It does not, by itself, mandate that the human-readable mandate document in the compliance folder reflects what those parameters actually contain at any given moment. The machine knows. The document may not.<sup class="fn"><a id="fnref1" href="#src1">1</a></sup></p>
