@@ -227,14 +227,14 @@
     }
   }
 
-  // hero motion — pages with mask-line headlines
-  const heroLines = doc.querySelector(".hero [data-lines]");
-  if (heroLines) {
+  // hero motion — homepage only; interior heroes render static
+  const isHome = doc.body.dataset.page === "home";
+  if (isHome) {
     root.classList.add("animate-headlines");
     requestAnimationFrame(() => {
       root.classList.add("lines-in");
-      doc.querySelectorAll(".hero [data-reveal]").forEach((el) => el.classList.add("is-visible"));
     });
+    doc.querySelectorAll(".hero .kicker[data-reveal]").forEach((el) => el.classList.add("is-visible"));
   }
 
   // safety net: if the renderer never advances CSS transitions (embedded
