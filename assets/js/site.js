@@ -334,29 +334,47 @@
   }
 
   /* ------------------------------------------------------- hero dot-field -- */
-  /* A restrained grid of dots rippling under three autonomous orange cursors —
-     like AI agents working in the background. No user input required. */
+  /* Neural energy orbs — soft glassy blue/cyan spheres drifting slowly over a
+     dot field, with thin orange trails echoing the product cursor. */
 
   const canvas = doc.getElementById("hero-canvas");
   if (canvas && canvas.getContext && canvas.closest(".hero--tall")) {
     const ctx = canvas.getContext("2d");
+    const heroEl = canvas.closest(".hero");
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
     const SPACING = 34;
-    const REACH = 190; // px radius of each agent's influence
-    const AGENT_COUNT = 3;
-    const CURSOR_PATH = new Path2D(
-      "M5.5 3.2a.7.7 0 0 1 1.13-.55l12.2 9.42a.7.7 0 0 1-.35 1.25l-5.38.7 3.03 5.51a.7.7 0 0 1-.28.95l-1.9 1.05a.7.7 0 0 1-.95-.28l-3.03-5.5-3.95 3.7a.7.7 0 0 1-1.18-.5Z"
-    );
+    const REACH = 190;
+    const AGENT_COUNT = 8;
+    const TRAIL_LEN = 24;
+    const ORB_PALETTE = [
+      { core: [74, 114, 240], rim: [36, 84, 216], glow: [120, 210, 255] },
+      { core: [56, 196, 232], rim: [24, 140, 180], glow: [160, 235, 255] },
+      { core: [90, 130, 255], rim: [48, 96, 210], glow: [180, 220, 255] },
+      { core: [68, 108, 228], rim: [32, 72, 196], glow: [130, 200, 248] },
+      { core: [48, 178, 220], rim: [20, 128, 168], glow: [150, 228, 252] },
+      { core: [82, 122, 248], rim: [40, 88, 204], glow: [170, 215, 255] },
+      { core: [62, 188, 238], rim: [28, 132, 174], glow: [145, 230, 255] },
+      { core: [78, 118, 244], rim: [38, 80, 208], glow: [165, 212, 252] },
+    ];
     let W = 0, H = 0, dots = [], agents = [], running = false, rafId = null;
+    let scrollParallax = 0;
 
     const rand = (min, max) => min + Math.random() * (max - min);
+    const rgba = (rgb, a) => `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${a.toFixed(3)})`;
+
+    const updateHeroParallax = () => {
+      if (!heroEl) return;
+      const rect = heroEl.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, -rect.top / Math.max(rect.height, 1)));
+      scrollParallax = progress;
+    };
 
     const pickTarget = (agent) => {
-      const pad = 56;
+      const pad = 72;
       agent.tx = rand(pad, Math.max(pad + 1, W - pad));
       agent.ty = rand(pad, Math.max(pad + 1, H - pad));
-      agent.speed = rand(0.028, 0.058);
-      agent.dwell = Math.round(rand(0, 8));
+      agent.speed = rand(0.011, 0.022);
+      agent.dwell = Math.round(rand(6, 18));
     };
 
     const initAgents = () => {
@@ -367,9 +385,14 @@
           y: rand(0, H),
           tx: 0,
           ty: 0,
-          speed: 0.04,
+          speed: 0.016,
           dwell: 0,
-          pulse: i * 2.1,
+          pulse: i * 1.4,
+          trail: [],
+          radius: rand(10, 17),
+          depth: 0.52 + (i / Math.max(AGENT_COUNT - 1, 1)) * 0.34,
+          parallax: 0.14 + i * 0.11,
+          palette: ORB_PALETTE[i % ORB_PALETTE.length],
         };
         pickTarget(agent);
         agent.x = agent.tx;
@@ -406,67 +429,134 @@
       initAgents();
     };
 
-    const drawAgentCursor = (x, y, pulse) => {
-      const glow = 0.42 + Math.sin(pulse) * 0.08;
+    const drawEnergyTrail = (agent, parallaxY) => {
+      const { trail, pulse, radius } = agent;
+      if (trail.length < 2) return;
+      const cx = agent.x;
+      const cy = agent.y + parallaxY;
+      const orbR = radius + Math.sin(pulse * 0.65) * 2.5;
+
       ctx.save();
-      ctx.translate(x, y);
-      ctx.scale(0.92, 0.92);
-      ctx.fillStyle = `rgba(255, 118, 45, ${glow.toFixed(3)})`;
-      ctx.strokeStyle = `rgba(11, 17, 32, ${(glow * 0.65).toFixed(3)})`;
-      ctx.lineWidth = 1.15;
-      ctx.fill(CURSOR_PATH);
-      ctx.stroke(CURSOR_PATH);
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+
+      for (let i = 1; i < trail.length; i++) {
+        const t = 1 - i / trail.length;
+        const alpha = t * t * 0.1 * agent.depth;
+        const isStem = i <= 3;
+        ctx.strokeStyle = `rgba(255, 118, 45, ${(isStem ? Math.max(alpha, 0.05 * agent.depth) : alpha).toFixed(3)})`;
+        ctx.lineWidth = isStem ? 1.4 + t * 0.7 : 0.9 + t * 1.2;
+        ctx.beginPath();
+        ctx.moveTo(i === 1 ? cx : trail[i - 1].x, i === 1 ? cy : trail[i - 1].y);
+        ctx.lineTo(trail[i].x, trail[i].y);
+        ctx.stroke();
+      }
+
+      const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, orbR * 0.55);
+      core.addColorStop(0, `rgba(255, 152, 78, ${(0.14 * agent.depth).toFixed(3)})`);
+      core.addColorStop(0.42, `rgba(255, 118, 45, ${(0.06 * agent.depth).toFixed(3)})`);
+      core.addColorStop(1, "rgba(255, 118, 45, 0)");
+      ctx.fillStyle = core;
       ctx.beginPath();
-      ctx.arc(2, 2, 5.5, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(255, 118, 45, ${(glow * 0.35).toFixed(3)})`;
-      ctx.lineWidth = 1;
+      ctx.arc(cx, cy, orbR * 0.62, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    };
+
+    const drawNeuralOrb = (agent, parallaxY) => {
+      const { x, y, pulse, radius, palette, depth } = agent;
+      const drawY = y + parallaxY;
+      const alpha = (0.055 + Math.sin(pulse) * 0.018) * depth;
+      const r = radius + Math.sin(pulse * 0.65) * 2;
+
+      ctx.save();
+
+      const outerGlow = ctx.createRadialGradient(x, drawY, r * 0.2, x, drawY, r * 2.6);
+      outerGlow.addColorStop(0, rgba(palette.glow, alpha * 0.38));
+      outerGlow.addColorStop(0.45, rgba(palette.core, alpha * 0.14));
+      outerGlow.addColorStop(1, rgba(palette.core, 0));
+      ctx.fillStyle = outerGlow;
+      ctx.beginPath();
+      ctx.arc(x, drawY, r * 2.6, 0, Math.PI * 2);
+      ctx.fill();
+
+      const body = ctx.createRadialGradient(
+        x - r * 0.32, drawY - r * 0.38, r * 0.08,
+        x + r * 0.08, drawY + r * 0.12, r
+      );
+      body.addColorStop(0, rgba(palette.glow, alpha * 0.95));
+      body.addColorStop(0.38, rgba(palette.core, alpha * 0.78));
+      body.addColorStop(0.72, rgba(palette.rim, alpha * 0.48));
+      body.addColorStop(1, rgba(palette.rim, alpha * 0.12));
+      ctx.fillStyle = body;
+      ctx.beginPath();
+      ctx.arc(x, drawY, r, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = rgba([255, 255, 255], alpha * 0.28);
+      ctx.lineWidth = 0.6;
+      ctx.beginPath();
+      ctx.arc(x, drawY, r, 0, Math.PI * 2);
       ctx.stroke();
+
+      ctx.fillStyle = rgba([255, 255, 255], alpha * 0.22);
+      ctx.beginPath();
+      ctx.ellipse(x - r * 0.24, drawY - r * 0.32, r * 0.18, r * 0.1, -0.55, 0, Math.PI * 2);
+      ctx.fill();
+
       ctx.restore();
     };
 
     const frame = () => {
+      updateHeroParallax();
       ctx.clearRect(0, 0, W, H);
 
       for (const agent of agents) {
         agent.x += (agent.tx - agent.x) * agent.speed;
         agent.y += (agent.ty - agent.y) * agent.speed;
-        agent.pulse += 0.04;
+        agent.pulse += 0.025;
         const dx = agent.tx - agent.x;
         const dy = agent.ty - agent.y;
-        if (Math.hypot(dx, dy) < 24) {
+        if (Math.hypot(dx, dy) < 18) {
           if (agent.dwell > 0) agent.dwell--;
           else pickTarget(agent);
         }
+        agent.trail.unshift({ x: agent.x, y: agent.y + scrollParallax * agent.parallax * 28 });
+        if (agent.trail.length > TRAIL_LEN) agent.trail.pop();
       }
 
       for (const d of dots) {
         let px = d.ox, py = d.oy, targetLift = 0;
         for (const agent of agents) {
-          const dx = d.ox - agent.x, dy = d.oy - agent.y;
+          const parallaxY = scrollParallax * agent.parallax * 28;
+          const dx = d.ox - agent.x, dy = d.oy - (agent.y + parallaxY);
           const dist = Math.hypot(dx, dy);
           if (dist < REACH) {
             const f = 1 - dist / REACH;
             const eased = f * f;
-            px += (dx / (dist || 1)) * eased * 10;
-            py += (dy / (dist || 1)) * eased * 10;
-            targetLift = Math.max(targetLift, eased);
+            px += (dx / (dist || 1)) * eased * 5;
+            py += (dy / (dist || 1)) * eased * 5;
+            targetLift = Math.max(targetLift, eased * agent.depth);
           }
         }
-        d.lift += (targetLift - d.lift) * 0.15;
+        d.lift += (targetLift - d.lift) * 0.1;
         d.x = px; d.y = py;
 
-        const r = 1.1 + d.lift * 1.4;
-        const alpha = 0.16 + d.lift * 0.62;
+        const r = 1.1 + d.lift * 0.9;
+        const alpha = 0.12 + d.lift * 0.22;
         ctx.beginPath();
         ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
         ctx.fillStyle = d.lift > 0.04
-          ? `rgba(255, 132, 58, ${alpha.toFixed(3)})`
+          ? `rgba(100, 188, 255, ${alpha.toFixed(3)})`
           : `rgba(180, 182, 190, ${alpha.toFixed(3)})`;
         ctx.fill();
       }
 
       for (const agent of agents) {
-        drawAgentCursor(agent.x, agent.y, agent.pulse);
+        const parallaxY = scrollParallax * agent.parallax * 28;
+        drawNeuralOrb(agent, parallaxY);
+        drawEnergyTrail(agent, parallaxY);
       }
 
       if (running) rafId = requestAnimationFrame(frame);
