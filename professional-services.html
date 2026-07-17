@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css?v=9">
-<script>document.documentElement.classList.add("js");</script>
+<script>document.documentElement.classList.add("js","animate-headlines");</script>
 </head>
 <body data-page="ps">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -106,10 +106,13 @@
   <div class="hero__bg" aria-hidden="true"></div>
   <img class="halftone" src="assets/img/halftone-proserv.png?v=1" alt="" aria-hidden="true">
   <div class="container--wide container hero__content">
-    <p class="kicker">Solutions / Professional Services</p>
-    <h1 class="display">Win clients.<br><em>Keep clients.</em></h1>
-    <p class="lede">Purpose built AI for firms that need to respond faster, onboard seamlessly, and become the trusted partner clients rely on.</p>
-    <div class="hero__actions">
+    <p class="kicker" data-reveal="draw" style="--i:0">Solutions / Professional Services</p>
+    <h1 class="display" data-lines>
+      <span class="mask-line"><span style="--i:0">Win clients.</span></span>
+      <span class="mask-line"><span style="--i:1"><em>Keep clients.</em></span></span>
+    </h1>
+    <p class="lede" data-reveal style="--i:3">Purpose built AI for firms that need to respond faster, onboard seamlessly, and become the trusted partner clients rely on.</p>
+    <div class="hero__actions" data-reveal style="--i:4">
       <a class="btn btn--primary" href="#contact">Contact sales <span class="arr" aria-hidden="true">→</span></a>
       <a class="btn btn--ghost" href="index.html#demo">See the platform <span class="arr" aria-hidden="true">→</span></a>
     </div>
@@ -121,7 +124,7 @@
   <div class="container--wide container">
     <div class="section-head">
       <p class="kicker" data-reveal="draw">The compounding asset</p>
-      <h2 class="h2" data-reveal>Turn institutional knowledge into <em>competitive advantage.</em></h2>
+      <h2 class="h2" data-reveal>Turn institutional knowledge into a <em>competitive advantage.</em></h2>
     </div>
     <div class="outcome-grid" data-stagger>
       <div class="outcome-card spot-card" data-reveal>
@@ -222,7 +225,7 @@
 <section class="section cta-band dark" aria-label="Get started">
   <div class="container">
     <p class="kicker kicker--center" data-reveal="draw">Solutions / Professional Services</p>
-    <h2 class="h1" data-reveal>Become the firm clients <em>rely on.</em></h2>
+    <h2 class="h1" data-reveal>Become the firm clients <em class="accent-ai">rely on.</em></h2>
     <p class="lede" data-reveal>Tell us where response times cost you work. We'll show you the same flow at Bespoke speed.</p>
     <div class="hero__actions" data-reveal>
       <a class="btn btn--white" href="#contact">Contact sales <span class="arr" aria-hidden="true">→</span></a>

@@ -840,7 +840,7 @@ body.nav-open .mobile-menu__panel { transform: none; }
 /* interior page hero (smaller) */
 .hero--page { padding-top: calc(var(--nav-h) + clamp(3rem, 8vh, 5.5rem)); }
 .hero--page .display { font-size: clamp(2.8rem, 6.6vw, 5.6rem); }
-.hero--page .hero__content > * {
+html:not(.animate-headlines) .hero--page .hero__content > * {
   opacity: 1;
   transform: none;
 }

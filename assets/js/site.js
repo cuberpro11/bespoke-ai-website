@@ -227,14 +227,14 @@
     }
   }
 
-  // hero motion — homepage only; interior heroes render static
-  const isHome = doc.body.dataset.page === "home";
-  if (isHome) {
+  // hero motion — pages with mask-line headlines
+  const heroLines = doc.querySelector(".hero [data-lines]");
+  if (heroLines) {
     root.classList.add("animate-headlines");
     requestAnimationFrame(() => {
       root.classList.add("lines-in");
+      doc.querySelectorAll(".hero [data-reveal]").forEach((el) => el.classList.add("is-visible"));
     });
-    doc.querySelectorAll(".hero .kicker[data-reveal]").forEach((el) => el.classList.add("is-visible"));
   }
 
   // safety net: if the renderer never advances CSS transitions (embedded
@@ -334,18 +334,49 @@
   }
 
   /* ------------------------------------------------------- hero dot-field -- */
-  /* A restrained grid of dots that responds to the cursor like a taut piece
-     of fabric — no constellations, no code-like glyphs. Dots near the
-     pointer lift slightly, brighten, and ease back once the pointer leaves. */
+  /* A restrained grid of dots rippling under three autonomous orange cursors —
+     like AI agents working in the background. No user input required. */
 
   const canvas = doc.getElementById("hero-canvas");
   if (canvas && canvas.getContext && canvas.closest(".hero--tall")) {
     const ctx = canvas.getContext("2d");
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
     const SPACING = 34;
-    const REACH = 190; // px radius of cursor influence
-    let W = 0, H = 0, dots = [], running = false, rafId = null;
-    const mouse = { x: -9999, y: -9999, active: false, tx: -9999, ty: -9999 };
+    const REACH = 190; // px radius of each agent's influence
+    const AGENT_COUNT = 3;
+    const CURSOR_PATH = new Path2D(
+      "M5.5 3.2a.7.7 0 0 1 1.13-.55l12.2 9.42a.7.7 0 0 1-.35 1.25l-5.38.7 3.03 5.51a.7.7 0 0 1-.28.95l-1.9 1.05a.7.7 0 0 1-.95-.28l-3.03-5.5-3.95 3.7a.7.7 0 0 1-1.18-.5Z"
+    );
+    let W = 0, H = 0, dots = [], agents = [], running = false, rafId = null;
+
+    const rand = (min, max) => min + Math.random() * (max - min);
+
+    const pickTarget = (agent) => {
+      const pad = 56;
+      agent.tx = rand(pad, Math.max(pad + 1, W - pad));
+      agent.ty = rand(pad, Math.max(pad + 1, H - pad));
+      agent.speed = rand(0.028, 0.058);
+      agent.dwell = Math.round(rand(0, 8));
+    };
+
+    const initAgents = () => {
+      agents = [];
+      for (let i = 0; i < AGENT_COUNT; i++) {
+        const agent = {
+          x: rand(0, W),
+          y: rand(0, H),
+          tx: 0,
+          ty: 0,
+          speed: 0.04,
+          dwell: 0,
+          pulse: i * 2.1,
+        };
+        pickTarget(agent);
+        agent.x = agent.tx;
+        agent.y = agent.ty;
+        agents.push(agent);
+      }
+    };
 
     const build = () => {
       const rect = canvas.parentElement.getBoundingClientRect();
@@ -372,26 +403,53 @@
           });
         }
       }
+      initAgents();
+    };
+
+    const drawAgentCursor = (x, y, pulse) => {
+      const glow = 0.42 + Math.sin(pulse) * 0.08;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(0.92, 0.92);
+      ctx.fillStyle = `rgba(255, 118, 45, ${glow.toFixed(3)})`;
+      ctx.strokeStyle = `rgba(11, 17, 32, ${(glow * 0.65).toFixed(3)})`;
+      ctx.lineWidth = 1.15;
+      ctx.fill(CURSOR_PATH);
+      ctx.stroke(CURSOR_PATH);
+      ctx.beginPath();
+      ctx.arc(2, 2, 5.5, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255, 118, 45, ${(glow * 0.35).toFixed(3)})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.restore();
     };
 
     const frame = () => {
-      // ease the tracked pointer for a gentle, non-jittery response
-      mouse.x += (mouse.tx - mouse.x) * 0.18;
-      mouse.y += (mouse.ty - mouse.y) * 0.18;
-
       ctx.clearRect(0, 0, W, H);
+
+      for (const agent of agents) {
+        agent.x += (agent.tx - agent.x) * agent.speed;
+        agent.y += (agent.ty - agent.y) * agent.speed;
+        agent.pulse += 0.04;
+        const dx = agent.tx - agent.x;
+        const dy = agent.ty - agent.y;
+        if (Math.hypot(dx, dy) < 24) {
+          if (agent.dwell > 0) agent.dwell--;
+          else pickTarget(agent);
+        }
+      }
 
       for (const d of dots) {
         let px = d.ox, py = d.oy, targetLift = 0;
-        if (mouse.active) {
-          const dx = d.ox - mouse.x, dy = d.oy - mouse.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+        for (const agent of agents) {
+          const dx = d.ox - agent.x, dy = d.oy - agent.y;
+          const dist = Math.hypot(dx, dy);
           if (dist < REACH) {
             const f = 1 - dist / REACH;
             const eased = f * f;
             px += (dx / (dist || 1)) * eased * 10;
             py += (dy / (dist || 1)) * eased * 10;
-            targetLift = eased;
+            targetLift = Math.max(targetLift, eased);
           }
         }
         d.lift += (targetLift - d.lift) * 0.15;
@@ -402,9 +460,13 @@
         ctx.beginPath();
         ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
         ctx.fillStyle = d.lift > 0.04
-          ? `rgba(120, 150, 235, ${alpha.toFixed(3)})`
+          ? `rgba(255, 132, 58, ${alpha.toFixed(3)})`
           : `rgba(180, 182, 190, ${alpha.toFixed(3)})`;
         ctx.fill();
+      }
+
+      for (const agent of agents) {
+        drawAgentCursor(agent.x, agent.y, agent.pulse);
       }
 
       if (running) rafId = requestAnimationFrame(frame);
@@ -422,7 +484,7 @@
     };
 
     build();
-    const staticCanvas = REDUCED || MOBILE || COARSE;
+    const staticCanvas = REDUCED;
     if (staticCanvas) {
       frame(); // single static frame
     } else {
@@ -434,17 +496,7 @@
       doc.addEventListener("visibilitychange", () =>
         doc.hidden ? stop() : start()
       );
-      const hero = canvas.closest(".hero");
-      (hero || canvas).addEventListener("pointermove", (e) => {
-        const r = canvas.getBoundingClientRect();
-        mouse.tx = e.clientX - r.left;
-        mouse.ty = e.clientY - r.top;
-        mouse.active = true;
-      }, { passive: true });
-      (hero || canvas).addEventListener("pointerleave", () => {
-        mouse.active = false;
-        mouse.tx = mouse.ty = -9999;
-      });
+      start();
     }
 
     let rT = null;
