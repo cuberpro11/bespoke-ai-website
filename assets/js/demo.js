@@ -14,7 +14,7 @@
   const MOBILE = window.matchMedia("(max-width: 860px)").matches;
   const COARSE = window.matchMedia("(hover: none), (pointer: coarse)").matches;
   const HIDE_CURSOR = MOBILE || COARSE;
-  const PLAYBACK_RATE = 1.2;
+  const PLAYBACK_RATE = 2.4;
   const realMs = (ms) => ms / PLAYBACK_RATE;
   const $ = (key) => stage.querySelector(`[data-el="${key}"]`);
   const el = {
@@ -151,7 +151,7 @@
     ],
   };
 
-  const DRAFT_LINE_MS = 105;
+  const DRAFT_LINE_MS = 52;
 
   const folderIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2Z"/></svg>';
   const checkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
