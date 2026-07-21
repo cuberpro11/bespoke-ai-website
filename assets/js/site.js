@@ -920,11 +920,42 @@
 
   doc.querySelectorAll("[data-contact-form]").forEach((box) => {
     const form = box.querySelector("form");
-    const formWrap = box.querySelector(".f-form");
     if (!form) return;
+
+    const footer = box.closest(".footer");
+    const mailEl = footer?.querySelector(".f-mail");
+    let to = "contact@bespoke.ai";
+    if (mailEl) {
+      const href = mailEl.getAttribute("href") || "";
+      to = href.replace(/^mailto:/i, "").split("?")[0] || mailEl.textContent.trim() || to;
+    }
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      (formWrap || box).classList.add("is-sent");
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const fd = new FormData(form);
+      const name = String(fd.get("name") || "").trim();
+      const firm = String(fd.get("firm") || "").trim();
+      const email = String(fd.get("email") || "").trim();
+      const message = String(fd.get("message") || "").trim();
+
+      const subject = name
+        ? `Working session request from ${name}`
+        : "Working session request";
+      const body = [
+        `Name: ${name}`,
+        `Firm: ${firm}`,
+        `Email: ${email}`,
+        "",
+        message,
+      ].join("\n");
+
+      const params = new URLSearchParams({ subject, body });
+      window.location.href = `mailto:${to}?${params.toString()}`;
     });
   });
 
