@@ -12,6 +12,7 @@
 
   const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const MOBILE = window.matchMedia("(max-width: 860px)").matches;
+  const PHONE = window.matchMedia("(max-width: 560px)").matches;
   const COARSE = window.matchMedia("(hover: none), (pointer: coarse)").matches;
   const HIDE_CURSOR = MOBILE || COARSE;
   const PLAYBACK_RATE = 2.4;
@@ -48,14 +49,14 @@
   /* ------------------------------------------------------------- content -- */
 
   const FILES = [
-    { name: "ISDA Master — Meridian.pdf",   kind: "PDF",  sub: "2002 form · NY law",        folder: "trading", sx: 6,  sy: 6 },
-    { name: "CSA Amendment (2024).pdf",     kind: "PDF",  sub: "Margin terms · executed",   folder: "trading", sx: 46, sy: 14 },
-    { name: "GMSLA — Meridian Sec.pdf",     kind: "PDF",  sub: "Securities lending",        folder: "trading", sx: 22, sy: 34 },
-    { name: "Fund II LPA.docx",             kind: "DOCX", sub: "Delaware LP · 148 pp",      folder: "funds",   sx: 62, sy: 40 },
-    { name: "Side Letter — Anchor LP.pdf",  kind: "PDF",  sub: "MFN · fee terms",           folder: "funds",   sx: 10, sy: 62 },
-    { name: "Credit Agreement — B.pdf",     kind: "PDF",  sub: "Facility B · secured",      folder: "credit",  sx: 52, sy: 66 },
-    { name: "Guarantee & Security.pdf",     kind: "PDF",  sub: "Cross-lien schedule",       folder: "credit",  sx: 30, sy: 84 },
-    { name: "Board Minutes — Q3.docx",      kind: "DOCX", sub: "Governance record",         folder: "gov",     sx: 66, sy: 88 },
+    { name: "ISDA Master — Meridian.pdf",   kind: "PDF",  sub: "2002 form · NY law",        folder: "trading", sx: 6,  sy: 6,  px: 2,  py: 2  },
+    { name: "CSA Amendment (2024).pdf",     kind: "PDF",  sub: "Margin terms · executed",   folder: "trading", sx: 46, sy: 14, px: 52, py: 6  },
+    { name: "GMSLA — Meridian Sec.pdf",     kind: "PDF",  sub: "Securities lending",        folder: "trading", sx: 22, sy: 34, px: 4,  py: 24 },
+    { name: "Fund II LPA.docx",             kind: "DOCX", sub: "Delaware LP · 148 pp",      folder: "funds",   sx: 62, sy: 40, px: 50, py: 30 },
+    { name: "Side Letter — Anchor LP.pdf",  kind: "PDF",  sub: "MFN · fee terms",           folder: "funds",   sx: 10, sy: 62, px: 2,  py: 48 },
+    { name: "Credit Agreement — B.pdf",     kind: "PDF",  sub: "Facility B · secured",      folder: "credit",  sx: 52, sy: 66, px: 52, py: 52 },
+    { name: "Guarantee & Security.pdf",     kind: "PDF",  sub: "Cross-lien schedule",       folder: "credit",  sx: 30, sy: 84, px: 6,  py: 72 },
+    { name: "Board Minutes — Q3.docx",      kind: "DOCX", sub: "Governance record",         folder: "gov",     sx: 66, sy: 88, px: 50, py: 76 },
   ];
 
   const FOLDERS = [
@@ -64,6 +65,16 @@
     { key: "credit",  label: "Credit",                tags: ["Cross-liens", "Facility B"] },
     { key: "gov",     label: "Governance",            tags: ["Q3 record"] },
   ];
+
+  const STATUS = {
+    waiting: "Waiting for upload…",
+    uploading: PHONE ? "Uploading 8 docs…" : "Uploading 8 documents…",
+    analyzing: PHONE ? "Analyzing parties & terms…" : "Analyzing — parties, dates, obligations, governing law…",
+    ingested: PHONE ? "8 docs ingested" : "8 documents ingested",
+    classifying: PHONE ? "Classifying matters…" : "Classifying into matters…",
+    extracting: PHONE ? "Extracting key terms…" : "Extracting parties, dates, governing law…",
+    organized: PHONE ? "Organized · 8 docs" : "Organized · 8 documents across 4 matters",
+  };
 
   const PROMPT = "Summarize our termination and cross-default exposure across the Meridian trading agreements — and flag any margin terms that changed in the 2024 CSA amendment.";
 
@@ -174,8 +185,8 @@
     chips = FILES.map((f) => {
       const d = document.createElement("div");
       d.className = "file-chip";
-      d.style.left = f.sx + "%";
-      d.style.top = f.sy + "%";
+      d.style.left = (PHONE ? f.px : f.sx) + "%";
+      d.style.top = (PHONE ? f.py : f.sy) + "%";
       d.innerHTML = `<span class="f-ico">${f.kind}</span>
         <span class="f-body"><span class="f-name">${f.name}</span><span class="f-sub">${f.sub}</span></span>
         <span class="f-check">${checkIcon}</span>
@@ -285,7 +296,7 @@
     buildFolders();
     buildChips();
     el.folderGrid.querySelectorAll(".folder").forEach((f) => f.classList.remove("is-in", "is-lit", "is-packed"));
-    el.docsStatus.textContent = "Waiting for upload…";
+    el.docsStatus.textContent = STATUS.waiting;
     el.docsStatus.classList.remove("is-good");
     el.badgeDocs.classList.remove("is-on");
     el.badgeDraft.classList.remove("is-on");
@@ -329,7 +340,7 @@
 
   const composeIngested = () => {
     chips.forEach((c) => c.classList.add("is-in", "is-done"));
-    el.docsStatus.textContent = "8 documents ingested";
+    el.docsStatus.textContent = STATUS.ingested;
     el.docsStatus.classList.add("is-good");
   };
 
@@ -343,7 +354,7 @@
     });
     el.folderGrid.querySelectorAll(".tag").forEach((t) => t.classList.add("is-in"));
     slotChips();
-    el.docsStatus.textContent = "Organized · 8 documents across 4 matters";
+    el.docsStatus.textContent = STATUS.organized;
     el.docsStatus.classList.add("is-good");
     el.badgeDocs.classList.add("is-on");
   };
@@ -449,17 +460,17 @@
       },
       cues: [
         { t: 300, run: () => { el.cursor.classList.add("is-on"); cursorTo(el.dropzone, { dur: 1100, oy: 30 }); } },
-        { t: 700, run: () => (el.docsStatus.textContent = "Uploading 8 documents…") },
+        { t: 700, run: () => (el.docsStatus.textContent = STATUS.uploading) },
         ...FILES.map((f, i) => ({
           t: 800 + i * 280,
           run: () => chips[i].classList.add("is-in", "is-scanning"),
         })),
-        { t: 3400, run: () => (el.docsStatus.textContent = "Analyzing — parties, dates, obligations, governing law…") },
+        { t: 3400, run: () => (el.docsStatus.textContent = STATUS.analyzing) },
         ...FILES.map((f, i) => ({
           t: 3600 + i * 300,
           run: () => { chips[i].classList.remove("is-scanning"); chips[i].classList.add("is-done"); },
         })),
-        { t: 6300, run: () => { el.docsStatus.textContent = "8 documents ingested"; el.docsStatus.classList.add("is-good"); } },
+        { t: 6300, run: () => { el.docsStatus.textContent = STATUS.ingested; el.docsStatus.classList.add("is-good"); } },
       ],
     },
 
@@ -472,7 +483,7 @@
         composeIngested();
       },
       cues: [
-        { t: 200, run: () => { el.dropzone.classList.add("is-hidden"); el.docsStatus.classList.remove("is-good"); el.docsStatus.textContent = "Classifying into matters…"; } },
+        { t: 200, run: () => { el.dropzone.classList.add("is-hidden"); el.docsStatus.classList.remove("is-good"); el.docsStatus.textContent = STATUS.classifying; } },
         ...FOLDERS.map((f, i) => ({
           t: 420 + i * 130,
           run: () => el.folderGrid.querySelector(`[data-folder="${f.key}"]`).classList.add("is-in"),
@@ -486,9 +497,9 @@
             node.querySelector(".count").textContent = FILES.filter((x) => x.folder === f.key).length;
           },
         })),
-        { t: 2600, run: () => (el.docsStatus.textContent = "Extracting parties, dates, governing law…") },
+        { t: 2600, run: () => (el.docsStatus.textContent = STATUS.extracting) },
         { t: 4600, run: () => el.folderGrid.querySelectorAll(".folder").forEach((f) => f.classList.remove("is-lit")) },
-        { t: 5200, run: () => { el.docsStatus.textContent = "Organized · 8 documents across 4 matters"; el.docsStatus.classList.add("is-good"); el.badgeDocs.classList.add("is-on"); } },
+        { t: 5200, run: () => { el.docsStatus.textContent = STATUS.organized; el.docsStatus.classList.add("is-good"); el.badgeDocs.classList.add("is-on"); } },
         { t: 6200, run: () => { el.cursor.classList.add("is-on"); cursorTo(el.sideChat, { dur: 800 }); } },
         { t: 6800, run: () => cursorClick() },
       ],
