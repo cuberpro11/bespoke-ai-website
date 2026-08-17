@@ -3531,6 +3531,7 @@ body.nav-open .mobile-menu__panel { transform: none; }
 
 .footer .f-brandcol p { font-size: 0.93rem; max-width: 34ch; margin-top: 1.1rem; }
 .footer .f-mail { display: inline-flex; margin-top: 1.3rem; color: var(--sky); font-size: 0.98rem; }
+.footer [data-contact-form] .f-mail { margin-top: 0; margin-bottom: 1.4rem; }
 
 /* contact mini-form */
 .f-form { display: grid; gap: 0.7rem; }
