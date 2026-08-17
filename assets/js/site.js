@@ -924,7 +924,7 @@
 
     const footer = box.closest(".footer");
     const mailEl = footer?.querySelector(".f-mail");
-    let to = "contact@bespoke.ai";
+    let to = "contact@getbespoke.ai";
     if (mailEl) {
       const href = mailEl.getAttribute("href") || "";
       to = href.replace(/^mailto:/i, "").split("?")[0] || mailEl.textContent.trim() || to;
