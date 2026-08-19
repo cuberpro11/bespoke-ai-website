@@ -922,8 +922,7 @@
     const form = box.querySelector("form");
     if (!form) return;
 
-    const footer = box.closest(".footer");
-    const mailEl = footer?.querySelector(".f-mail");
+    const mailEl = box.querySelector(".f-mail") || box.closest(".footer")?.querySelector(".f-mail");
     let to = "contact@getbespoke.ai";
     if (mailEl) {
       const href = mailEl.getAttribute("href") || "";
