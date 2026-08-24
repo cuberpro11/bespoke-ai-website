@@ -1,0 +1,77 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 905 >>
+stream
+BT
+/F1 16 Tf
+72 720 Td
+(Sample ISDA Schedule) Tj
+/F2 11 Tf
+0 -28 Td
+(SAMPLE DOCUMENT ? FOR DEMONSTRATION ONLY) Tj
+0 -16 Td
+( ) Tj
+0 -16 Td
+(SCHEDULE to the 2002 Master Agreement) Tj
+0 -16 Td
+(Dated as of January 15, 2025) Tj
+0 -16 Td
+( ) Tj
+0 -16 Td
+(between) Tj
+0 -16 Td
+(Meridian Clearing Bank  \("Party A"\)) Tj
+0 -16 Td
+(and) Tj
+0 -16 Td
+(Northwind Macro Fund LP  \("Party B"\)) Tj
+0 -16 Td
+( ) Tj
+0 -16 Td
+(Part 1. Termination Provisions) Tj
+0 -16 Td
+( ) Tj
+0 -16 Td
+(\(a\) Specified Entities means, in relation to Party A, None.) Tj
+0 -16 Td
+(\(b\) Specified Transaction will have the meaning specified in Section 14.) Tj
+0 -16 Td
+(\(c\) The Cross Default provisions of Section 5\(a\)\(vi\) will apply to both parties.) Tj
+0 -16 Td
+( ) Tj
+0 -16 Td
+(This file is fictional sample content created for a product demo.) Tj
+0 -16 Td
+(It does not describe any real agreement, party, or transaction.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000001207 00000 n 
+0000001282 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1352
+%%EOF

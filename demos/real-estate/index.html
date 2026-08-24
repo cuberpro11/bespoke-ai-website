@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Operations Command Center — Bespoke Demo</title>
+<meta name="description" content="Bespoke demo: automated tenant intake, vendor sourcing, quote approval, and expense settlement across a 50-unit NYC portfolio.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=4">
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+<a class="skip-link" href="#pipeline">Skip to pipeline</a>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="topbar__back" href="../../demos.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span>Bespoke demos</span>
+    </a>
+
+    <div class="topbar__brand">
+      <span class="topbar__mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5M9 9h.01M15 9h.01M9 12.5h.01M15 12.5h.01"/></svg>
+      </span>
+      <div class="topbar__titles">
+        <h1>NYC Real Estate AI Portal <span class="pill pill--units">50 units</span></h1>
+        <p>Automated intake, vendor sourcing, quote approval &amp; expenses</p>
+      </div>
+    </div>
+
+    <div class="topbar__actions">
+      <span class="pill pill--session"><i class="live-dot" aria-hidden="true"></i> Manager: AM@getbespoke.ai</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ---------------------------------------------------------- KPIs -- -->
+  <section class="kpis" data-stagger aria-label="Portfolio metrics">
+    <div class="kpi" data-reveal>
+      <span class="kpi__label">Total portfolios</span>
+      <strong class="kpi__value" data-count="50" data-suffix=" Apartments">0 Apartments</strong>
+      <span class="kpi__note">Sourced across Brooklyn, Manhattan, Queens &amp; the Bronx</span>
+    </div>
+    <div class="kpi" data-reveal>
+      <span class="kpi__label">Active workflow tickets</span>
+      <strong class="kpi__value kpi__value--accent" id="kpiTickets" data-count="3">0</strong>
+      <span class="kpi__note">Pending action or tenant verification</span>
+    </div>
+    <div class="kpi" data-reveal>
+      <span class="kpi__label">Total paid ledger</span>
+      <strong class="kpi__value" id="kpiLedger" data-count="785" data-prefix="$">$0</strong>
+      <span class="kpi__note">Automatically compiled from approved quotes</span>
+    </div>
+    <div class="kpi kpi--switch" data-reveal>
+      <span class="kpi__label">AI autopilot mode</span>
+      <div class="kpi__switchrow">
+        <strong class="kpi__value kpi__value--sm" id="autopilotLabel">Enabled <span>(quotes &lt; $150)</span></strong>
+        <button class="switch is-on" type="button" id="autopilotToggle" role="switch" aria-checked="true" aria-label="AI autopilot mode">
+          <span class="switch__knob" aria-hidden="true"></span>
+        </button>
+      </div>
+      <span class="kpi__note">Dispatches cheap routine repairs without waiting on a human</span>
+    </div>
+  </section>
+
+  <div class="grid-main">
+
+    <!-- ------------------------------------------------------ pipeline -- -->
+    <div class="col col--left">
+
+      <section class="panel" id="pipeline" data-reveal aria-label="Active maintenance automation pipeline">
+        <div class="panel__head">
+          <div>
+            <h2 class="panel__title">Active maintenance automation pipeline</h2>
+            <p class="panel__sub">Step-by-step resolution flow for apartment issues</p>
+          </div>
+          <span class="pill pill--model"><i class="spark" aria-hidden="true"></i> Bespoke triage model</span>
+        </div>
+
+        <div class="ticket-list" id="ticketList"></div>
+
+        <p class="empty-note" id="pipelineEmpty" hidden>
+          Every ticket is settled. Raise a new one from the tenant sandbox.
+        </p>
+      </section>
+
+      <section class="panel panel--summary" id="summaryPanel" data-reveal aria-label="Contextual ticket summary">
+        <div class="panel__head panel__head--tight">
+          <div>
+            <h2 class="panel__title panel__title--sm">Contextual summary: <span id="summaryTicket" class="mono">TKT-101</span></h2>
+            <p class="panel__sub">Unit: <span id="summaryUnit" class="mono">BK-301 (Apt 3A)</span></p>
+          </div>
+          <span class="pill pill--step mono" id="summaryStep">QUOTE_APPROVAL</span>
+        </div>
+
+        <div class="summary-body" id="summaryBody">
+          <div class="summary-col">
+            <div class="field">
+              <span class="field__label">Tenant original text</span>
+              <blockquote class="quote" id="sumRaw"></blockquote>
+            </div>
+            <div class="field" id="sumTransWrap">
+              <span class="field__label field__label--ai">AI translation</span>
+              <p class="ai-line" id="sumTranslation"></p>
+            </div>
+            <div class="field">
+              <span class="field__label field__label--ai">AI automated SMS response</span>
+              <blockquote class="quote quote--ai" id="sumReply"></blockquote>
+            </div>
+          </div>
+
+          <div class="summary-col">
+            <div class="field">
+              <span class="field__label field__label--ai">AI issue triage</span>
+              <p class="triage" id="sumSummary"></p>
+            </div>
+            <div class="vendor" id="sumVendor">
+              <span class="field__label">Matched professional <em>sourced</em></span>
+              <div class="vendor__row">
+                <b id="sumVendorName"></b>
+                <span class="mono" id="sumVendorPhone"></span>
+              </div>
+              <div class="vendor__row vendor__row--meta">
+                <span id="sumVendorCoverage"></span>
+                <span class="mono quote-amt" id="sumQuote"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- --------------------------------------------------- right rail -- -->
+    <aside class="col col--right">
+
+      <section class="panel" data-reveal aria-label="Tenant sandbox simulator">
+        <div class="panel__head panel__head--tight">
+          <h2 class="panel__title panel__title--sm">
+            <svg class="panel__ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg>
+            Tenant sandbox simulator
+          </h2>
+          <span class="pill pill--sandbox">Sandbox</span>
+        </div>
+        <p class="panel__sub panel__sub--body">Simulate a live text or phone call from one of the 50 tenants. Intake is parsed, triaged, and turned into a new ticket.</p>
+
+        <span class="field__label">Scenario presets</span>
+        <div class="presets" data-stagger>
+          <button class="preset" type="button" data-reveal
+                  data-unit="BK-301"
+                  data-message="Hola, mi tubería del agua caliente comenzó a gotear por toda la alfombra. Hay mucha agua.">
+            <b>💦 Spanish plumbing burst (BK-301)</b>
+            <span>“tubería del agua caliente comenzó a gotear…”</span>
+          </button>
+          <button class="preset" type="button" data-reveal
+                  data-unit="MN-302"
+                  data-message="The living room wall outlet is smoking and sparking! Power is completely out in my kitchen wall.">
+            <b>⚡ Electrical outlet smoke (MN-302)</b>
+            <span>“wall outlet is smoking and sparking!…”</span>
+          </button>
+          <button class="preset" type="button" data-reveal
+                  data-unit="QN-103"
+                  data-message="I am locked out! The key is jammed in the deadbolt and won't twist. I'm stuck out in the cold.">
+            <b>🔑 Locked out of apartment (QN-103)</b>
+            <span>“key is jammed in the deadbolt…”</span>
+          </button>
+        </div>
+
+        <label class="field__label" for="simUnit">Simulate unit number</label>
+        <select class="select" id="simUnit"></select>
+
+        <label class="field__label" for="simMessage">Write custom tenant message</label>
+        <textarea class="textarea" id="simMessage" rows="3" placeholder="e.g. My bathroom radiator is freezing and cold…"></textarea>
+
+        <div class="sim-actions">
+          <button class="btn btn--primary" type="button" id="sendSms">Send SMS</button>
+          <button class="btn btn--ghost" type="button" id="simCall">Simulate call</button>
+        </div>
+
+        <div class="ai-status" id="aiStatus" hidden aria-live="polite">
+          <span class="ai-status__spinner" aria-hidden="true"></span>
+          <span class="ai-status__text" id="aiStatusText"></span>
+        </div>
+      </section>
+
+      <section class="panel" data-reveal aria-label="Contractor invoice parser">
+        <div class="panel__head panel__head--tight">
+          <h2 class="panel__title panel__title--sm">
+            <svg class="panel__ico" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+            Contractor invoice parser
+          </h2>
+        </div>
+        <p class="panel__sub panel__sub--body">Contractors email invoices directly. Metadata is extracted and logged with no manual typing.</p>
+
+        <span class="field__label">Raw emailed invoice text</span>
+        <pre class="invoice mono" id="invoiceText"></pre>
+
+        <div class="invoice-tabs" id="invoiceTabs"></div>
+
+        <button class="btn btn--primary btn--full" type="button" id="parseInvoice">Parse &amp; log invoice</button>
+
+        <div class="parsed" id="parsedOut" hidden></div>
+      </section>
+    </aside>
+  </div>
+
+  <!-- --------------------------------------------------------- ledger -- -->
+  <section class="panel" data-reveal aria-label="Financial expense ledger">
+    <div class="panel__head">
+      <div>
+        <h2 class="panel__title">Financial expense ledger</h2>
+        <p class="panel__sub">Archived list of completed and paid service invoices for tax logging</p>
+      </div>
+      <span class="total-chip">Total expenses <b class="mono" id="ledgerTotal">$785</b></span>
+    </div>
+
+    <div class="table-scroll">
+      <table class="ledger">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Apartment</th>
+            <th scope="col">Service professional</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date settled</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody id="ledgerBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- -------------------------------------------------------- monitor -- -->
+  <section class="panel" data-reveal aria-label="Live portfolio monitor">
+    <div class="panel__head">
+      <div>
+        <h2 class="panel__title">50 NYC apartments — live monitor</h2>
+        <p class="panel__sub">Current triage status across the 50-unit portfolio</p>
+      </div>
+      <div class="monitor__controls">
+        <label class="search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="unitSearch" placeholder="Filter by unit or tenant" aria-label="Filter units">
+        </label>
+        <div class="tabs" id="boroughTabs" role="tablist" aria-label="Borough">
+          <button class="tab is-active" type="button" role="tab" aria-selected="true" data-borough="All">All</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-borough="Brooklyn">Brooklyn</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-borough="Manhattan">Manhattan</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-borough="Queens">Queens</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-borough="Bronx">Bronx</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-grid" id="unitGrid"></div>
+    <p class="empty-note" id="unitEmpty" hidden>No units match that filter.</p>
+
+    <div class="legend">
+      <span class="legend__label">Status key</span>
+      <span class="legend__item"><i data-stage="clean"></i> Active clean</span>
+      <span class="legend__item"><i data-stage="triage"></i> 1. Triage</span>
+      <span class="legend__item"><i data-stage="hiring"></i> 2. Sourced</span>
+      <span class="legend__item"><i data-stage="quote_approval"></i> 3. Quote review</span>
+      <span class="legend__item"><i data-stage="confirming_fix"></i> 4. Sign-off</span>
+      <span class="legend__item"><i data-stage="payment"></i> 5. Pay pro</span>
+    </div>
+  </section>
+
+  <footer class="demo-foot">
+    <p>Bespoke demo environment — illustrative portfolio data, no live tenant records.</p>
+    <a class="u-line" href="../../demos.html">← Back to all demos</a>
+  </footer>
+</main>
+
+<div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<script src="app.js?v=4" defer></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 651 >>
+stream
+BT
+/F1 16 Tf
+72 720 Td
+(Sample Redline Review) Tj
+/F2 11 Tf
+0 -28 Td
+(SAMPLE DOCUMENT ? FOR DEMONSTRATION ONLY) Tj
+0 -16 Td
+( ) Tj
+0 -16 Td
+(Redline Review  |  Northwind Macro Fund LP / Meridian Clearing Bank) Tj
+0 -16 Td
+( ) Tj
+0 -16 Td
+(Change 1: Threshold reduced from 3% to 2% of shareholder equity.) Tj
+0 -16 Td
+(Change 2: Minimum NAV floor increased from USD 15 million to USD 25 million.) Tj
+0 -16 Td
+(Change 3: Liquidity Buffer additional termination event removed.) Tj
+0 -16 Td
+(Change 4: Lookback period limited to the previous 12 months.) Tj
+0 -16 Td
+( ) Tj
+0 -16 Td
+(This file is fictional sample content created for a product demo.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000953 00000 n 
+0000001028 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1098
+%%EOF

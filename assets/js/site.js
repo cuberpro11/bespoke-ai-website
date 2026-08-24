@@ -74,7 +74,11 @@
     }
   }
 
-  const BURGER_MQ = window.matchMedia("(max-width: 960px)");
+  doc.querySelectorAll("a[data-placeholder-link]").forEach((el) => {
+    el.addEventListener("click", (e) => e.preventDefault());
+  });
+
+  const BURGER_MQ = window.matchMedia("(max-width: 1140px)");
 
   // mobile menu
   const burger = doc.querySelector(".nav__burger");

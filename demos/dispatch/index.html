@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Call Intake &amp; Dispatch — Bespoke Demo</title>
+<meta name="description" content="Bespoke demo: 24/7 AI call intake that turns every phone call into an SMS to the dispatcher, a row in the client's job sheet, and a full intake record in the web console.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=3">
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+<a class="skip-link" href="#views">Skip to demo</a>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="topbar__back" href="../../demos.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span>Bespoke demos</span>
+    </a>
+
+    <div class="topbar__brand">
+      <span class="topbar__mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13v-1a8 8 0 0 1 16 0v1M4 13h2.5a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5ZM20 13h-2.5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1H19a1 1 0 0 0 1-1v-5ZM20 19v.5a2.5 2.5 0 0 1-2.5 2.5H13"/></svg>
+      </span>
+      <div class="topbar__titles">
+        <h1>Dispatch AI <span class="pill pill--units">24/7 intake</span></h1>
+        <p>AI call intake &amp; job routing — white-label demo</p>
+      </div>
+    </div>
+
+    <div class="topbar__actions">
+      <span class="pill pill--session"><i class="live-dot" aria-hidden="true"></i> Live call handling</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- --------------------------------------------------------- tab bar -- -->
+  <div class="tabs" id="views" role="tablist" aria-label="Demo views" data-reveal>
+    <button class="tab is-active" type="button" role="tab" data-view="sms" id="tab-sms" aria-controls="view-sms" aria-selected="true">Text message</button>
+    <button class="tab" type="button" role="tab" data-view="sheet" id="tab-sheet" aria-controls="view-sheet" aria-selected="false" tabindex="-1">Job sheet</button>
+    <button class="tab" type="button" role="tab" data-view="web" id="tab-web" aria-controls="view-web" aria-selected="false" tabindex="-1">Web view</button>
+  </div>
+
+  <!-- ------------------------------------------------------- SMS view -- -->
+  <section class="view is-active" id="view-sms" role="tabpanel" aria-labelledby="tab-sms" tabindex="0">
+    <p class="caption">What the dispatcher's phone looks like right after the AI hangs up. Every call, day or night, becomes a text like this within seconds — <b>no missed jobs, no note-taking.</b></p>
+
+    <div class="phone-stage" data-reveal>
+      <div class="phone">
+        <div class="notch" aria-hidden="true"></div>
+        <div class="screen">
+          <div class="imsg-head">
+            <div class="avatar" aria-hidden="true">DA</div>
+            <div class="name">Dispatch AI</div>
+            <div class="sub">Job Intake Line</div>
+          </div>
+          <div class="thread">
+
+            <div class="timestamp-row">Today 2:14 AM</div>
+            <div class="bubble">
+              <span class="tag">Tow request</span><br>
+              <b>Sarah Martinez</b> needs a tow.<br>
+              Est. Rate: $450<br>
+              2019 Honda Civic — Plate 7XKP192<br>
+              Pickup: 1200 Elm St, Austin TX<br>
+              Drop-off: Mike's Auto Body, 45 5th Ave<br>
+              Note: front left tire blown, car won't move safely.<br>
+              Callback: (512) 555-0148
+            </div>
+
+            <div class="timestamp-row">Today 9:47 AM</div>
+            <div class="bubble">
+              <span class="tag">Lockout</span><br>
+              <b>Derrick Owusu</b> is locked out.<br>
+              Est. Rate: $395<br>
+              2021 Ford F-150 — Plate KLT-4482<br>
+              Location: Riverside Park lot, north entrance<br>
+              Note: keys visible on driver seat, no spare, has toddler with him — flagged urgent.<br>
+              Callback: (737) 555-0092
+            </div>
+
+            <div class="timestamp-row">Today 1:32 PM</div>
+            <div class="bubble">
+              <span class="tag">Jump start</span><br>
+              <b>Angela Reyes</b> needs a battery jump.<br>
+              Est. Rate: $380<br>
+              2016 Toyota Camry — Plate 9DFM201<br>
+              Location: Whole Foods, 4477 Burnet Rd<br>
+              Note: battery dead 2nd time this month, may need replacement — mention to tech.<br>
+              Callback: (512) 555-0173
+            </div>
+
+            <div class="timestamp-row">Today 6:58 PM</div>
+            <div class="bubble">
+              <span class="tag">Tow request</span><br>
+              <b>James Whitfield</b> needs a tow after collision.<br>
+              Est. Rate: $620<br>
+              2020 Subaru Outback — Plate GTP-5561<br>
+              Pickup: I-35 N shoulder, mile marker 238<br>
+              Drop-off: Whitfield residence, 812 Oak Bend Dr<br>
+              Note: airbags deployed, driver says he's OK, minor cuts — advise dispatcher may want to confirm welfare.<br>
+              Callback: (512) 555-0210
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ----------------------------------------------------- sheet view -- -->
+  <section class="view" id="view-sheet" role="tabpanel" aria-labelledby="tab-sheet" tabindex="0" hidden>
+    <p class="caption">Every call also lands as a row in the client's Google Sheet — a running, searchable log the dispatcher (or the owner, from their phone) can scan at a glance.</p>
+
+    <div class="browser" data-reveal>
+      <div class="browser-top">
+        <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="sheet-title"><span class="ico" aria-hidden="true"></span>Job Intake — Lonestar Towing &amp; Recovery</div>
+      </div>
+      <div class="toolbar" aria-hidden="true">
+        <span>File</span><span>Edit</span><span>View</span><span>Insert</span><span>Format</span><span>Data</span>
+      </div>
+      <div class="sheet-scroll" tabindex="0" role="region" aria-label="Job intake sheet">
+        <table>
+          <thead>
+            <tr class="colhead" aria-hidden="true">
+              <th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th><th>K</th>
+            </tr>
+            <tr class="fieldhead">
+              <th class="rownum">#</th>
+              <th>Timestamp</th>
+              <th>Caller Name</th>
+              <th>Callback #</th>
+              <th>Est. Rate</th>
+              <th>Vehicle</th>
+              <th>License Plate</th>
+              <th>Service Type</th>
+              <th>Pickup Location</th>
+              <th>Drop-off Location</th>
+              <th>Special Notes</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="rownum">1</td>
+              <td class="mono">7/8/26 2:14 AM</td>
+              <td>Sarah Martinez</td>
+              <td class="mono">(512) 555-0148</td>
+              <td class="mono">$450</td>
+              <td>2019 Honda Civic</td>
+              <td class="mono">7XKP192</td>
+              <td>Tow</td>
+              <td class="wrap-cell">1200 Elm St, Austin TX</td>
+              <td class="wrap-cell">Mike's Auto Body, 45 5th Ave</td>
+              <td class="wrap-cell">Front left tire blown, car unsafe to drive</td>
+              <td><span class="chip chip--dispatched">Dispatched</span></td>
+            </tr>
+            <tr>
+              <td class="rownum">2</td>
+              <td class="mono">7/8/26 9:47 AM</td>
+              <td>Derrick Owusu</td>
+              <td class="mono">(737) 555-0092</td>
+              <td class="mono">$395</td>
+              <td>2021 Ford F-150</td>
+              <td class="mono">KLT-4482</td>
+              <td>Lockout</td>
+              <td class="wrap-cell">Riverside Park lot, north entrance</td>
+              <td class="wrap-cell">—</td>
+              <td class="wrap-cell">Keys on seat, no spare, customer has child with him — urgent</td>
+              <td><span class="chip chip--enroute">En Route</span></td>
+            </tr>
+            <tr>
+              <td class="rownum">3</td>
+              <td class="mono">7/8/26 1:32 PM</td>
+              <td>Angela Reyes</td>
+              <td class="mono">(512) 555-0173</td>
+              <td class="mono">$380</td>
+              <td>2016 Toyota Camry</td>
+              <td class="mono">9DFM201</td>
+              <td>Jump Start</td>
+              <td class="wrap-cell">Whole Foods, 4477 Burnet Rd</td>
+              <td class="wrap-cell">—</td>
+              <td class="wrap-cell">2nd dead battery this month, may need replacement</td>
+              <td><span class="chip chip--new">New</span></td>
+            </tr>
+            <tr>
+              <td class="rownum">4</td>
+              <td class="mono">7/8/26 6:58 PM</td>
+              <td>James Whitfield</td>
+              <td class="mono">(512) 555-0210</td>
+              <td class="mono">$620</td>
+              <td>2020 Subaru Outback</td>
+              <td class="mono">GTP-5561</td>
+              <td>Tow — Collision</td>
+              <td class="wrap-cell">I-35 N shoulder, mile marker 238</td>
+              <td class="wrap-cell">812 Oak Bend Dr</td>
+              <td class="wrap-cell">Airbags deployed, driver reports minor cuts — confirm welfare</td>
+              <td><span class="chip chip--new">New</span></td>
+            </tr>
+            <tr>
+              <td class="rownum">5</td>
+              <td class="mono">7/7/26 11:03 PM</td>
+              <td>Priya Nandakumar</td>
+              <td class="mono">(512) 555-0134</td>
+              <td class="mono">$540</td>
+              <td>2018 Jeep Wrangler</td>
+              <td class="mono">4RTL880</td>
+              <td>Winch Out</td>
+              <td class="wrap-cell">Off Panther Trail, unpaved shoulder</td>
+              <td class="wrap-cell">—</td>
+              <td class="wrap-cell">Stuck in mud after rain, 4WD unresponsive</td>
+              <td><span class="chip chip--dispatched">Dispatched</span></td>
+            </tr>
+            <tr>
+              <td class="rownum">6</td>
+              <td class="mono">7/7/26 4:21 PM</td>
+              <td>Tom Bradshaw</td>
+              <td class="mono">(512) 555-0299</td>
+              <td class="mono">$475</td>
+              <td>2015 Chevy Malibu</td>
+              <td class="mono">8HGT330</td>
+              <td>Tow — Impound Release</td>
+              <td class="wrap-cell">City Impound Lot, 900 Cesar Chavez</td>
+              <td class="wrap-cell">Bradshaw residence, 233 Pecan Grove Ln</td>
+              <td class="wrap-cell">Needs receipt photo texted for insurance</td>
+              <td><span class="chip chip--dispatched">Dispatched</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------------- web view -- -->
+  <section class="view" id="view-web" role="tabpanel" aria-labelledby="tab-web" tabindex="0" hidden>
+    <p class="caption">A simple internal console version of the same data — click a customer on the left to pull up their full intake on the right. Useful for a dispatcher working from a desktop instead of their phone.</p>
+
+    <div class="console" data-reveal>
+      <div class="cust-list" id="custList" role="listbox" aria-label="Intake records"></div>
+      <div class="cust-detail" id="custDetail"></div>
+    </div>
+  </section>
+
+  <p class="foot-note">
+    All three views update automatically from the same call — the SMS fires immediately for real-time dispatch, the sheet row is appended right after for record-keeping and billing, and the web console gives a click-through view of every customer's full intake. The column/field set is easily reconfigured per vertical (e.g. swap Vehicle/Plate for Patient/Incident Type on a personal injury intake line).
+  </p>
+
+  <footer class="demo-foot">
+    <p>Bespoke demo environment — illustrative intake data, no live customer records.</p>
+    <a class="u-line" href="../../demos.html">← Back to all demos</a>
+  </footer>
+</main>
+
+<script src="app.js?v=4" defer></script>
+</body>
+</html>
