@@ -866,7 +866,8 @@ table { border-collapse: collapse; width: 100%; }
   .console { flex-direction: column; min-height: 0; }
   .cust-list {
     width: 100%;
-    max-height: 240px;
+    max-height: none;
+    overflow: visible;
     border-right: 0;
     border-bottom: 1px solid var(--hair);
   }
@@ -876,12 +877,97 @@ table { border-collapse: collapse; width: 100%; }
   .msg { max-width: 88%; }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
+  .topbar {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .topbar__inner {
+    flex-wrap: nowrap;
+    padding: 0.55rem max(var(--gutter), env(safe-area-inset-right, 0px)) 0.55rem max(var(--gutter), env(safe-area-inset-left, 0px));
+    gap: 0.6rem;
+  }
+  .topbar__back { order: 0; padding: 0.45rem 0.65rem 0.45rem 0.45rem; min-height: 44px; }
+  .topbar__actions { display: none; }
+  .topbar__brand { order: 0; width: auto; flex: 1; min-width: 0; }
+  .topbar__mark { width: 32px; height: 32px; }
   .topbar__titles h1 { font-size: 1.02rem; }
-  .tabs { gap: 0.35rem; }
-  .tab { padding: 0.55rem 0.8rem; font-size: 0.65rem; }
+  .topbar__titles p { display: none; }
+
+  .wrap {
+    padding: 0.85rem max(var(--gutter), env(safe-area-inset-right, 0px)) max(2rem, env(safe-area-inset-bottom, 0px)) max(var(--gutter), env(safe-area-inset-left, 0px));
+    gap: 0.85rem;
+  }
+
+  .tabs {
+    position: sticky;
+    top: calc(3.15rem + env(safe-area-inset-top, 0px));
+    z-index: 30;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.3rem;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 0.35rem var(--gutter) 0.5rem;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: saturate(150%) blur(10px);
+    -webkit-backdrop-filter: saturate(150%) blur(10px);
+  }
+  .tab {
+    flex: 1 1 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.5rem 0.35rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+
+  .caption { font-size: 0.82rem; margin-bottom: 0.85rem; }
+
+  .phone {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius);
+    background: transparent;
+    box-shadow: none;
+  }
+  .notch { display: none; }
+  .screen {
+    border-radius: var(--radius);
+    border: 1px solid var(--hair);
+    box-shadow: var(--shadow-sm);
+  }
+  .thread { min-height: 0; padding-bottom: 1.4rem; }
+  .bubble { font-size: 0.88rem; max-width: 92%; padding: 0.7rem 0.9rem; }
+
+  .toolbar { display: none; }
+  .sheet-title { font-size: 0.72rem; }
+  .sheet-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+  .sheet-scroll thead tr.colhead { display: none; }
+  .sheet-scroll tbody td,
+  .sheet-scroll tbody td.wrap-cell {
+    white-space: nowrap;
+    max-width: none;
+  }
+
+  .cust-list { max-height: none; overflow: visible; }
+  .thread-box { max-height: none; overflow: visible; }
+  .cust-item {
+    padding: 0.95rem 1rem;
+    flex-shrink: 0;
+  }
+  .cust-detail { padding: 1.15rem 1rem 1.4rem; }
   .detail-head { flex-direction: column; gap: 0.6rem; }
   .detail-rate { text-align: left; }
+  .detail-head h2 { font-size: 1.28rem; }
+
+  .demo-foot { padding-bottom: 0.4rem; }
 }
 
 /* ---------- 14. Reduced motion ------------------------------------------- */

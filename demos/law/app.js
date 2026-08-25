@@ -442,7 +442,12 @@
 
   /* Horizontal stacked bars — one row per client, one segment per doc type. */
   function stackedBarChart(data) {
-    var W = 900, rowH = 52, padTop = 10, padBottom = 34, labelW = 110, padRight = 30;
+    var mobile = window.matchMedia && window.matchMedia("(max-width: 640px)").matches;
+    var W = mobile ? 420 : 900;
+    var rowH = mobile ? 70 : 52;
+    var padTop = 10, padBottom = 34;
+    var labelW = mobile ? 86 : 110;
+    var padRight = mobile ? 16 : 30;
     var H = padTop + data.length * rowH + padBottom;
     var max = Math.max.apply(null, data.map(function (d) {
       return d.v.reduce(function (a, b) { return a + b; }, 0);

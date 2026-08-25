@@ -1172,12 +1172,94 @@ table { border-collapse: collapse; width: 100%; }
   .tabs { width: 100%; overflow-x: auto; }
 }
 
-@media (max-width: 560px) {
-  .kpis { grid-template-columns: minmax(0, 1fr); }
-  .unit-grid { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
-  .sim-actions { grid-template-columns: minmax(0, 1fr); }
-  .panel__head { flex-direction: column; align-items: flex-start; }
+@media (max-width: 640px) {
+  .topbar {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .topbar__inner {
+    flex-wrap: nowrap;
+    padding: 0.55rem max(var(--gutter), env(safe-area-inset-right, 0px)) 0.55rem max(var(--gutter), env(safe-area-inset-left, 0px));
+    gap: 0.6rem;
+  }
+  .topbar__back { order: 0; padding: 0.45rem 0.65rem 0.45rem 0.45rem; min-height: 44px; }
+  .topbar__actions { display: none; }
+  .topbar__brand { order: 0; width: auto; flex: 1; min-width: 0; }
+  .topbar__mark { width: 32px; height: 32px; }
   .topbar__titles h1 { font-size: 1.02rem; }
+  .topbar__titles p { display: none; }
+
+  .wrap {
+    padding: 0.85rem max(var(--gutter), env(safe-area-inset-right, 0px)) max(2rem, env(safe-area-inset-bottom, 0px)) max(var(--gutter), env(safe-area-inset-left, 0px));
+    gap: 0.85rem;
+  }
+
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }
+  .kpi { padding: 0.8rem 0.85rem 0.9rem; }
+  .kpi--switch { grid-column: 1 / -1; }
+  .kpi__value { font-size: 1.35rem; }
+
+  .stage {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.2rem;
+    text-align: center;
+  }
+  .stage__label {
+    display: block;
+    font-size: 0.52rem;
+    letter-spacing: 0;
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  .panel { padding: 1rem 0.9rem 1.15rem; }
+  .panel__head { flex-direction: column; align-items: flex-start; }
+  .ticket { padding: 0.85rem 0.8rem; }
+  .ticket__foot .btn { min-height: 44px; }
+  .btn { min-height: 44px; padding: 0.7rem 0.95rem; }
+
+  .preset { min-height: 44px; padding: 0.7rem 0.8rem; text-align: left; }
+  .select, .textarea, .search input { font-size: 16px; min-height: 44px; }
+  .sim-actions { grid-template-columns: minmax(0, 1fr); }
+  .sim-actions .btn { width: 100%; }
+
+  .table-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+  .invoice { max-height: none; }
+
+  .monitor__controls {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .search { width: 100%; min-height: 44px; }
+  .search input { width: 100%; }
+  .tabs {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab {
+    flex: 1 0 auto;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.7rem;
+  }
+
+  .unit-grid { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+  .unit { min-height: 44px; padding: 0.55rem 0.4rem; }
+  .toasts {
+    bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+    left: 0.75rem;
+    right: 0.75rem;
+    max-width: none;
+  }
 }
 
 /* ---------- 17. Reduced motion ------------------------------------------- */
