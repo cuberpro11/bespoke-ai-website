@@ -31,6 +31,11 @@
     document.documentElement.dir = ar ? "rtl" : "ltr";
     document.documentElement.classList.toggle("is-ar", ar);
     document.title = ar ? "عمليات الفندق — عرض بيسكوك" : "Hotel Operations — Bespoke Demo";
+    var cueLang = ar ? "ar" : "en";
+    var cue = document.querySelector(".hx-video__cue-label");
+    var cueLink = document.querySelector(".hx-video__cue");
+    if (cue) cue.textContent = I18N.t(cueLang, "scrollCue");
+    if (cueLink) cueLink.setAttribute("aria-label", I18N.t(cueLang, "scrollCueAria"));
   }
 
   function setLang(next) {

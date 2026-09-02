@@ -7,6 +7,8 @@
   var STRINGS = {
     en: {
       langToggleAria: "Language",
+      scrollCue: "Scroll",
+      scrollCueAria: "Scroll to demo",
       navOverview: "Overview",
       navColleagues: "Colleagues",
       navTasks: "Tasks",
@@ -172,6 +174,8 @@
     },
     ar: {
       langToggleAria: "اللغة",
+      scrollCue: "مرر للأسفل",
+      scrollCueAria: "مرر إلى العرض",
       navOverview: "نظرة عامة",
       navColleagues: "الزملاء",
       navTasks: "المهام",

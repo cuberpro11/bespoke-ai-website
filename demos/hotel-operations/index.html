@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=7">
+<link rel="stylesheet" href="styles.css?v=8">
 <script>
 document.documentElement.classList.add("js");
 try {
@@ -41,12 +41,16 @@ try {
     preload="auto"
     src="assets/client-video-demo.mp4">
   </video>
+  <a class="hx-video__cue" href="#app" aria-label="Scroll to demo">
+    <span class="hx-video__cue-label">Scroll</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  </a>
 </section>
 <div id="app"></div>
 <div id="toasts" class="toasts" role="status" aria-live="polite"></div>
 
 <script src="data.js?v=3"></script>
-<script src="i18n.js?v=2"></script>
-<script src="app.js?v=7"></script>
+<script src="i18n.js?v=3"></script>
+<script src="app.js?v=8"></script>
 </body>
 </html>
