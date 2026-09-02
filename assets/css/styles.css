@@ -3584,6 +3584,35 @@ body.nav-open .mobile-menu__panel { transform: none; }
 .dp-units span:nth-child(12),
 .dp-units span:nth-child(18) { border-color: rgba(36, 84, 216, 0.3); background: rgba(36, 84, 216, 0.05); }
 
+/* hotel: nav rail (left) + floor/wing occupancy map (right) */
+.demo-preview__stage--hotel { grid-template-columns: 0.32fr 1fr; }
+.dp-floors {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 0.28rem;
+  min-height: 0;
+}
+.dp-floors span {
+  display: block;
+  min-height: 0;
+  border-radius: 5px;
+  background: var(--white);
+  border: 1px solid var(--line-light);
+}
+.dp-floors span.is-late {
+  background: rgba(196, 61, 61, 0.12);
+  border-color: rgba(196, 61, 61, 0.35);
+}
+.dp-floors span.is-active {
+  background: rgba(36, 84, 216, 0.08);
+  border-color: rgba(36, 84, 216, 0.32);
+}
+.dp-floors span.is-done {
+  background: rgba(47, 143, 91, 0.12);
+  border-color: rgba(47, 143, 91, 0.28);
+}
+
 .demo-preview__stage--law { grid-template-columns: 0.34fr 1fr; }
 .dp-rail {
   display: flex;
