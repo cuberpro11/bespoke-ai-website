@@ -3613,7 +3613,6 @@ body.nav-open .mobile-menu__panel { transform: none; }
   border-color: rgba(47, 143, 91, 0.28);
 }
 
-.demo-preview__stage--law { grid-template-columns: 0.34fr 1fr; }
 .dp-rail {
   display: flex;
   flex-direction: column;
@@ -3627,31 +3626,6 @@ body.nav-open .mobile-menu__panel { transform: none; }
 .dp-rail i:first-child { width: 72%; margin-bottom: 0.3rem; background: var(--cobalt); }
 .dp-rail i:nth-child(3) { width: 82%; background: rgba(36, 84, 216, 0.35); }
 .dp-rail i:nth-child(4) { width: 66%; }
-
-.dp-work { display: flex; flex-direction: column; gap: 0.45rem; justify-content: center; }
-.dp-work__tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
-.dp-work__tiles span { height: 34px; border-radius: 8px; background: var(--white); border: 1px solid var(--line-light); }
-.dp-work__bars {
-  display: flex;
-  flex-direction: column;
-  gap: 0.42rem;
-  padding: 0.6rem;
-  background: var(--white);
-  border: 1px solid var(--line-light);
-  border-radius: 8px;
-}
-.dp-work__bars i {
-  display: block;
-  width: var(--w);
-  height: 8px;
-  border-radius: 99px;
-  background: linear-gradient(
-    90deg,
-    rgba(17, 17, 20, 0.5) 0 30%,
-    rgba(36, 84, 216, 0.68) 30% 58%,
-    rgba(36, 84, 216, 0.3) 58% 100%
-  );
-}
 
 @media (max-width: 860px) {
   .demo-preview { padding: 1rem 1rem 1.2rem; }
