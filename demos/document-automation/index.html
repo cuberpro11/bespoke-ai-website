@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Document Automation Platform — Bespoke Demo</title>
+<meta name="description" content="Bespoke demo: a private knowledge vault that answers from a firm's own documents with an exact citation behind every line, and assembles executed agreements from intake data and a clause library.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=1">
+<script>document.documentElement.classList.add("js");</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yae0ivcs5k");
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to the demo</a>
+
+<header class="apphead">
+  <div class="apphead__brand">
+    <span class="apphead__mark" aria-hidden="true">B</span>
+    <span class="apphead__name">Bespoke</span>
+    <span class="apphead__dot" aria-hidden="true">·</span>
+    <span class="apphead__sub">Document Automation Platform</span>
+  </div>
+  <div class="apphead__user">
+    <a class="apphead__back" href="/demos">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span>Bespoke demos</span>
+    </a>
+    <span class="apphead__mail">knowledge.bespoke.ai</span>
+    <span class="apphead__avatar" aria-hidden="true">KB</span>
+  </div>
+</header>
+
+<div class="shell">
+
+  <nav class="sidebar" aria-label="Platform sections">
+    <div class="sidenav" role="tablist">
+
+      <button class="sidenav__item is-active" type="button" role="tab" aria-selected="true" data-view="ask">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg>
+        <span>Ask</span>
+      </button>
+
+      <button class="sidenav__item" type="button" role="tab" aria-selected="false" data-view="library">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+        <span>Library</span>
+        <span class="sidenav__badge" id="libraryCount">12</span>
+      </button>
+
+      <button class="sidenav__item" type="button" role="tab" aria-selected="false" data-view="assemble">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg>
+        <span>Assemble</span>
+      </button>
+
+      <button class="sidenav__item" type="button" role="tab" aria-selected="false" data-view="clauses">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 21h10"/><path d="m5 7 3 6H2Zm14 0 3 6h-6Z"/><path d="M5 7h14"/></svg>
+        <span>Clause Library</span>
+        <span class="sidenav__badge" id="clauseCount">12</span>
+      </button>
+
+    </div>
+
+    <p class="sidefoot">Answers are generated only from the indexed corpus. Nothing is drawn from outside it, and every line carries a citation.</p>
+  </nav>
+
+  <main class="main" id="main">
+
+    <!-- ------------------------------------------------------------ ask -- -->
+    <section class="view" id="view-ask" role="tabpanel" aria-label="Ask">
+      <h1 class="page__title">Ask</h1>
+      <p class="page__sub">Conversational answers drawn from the firm&rsquo;s own documents, wikis and operational manuals.</p>
+
+      <div class="ask">
+        <div>
+          <div class="thread u-hide" id="thread"></div>
+
+          <div class="asksuggest" id="suggested"></div>
+
+          <form class="composer" id="askForm">
+            <textarea id="askInput" rows="1" placeholder="Ask about a policy, a procedure, or a standard form…" aria-label="Ask a question"></textarea>
+            <button class="btn btn--primary" type="submit">Ask</button>
+          </form>
+        </div>
+
+        <aside class="card" aria-label="Sources">
+          <p class="panelabel">Sources</p>
+          <div id="sources">
+            <p class="src__empty">Ask a question and every sentence in the answer will point at the passage it came from.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------- library -- -->
+    <section class="view u-hide" id="view-library" role="tabpanel" aria-label="Library">
+      <h1 class="page__title">Library</h1>
+      <p class="page__sub">The indexed corpus. Everything the assistant can answer from, and nothing it cannot.</p>
+
+      <label class="search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+        <input type="search" id="librarySearch" placeholder="Search documents" aria-label="Search documents">
+      </label>
+
+      <div class="chips" id="libraryChips" role="group" aria-label="Filter by document type"></div>
+
+      <section class="card card--flush" aria-label="Documents">
+        <div class="tablewrap">
+          <table class="table">
+            <thead>
+              <tr><th>Ref</th><th>Document</th><th>Type</th><th>Owner</th><th class="num">Pages</th><th>Updated</th><th>Index</th></tr>
+            </thead>
+            <tbody id="libraryBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- ------------------------------------------------------- assemble -- -->
+    <section class="view u-hide" id="view-assemble" role="tabpanel" aria-label="Assemble">
+      <h1 class="page__title">Assemble</h1>
+      <p class="page__sub">Raw intake data and unstructured notes, turned into a draft agreement built from the clause library.</p>
+
+      <div class="steps" id="steps"></div>
+
+      <div class="asmgrid">
+        <div>
+          <section class="card" aria-label="Matter record">
+            <h2 class="card__title">Matter record</h2>
+            <dl class="kv" id="intakeKv"></dl>
+            <p class="notes" id="intakeNotes"></p>
+          </section>
+
+          <section class="card" style="margin-top:16px" aria-label="Clauses selected">
+            <h2 class="card__title">Clauses selected</h2>
+            <div id="selectedClauses"></div>
+          </section>
+
+          <section class="card" style="margin-top:16px" aria-label="Review issues">
+            <h2 class="card__title">Review — <span id="issueCount"></span></h2>
+            <div id="issues"></div>
+          </section>
+        </div>
+
+        <div>
+          <div class="docbar">
+            <p class="panelabel" style="margin:0">Draft — Master Services Agreement</p>
+            <span class="toggleline">
+              Fill variables
+              <button class="toggle" type="button" id="varToggle" aria-pressed="true" aria-label="Fill variables from the matter record"></button>
+            </span>
+          </div>
+          <article class="doc" id="doc"></article>
+          <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+            <button class="btn btn--primary" type="button" data-noop="1">Send for signature</button>
+            <button class="btn btn--ghost" type="button" data-noop="1">Export .docx</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------- clauses -- -->
+    <section class="view u-hide" id="view-clauses" role="tabpanel" aria-label="Clause Library">
+      <h1 class="page__title">Clause Library</h1>
+      <p class="page__sub">Versioned, reviewed, and traceable — each clause records when it was last approved and how often it has been used.</p>
+
+      <div class="chips" id="clauseChips" role="group" aria-label="Filter by category"></div>
+
+      <section class="card card--flush" aria-label="Clauses">
+        <div class="tablewrap">
+          <table class="table">
+            <thead>
+              <tr><th>Ref</th><th>Clause</th><th>Category</th><th>Version</th><th>Risk</th><th>Last reviewed</th><th class="num">Uses</th></tr>
+            </thead>
+            <tbody id="clauseBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <footer class="demo-foot">
+      <p>Bespoke demo environment — illustrative corpus, no live client documents.</p>
+      <a href="/demos">← Back to all demos</a>
+    </footer>
+
+  </main>
+</div>
+
+<div id="toastRoot"></div>
+
+<script src="data.js?v=1" defer></script>
+<script src="app.js?v=1" defer></script>
+</body>
+</html>

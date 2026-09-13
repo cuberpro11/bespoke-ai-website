@@ -1,13 +1,59 @@
 [build]
   publish = "."
-  command = ""
+  # Stamp nav/footer from partials/ and regenerate sitemap.xml so a deploy
+  # cannot ship stale shared markup even if those scripts were not run locally.
+  command = "python3 tools/sync-shared.py && python3 tools/build-sitemap.py"
 
+# ---------------------------------------------------------------- canonical host
 [[redirects]]
   from = "https://www.getbespoke.ai/*"
   to = "https://getbespoke.ai/:splat"
   status = 301
   force = true
 
+# ------------------------------------------------- renamed solution hubs (SEO)
+# /law -> /legal and /professional-services -> /general-services.
+# Children of the old paths are swept up by the splat rules.
+[[redirects]]
+  from = "/law"
+  to = "/legal"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/law.html"
+  to = "/legal"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/law/*"
+  to = "/legal/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/professional-services"
+  to = "/general-services"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/professional-services.html"
+  to = "/general-services"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/professional-services/*"
+  to = "/general-services/:splat"
+  status = 301
+  force = true
+
+# ------------------------------------------------ .html -> extensionless URLs
+# Kept so old inbound links and indexed .html URLs land on the canonical form.
+# Internal links across the site are already written extensionless, so these
+# should only ever fire for external traffic.
 [[redirects]]
   from = "/index.html"
   to = "/"
@@ -39,18 +85,6 @@
   force = true
 
 [[redirects]]
-  from = "/law.html"
-  to = "/law"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/professional-services.html"
-  to = "/professional-services"
-  status = 301
-  force = true
-
-[[redirects]]
   from = "/insights.html"
   to = "/insights"
   status = 301
@@ -62,6 +96,8 @@
   status = 301
   force = true
 
+# --------------------------------------------------------------- catch-all 404
+# Must stay last: Netlify applies the first matching rule.
 [[redirects]]
   from = "/*"
   to = "/404.html"

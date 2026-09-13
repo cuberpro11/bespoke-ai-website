@@ -65,13 +65,15 @@
   window.addEventListener("scroll", onScroll, { passive: true });
 
   // active link
+  // `data-page` lights this page's own nav entry; `data-section` lights the
+  // parent dropdown, so adding a solutions page never means editing this file.
   const page = doc.body.dataset.page;
-  const solutionPages = new Set(["law", "finance", "ps"]);
+  const section = doc.body.dataset.section;
   if (page) {
     doc.querySelectorAll(`[data-nav="${page}"]`).forEach((el) => el.classList.add("is-active"));
-    if (solutionPages.has(page)) {
-      doc.querySelectorAll('[data-nav="solutions"]').forEach((el) => el.classList.add("is-active"));
-    }
+  }
+  if (section) {
+    doc.querySelectorAll(`[data-nav="${section}"]`).forEach((el) => el.classList.add("is-active"));
   }
 
   doc.querySelectorAll("a[data-placeholder-link]").forEach((el) => {
@@ -922,16 +924,27 @@
 
   /* -------------------------------------------------------- contact form -- */
 
+  // Contact forms post to Netlify Forms over fetch, so the visitor never leaves
+  // the page and never has to have a mail client configured. Netlify picks the
+  // form up from the deployed HTML (data-netlify + a hidden form-name field),
+  // which keeps the site build-free.
   doc.querySelectorAll("[data-contact-form]").forEach((box) => {
     const form = box.querySelector("form");
     if (!form) return;
 
-    const mailEl = box.querySelector(".f-mail") || box.closest(".footer")?.querySelector(".f-mail");
-    let to = "contact@getbespoke.ai";
-    if (mailEl) {
-      const href = mailEl.getAttribute("href") || "";
-      to = href.replace(/^mailto:/i, "").split("?")[0] || mailEl.textContent.trim() || to;
-    }
+    const wrap = box.querySelector(".f-form");
+    const errEl = box.querySelector(".f-form__err");
+    const submitBtn = form.querySelector('[type="submit"]');
+
+    const submitLabel = submitBtn ? submitBtn.textContent : "";
+
+    const showError = () => {
+      if (errEl) errEl.hidden = false;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitLabel;
+      }
+    };
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -939,26 +952,33 @@
         form.reportValidity();
         return;
       }
+      if (errEl) errEl.hidden = true;
 
-      const fd = new FormData(form);
-      const name = String(fd.get("name") || "").trim();
-      const firm = String(fd.get("firm") || "").trim();
-      const email = String(fd.get("email") || "").trim();
-      const message = String(fd.get("message") || "").trim();
+      // Netlify's honeypot: a filled bot-field means a bot. Pretend it worked.
+      if (String(new FormData(form).get("bot-field") || "").trim()) {
+        if (wrap) wrap.classList.add("is-sent");
+        return;
+      }
 
-      const subject = name
-        ? `Working session request from ${name}`
-        : "Working session request";
-      const body = [
-        `Name: ${name}`,
-        `Firm: ${firm}`,
-        `Email: ${email}`,
-        "",
-        message,
-      ].join("\n");
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending…";
+      }
 
-      const params = new URLSearchParams({ subject, body });
-      window.location.href = `mailto:${to}?${params.toString()}`;
+      const body = new URLSearchParams(new FormData(form)).toString();
+      const action = form.getAttribute("action") || window.location.pathname;
+
+      fetch(action, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body,
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error(String(res.status));
+          if (wrap) wrap.classList.add("is-sent");
+          form.reset();
+        })
+        .catch(showError);
     });
   });
 

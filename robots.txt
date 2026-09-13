@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
-Disallow: /demos/
+
+# The interactive demo apps are illustrative prototypes, not indexable content.
+# /demos itself is the public demos page and must stay crawlable.
+Disallow: /demos/dispatch/
+Disallow: /demos/hotel-operations/
+Disallow: /demos/intake/
+Disallow: /demos/real-estate/
 
 Sitemap: https://getbespoke.ai/sitemap.xml

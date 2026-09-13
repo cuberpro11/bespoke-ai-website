@@ -1,0 +1,53 @@
+<footer class="footer" id="contact">
+  <div class="container--wide container">
+    <div class="footer__grid" data-stagger>
+      <div class="f-brandcol" data-reveal="fade">
+        <a class="brand" href="/" aria-label="Bespoke — home">
+          <img class="brand__mark" src="/assets/img/brain-mark.svg" alt="" aria-hidden="true">
+          <span class="brand__wordmark">Bespoke</span>
+        </a>
+        <p>A bespoke software consultancy building custom AI systems inside law firms, financial institutions, schools, and professional services firms.</p>
+      </div>
+      <div data-reveal="fade">
+        <h4>Solutions</h4>
+        <a class="f-link" href="/legal">Legal</a>
+        <a class="f-link" href="/finance">Finance</a>
+        <a class="f-link" href="/edtech">EdTech</a>
+        <a class="f-link" href="/general-services">General Services</a>
+      </div>
+      <div data-reveal="fade">
+        <h4>Company</h4>
+        <a class="f-link" href="/about">About</a>
+        <a class="f-link" href="/insights">Industry Analysis</a>
+        <a class="f-link" href="/demos">Demos</a>
+        <a class="f-link" href="/#approach">Our Model</a>
+      </div>
+      <div data-contact-form data-reveal="fade">
+        <h4>Contact</h4>
+        <a class="f-mail u-line" href="mailto:contact@getbespoke.ai">contact@getbespoke.ai</a>
+        <div class="f-form">
+          <form name="contact" method="POST" action="/contact" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+            <input type="hidden" name="form-name" value="contact">
+            <p class="f-form__hp" hidden><label>Leave this empty <input name="bot-field"></label></p>
+            <div class="row2">
+              <input type="text" name="name" placeholder="Name" autocomplete="name" required>
+              <input type="text" name="firm" placeholder="Firm" autocomplete="organization" required>
+            </div>
+            <input type="email" name="email" placeholder="Work email" autocomplete="email" required class="f-form__stack">
+            <textarea name="message" placeholder="Where do documents slow you down?" class="f-form__stack"></textarea>
+            <button class="btn btn--soft f-form__submit" type="submit">Request a working session</button>
+          </form>
+          <div class="f-form__ok" role="status">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Thank you — we'll reply within one business day.
+          </div>
+          <p class="f-form__err" role="alert" hidden>Something went wrong sending that. Please email <a class="u-line" href="mailto:contact@getbespoke.ai">contact@getbespoke.ai</a> directly.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>© <span id="year">2026</span> Bespoke. All rights reserved.</span>
+    </div>
+  </div>
+  <div class="footer__ghost" aria-hidden="true">bespoke</div>
+</footer>

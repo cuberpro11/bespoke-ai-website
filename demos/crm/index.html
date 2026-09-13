@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Client Relations Portal — Bespoke Demo</title>
+<meta name="description" content="Bespoke demo: a legal client relations portal — intake dashboard, lead scoring, AI-proposed actions, consultation booking, and integrations.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=1">
+<script>document.documentElement.classList.add("js");</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yae0ivcs5k");
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to the demo</a>
+
+<div class="shell">
+
+  <nav class="sidebar" aria-label="Portal sections">
+    <div class="brand">
+      <div class="brand__name">Your Firm</div>
+      <div class="brand__sub">Client Relations Portal</div>
+    </div>
+
+    <div class="sidenav" role="tablist">
+      <button class="sidenav__item is-active" type="button" role="tab" aria-selected="true" data-view="dashboard">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        <span>Dashboard</span>
+      </button>
+
+      <button class="sidenav__item" type="button" role="tab" aria-selected="false" data-view="clients">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Clients</span>
+        <span class="sidenav__badge" id="clientsBadge">3</span>
+      </button>
+
+      <button class="sidenav__item" type="button" role="tab" aria-selected="false" data-view="agent">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg>
+        <span>AI Agent</span>
+      </button>
+
+      <button class="sidenav__item" type="button" role="tab" aria-selected="false" data-view="integrations">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 12 0V3"/><path d="M12 15v6"/><circle cx="6" cy="3" r="1"/><circle cx="18" cy="3" r="1"/></svg>
+        <span>Integrations</span>
+      </button>
+
+      <button class="sidenav__item" type="button" role="tab" aria-selected="false" data-view="settings">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.4l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0-1.2-2.9H2a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1.1 1.7 1.7 0 0 0-.4-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V2a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H22a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>
+        <span>Settings</span>
+      </button>
+    </div>
+
+    <div class="sidefoot">
+      <a href="/demos">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Bespoke demos
+      </a>
+    </div>
+  </nav>
+
+  <main class="main" id="main">
+
+    <!-- ------------------------------------------------------ dashboard -- -->
+    <section class="view" id="view-dashboard" role="tabpanel" aria-label="Dashboard">
+      <h1 class="page__title">Dashboard</h1>
+
+      <div class="sectionhead">
+        <div>
+          <h2>Outreach Overview</h2>
+          <p>Intake activity across all channels</p>
+        </div>
+        <select class="select" id="periodSelect" aria-label="Reporting period">
+          <option value="7">Last 7 days</option>
+          <option value="30" selected>Last 30 days</option>
+          <option value="90">Last 90 days</option>
+        </select>
+      </div>
+
+      <div class="kpis" id="kpis"></div>
+
+      <div class="dashgrid">
+        <section class="card" aria-label="Intake by channel">
+          <h3 class="card__title">Intake by Channel</h3>
+          <div class="chart" id="chart"></div>
+          <div class="legend" id="chartLegend"></div>
+        </section>
+
+        <section class="card" aria-label="Needs response">
+          <h3 class="card__title card__title--row">
+            <span style="display:inline-flex;align-items:center;gap:8px"><i class="needs__dot"></i> Needs Response</span>
+            <span class="sidenav__badge" style="margin:0" id="needsCount">3</span>
+          </h3>
+          <div id="needsList"></div>
+          <button class="card__link" type="button" id="needsLink">View all in Clients ↗</button>
+        </section>
+      </div>
+
+      <div class="dashgrid dashgrid--3">
+        <section class="card" aria-label="Channel breakdown">
+          <h3 class="card__title">Channel Breakdown</h3>
+          <div id="channelBars"></div>
+        </section>
+
+        <section class="card" aria-label="Pipeline status">
+          <h3 class="card__title">Pipeline Status</h3>
+          <div class="funnel" id="funnel"></div>
+        </section>
+
+        <section class="card" aria-label="Recent activity">
+          <h3 class="card__title">Recent Activity</h3>
+          <div class="feed" id="feed"></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------- clients -- -->
+    <section class="view u-hide" id="view-clients" role="tabpanel" aria-label="Clients">
+      <div id="clientsList">
+        <h1 class="page__title">Clients</h1>
+        <div id="clientSections"></div>
+      </div>
+      <div id="clientDetail" class="u-hide"></div>
+    </section>
+
+    <!-- ------------------------------------------------------- ai agent -- -->
+    <section class="view u-hide" id="view-agent" role="tabpanel" aria-label="AI Agent">
+      <div class="agent">
+        <div class="agent__hello" id="agentHello">
+          <span class="agent__mark" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="3"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/></svg>
+          </span>
+          <h1>AI Assistant</h1>
+          <p>Ask anything, or start from one of the actions below.</p>
+        </div>
+
+        <div class="chat u-hide" id="agentChat"></div>
+
+        <div class="agent__grid" id="agentActions"></div>
+
+        <form class="composer" id="agentForm">
+          <textarea id="agentInput" rows="1" placeholder="Ask the assistant…" aria-label="Message the assistant"></textarea>
+          <button class="btn btn--primary" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- --------------------------------------------------- integrations -- -->
+    <section class="view u-hide" id="view-integrations" role="tabpanel" aria-label="Integrations">
+      <h1 class="page__title">Integrations</h1>
+
+      <section style="margin-bottom:22px" aria-label="Connected integrations">
+        <div class="clientsec__head">
+          <h2 class="clientsec__title">Connected</h2>
+          <span class="clientsec__count" id="connectedCount"></span>
+        </div>
+        <div class="intlist" id="connectedList"></div>
+      </section>
+
+      <section aria-label="Available integrations">
+        <div class="clientsec__head">
+          <h2 class="clientsec__title">Available</h2>
+          <span class="clientsec__count" id="availableCount"></span>
+        </div>
+        <div class="intlist" id="availableList"></div>
+      </section>
+    </section>
+
+    <!-- ------------------------------------------------------- settings -- -->
+    <section class="view u-hide" id="view-settings" role="tabpanel" aria-label="Settings">
+      <h1 class="page__title">Settings</h1>
+
+      <div class="settings">
+        <section class="card" aria-label="Account">
+          <h3 class="card__title">Account</h3>
+          <div class="profile">
+            <span class="profile__avatar" aria-hidden="true">AU</span>
+            <div>
+              <div class="profile__name">Admin User</div>
+              <div class="profile__meta">admin@yourlawfirm.com</div>
+              <div class="profile__meta">Your Law Firm</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" aria-label="Notifications">
+          <h3 class="card__title">Notifications</h3>
+          <div id="notifRows"></div>
+        </section>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+
+<script src="data.js?v=1" defer></script>
+<script src="app.js?v=1" defer></script>
+</body>
+</html>

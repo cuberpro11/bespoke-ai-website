@@ -227,6 +227,14 @@ section { scroll-margin-top: calc(var(--nav-h) + 12px); }
 .section-head--center { margin-inline: auto; text-align: center; }
 .section-head .lede { margin-top: 1.4rem; }
 
+/* Hub pages only: hide the redundant kicker that sat flush under the hero. */
+body[data-page="legal"] .hero + .section .section-head > .kicker,
+body[data-page="finance"] .hero + .section .section-head > .kicker,
+body[data-page="edtech"] .hero + .section .section-head > .kicker,
+body[data-page="general-services"] .hero + .section .section-head > .kicker {
+  display: none;
+}
+
 .hairline { border: 0; height: 1px; background: var(--line-light); margin: 0; }
 .dark .hairline { background: var(--line-dark); }
 
@@ -2290,8 +2298,12 @@ body.nav-open .mobile-menu__panel { transform: none; }
 }
 .ind-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* four solution categories since EdTech was added */
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.1rem;
+}
+@media (max-width: 1080px) {
+  .ind-grid { grid-template-columns: repeat(2, 1fr); }
 }
 .ind-card {
   position: relative;
@@ -3016,21 +3028,20 @@ body.nav-open .mobile-menu__panel { transform: none; }
   font-size: 0.9rem;
   line-height: 1.55;
   border-radius: 6px;
-  transition: color var(--fast) ease-out, padding-left var(--mid) var(--ease-out);
+  transition: color var(--fast) ease-out, background var(--fast) ease-out;
 }
-.cap-col li::before,
-.cap-col li::after {
+.cap-col li::before {
   content: "";
   position: absolute;
   top: 1.12rem;
+  left: 0;
   width: 4px;
   height: 4px;
   background: var(--cobalt);
   transform: rotate(45deg);
-  transition: opacity var(--fast) ease-out, transform var(--mid) var(--ease-out);
+  opacity: 0.45;
+  transition: opacity var(--fast) ease-out, box-shadow var(--fast) ease-out;
 }
-.cap-col li::before { left: 0; opacity: 0.45; }
-.cap-col li::after { left: 6px; opacity: 0; transform: rotate(45deg) translateX(-4px); }
 @media (hover: hover) {
   .cap-col.spot-card:hover {
     background: linear-gradient(165deg, rgba(36, 84, 216, 0.05) 0%, var(--white) 58%);
@@ -3044,10 +3055,10 @@ body.nav-open .mobile-menu__panel { transform: none; }
   }
   .cap-col li:hover {
     color: var(--ink-900);
-    padding-left: 1.4rem;
   }
-  .cap-col li:hover::before { opacity: 0.85; transform: rotate(45deg) scale(1.15); }
-  .cap-col li:hover::after { opacity: 0.4; transform: rotate(45deg) translateX(0); }
+  .cap-col li:hover::before {
+    opacity: 1;
+  }
 }
 
 /* ---------- 22. Flip cards ------------------------------------------------ */
@@ -4151,8 +4162,11 @@ body.nav-open .mobile-menu__panel { transform: none; }
   .js .cap-col[data-reveal] .cap-list li {
     opacity: 0.001;
     transform: translateX(-8px);
-    transition: opacity 460ms ease-out, transform 480ms var(--ease-out);
-    transition-delay: calc(var(--i, 0) * 80ms + 200ms + var(--li, 0) * 45ms);
+    transition:
+      opacity 460ms ease-out calc(var(--i, 0) * 80ms + 200ms + var(--li, 0) * 45ms),
+      transform 480ms var(--ease-out) calc(var(--i, 0) * 80ms + 200ms + var(--li, 0) * 45ms),
+      color var(--fast) ease-out,
+      background var(--fast) ease-out;
   }
   .js .cap-col[data-reveal].is-visible .cap-list li {
     opacity: 1;
@@ -4495,7 +4509,7 @@ body[data-page="contact"] {
   padding-block: 1.5rem 2rem;
 }
 
-.contact-screen h1 {
+.contact-screen__eyebrow {
   font-family: var(--sans);
   font-size: 0.68rem;
   font-weight: 500;
@@ -4519,4 +4533,552 @@ body[data-page="contact"] {
 @media (max-width: 560px) {
   .contact-screen .f-form .row2 { grid-template-columns: 1fr; }
   .contact-screen .f-form textarea { min-height: 120px; }
+}
+
+/* ==========================================================================
+   30. SOLUTIONS MEGA-MENU
+   The Solutions dropdown grew from 3 flat links to 4 category columns, each
+   listing its service pages. Layered on top of the existing .dropdown rules
+   rather than replacing them, so the panel chrome stays identical.
+   ========================================================================== */
+
+.dropdown--mega {
+  /* one track per column, so the panel sizes itself to however many
+     categories exist rather than hardcoding a count */
+  padding: 0.75rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 262px;
+  width: max-content;
+  min-width: 0;
+  max-width: calc(100vw - 2.5rem);
+  gap: 0.25rem;
+}
+.mega__col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0.25rem;
+  border-radius: 12px;
+}
+.mega__col + .mega__col {
+  border-left: 1px solid var(--line-dark);
+}
+
+/* the column header doubles as the link to the category hub */
+.dropdown--mega .mega__hub {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.7rem;
+  align-items: start;
+  padding: 0.6rem 0.65rem 0.7rem;
+  border-radius: 10px;
+}
+.dropdown--mega .mega__hub .dd-ico {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+}
+.dropdown--mega .mega__hub b {
+  font-size: 0.94rem;
+}
+.dropdown--mega .mega__hub > span:not(.dd-ico) > span {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--t-faint);
+}
+
+/* neutralize the single-column divider/spacing rules from the base dropdown */
+.dropdown--mega a + a {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 0.5rem;
+}
+
+.mega__list {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0 0.2rem;
+  display: grid;
+  gap: 0.1rem;
+  border-top: 1px solid var(--line-dark);
+  padding-top: 0.45rem;
+}
+.dropdown--mega .mega__list a {
+  display: block;
+  grid-template-columns: none;
+  padding: 0.42rem 0.5rem;
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  line-height: 1.35;
+  color: var(--t-dim);
+  transition: background-color var(--fast) ease-out, color var(--fast) ease-out;
+}
+.dropdown--mega .mega__list a:hover,
+.dropdown--mega .mega__list a.is-active {
+  color: var(--t-bright);
+  background: color-mix(in srgb, var(--cobalt) 10%, transparent);
+}
+
+@media (max-width: 1240px) {
+  .dropdown--mega {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(720px, calc(100vw - 2.5rem));
+  }
+  .mega__col:nth-child(odd) + .mega__col { border-left: 1px solid var(--line-dark); }
+  .mega__col:nth-child(3) { border-left: 0; }
+  .mega__col:nth-child(n + 3) {
+    margin-top: 0.35rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--line-dark);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* the base rule staggers each <a>; in the mega-menu stagger whole columns */
+  .nav__item.is-open .dropdown--mega a {
+    animation: none;
+  }
+  .nav__item.is-open .dropdown--mega .mega__col {
+    animation: dd-item-in 360ms var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 45ms + 60ms);
+  }
+}
+
+/* -------------------------------------------------------- mobile: grouped */
+.mm-group + .mm-group {
+  margin-top: 0.45rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--line-dark);
+}
+.mm-list {
+  list-style: none;
+  margin: 0.1rem 0 0.25rem;
+  padding: 0 0 0 0.15rem;
+  display: grid;
+  gap: 0.05rem;
+}
+.mm-list a {
+  display: block;
+  padding: 0.5rem 0.45rem;
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--t-dim);
+  transition: background-color var(--fast) ease-out, color var(--fast) ease-out;
+}
+.mm-list a:hover,
+.mm-list a.is-active {
+  color: var(--t-bright);
+  background: rgba(172, 174, 182, 0.08);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* .mm-group wrappers broke the old :nth-child stagger on sub-links; drive
+     the reveal off the group instead so it scales with any number of items */
+  .mobile-menu__sub .mm-group .mobile-menu__sub-link,
+  .mobile-menu__sub .mm-group .mm-list {
+    opacity: 0;
+    transform: translateX(-18px);
+    transition:
+      opacity 400ms ease-out,
+      transform 460ms var(--ease-out),
+      background-color var(--fast) ease-out;
+  }
+  .mobile-menu__item--dd.is-sub-reveal .mm-group .mobile-menu__sub-link,
+  .mobile-menu__item--dd.is-sub-reveal .mm-group .mm-list {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: calc(70ms + var(--si, 0) * 70ms);
+  }
+  .mm-group:nth-child(1) { --si: 0; }
+  .mm-group:nth-child(2) { --si: 1; }
+  .mm-group:nth-child(3) { --si: 2; }
+  .mm-group:nth-child(4) { --si: 3; }
+}
+
+/* ==========================================================================
+   31. SERVICE PAGES (solution cluster children)
+   Shared blocks for the pages beneath each category hub: a dark variant of
+   the capability grid, a single-demo card, and the related-services block
+   that carries internal linking between siblings and back to the hub.
+   ========================================================================== */
+
+/* -------------------------------------- capability grid on a dark section */
+.dark .cap-col {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--navy-850) 92%, white 3%) 0%, var(--navy-900) 100%);
+  border-color: var(--line-dark);
+}
+.dark .cap-col h3 {
+  color: var(--t-bright);
+  border-bottom-color: var(--line-dark);
+}
+.dark .cap-col li { color: var(--t-dim); }
+.dark .cap-ico {
+  color: var(--sky);
+  background: color-mix(in srgb, var(--cobalt) 12%, transparent);
+  border-color: color-mix(in srgb, var(--cobalt) 32%, transparent);
+}
+@media (hover: hover) {
+  .dark .cap-col.spot-card:hover {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--navy-850) 92%, white 3%) 0%, var(--navy-900) 100%);
+    border-color: rgba(172, 174, 182, 0.4);
+  }
+  .dark .cap-col.spot-card:hover::before,
+  .dark .cap-col.spot-card:hover::after {
+    opacity: 0;
+  }
+  .dark .cap-col.spot-card:hover .cap-ico {
+    background: color-mix(in srgb, var(--cobalt) 12%, transparent);
+    border-color: color-mix(in srgb, var(--cobalt) 32%, transparent);
+    transform: none;
+  }
+  .dark .cap-col li:hover {
+    color: var(--t-bright);
+  }
+}
+
+/* three-up reads better than four when the copy is long-form */
+.cap-grid--3 { grid-template-columns: repeat(3, 1fr); }
+
+/* ------------------------------------------------- single embedded demo */
+.demo-preview--solo {
+  max-width: 900px;
+  margin-inline: auto;
+}
+.demo-disclaimer {
+  max-width: 900px;
+  margin: 1.1rem auto 0;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--ink-400);
+}
+.dark .demo-disclaimer { color: var(--t-faint); }
+
+/* ------------------------------------------------------ related services */
+.rel-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+.rel-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.65rem 1.6rem 1.5rem;
+  color: inherit;
+  text-decoration: none;
+  background: linear-gradient(180deg, var(--white) 0%, color-mix(in srgb, var(--paper) 30%, var(--white)) 100%);
+  transition:
+    border-color var(--mid) ease-out,
+    transform var(--mid) var(--ease-out),
+    box-shadow var(--mid) ease-out;
+}
+.rel-link:hover { transform: translateY(-3px); }
+.rel-link h3 {
+  font-family: var(--serif);
+  font-size: 1.14rem;
+  font-weight: 600;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+  color: var(--ink-900);
+}
+.rel-link p {
+  flex: 1;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink-600);
+}
+.rel-link .link-arrow { margin-top: 0.35rem; }
+
+/* five-service hubs (Finance, General Services) use the same 3-up track */
+.rel-links--5 { grid-template-columns: repeat(3, 1fr); }
+
+/* These grids are declared after the site's own breakpoints, so they have to
+   restate them. Match the existing 1080 / 560 stops rather than inventing new
+   ones, so columns step down in sync with the rest of the page. */
+@media (max-width: 1080px) {
+  .rel-links,
+  .rel-links--5,
+  .cap-grid--3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .rel-links,
+  .rel-links--5,
+  .cap-grid--3 { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   32. DEMOS PAGE
+   Intro disclaimer above the grid, and a links block beneath it pointing at
+   the service pages each demo illustrates.
+   ========================================================================== */
+
+.demos-intro {
+  max-width: 900px;
+  margin-inline: auto;
+  margin-bottom: 2.25rem;
+  text-align: center;
+}
+.demos-intro .lede { margin: 0; }
+
+.demos-services {
+  max-width: 900px;
+  margin: 3.25rem auto 0;
+  padding-top: 2.25rem;
+  border-top: 1px solid var(--line-light);
+}
+.demos-services h2 {
+  margin-bottom: 1rem;
+  color: var(--ink-900);
+}
+.demos-services__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.75rem;
+}
+.demos-services__list a {
+  font-family: var(--sans);
+  font-size: 0.94rem;
+  color: var(--ink-600);
+  transition: color var(--fast) ease-out;
+}
+.demos-services__list a:hover { color: var(--cobalt); }
+
+/* ==========================================================================
+   33. CONTACT PAGE
+   The page grew a real H1, a "How it works" ladder, and inline form states,
+   so it is no longer a bare full-screen form.
+   ========================================================================== */
+
+.contact-screen__title {
+  font-family: var(--serif);
+  font-size: clamp(2.1rem, 4.4vw, 3.1rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--t-bright);
+  margin-bottom: 0.85rem;
+}
+.contact-screen__title em {
+  font-style: italic;
+  color: var(--sky);
+}
+.contact-screen__lede {
+  font-family: var(--sans);
+  font-size: 1.02rem;
+  line-height: 1.62;
+  color: var(--t-dim);
+  margin-bottom: 1.3rem;
+}
+
+/* ------------------------------------------------------- how it works */
+.hiw {
+  margin: 2.4rem 0 2.6rem;
+  padding: 1.9rem 1.75rem 1.6rem;
+  border: 1px solid var(--line-dark);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--navy-900) 55%, transparent);
+}
+.hiw__title {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--t-faint);
+  margin-bottom: 1.35rem;
+}
+.hiw__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.15rem;
+}
+.hiw__step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.95rem;
+  align-items: start;
+}
+.hiw__num {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--cobalt) 42%, transparent);
+  background: color-mix(in srgb, var(--cobalt) 14%, transparent);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--sky);
+}
+.hiw__step h3 {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--t-bright);
+  margin-bottom: 0.2rem;
+}
+.hiw__step p {
+  font-family: var(--sans);
+  font-size: 0.89rem;
+  line-height: 1.58;
+  color: var(--t-dim);
+}
+.hiw__note {
+  margin-top: 1.4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line-dark);
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  color: var(--sky);
+}
+
+/* --------------------------------------------------------- form states */
+.f-form__hp { position: absolute; left: -9999px; }
+.f-form__err {
+  margin-top: 0.85rem;
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: #e8a0a0;
+}
+.f-form.is-sent .f-form__err { display: none; }
+
+/* ------------------------------------------------- footer-less link row */
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+  margin-top: 2.4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line-dark);
+}
+.contact-links a {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--t-faint);
+  transition: color var(--fast) ease-out;
+}
+.contact-links a:hover { color: var(--t-bright); }
+
+/* ==========================================================================
+   34. HOMEPAGE SERVICES BAND
+   Four practice columns beneath the demo. Each column header links to the
+   category hub and the list beneath it links to every service page, so the
+   homepage reaches all 18 solution pages in one block.
+   ========================================================================== */
+
+.hero__lede {
+  max-width: 46rem;
+  margin-bottom: 2rem;
+}
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+.svc-col {
+  display: flex;
+  flex-direction: column;
+  padding: 1.85rem 1.7rem 1.6rem;
+  background: linear-gradient(180deg, var(--white) 0%, color-mix(in srgb, var(--paper) 28%, var(--white)) 100%);
+  transition:
+    border-color var(--mid) ease-out,
+    transform var(--mid) var(--ease-out),
+    box-shadow var(--mid) ease-out;
+}
+.svc-col:hover { transform: translateY(-3px); }
+
+.svc-col__hub {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.svc-col__kicker {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-400);
+  margin-bottom: 0.75rem;
+}
+.svc-col__hub h3 {
+  font-family: var(--serif);
+  font-size: 1.32rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink-900);
+  margin-bottom: 0.55rem;
+}
+.svc-col__hub p {
+  font-family: var(--sans);
+  font-size: 0.89rem;
+  line-height: 1.58;
+  color: var(--ink-600);
+  margin-bottom: 0.9rem;
+}
+
+.svc-col__list {
+  list-style: none;
+  margin: auto 0 0;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--line-light);
+  display: grid;
+  gap: 0.1rem;
+}
+.svc-col__list a {
+  display: block;
+  padding: 0.4rem 0.5rem 0.4rem 0;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: var(--ink-600);
+  transition: color var(--fast) ease-out, padding-left var(--mid) var(--ease-out);
+}
+.svc-col__list a:hover {
+  color: var(--cobalt);
+  padding-left: 0.35rem;
+}
+
+.svc-foot {
+  max-width: 780px;
+  margin: 2.5rem auto 0;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--ink-600);
+}
+
+@media (max-width: 1080px) {
+  .svc-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .svc-grid { grid-template-columns: 1fr; }
+}
+
+/* cross-cluster pointer beneath a related-services grid */
+.rel-foot {
+  max-width: 780px;
+  margin: 2rem auto 0;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--ink-600);
 }
