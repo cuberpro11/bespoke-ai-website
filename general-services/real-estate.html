@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Custom Real Estate Software">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-proserv.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/real-estate.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / General Services / Real Estate</p>
     <h1 class="display">Custom Real Estate <em>Software Solutions</em></h1>
@@ -259,50 +260,83 @@
 </section>
 
 <!-- CORE CAPABILITIES & PORTFOLIO AUTOMATION -->
-<section class="section cap-section on-light" aria-label="Core capabilities">
+<section class="section section--white on-light re-section" data-sol aria-label="Core capabilities">
   <div class="container--wide container">
     <div class="section-head">
       <p class="kicker" data-reveal="draw">Core capabilities &amp; portfolio automation</p>
       <h2 class="h2" data-reveal>Tailored real estate software for <em>deal flow &amp; property operations.</em></h2>
       <p class="lede" data-reveal>Real estate investment firms and property management companies frequently outgrow generic CRM platforms and rigid accounting tools. We engineer bespoke platforms that centralize asset management, automate tenant communications, and extract value from complex property documentation.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h8"/></svg></span>
-          <h3>Bespoke custom property management software development</h3>
+
+    <div class="re-board" data-viz="realestate" data-reveal="scale">
+      <div class="re-board__head">
+        <div>
+          <span class="re-board__eyebrow">Stacking plan</span>
+          <b class="re-board__name">1180 Harbor Street · Class A office</b>
         </div>
-        <ul class="cap-list">
+        <p class="re-board__hint">Select a suite to open its abstracted lease.</p>
+        <span class="sol-illus">Illustrative</span>
+      </div>
+
+      <div class="re-board__grid">
+        <div class="re-stack">
+          <div class="re-stack__floors" data-stack></div>
+          <ul class="re-legend" aria-label="Lease expiry">
+            <li class="re-legend__26">2026</li>
+            <li class="re-legend__27">2027</li>
+            <li class="re-legend__28">2028–29</li>
+            <li class="re-legend__30">2030+</li>
+            <li class="re-legend__vac">Vacant</li>
+          </ul>
+        </div>
+
+        <aside class="re-abstract" data-abstract aria-live="polite">
+          <p class="re-abstract__label">Lease abstract</p>
+          <p class="re-abstract__tenant" data-f="tenant">Northwind Analytics</p>
+          <p class="re-abstract__suite" data-f="suite">Suite 600 · 12,600 RSF</p>
+          <dl class="re-abstract__kv" data-kv></dl>
+          <div class="re-steps">
+            <p class="re-steps__label">Annual base rent by lease year</p>
+            <svg class="re-steps__svg" viewBox="0 0 300 90" preserveAspectRatio="none" aria-hidden="true" data-steps></svg>
+          </div>
+        </aside>
+      </div>
+
+      <dl class="re-metrics" data-metrics>
+        <div><dt>Occupancy</dt><dd data-m="occ">—</dd></div>
+        <div><dt>WALT</dt><dd data-m="walt">—</dd></div>
+        <div><dt>In-place NOI</dt><dd data-m="noi">—</dd></div>
+        <div><dt>Cap rate <small>on $88M</small></dt><dd data-m="cap">—</dd></div>
+        <div><dt>Cash-on-cash</dt><dd data-m="coc">—</dd></div>
+      </dl>
+    </div>
+
+    <div class="re-spec">
+      <p class="re-spec__title"><span>Specification</span><span>Bespoke platform for owners, brokerages &amp; property managers</span></p>
+      <div class="re-spec__row" data-reveal>
+        <h3>Bespoke custom property management software development</h3>
+        <ul>
           <li>Move beyond off-the-shelf software limitations with custom property management software designed around your specific leasing workflows, maintenance routing, and rent collection logic.</li>
           <li>Build integrated tenant portals, automated lease renewal engines, and vendor dispatch modules that reduce administrative overhead across portfolios.</li>
         </ul>
       </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
-          <h3>Lease abstraction &amp; document data extraction</h3>
-        </div>
-        <ul class="cap-list">
+      <div class="re-spec__row" data-reveal>
+        <h3>Lease abstraction &amp; document data extraction</h3>
+        <ul>
           <li>Automatically parse complex commercial leases, amendment addendums, and offering memorandums to extract key escalation terms, rent schedules, and termination options.</li>
           <li>Feed extracted lease terms directly into core accounting and asset management engines with zero manual data entry.</li>
         </ul>
       </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 17V9m5 8V5m5 12v-6"/></svg></span>
-          <h3>Automated deal flow &amp; underwriting pipelines</h3>
-        </div>
-        <ul class="cap-list">
+      <div class="re-spec__row" data-reveal>
+        <h3>Automated deal flow &amp; underwriting pipelines</h3>
+        <ul>
           <li>Centralize property acquisition tracking, rent roll analysis, and underwriting models within a unified investment dashboard.</li>
           <li>Ingest unstructured property listings, tax records, and operating statements to calculate NOI, cap rates, and cash-on-cash returns automatically.</li>
         </ul>
       </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-          <h3>Private RAG document search for asset management</h3>
-        </div>
-        <ul class="cap-list">
+      <div class="re-spec__row" data-reveal>
+        <h3>Private RAG document search for asset management</h3>
+        <ul>
           <li>Securely query your entire repository of title insurance policies, environmental reports, and lender agreements using natural language.</li>
           <li>Provide asset managers with immediate, verifiable citations from legal agreements while keeping proprietary deal data completely private.</li>
         </ul>
@@ -311,42 +345,28 @@
   </div>
 </section>
 
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
+<!-- CLOSING -->
+<section class="section cl cl--realestate section--navy dark" aria-label="Next steps">
   <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom automation software</p>
-      <h2 class="h2" data-reveal>Related <em>services.</em></h2>
-    </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/general-services/document-automation" data-reveal>
-        <h3>Document automation</h3>
-        <p>Document drafting automation: dynamic template and clause libraries, unstructured data ingestion, and multi-format export.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/general-services/api-integrations" data-reveal>
-        <h3>API integrations</h3>
-        <p>Custom API development and middleware that connect Clio, Salesforce, QuickBooks, and internal databases into one flow.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/general-services" data-reveal>
-        <h3>All general services</h3>
-        <p>The full range of custom automation software Bespoke builds across documents, APIs, knowledge, and property operations.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / General Services / Real Estate</p>
-    <h2 class="h1" data-reveal>Ready to build <em class="accent-ai">custom real estate software?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers to design private, secure property platforms tailored to your firm's unique portfolio requirements.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
+    <div class="cl-grid cl-grid--sign">
+      <div class="cl-sign" data-reveal>
+        <span class="cl-sign__post" aria-hidden="true"></span>
+        <span class="cl-sign__chain" aria-hidden="true"></span>
+        <div class="cl-sign__board">
+          <p class="cl-sign__now">Now leasing</p>
+          <p class="cl-sign__crumb">Solutions / General Services / Real Estate</p>
+          <h2 class="h2">Ready to build <em class="accent-ai">custom real estate software?</em></h2>
+          <p class="cl-sign__body">Partner with specialized software engineers to design private, secure property platforms tailored to your firm's unique portfolio requirements.</p>
+          <a class="cl-sign__phone" href="/contact">Enquire · Contact <span class="arr" aria-hidden="true">→</span></a>
+          <a class="cl-sign__alt u-line" href="/demos">See more demos</a>
+        </div>
+      </div>
+      <div class="cl-listings">
+        <h2 class="cl-listings__t">Nearby listings · Related services.</h2>
+        <a class="cl-listing" href="/general-services/document-automation" data-reveal><span class="cl-listing__img" aria-hidden="true"><i></i><i></i><i></i></span><span class="cl-listing__unit">Unit 01 · available</span><h3>Document automation</h3><p>Document drafting automation: dynamic template and clause libraries, unstructured data ingestion, and multi-format export.</p></a>
+        <a class="cl-listing" href="/general-services/api-integrations" data-reveal><span class="cl-listing__img" aria-hidden="true"><i></i><i></i><i></i></span><span class="cl-listing__unit">Unit 02 · available</span><h3>API integrations</h3><p>Custom API development and middleware that connect Clio, Salesforce, QuickBooks, and internal databases into one flow.</p></a>
+        <a class="cl-listing" href="/general-services" data-reveal><span class="cl-listing__img" aria-hidden="true"><i></i><i></i><i></i></span><span class="cl-listing__unit">Unit 03 · available</span><h3>All general services</h3><p>The full range of custom automation software Bespoke builds across documents, APIs, knowledge, and property operations.</p></a>
+      </div>
     </div>
   </div>
 </section>
@@ -410,5 +430,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Legal Contract Automation">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-law.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/documentation-automation.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / Legal / Documentation Automation</p>
     <h1 class="display">Legal Contract <em>Automation Solutions</em></h1>
@@ -232,53 +233,91 @@
 </section>
 
 <!-- CORE CAPABILITIES & LEGAL DOCUMENT AUTOMATION -->
-<section class="section cap-section on-light" aria-label="Document automation capabilities">
+<section class="section section--paper on-light ld-section" data-sol aria-label="Document automation capabilities">
   <div class="container--wide container">
     <div class="section-head">
       <p class="kicker" data-reveal="draw">Core capabilities &amp; legal document automation</p>
       <h2 class="h2" data-reveal>Precision document automation for <em>legal workflows.</em></h2>
       <p class="lede" data-reveal>Legal teams spend hundreds of hours manually customizing contracts, cross-referencing complex clauses, and copying client intake data across fragmented files. We engineer bespoke document automation for legal teams that transforms unstructured intake notes and precedent libraries into structured, execution-ready agreements without compromising on data privacy.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
+
+    <div class="ld-story" data-viz="legaldoc">
+      <div class="ld-stage">
+        <article class="ld-page s1 s2 s3 s4" data-page aria-label="Engagement agreement being assembled">
+          <header class="ld-page__head">
+            <span class="ld-page__firm">Reyes Clarke LLP</span>
+            <span class="ld-page__ref">Draft 3 · <span class="sol-illus">Illustrative</span></span>
+          </header>
+          <p class="ld-page__title">Engagement &amp; Fee Agreement</p>
+          <p class="ld-intake"><span class="ld-intake__ico" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 7 9-7"/></svg></span>Fields extracted from <b>intake-2291.eml</b> · 6 of 6 populated</p>
+
+          <div class="ld-cl" data-type="parties">
+            <span class="ld-tab">Parties</span>
+            <p><b>1.</b> This agreement is made on <span class="ld-f"><s>[date]</s><em>2 June 2026</em></span> between <span class="ld-f"><s>[client]</s><em>Halden Maritime Holdings Ltd.</em></span> (“Client”) and Reyes Clarke LLP (“Firm”).</p>
+          </div>
+          <div class="ld-cl" data-type="scope">
+            <span class="ld-tab">Scope</span>
+            <p><b>2.</b> The Firm will represent the Client in <span class="ld-f"><s>[matter description]</s><em>its charter-party dispute with Norbeck Shipping AS</em></span>, including negotiation and, if required, arbitration in <span class="ld-f"><s>[seat]</s><em>London</em></span>.</p>
+          </div>
+          <div class="ld-cl ld-cl--cond" data-type="fees">
+            <span class="ld-tab">Fees</span>
+            <p><b>3.</b> <span class="ld-var ld-var--a">The Client will pay for services at the hourly rates set out in Schedule A, invoiced monthly.</span><span class="ld-var ld-var--b">The Client will pay a contingency fee of <span class="ld-f"><s>[rate]</s><em>25%</em></span> of any amount recovered, plus disbursements, under the firm's contingency policy for disputes above $1M.</span></p>
+          </div>
+          <div class="ld-cl" data-type="liability">
+            <span class="ld-tab">Liability</span>
+            <p><b>4.</b> <del>The Firm's liability under this agreement is unlimited.</del> <ins>The Firm's aggregate liability is limited to the fees paid in the twelve months before the claim arose.</ins></p>
+          </div>
+          <div class="ld-cl" data-type="law">
+            <span class="ld-tab">Law</span>
+            <p><b>5.</b> This agreement is governed by the laws of <span class="ld-f"><s>[jurisdiction]</s><em>England and Wales</em></span>.</p>
+          </div>
+
+          <aside class="ld-comment">
+            <b>Precedent vault</b>
+            <span>Fallback accepted in 14 executed agreements</span>
+            <cite>Matter 2023-118 · §7.2 · signed 11 Oct 2023</cite>
+          </aside>
+
+          <footer class="ld-sync">
+            <span class="ld-sync__dot" aria-hidden="true"></span>
+            <span>Synced to Clio · Matter 2026-0412 · retainer invoice created</span>
+          </footer>
+        </article>
+      </div>
+
+      <div class="ld-notes">
+        <article class="ld-note" data-step="1">
+          <span class="ld-note__mark">Margin note A · clause map</span>
           <h3>Dynamic legal contract automation &amp; clause mapping</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Convert standard engagement letters, settlement agreements, NDAs, and corporate governance documents into reusable templates.</li>
-          <li>Automatically select, insert, and update conditional clauses, fee arrangements, and jurisdictional language based on intake logic.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v5H4zM4 15h16v5H4z"/><path d="M9 9v6M15 9v6"/></svg></span>
+          <ul>
+            <li>Convert standard engagement letters, settlement agreements, NDAs, and corporate governance documents into reusable templates.</li>
+            <li>Automatically select, insert, and update conditional clauses, fee arrangements, and jurisdictional language based on intake logic.</li>
+          </ul>
+        </article>
+        <article class="ld-note" data-step="2">
+          <span class="ld-note__mark">Margin note B · intake</span>
           <h3>Unstructured intake parsing &amp; matter auto-population</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Automatically parse client emails, consultation summaries, and intake forms directly into your drafting workflows.</li>
-          <li>Extract key party details, entity structures, financial terms, and critical dates to populate complex, multi-page legal documents in seconds.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span>
+          <ul>
+            <li>Automatically parse client emails, consultation summaries, and intake forms directly into your drafting workflows.</li>
+            <li>Extract key party details, entity structures, financial terms, and critical dates to populate complex, multi-page legal documents in seconds.</li>
+          </ul>
+        </article>
+        <article class="ld-note" data-step="3">
+          <span class="ld-note__mark">Margin note C · practice system</span>
           <h3>Practice management system integration</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Seamlessly connect your custom document assembly engine to core legal platforms such as Clio, MyCase, or internal matter management systems.</li>
-          <li>Automatically sync executed agreements, update matter statuses, and trigger billing events across your existing software stack.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+          <ul>
+            <li>Seamlessly connect your custom document assembly engine to core legal platforms such as Clio, MyCase, or internal matter management systems.</li>
+            <li>Automatically sync executed agreements, update matter statuses, and trigger billing events across your existing software stack.</li>
+          </ul>
+        </article>
+        <article class="ld-note" data-step="4">
+          <span class="ld-note__mark">Margin note D · precedent</span>
           <h3>Private RAG precedent vault search</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Securely query your firm's entire vault of historical agreements, negotiated addendums, and precedent files using natural language.</li>
-          <li>Provide attorneys with immediate, verifiable clause recommendations from past successful deals while keeping sensitive client data strictly private.</li>
-        </ul>
+          <ul>
+            <li>Securely query your firm's entire vault of historical agreements, negotiated addendums, and precedent files using natural language.</li>
+            <li>Provide attorneys with immediate, verifiable clause recommendations from past successful deals while keeping sensitive client data strictly private.</li>
+          </ul>
+        </article>
       </div>
     </div>
   </div>
@@ -327,44 +366,27 @@
   </div>
 </section>
 
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
+<!-- CLOSING -->
+<section class="section cl cl--legaldoc section--paper on-light" aria-label="Next steps">
   <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom legal software</p>
-      <h2 class="h2" data-reveal>Related <em>legal services.</em></h2>
+    <div class="cl-copy">
+      <p class="kicker" data-reveal="draw">Solutions / Legal / Documentation Automation</p>
+      <h2 class="h1" data-reveal>Interested in <em class="accent-ai">learning more?</em></h2>
+      <p class="lede" data-reveal>Partner with specialized software engineers and SMEs with legal backgrounds to design private, SOC 2 compliant solutions tailored to your firm's unique needs.</p>
+      <div data-reveal>
+        <div class="cl-actions">
+          <a class="btn btn--primary" href="/contact">Contact <span class="arr" aria-hidden="true">→</span></a>
+          <a class="cl-link u-line" href="/demos">See more demos</a>
+        </div>
+      </div>
     </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/legal/workflow-automation" data-reveal>
-        <h3>Legal workflow automation</h3>
-        <p>Automate intake, smart forms, matter tracking, and task routing across your practice management stack.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/legal/client-relations-management" data-reveal>
-        <h3>Client relations management</h3>
-        <p>Bespoke CRM solutions that score leads, automate consultation follow-ups, and convert inquiries into signed matters.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/legal" data-reveal>
-        <h3>All legal solutions</h3>
-        <p>The full range of custom legal software Bespoke builds for firms and in-house legal departments.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
+    <div class="cl-exhibits">
+      <h2 class="cl-exhibits__t">Related legal services.</h2>
+        <a class="cl-exhibit" href="/legal/workflow-automation" data-reveal><span>01</span><h3>Legal workflow automation</h3><p>Automate intake, smart forms, matter tracking, and task routing across your practice management stack.</p></a>
+        <a class="cl-exhibit" href="/legal/client-relations-management" data-reveal><span>02</span><h3>Client relations management</h3><p>Bespoke CRM solutions that score leads, automate consultation follow-ups, and convert inquiries into signed matters.</p></a>
+        <a class="cl-exhibit" href="/legal" data-reveal><span>03</span><h3>All legal solutions</h3><p>The full range of custom legal software Bespoke builds for firms and in-house legal departments.</p></a>
     </div>
-    <p class="rel-foot" data-reveal>Working outside a legal context? The same engine powers our <a class="u-line" href="/general-services/document-automation">document drafting automation</a> for financial and corporate teams.</p>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / Legal / Documentation Automation</p>
-    <h2 class="h1" data-reveal>Interested in <em class="accent-ai">learning more?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers and SMEs with legal backgrounds to design private, SOC 2 compliant solutions tailored to your firm's unique needs.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
-    </div>
+    <p class="cl-foot" data-reveal>Working outside a legal context? The same engine powers our <a class="u-line" href="/general-services/document-automation">document drafting automation</a> for financial and corporate teams.</p>
   </div>
 </section>
 
@@ -427,5 +449,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

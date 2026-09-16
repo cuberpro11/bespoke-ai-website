@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="AI Risk Management Software">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-finance.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/risk-management.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / Finance / Risk Management</p>
     <h1 class="display">AI Risk Management <em>Software</em></h1>
@@ -232,95 +233,139 @@
 </section>
 
 <!-- DOCUMENT & DATA AUTOMATION -->
-<section class="section cap-section on-light" aria-label="Document and data automation">
+<section class="section section--paper on-light rk-section" data-sol aria-label="Document and data automation">
   <div class="container--wide container">
     <div class="section-head">
-      <p class="kicker" data-reveal="draw">Document &amp; data automation</p>
+      <p class="kicker" data-reveal="draw">Core capabilities &amp; data automation</p>
       <h2 class="h2" data-reveal>Risk management documentation automation <em>via AI.</em></h2>
       <p class="lede" data-reveal>Risk officers spend hundreds of hours manually reviewing, extracting, and cross-referencing data across complex loan applications, regulatory disclosures, audit reports, and counterparty filings. We engineer bespoke document automation engines that transform unstructured compliance documents into structured, real-time risk intelligence without compromising on data privacy.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 17V9m5 8V5m5 12v-6"/></svg></span>
-          <h3>Automated credit &amp; counterparty risk extraction</h3>
+
+    <div class="rk-sim" data-viz="risk" data-reveal="scale">
+      <div class="rk-sim__head">
+        <div>
+          <span class="rk-sim__eyebrow">Stress scenario</span>
+          <b class="rk-sim__title">Commercial credit book · $2.3B exposure</b>
         </div>
-        <ul class="cap-list">
+        <p class="rk-sim__hint">Drag a factor. Exposures, covenants and liquidity recompute from the extracted loan data.</p>
+        <span class="sol-illus">Illustrative</span>
+      </div>
+
+      <div class="rk-sim__body">
+        <div class="rk-controls">
+          <label class="rk-ctl">
+            <span class="rk-ctl__row"><span>Rate shock</span><output data-out="rate">+200 bps</output></span>
+            <input type="range" min="0" max="400" step="25" value="200" data-k="rate">
+          </label>
+          <label class="rk-ctl">
+            <span class="rk-ctl__row"><span>Credit spread widening</span><output data-out="spread">+150 bps</output></span>
+            <input type="range" min="0" max="500" step="25" value="150" data-k="spread">
+          </label>
+          <label class="rk-ctl">
+            <span class="rk-ctl__row"><span>Liquidity haircut</span><output data-out="haircut">10%</output></span>
+            <input type="range" min="0" max="30" step="1" value="10" data-k="haircut">
+          </label>
+          <div class="rk-presets" role="group" aria-label="Scenario presets">
+            <button type="button" data-preset="0,0,0">Reset to base case</button>
+            <button type="button" data-preset="350,125,8">Rate spike</button>
+            <button type="button" data-preset="150,450,24">2008-style</button>
+          </div>
+          <dl class="rk-totals">
+            <div><dt>Stressed expected loss</dt><dd data-out="el">$31.4M</dd></div>
+            <div><dt>Portfolio loss rate</dt><dd data-out="lr">1.37%</dd></div>
+          </dl>
+        </div>
+
+        <div class="rk-heat">
+          <div class="rk-heat__grid" data-heat>
+            <span class="rk-heat__corner">Sector / rating</span>
+            <span class="rk-heat__col">A &amp; above</span>
+            <span class="rk-heat__col">BBB</span>
+            <span class="rk-heat__col">BB</span>
+            <span class="rk-heat__col">B &amp; below</span>
+          </div>
+          <div class="rk-heat__scale" aria-hidden="true"><span>Loss rate</span><i></i><span>0.2%</span><span>20%+</span></div>
+        </div>
+
+        <ul class="rk-checks" aria-live="polite">
+          <li class="rk-check" data-check="lr"><span class="rk-check__name">Portfolio loss rate ≤ 3.0%</span><b class="rk-check__val">1.37%</b><span class="rk-check__state">Pass</span></li>
+          <li class="rk-check" data-check="conc"><span class="rk-check__name">Single-sector share of loss ≤ 30%</span><b class="rk-check__val">27%</b><span class="rk-check__state">Pass</span></li>
+          <li class="rk-check" data-check="dscr"><span class="rk-check__name">CRE book DSCR ≥ 1.25×</span><b class="rk-check__val">1.36×</b><span class="rk-check__state">Pass</span></li>
+          <li class="rk-check" data-check="lcr"><span class="rk-check__name">Liquidity coverage ≥ 100%</span><b class="rk-check__val">111%</b><span class="rk-check__state">Pass</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rk-register">
+      <div class="rk-register__head" aria-hidden="true">
+        <span>Ref</span><span>Capability</span><span>What gets automated</span><span>Control output</span>
+      </div>
+      <article class="rk-reg" data-reveal>
+        <span class="rk-reg__ref">RISK-01</span>
+        <h3>Automated credit &amp; counterparty risk extraction</h3>
+        <ul>
           <li>Automatically parse audited financial statements, credit memos, tax filings, and 10-K/10-Q disclosures.</li>
           <li>Extract key financial ratios, debt covenants, and liquidity metrics directly into your risk engines with zero manual data entry.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10Z"/><path d="m9 11.5 2 2 4-4.5"/></svg></span>
-          <h3>Regulatory compliance &amp; policy mapping</h3>
-        </div>
-        <ul class="cap-list">
+        <span class="rk-reg__out">Ratios &amp; covenants feed the scenario engine</span>
+      </article>
+      <article class="rk-reg" data-reveal>
+        <span class="rk-reg__ref">RISK-02</span>
+        <h3>Regulatory compliance &amp; policy mapping</h3>
+        <ul>
           <li>Continuously map regulatory policy updates (such as Basel III/IV, SEC mandates, or internal credit policies) directly against active client portfolios and loans.</li>
           <li>Leverage AI and risk management automation tools to auto-flag non-compliant terms, covenant breaches, or high-risk exposure concentrations.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
-          <h3>Audit trail &amp; regulatory filing generation</h3>
-        </div>
-        <ul class="cap-list">
+        <span class="rk-reg__out">Breach &amp; concentration flags</span>
+      </article>
+      <article class="rk-reg" data-reveal>
+        <span class="rk-reg__ref">RISK-03</span>
+        <h3>Audit trail &amp; regulatory filing generation</h3>
+        <ul>
           <li>Convert complex internal risk analysis and stress-test models into standardized, audit-ready compliance reports in seconds.</li>
           <li>Draft comprehensive credit risk memos and regulatory disclosures tailored strictly to your firm's governance standards.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-          <h3>Private RAG risk vault search</h3>
-        </div>
-        <ul class="cap-list">
+        <span class="rk-reg__out">Audit-ready memo &amp; filing drafts</span>
+      </article>
+      <article class="rk-reg" data-reveal>
+        <span class="rk-reg__ref">RISK-04</span>
+        <h3>Private RAG risk vault search</h3>
+        <ul>
           <li>Securely query your firm's entire repository of historical loan files, legal contracts, counterparty agreements, and policy guidelines using natural language.</li>
           <li>Provide risk analysts with immediate, verifiable citations from internal files while ensuring sensitive financial data is never exposed to public LLMs.</li>
         </ul>
-      </div>
+        <span class="rk-reg__out">Cited answers from loan files</span>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
+<!-- CLOSING -->
+<section class="section cl cl--risk section--paper on-light" aria-label="Next steps">
   <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom financial software</p>
-      <h2 class="h2" data-reveal>Related <em>finance services.</em></h2>
-    </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/finance/wealth-management" data-reveal>
-        <h3>Wealth management</h3>
-        <p>AI and wealth management pipelines for onboarding, KYC extraction, quarterly commentary, and alternative asset parsing.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/finance/compliance" data-reveal>
-        <h3>Compliance</h3>
-        <p>Custom compliance software for KYC, AML and sanctions screening, regulatory tracking, and board reporting.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/finance" data-reveal>
-        <h3>All finance solutions</h3>
-        <p>The full range of custom financial software Bespoke builds for banks, funds, RIAs, and CPA firms.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / Finance / Risk Management</p>
-    <h2 class="h1" data-reveal>Interested in discussing custom <em class="accent-ai">AI risk management software?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers with finance backgrounds to design private, secure AI pipelines tailored to your firm's proprietary risk models and regulatory workflows.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
-    </div>
+    <article class="cl-memo" data-reveal>
+      <header class="cl-memo__head">
+        <p class="cl-memo__type">Memorandum</p>
+        <dl>
+          <div><dt>To</dt><dd>Your risk committee</dd></div>
+          <div><dt>From</dt><dd>Bespoke</dd></div>
+          <div><dt>Re</dt><dd>Solutions / Finance / Risk Management</dd></div>
+          <div><dt>Classification</dt><dd>Private · closed AI loop</dd></div>
+        </dl>
+      </header>
+      <h2 class="h2">Interested in discussing custom <em class="accent-ai">AI risk management software?</em></h2>
+      <p class="cl-memo__body">Partner with specialized software engineers with finance backgrounds to design private, secure AI pipelines tailored to your firm's proprietary risk models and regulatory workflows.</p>
+      <p class="cl-memo__rec"><b>Recommendation.</b> Book a working session to map your credit files, covenants and stress models.</p>
+      <div class="cl-actions "><a class="btn btn--primary" href="/contact">Book a working session <span class="arr" aria-hidden="true">→</span></a><a class="cl-link u-line" href="/demos">See more demos</a></div>
+      <footer class="cl-memo__cc">
+        <h2 class="cl-memo__cc-t">cc: Related finance services.</h2>
+        <ul>
+          <li><a href="/finance/wealth-management"><h3>Wealth management</h3><span>AI and wealth management pipelines for onboarding, KYC extraction, quarterly commentary, and alternative asset parsing.</span></a></li>
+          <li><a href="/finance/compliance"><h3>Compliance</h3><span>Custom compliance software for KYC, AML and sanctions screening, regulatory tracking, and board reporting.</span></a></li>
+          <li><a href="/finance"><h3>All finance solutions</h3><span>The full range of custom financial software Bespoke builds for banks, funds, RIAs, and CPA firms.</span></a></li>
+        </ul>
+      </footer>
+    </article>
   </div>
 </section>
 
@@ -383,5 +428,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

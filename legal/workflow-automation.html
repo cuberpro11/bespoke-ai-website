@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Legal Workflow Automation">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-law.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/workflow-automation.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / Legal / Workflow Automation</p>
     <h1 class="display">Legal Tech <em>Workflow Solutions</em></h1>
@@ -259,54 +260,86 @@
 </section>
 
 <!-- CORE CAPABILITIES & DAILY WORKFLOWS -->
-<section class="section cap-section on-light" aria-label="Workflow capabilities">
+<section class="section section--white on-light lw-section" data-sol aria-label="Workflow capabilities">
   <div class="container--wide container">
     <div class="section-head">
       <p class="kicker" data-reveal="draw">Core capabilities &amp; daily workflows</p>
       <h2 class="h2" data-reveal>Streamline your firm's <em>daily operations.</em></h2>
       <p class="lede" data-reveal>Attorneys and legal staff waste hours every week manually copying intake notes, re-keying client data into practice management software, and chasing down signatures. We build custom software that connects your existing tools and automates the tedious steps in your everyday practice.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v6a2 2 0 0 0 2 2H14"/></svg></span>
+
+    <div class="lw-board" data-viz="workflow" data-reveal="scale">
+      <div class="lw-board__bar">
+        <span class="lw-board__title">Matters board</span>
+        <span class="lw-board__meta">Rules running: <b>14</b> · manual moves today: <b>0</b></span>
+        <span class="sol-illus">Illustrative</span>
+      </div>
+      <div class="lw-rule" data-rule aria-live="polite">
+        <span class="lw-rule__tag">Rule fired</span>
+        <span class="lw-rule__when"><i>When</i> <span data-when>engagement letter signed</span></span>
+        <span class="lw-rule__then"><i>Then</i> <span data-then>create matter in Clio · assign A. Chen · due in 3 days</span></span>
+      </div>
+      <div class="lw-cols" data-cols>
+        <div class="lw-col" data-col="intake"><p class="lw-col__head">Intake <b>0</b></p><div class="lw-col__list"></div></div>
+        <div class="lw-col" data-col="conflict"><p class="lw-col__head">Conflict check <b>0</b></p><div class="lw-col__list"></div></div>
+        <div class="lw-col" data-col="signed"><p class="lw-col__head">Engagement signed <b>0</b></p><div class="lw-col__list"></div></div>
+        <div class="lw-col" data-col="active"><p class="lw-col__head">Active <b>0</b></p><div class="lw-col__list"></div></div>
+        <div class="lw-col" data-col="billing"><p class="lw-col__head">Billing <b>0</b></p><div class="lw-col__list"></div></div>
+      </div>
+      <div class="lw-week" data-week>
+        <div class="lw-day"><span>Mon</span><ul></ul></div>
+        <div class="lw-day"><span>Tue</span><ul></ul></div>
+        <div class="lw-day"><span>Wed</span><ul></ul></div>
+        <div class="lw-day"><span>Thu</span><ul></ul></div>
+        <div class="lw-day"><span>Fri</span><ul></ul></div>
+      </div>
+    </div>
+
+    <div class="lw-recipes">
+      <article class="lw-recipe" data-reveal>
+        <p class="lw-recipe__when"><i>When</i> a prospective client submits your web form</p>
+        <div class="lw-recipe__then">
+          <i>Then</i>
           <h3>Intake &amp; smart form automation software</h3>
+          <ul>
+            <li>Upgrade basic web forms into dynamic form automation software that collects client details, screens for conflicts, and creates new matters automatically.</li>
+            <li>Instantly convert client responses into structured files without asking your staff to copy and paste information by hand.</li>
+          </ul>
         </div>
-        <ul class="cap-list">
-          <li>Upgrade basic web forms into dynamic form automation software that collects client details, screens for conflicts, and creates new matters automatically.</li>
-          <li>Instantly convert client responses into structured files without asking your staff to copy and paste information by hand.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/></svg></span>
+      </article>
+      <article class="lw-recipe" data-reveal>
+        <p class="lw-recipe__when"><i>When</i> a matter moves to its next phase</p>
+        <div class="lw-recipe__then">
+          <i>Then</i>
           <h3>Matter tracking &amp; task routing</h3>
+          <ul>
+            <li>Automatically assign tasks, set deadline reminders, and notify team members when a case moves to the next phase.</li>
+            <li>Keep paralegals, associates, and partners aligned on status updates without endless internal email chains.</li>
+          </ul>
         </div>
-        <ul class="cap-list">
-          <li>Automatically assign tasks, set deadline reminders, and notify team members when a case moves to the next phase.</li>
-          <li>Keep paralegals, associates, and partners aligned on status updates without endless internal email chains.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span>
+      </article>
+      <article class="lw-recipe" data-reveal>
+        <p class="lw-recipe__when"><i>When</i> a record changes in Clio, MyCase or Smokeball</p>
+        <div class="lw-recipe__then">
+          <i>Then</i>
           <h3>Seamless practice management integration</h3>
+          <ul>
+            <li>Connect your custom workflows directly to software like Clio, MyCase, or Smokeball.</li>
+            <li>Keep client records, documents, and billing notes synchronized across every system your firm relies on.</li>
+          </ul>
         </div>
-        <ul class="cap-list">
-          <li>Connect your custom workflows directly to software like Clio, MyCase, or Smokeball.</li>
-          <li>Keep client records, documents, and billing notes synchronized across every system your firm relies on.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m2 7 10 6 10-6"/></svg></span>
+      </article>
+      <article class="lw-recipe" data-reveal>
+        <p class="lw-recipe__when"><i>When</i> a client email or signed document arrives</p>
+        <div class="lw-recipe__then">
+          <i>Then</i>
           <h3>Instant document &amp; email routing</h3>
+          <ul>
+            <li>Automatically file incoming client emails, attachments, and signed agreements into the correct matter folder.</li>
+            <li>Trigger immediate follow-up messages or draft replies for review the moment a new document arrives.</li>
+          </ul>
         </div>
-        <ul class="cap-list">
-          <li>Automatically file incoming client emails, attachments, and signed agreements into the correct matter folder.</li>
-          <li>Trigger immediate follow-up messages or draft replies for review the moment a new document arrives.</li>
-        </ul>
-      </div>
+      </article>
     </div>
   </div>
 </section>
@@ -354,44 +387,28 @@
   </div>
 </section>
 
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
+<!-- CLOSING -->
+<section class="section cl cl--workflow section--paper2 on-light" aria-label="Next steps">
   <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom legal software</p>
-      <h2 class="h2" data-reveal>Related <em>legal services.</em></h2>
+    <div class="cl-grid">
+      <div class="cl-copy">
+        <p class="kicker" data-reveal="draw">Solutions / Legal / Workflow Automation</p>
+        <h2 class="h1" data-reveal>Ready to upgrade your <em class="accent-ai">legal tech workflows?</em></h2>
+        <p class="lede" data-reveal>Partner with specialized software engineers and SMEs with legal backgrounds to design private, SOC 2 compliant solutions tailored to your firm's unique needs.</p>
+      </div>
+      <div class="cl-todo" data-reveal>
+        <p class="cl-todo__head"><span>Your next steps</span><span>Assigned to you · due this week</span></p>
+        <h2 class="cl-todo__t">Related legal services.</h2>
+        <ol class="cl-todo__list">
+          <li class="cl-todo__item" style="--i:0"><span class="cl-todo__box" aria-hidden="true"></span><a href="/demos"><h3>Watch the intake console demo</h3><p>See agentic email parsing and form automation working end to end.</p></a></li>
+          <li class="cl-todo__item" style="--i:1"><span class="cl-todo__box" aria-hidden="true"></span><a href="/legal/documentation-automation"><h3>Documentation automation</h3><p>Legal contract automation, clause mapping, and private RAG search across your precedent vault.</p></a></li>
+          <li class="cl-todo__item" style="--i:2"><span class="cl-todo__box" aria-hidden="true"></span><a href="/legal/client-relations-management"><h3>Client relations management</h3><p>Bespoke CRM solutions that score leads, automate consultation follow-ups, and convert inquiries into signed matters.</p></a></li>
+          <li class="cl-todo__item" style="--i:3"><span class="cl-todo__box" aria-hidden="true"></span><a href="/legal"><h3>All legal solutions</h3><p>The full range of custom legal software Bespoke builds for firms and in-house legal departments.</p></a></li>
+          <li class="cl-todo__item cl-todo__item--cta" style="--i:4"><span class="cl-todo__box" aria-hidden="true"></span><div><p class="cl-todo__cta-t">Book a working session</p><a class="btn btn--primary" href="/contact">Contact <span class="arr" aria-hidden="true">→</span></a></div></li>
+        </ol>
+      </div>
     </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/legal/documentation-automation" data-reveal>
-        <h3>Documentation automation</h3>
-        <p>Legal contract automation, clause mapping, and private RAG search across your precedent vault.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/legal/client-relations-management" data-reveal>
-        <h3>Client relations management</h3>
-        <p>Bespoke CRM solutions that score leads, automate consultation follow-ups, and convert inquiries into signed matters.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/legal" data-reveal>
-        <h3>All legal solutions</h3>
-        <p>The full range of custom legal software Bespoke builds for firms and in-house legal departments.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-    </div>
-    <p class="rel-foot" data-reveal>Regulated financial workflows in the same firm? See <a class="u-line" href="/finance/compliance">custom compliance software</a>.</p>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / Legal / Workflow Automation</p>
-    <h2 class="h1" data-reveal>Ready to upgrade your <em class="accent-ai">legal tech workflows?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers and SMEs with legal backgrounds to design private, SOC 2 compliant solutions tailored to your firm's unique needs.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
-    </div>
+    <p class="cl-foot" data-reveal>Regulated financial workflows in the same firm? See <a class="u-line" href="/finance/compliance">custom compliance software</a>.</p>
   </div>
 </section>
 
@@ -454,5 +471,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

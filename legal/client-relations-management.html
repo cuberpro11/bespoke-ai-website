@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Legal Client Relations Management">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-law.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/client-relations-management.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / Legal / Client Relations Management</p>
     <h1 class="display">Bespoke <em>CRM Solutions</em></h1>
@@ -259,54 +260,90 @@
 </section>
 
 <!-- CORE CAPABILITIES & CLIENT MANAGEMENT -->
-<section class="section cap-section on-light" aria-label="Client management capabilities">
+<section class="section section--white on-light cr-section" data-sol aria-label="Client management capabilities">
   <div class="container--wide container">
     <div class="section-head">
       <p class="kicker" data-reveal="draw">Core capabilities &amp; client management</p>
       <h2 class="h2" data-reveal>Build stronger client relationships without <em>the administrative burden.</em></h2>
       <p class="lede" data-reveal>Off-the-shelf CRMs are often built for generic sales teams, not law firms handling sensitive consultations and strict conflict checks. We build bespoke CRM solutions designed around how legal practices actually attract, onboard, and communicate with clients.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM21 21v-2a4 4 0 0 0-3-3.87M15 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-          <h3>Tailored legal client relationship management software</h3>
+
+    <div class="cr-bento" data-viz="crm">
+      <figure class="cr-tile cr-tile--flow" data-reveal>
+        <figcaption class="cr-flow__head">
+          <span><b>Inquiry to retained matter</b> · last 90 days</span>
+          <span class="cr-flow__key">Lead score ≥ 60 qualifies</span>
+          <span class="sol-illus">Illustrative</span>
+        </figcaption>
+        <div class="cr-flow__scroll">
+          <svg class="cr-flow" viewBox="0 0 720 370" role="img" aria-label="240 inquiries, 142 qualified, 96 consultations booked, 71 fee agreements sent, 58 matters retained.">
+            <g data-bands></g>
+            <g data-particles></g>
+            <g data-labels></g>
+          </svg>
         </div>
-        <ul class="cap-list">
+      </figure>
+
+      <figure class="cr-tile cr-tile--phone" data-reveal>
+        <div class="cr-phone" data-phone>
+          <div class="cr-phone__notch" aria-hidden="true"></div>
+          <div class="cr-phone__screen">
+            <p class="cr-phone__firm">Reyes Clarke LLP · Client portal</p>
+            <p class="cr-phone__case">Martinez v. Apex Builders</p>
+            <ol class="cr-miles">
+              <li class="is-done"><span>Consultation</span><small>Mar 4</small></li>
+              <li class="is-done"><span>Engagement signed</span><small>Mar 6</small></li>
+              <li class="is-now" data-mile><span>Discovery</span><small><i style="--p:0.72"></i>72%</small></li>
+              <li><span>Mediation</span><small>Oct 21</small></li>
+              <li><span>Trial preparation</span><small>—</small></li>
+            </ol>
+            <div class="cr-req" data-req>
+              <p class="cr-req__title">Documents we need</p>
+              <p class="cr-req__row" data-doc="1"><span>Medical records</span><b>✓</b></p>
+              <p class="cr-req__row" data-doc="2"><span>Wage statements</span><b>✓</b></p>
+              <p class="cr-req__row" data-doc="3"><span>Repair estimate</span><b>✓</b></p>
+            </div>
+            <div class="cr-toast" data-toast>
+              <b>Next date</b>
+              <span>Mediation · Oct 21 · 9:30 AM · Dept. 14</span>
+            </div>
+          </div>
+        </div>
+        <figcaption class="cr-phone__cap">What the client sees, updated from the matter file.</figcaption>
+      </figure>
+
+      <article class="cr-tile cr-tile--cap" data-reveal>
+        <span class="cr-cap__tag">Pipeline</span>
+        <h3>Tailored legal client relationship management software</h3>
+        <ul>
           <li>Track prospective clients from their first website inquiry all the way through retention without losing details along the way.</li>
           <li>Automate initial conflict checks, consultation bookings, and fee agreement dispatches so potential clients get immediate attention.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8Z"/></svg></span>
-          <h3>Embedded legal AI assistant for faster follow-ups</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="cr-tile cr-tile--cap cr-tile--ink" data-reveal>
+        <span class="cr-cap__tag">Assistant</span>
+        <h3>Embedded legal AI assistant for faster follow-ups</h3>
+        <ul>
           <li>Deploy a private legal AI assistant to summarize inbound intake notes, highlight key case facts, and draft personalized response emails for your review.</li>
           <li>Help your intake team answer prospect questions quickly while maintaining a professional, human touch.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h8"/></svg></span>
-          <h3>Automated client update portals</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="cr-tile cr-tile--cap cr-tile--wide" data-reveal>
+        <span class="cr-cap__tag">Portal</span>
+        <h3>Automated client update portals</h3>
+        <ul>
           <li>Give clients a clear, secure view of their case milestones, upcoming court dates, and outstanding document requests.</li>
           <li>Reduce repetitive status call volume while keeping clients informed and confident in your firm's progress.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1 1 12 3v9Z"/><path d="M21 3v6h-6"/></svg></span>
-          <h3>Practice management &amp; billing synchronization</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="cr-tile cr-tile--cap cr-tile--wide cr-tile--tint" data-reveal>
+        <span class="cr-cap__tag">Sync</span>
+        <h3>Practice management &amp; billing synchronization</h3>
+        <ul>
           <li>Connect your intake system directly to tools like Clio, MyCase, or QuickBooks.</li>
           <li>Automatically convert retained leads into active legal matters and generate initial retainer invoices in a single step.</li>
         </ul>
-      </div>
+      </article>
     </div>
   </div>
 </section>
@@ -354,44 +391,29 @@
   </div>
 </section>
 
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
+<!-- CLOSING -->
+<section class="section cl cl--crm section--white on-light" aria-label="Next steps">
   <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom legal software</p>
-      <h2 class="h2" data-reveal>Related <em>legal services.</em></h2>
+    <div class="cl-rolodex">
+      <div class="cl-vcard" data-reveal="scale">
+        <span class="cl-vcard__rings" aria-hidden="true"><i></i><i></i></span>
+        <p class="cl-vcard__crumb">Solutions / Legal / Client Relations Management</p>
+        <h2 class="h2">Ready to build a bespoke CRM <em class="accent-ai">for your firm?</em></h2>
+        <p class="cl-vcard__body">Partner with specialized software engineers and SMEs with legal backgrounds to design private, SOC 2 compliant solutions tailored to your firm's unique needs.</p>
+        <dl class="cl-vcard__kv">
+          <div><dt>Contact</dt><dd><a class="u-line" href="mailto:contact@getbespoke.ai">contact@getbespoke.ai</a></dd></div>
+          <div><dt>Status</dt><dd>Prospect · ready for consult</dd></div>
+        </dl>
+        <div class="cl-actions "><a class="btn btn--primary" href="/contact">Book consult · Contact <span class="arr" aria-hidden="true">→</span></a><a class="cl-link u-line" href="/demos">See more demos</a></div>
+      </div>
+      <div class="cl-rolos">
+        <h2 class="cl-rolos__t">Related legal services.</h2>
+        <a class="cl-rolo" href="/legal/documentation-automation" style="--r:-3deg" data-reveal><span class="cl-rolo__tab">D</span><h3>Documentation automation</h3><p>Legal contract automation, clause mapping, and private RAG search across your precedent vault.</p><span class="cl-rolo__link">Open card <span class="arr" aria-hidden="true">→</span></span></a>
+        <a class="cl-rolo" href="/legal/workflow-automation" style="--r:2deg" data-reveal><span class="cl-rolo__tab">L</span><h3>Legal workflow automation</h3><p>Automate intake, smart forms, matter tracking, and task routing across your practice management stack.</p><span class="cl-rolo__link">Open card <span class="arr" aria-hidden="true">→</span></span></a>
+        <a class="cl-rolo" href="/legal" style="--r:-1.5deg" data-reveal><span class="cl-rolo__tab">A</span><h3>All legal solutions</h3><p>The full range of custom legal software Bespoke builds for firms and in-house legal departments.</p><span class="cl-rolo__link">Open card <span class="arr" aria-hidden="true">→</span></span></a>
+      </div>
     </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/legal/documentation-automation" data-reveal>
-        <h3>Documentation automation</h3>
-        <p>Legal contract automation, clause mapping, and private RAG search across your precedent vault.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/legal/workflow-automation" data-reveal>
-        <h3>Legal workflow automation</h3>
-        <p>Automate intake, smart forms, matter tracking, and task routing across your practice management stack.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/legal" data-reveal>
-        <h3>All legal solutions</h3>
-        <p>The full range of custom legal software Bespoke builds for firms and in-house legal departments.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-    </div>
-    <p class="rel-foot" data-reveal>Most of the intake volume arriving by email? Pair this with <a class="u-line" href="/general-services/automated-email-response">automated email response software</a>.</p>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / Legal / Client Relations Management</p>
-    <h2 class="h1" data-reveal>Ready to build a bespoke CRM <em class="accent-ai">for your firm?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers and SMEs with legal backgrounds to design private, SOC 2 compliant solutions tailored to your firm's unique needs.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
-    </div>
+    <p class="cl-foot" data-reveal>Most of the intake volume arriving by email? Pair this with <a class="u-line" href="/general-services/automated-email-response">automated email response software</a>.</p>
   </div>
 </section>
 
@@ -454,5 +476,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

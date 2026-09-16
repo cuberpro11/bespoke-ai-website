@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Automated Email Response Software">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-proserv.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/automated-email-response.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / General Services / Automated Email Response</p>
     <h1 class="display">Custom Automated Email <em>Response Software Solutions</em></h1>
@@ -232,96 +233,123 @@
 </section>
 
 <!-- CORE CAPABILITIES & INBOX AUTOMATION -->
-<section class="section cap-section on-light" aria-label="Core capabilities">
+<section class="section section--paper on-light em-section" data-sol aria-label="Core capabilities">
   <div class="container--wide container">
     <div class="section-head">
       <p class="kicker" data-reveal="draw">Core capabilities &amp; inbox automation</p>
       <h2 class="h2" data-reveal>Intelligent inbox ingestion and <em>dynamic response generation.</em></h2>
       <p class="lede" data-reveal>Off-the-shelf autoresponders send generic, canned replies that fail to capture nuances or advance high-value leads. We engineer custom automated email response software that securely parses incoming messages, evaluates potential account metrics, and drafts personalized, human-quality responses for instant staff approval.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v5H4zM4 15h16v5H4z"/><path d="M9 9v6M15 9v6"/></svg></span>
-          <h3>Smart intake parsing &amp; value opportunity calculations</h3>
+
+    <div class="em-desk" data-viz="email" data-reveal="scale">
+      <div class="em-desk__bar">
+        <span class="em-desk__box">intake@firm.com</span>
+        <span class="em-desk__count"><b data-count>3</b> new today</span>
+        <span class="sol-illus">Illustrative</span>
+      </div>
+
+      <div class="em-desk__grid">
+        <article class="em-mail" data-mail aria-live="polite">
+          <header class="em-mail__head">
+            <span class="em-mail__avatar" data-avatar>DW</span>
+            <div class="em-mail__who"><b data-from>Dana Whitfield</b><span data-subject>Rear-end collision, need a lawyer</span></div>
+            <div class="em-gauge" aria-label="Value score">
+              <svg viewBox="0 0 64 36" aria-hidden="true"><path class="em-gauge__track" d="M6,32 A26,26 0 0 1 58,32"/><path class="em-gauge__fill" d="M6,32 A26,26 0 0 1 58,32" pathLength="100" style="stroke-dashoffset:14"/></svg>
+              <b data-score>86</b><span>value</span>
+            </div>
+            <button class="em-hot" type="button" data-hot="1" aria-label="Capability 1: intake parsing and value scoring">1</button>
+          </header>
+          <p class="em-mail__body" data-body>I was rear-ended on I-95 on <mark data-tag="date">March 3</mark>. The other driver's insurer says the <mark data-tag="amount">policy limit is $250,000</mark>. I've missed three weeks of work and have <mark data-tag="amount">medical bills over $40,000</mark>. Can someone call me about a <mark data-tag="matter">personal injury claim</mark>?</p>
+        </article>
+
+        <div class="em-lanes">
+          <div class="em-lane" data-lane="senior"><span class="em-lane__name">Senior partner <small>score ≥ 80</small></span><b class="em-lane__n">1</b><ul class="em-lane__chips"><li>D. Whitfield · PI</li></ul></div>
+          <div class="em-lane" data-lane="intake"><span class="em-lane__name">Intake team <small>40–79</small></span><b class="em-lane__n">1</b><ul class="em-lane__chips"><li>Nair Hospitality · lease</li></ul></div>
+          <div class="em-lane" data-lane="standard"><span class="em-lane__name">Standard reply <small>&lt; 40</small></span><b class="em-lane__n">1</b><ul class="em-lane__chips"><li>T. Reyes · invoice</li></ul></div>
         </div>
-        <ul class="cap-list">
+
+        <div class="em-draft" data-draft>
+          <div class="em-draft__head">
+            <span>Draft reply <small data-draft-to>to Dana Whitfield</small></span>
+            <button class="em-hot" type="button" data-hot="2" aria-label="Capability 2: embedded AI writing assistant">2</button>
+          </div>
+          <div class="em-draft__text" data-draft-text>
+            <p>Hi Dana, I'm sorry to hear about the accident. Attorney Sarah Klein handles personal injury matters like this and has openings Thursday at 10:00 or 2:30 for a free consultation.</p>
+            <p>Please bring the police report and any medical bills. We work on contingency, so there is no fee unless we recover for you.</p>
+          </div>
+          <div class="em-draft__src">
+            <button class="em-hot" type="button" data-hot="4" aria-label="Capability 4: private retrieval and security">4</button>
+            <span>Grounded in</span><i>Fee schedule · PI contingency v4</i><i>Calendar · S. Klein</i><i>CRM · no prior matter</i>
+          </div>
+          <div class="em-draft__actions">
+            <button class="em-approve" type="button" data-approve>Approve &amp; send</button>
+            <button class="em-hot" type="button" data-hot="3" aria-label="Capability 3: one-click approval">3</button>
+            <span class="em-sent" data-sent aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="em-caps" data-caps>
+      <article class="em-cap" data-cap="1" data-reveal>
+        <span class="em-cap__n">1</span>
+        <h3>Smart intake parsing &amp; value opportunity calculations</h3>
+        <ul>
           <li>Automatically extract key entity details, case parameters, and monetary thresholds from incoming client emails.</li>
           <li>Instantly analyze prospect history, score potential payout or account value, and route high-priority messages to senior team members.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8Z"/></svg></span>
-          <h3>Embedded AI writing assistant software engine</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="em-cap" data-cap="2" data-reveal>
+        <span class="em-cap__n">2</span>
+        <h3>Embedded AI writing assistant software engine</h3>
+        <ul>
           <li>Deploy custom AI writing assistant software directly into your internal inbox environment (Outlook, Gmail, or custom webmail).</li>
           <li>Automatically draft context-aware replies, citing internal pricing schedules, availability, and intake next steps, tailored strictly to your brand's voice and policy guidelines.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v6a2 2 0 0 0 2 2H14"/></svg></span>
-          <h3>Human-in-the-loop one-click approval</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="em-cap" data-cap="3" data-reveal>
+        <span class="em-cap__n">3</span>
+        <h3>Human-in-the-loop one-click approval</h3>
+        <ul>
           <li>Prevent unvetted outbound communications with intuitive approval queues built into your core dashboard.</li>
           <li>Allow account managers and legal teams to review, edit, or send AI-suggested responses with a single click.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-          <h3>Private RAG ingestion &amp; enterprise security</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="em-cap" data-cap="4" data-reveal>
+        <span class="em-cap__n">4</span>
+        <h3>Private RAG ingestion &amp; enterprise security</h3>
+        <ul>
           <li>Connect your email response automation directly to internal knowledge bases, client files, and CRM records using private vector search engines.</li>
           <li>Ensure sensitive client emails, proprietary intake criteria, and financial figures remain strictly contained within your isolated cloud setup.</li>
         </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="section cl cl--email section--paper2 on-light" aria-label="Next steps">
+  <div class="container--wide container">
+    <div class="cl-post">
+      <div class="cl-envelope" data-reveal>
+        <div class="cl-envelope__back" aria-hidden="true"></div>
+        <article class="cl-letter">
+          <p class="cl-letter__to">To: intake@yourfirm.com · Re: Solutions / General Services / Automated Email Response</p>
+          <h2 class="h2">Ready to build <em class="accent-ai">custom automated email response software?</em></h2>
+          <p class="cl-letter__body">Partner with specialized software engineers to design private, secure inbox automation engines tailored to your firm's unique intake and communication logic.</p>
+          <p class="cl-letter__sig">— The Bespoke team</p>
+          <div class="cl-actions "><a class="btn btn--primary" href="/contact">Reply · Contact <span class="arr" aria-hidden="true">→</span></a><a class="cl-link u-line" href="/demos">See more demos</a></div>
+        </article>
+        <div class="cl-envelope__front" aria-hidden="true"></div>
+      </div>
+      <div class="cl-stamps">
+        <h2 class="cl-stamps__t">Related services.</h2>
+        <a class="cl-stamp" href="/general-services/document-automation" data-reveal><span class="cl-stamp__val">1st class</span><h3>Document automation</h3><p>Document drafting automation: dynamic template and clause libraries, unstructured data ingestion, and multi-format export.</p></a>
+        <a class="cl-stamp" href="/general-services/api-integrations" data-reveal><span class="cl-stamp__val">2nd class</span><h3>API integrations</h3><p>Custom API development and middleware that connect Clio, Salesforce, QuickBooks, and internal databases into one flow.</p></a>
+        <a class="cl-stamp" href="/general-services" data-reveal><span class="cl-stamp__val">3rd class</span><h3>All general services</h3><p>The full range of custom automation software Bespoke builds across documents, APIs, knowledge, and property operations.</p></a>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
-  <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom automation software</p>
-      <h2 class="h2" data-reveal>Related <em>services.</em></h2>
-    </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/general-services/document-automation" data-reveal>
-        <h3>Document automation</h3>
-        <p>Document drafting automation: dynamic template and clause libraries, unstructured data ingestion, and multi-format export.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/general-services/api-integrations" data-reveal>
-        <h3>API integrations</h3>
-        <p>Custom API development and middleware that connect Clio, Salesforce, QuickBooks, and internal databases into one flow.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/general-services" data-reveal>
-        <h3>All general services</h3>
-        <p>The full range of custom automation software Bespoke builds across documents, APIs, knowledge, and property operations.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-    </div>
-    <p class="rel-foot" data-reveal>If those inbound emails are client intake for a law firm, see <a class="u-line" href="/legal/client-relations-management">legal client relations management</a>.</p>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / General Services / Automated Email Response</p>
-    <h2 class="h1" data-reveal>Ready to build <em class="accent-ai">custom automated email response software?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers to design private, secure inbox automation engines tailored to your firm's unique intake and communication logic.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
-    </div>
+    <p class="cl-foot" data-reveal>If those inbound emails are client intake for a law firm, see <a class="u-line" href="/legal/client-relations-management">legal client relations management</a>.</p>
   </div>
 </section>
 
@@ -384,5 +412,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

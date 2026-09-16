@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Custom Compliance Software">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-finance.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/compliance.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / Finance / Compliance</p>
     <h1 class="display">Custom Compliance <em>Software Solutions</em></h1>
@@ -232,96 +233,133 @@
 </section>
 
 <!-- DOCUMENT & DATA AUTOMATION -->
-<section class="section cap-section on-light" aria-label="Document and data automation">
+<section class="section section--paper on-light cp-section" data-sol aria-label="Document and data automation">
   <div class="container--wide container">
     <div class="section-head">
-      <p class="kicker" data-reveal="draw">Document &amp; data automation</p>
+      <p class="kicker" data-reveal="draw">Core capabilities &amp; data automation</p>
       <h2 class="h2" data-reveal>Custom compliance software for <em>document &amp; data workflows.</em></h2>
       <p class="lede" data-reveal>Compliance teams spend hundreds of hours manually reviewing, auditing, and cross-referencing data across complex regulatory updates, client disclosures, vendor contracts, and internal policies. We engineer custom document automation engines that transform unstructured regulatory files into structured, audit-ready data without compromising on data privacy.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM21 21v-2a4 4 0 0 0-3-3.87M15 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+
+    <div class="cp-screen" data-viz="compliance" data-reveal="scale">
+      <div class="cp-screen__main">
+        <div class="cp-file">
+          <div class="cp-file__tab"><span>Entity file · ONB-7741</span><span class="sol-illus">Illustrative</span></div>
+          <p class="cp-file__name">Halden Maritime Holdings Ltd.</p>
+          <dl class="cp-file__kv">
+            <div><dt>Jurisdiction</dt><dd>Cyprus</dd></div>
+            <div><dt>Registry no.</dt><dd>HE 418221</dd></div>
+            <div><dt>Incorporated</dt><dd>14 Feb 2017</dd></div>
+            <div><dt>Activity</dt><dd>Ship chartering</dd></div>
+          </dl>
+          <p class="cp-file__sub">Beneficial owners</p>
+          <ul class="cp-ubo">
+            <li><span>A. Konstantinou</span><i style="--w:0.42"></i><b>42%</b></li>
+            <li><span>M. Varga</span><i style="--w:0.33"></i><b>33%</b></li>
+            <li><span>Lindqvist Family Trust</span><i style="--w:0.25"></i><b>25%</b></li>
+          </ul>
+          <span class="cp-scan" aria-hidden="true"></span>
+        </div>
+
+        <ol class="cp-checks">
+          <li class="cp-check" data-state="ok"><span class="cp-check__ico" aria-hidden="true"></span><span class="cp-check__name">Corporate registry match</span><span class="cp-check__detail">Registry extract parsed · 2 directors match filing</span><span class="cp-check__chip">Verified</span></li>
+          <li class="cp-check" data-state="ok"><span class="cp-check__ico" aria-hidden="true"></span><span class="cp-check__name">Identity documents</span><span class="cp-check__detail">3 of 3 passports · MRZ and expiry checked</span><span class="cp-check__chip">Verified</span></li>
+          <li class="cp-check" data-state="ok"><span class="cp-check__ico" aria-hidden="true"></span><span class="cp-check__name">Ownership ≥ 25% resolved</span><span class="cp-check__detail">Trust deed parsed · settlor and beneficiaries named</span><span class="cp-check__chip">Resolved</span></li>
+          <li class="cp-check" data-state="warn"><span class="cp-check__ico" aria-hidden="true"></span><span class="cp-check__name">Politically exposed persons</span><span class="cp-check__detail">M. Varga · 0.82 name match · former deputy minister</span><span class="cp-check__chip">Escalated</span></li>
+          <li class="cp-check" data-state="ok"><span class="cp-check__ico" aria-hidden="true"></span><span class="cp-check__name">Sanctions lists</span><span class="cp-check__detail">OFAC SDN · EU · UN · UK HMT · no match</span><span class="cp-check__chip">Clear</span></li>
+          <li class="cp-check" data-state="info"><span class="cp-check__ico" aria-hidden="true"></span><span class="cp-check__name">Adverse media</span><span class="cp-check__detail">2 articles · low relevance · attached to file</span><span class="cp-check__chip">Noted</span></li>
+        </ol>
+      </div>
+
+      <div class="cp-verdict">
+        <span>Risk rating <b>Medium</b></span>
+        <span>Enhanced due diligence opened</span>
+        <span>Assigned to analyst R. Osei</span>
+      </div>
+
+      <div class="cp-chain">
+        <p class="cp-chain__label">Audit trail <span>append-only · each entry sealed with the hash of the one before</span></p>
+        <ol class="cp-chain__blocks" data-chain>
+          <li class="cp-block"><b>#0421</b><span>sanctions.clear</span><code>h 3e0c…91af</code><code>prev a41d…7c02</code><time>14:02:09</time></li>
+          <li class="cp-block cp-block--warn"><b>#0422</b><span>pep.escalated</span><code>h 7b19…e44d</code><code>prev 3e0c…91af</code><time>14:02:10</time></li>
+          <li class="cp-block"><b>#0423</b><span>media.noted</span><code>h c2f8…0b6e</code><code>prev 7b19…e44d</code><time>14:02:11</time></li>
+          <li class="cp-block cp-block--seal"><b>#0424</b><span>rating.medium · edd.open</span><code>h 58ad…d3c1</code><code>prev c2f8…0b6e</code><time>14:02:12</time></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="cp-controls">
+      <p class="cp-controls__title"><span>Control library</span><span>4 of 4 automated</span></p>
+      <div class="cp-controls__grid">
+        <article class="cp-ctrl" data-reveal>
+          <div class="cp-ctrl__top"><span class="cp-ctrl__box" aria-hidden="true"></span><span class="cp-ctrl__id">CTRL-KYC-01</span></div>
           <h3>Automated KYC, AML &amp; sanctions screening</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Automatically parse client onboarding documentation, corporate entity structures, and beneficial ownership filings.</li>
-          <li>Extract key identity details, verify tax structures, and flag political exposure or sanctions risks directly within your core operating system with zero manual data entry.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10Z"/><path d="m9 11.5 2 2 4-4.5"/></svg></span>
+          <ul>
+            <li>Automatically parse client onboarding documentation, corporate entity structures, and beneficial ownership filings.</li>
+            <li>Extract key identity details, verify tax structures, and flag political exposure or sanctions risks directly within your core operating system with zero manual data entry.</li>
+          </ul>
+          <p class="cp-ctrl__ev"><span>Evidence</span><i>Registry extract</i><i>Ownership chart</i><i>Screening log</i></p>
+        </article>
+        <article class="cp-ctrl" data-reveal>
+          <div class="cp-ctrl__top"><span class="cp-ctrl__box" aria-hidden="true"></span><span class="cp-ctrl__id">CTRL-REG-02</span></div>
           <h3>Regulatory tracking &amp; policy mapping</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Continuously map evolving federal, state, and international regulatory updates directly against active contracts and operational procedures.</li>
-          <li>Leverage custom compliance tools to auto-flag policy gaps, non-compliant contract terms, or outdated operational disclosures.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
+          <ul>
+            <li>Continuously map evolving federal, state, and international regulatory updates directly against active contracts and operational procedures.</li>
+            <li>Leverage custom compliance tools to auto-flag policy gaps, non-compliant contract terms, or outdated operational disclosures.</li>
+          </ul>
+          <p class="cp-ctrl__ev"><span>Evidence</span><i>Rule change log</i><i>Policy gap report</i></p>
+        </article>
+        <article class="cp-ctrl" data-reveal>
+          <div class="cp-ctrl__top"><span class="cp-ctrl__box" aria-hidden="true"></span><span class="cp-ctrl__id">CTRL-AUD-03</span></div>
           <h3>Audit trail &amp; regulatory reporting generation</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Convert complex internal compliance logs and risk assessments into standardized, audit-ready reports in seconds.</li>
-          <li>Draft comprehensive regulatory disclosures and board compliance packages tailored strictly to your organization's governance requirements.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+          <ul>
+            <li>Convert complex internal compliance logs and risk assessments into standardized, audit-ready reports in seconds.</li>
+            <li>Draft comprehensive regulatory disclosures and board compliance packages tailored strictly to your organization's governance requirements.</li>
+          </ul>
+          <p class="cp-ctrl__ev"><span>Evidence</span><i>Sealed audit trail</i><i>Board pack draft</i></p>
+        </article>
+        <article class="cp-ctrl" data-reveal>
+          <div class="cp-ctrl__top"><span class="cp-ctrl__box" aria-hidden="true"></span><span class="cp-ctrl__id">CTRL-KNW-04</span></div>
           <h3>Private RAG compliance vault search</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Securely query your firm's entire repository of historical audit filings, regulatory guidance, and internal policy manuals using natural language.</li>
-          <li>Provide compliance analysts with immediate, verifiable citations from internal files while ensuring sensitive corporate data is never exposed to public LLMs.</li>
-        </ul>
+          <ul>
+            <li>Securely query your firm's entire repository of historical audit filings, regulatory guidance, and internal policy manuals using natural language.</li>
+            <li>Provide compliance analysts with immediate, verifiable citations from internal files while ensuring sensitive corporate data is never exposed to public LLMs.</li>
+          </ul>
+          <p class="cp-ctrl__ev"><span>Evidence</span><i>Cited answers</i><i>Query log</i></p>
+        </article>
       </div>
     </div>
   </div>
 </section>
 
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
+<!-- CLOSING -->
+<section class="section cl cl--compliance section--white on-light" aria-label="Next steps">
   <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom financial software</p>
-      <h2 class="h2" data-reveal>Related <em>finance services.</em></h2>
+    <div class="cl-grid cl-grid--seal">
+      <div class="cl-seal" data-reveal aria-hidden="true">
+        <svg viewBox="0 0 240 240">
+          <defs><path id="clSealPath" d="M120,120 m-92,0 a92,92 0 1,1 184,0 a92,92 0 1,1 -184,0"/></defs>
+          <circle cx="120" cy="120" r="112" class="cl-seal__ring"/>
+          <circle cx="120" cy="120" r="72" class="cl-seal__ring cl-seal__ring--in"/>
+          <text class="cl-seal__arc"><textPath href="#clSealPath">SOC 2 · CLOSED AI-LOOP · AUDIT READY · YOUR DATA ·</textPath></text>
+          <text x="120" y="112" class="cl-seal__big">Ready</text>
+          <text x="120" y="138" class="cl-seal__small">for review</text>
+        </svg>
+      </div>
+      <div class="cl-copy">
+        <p class="kicker" data-reveal="draw">Solutions / Finance / Compliance</p>
+        <h2 class="h1" data-reveal>Ready to build <em class="accent-ai">custom compliance software?</em></h2>
+        <p class="lede" data-reveal>Partner with specialized software engineers with deep industry experience to design private, secure compliance systems tailored to your firm's proprietary regulatory requirements.</p>
+        <div data-reveal><div class="cl-actions "><a class="btn btn--primary" href="/contact">Contact <span class="arr" aria-hidden="true">→</span></a><a class="cl-link u-line" href="/demos">See more demos</a></div></div>
+      </div>
     </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/finance/wealth-management" data-reveal>
-        <h3>Wealth management</h3>
-        <p>AI and wealth management pipelines for onboarding, KYC extraction, quarterly commentary, and alternative asset parsing.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/finance/risk-management" data-reveal>
-        <h3>Risk management</h3>
-        <p>AI risk management software for credit and counterparty extraction, policy mapping, and audit-ready filings.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/finance" data-reveal>
-        <h3>All finance solutions</h3>
-        <p>The full range of custom financial software Bespoke builds for banks, funds, RIAs, and CPA firms.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
+    <div class="cl-xrefs">
+      <h2 class="cl-xrefs__t">Cross-references · Related finance services.</h2>
+        <a class="cl-xref" href="/finance/wealth-management" data-reveal><span class="cl-xref__n">§1</span><h3>Wealth management</h3><p>AI and wealth management pipelines for onboarding, KYC extraction, quarterly commentary, and alternative asset parsing.</p></a>
+        <a class="cl-xref" href="/finance/risk-management" data-reveal><span class="cl-xref__n">§2</span><h3>Risk management</h3><p>AI risk management software for credit and counterparty extraction, policy mapping, and audit-ready filings.</p></a>
+        <a class="cl-xref" href="/finance" data-reveal><span class="cl-xref__n">§3</span><h3>All finance solutions</h3><p>The full range of custom financial software Bespoke builds for banks, funds, RIAs, and CPA firms.</p></a>
     </div>
-    <p class="rel-foot" data-reveal>Compliance obligations that live in contracts and matters belong alongside <a class="u-line" href="/legal/workflow-automation">legal workflow automation</a>.</p>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / Finance / Compliance</p>
-    <h2 class="h1" data-reveal>Ready to build <em class="accent-ai">custom compliance software?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers with deep industry experience to design private, secure compliance systems tailored to your firm's proprietary regulatory requirements.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
-    </div>
+    <p class="cl-foot" data-reveal>Compliance obligations that live in contracts and matters belong alongside <a class="u-line" href="/legal/workflow-automation">legal workflow automation</a>.</p>
   </div>
 </section>
 
@@ -384,5 +422,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

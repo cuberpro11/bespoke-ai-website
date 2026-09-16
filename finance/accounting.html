@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Automated Workpaper Software">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-finance.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/accounting.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / Finance / Accounting</p>
     <h1 class="display">Automated Workpaper <em>Software Solutions</em></h1>
@@ -232,94 +233,149 @@
 </section>
 
 <!-- DOCUMENT & DATA AUTOMATION -->
-<section class="section cap-section on-light" aria-label="Document and data automation">
+<section class="section section--paper on-light ac-section" data-sol aria-label="Document and data automation">
   <div class="container--wide container">
     <div class="section-head">
-      <p class="kicker" data-reveal="draw">Document &amp; data automation</p>
+      <p class="kicker" data-reveal="draw">Core capabilities &amp; data automation</p>
       <h2 class="h2" data-reveal>Automated workpaper software for <em>accounting workflows.</em></h2>
       <p class="lede" data-reveal>Auditors and accounting professionals spend hundreds of hours manually reviewing, cross-referencing, and tying out figures across general ledgers, bank statements, tax filings, and client-provided schedules. We engineer bespoke document automation engines that transform unstructured client records into structured, audit-ready workpapers without compromising on data privacy.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1M9 13h1m4 0h1M9 17h1m4 0h1"/></svg></span>
+
+    <div class="ac-wp" data-viz="accounting" data-reveal>
+      <header class="ac-wp__head">
+        <div>
+          <span class="ac-wp__client">Marlow Freight Co. · FYE 30 Jun 2026</span>
+          <p class="ac-wp__title">Cash, operating account 1010 · Bank reconciliation</p>
+        </div>
+        <div class="ac-wp__ref"><span class="sol-illus">Illustrative</span><span>W/P <b>C-2</b></span></div>
+      </header>
+
+      <div class="ac-books">
+        <table class="ac-t" data-side="gl">
+          <caption>General ledger detail <a class="ac-sup" href="#ac-note-1" aria-label="Note 1">1</a></caption>
+          <thead><tr><th>Date</th><th>Ref</th><th class="num">Amount</th><th class="tk" aria-label="Tickmark"></th></tr></thead>
+          <tbody>
+            <tr data-m="1"><td>06/03</td><td>JE-2291 <small>Pell Logistics</small></td><td class="num">48,200.00</td><td class="tk"><i>✓</i></td></tr>
+            <tr data-m="2"><td>06/09</td><td>CHK-10442 <small>Northline Energy</small></td><td class="num">(18,415.20)</td><td class="tk"><i>✓</i></td></tr>
+            <tr data-m="3"><td>06/14</td><td>JE-2318 <small>Arden Retail</small></td><td class="num">72,950.00</td><td class="tk"><i>✓</i></td></tr>
+            <tr data-m="4"><td>06/21</td><td>ACH-7781 <small>Payroll, period 2</small></td><td class="num">(96,380.45)</td><td class="tk"><i>✓</i></td></tr>
+            <tr data-m="5"><td>06/27</td><td>JE-2340 <small>Dock 4 lease</small></td><td class="num">(12,000.00)</td><td class="tk"><i>✓</i></td></tr>
+            <tr data-m="x" class="is-open"><td>06/30</td><td>JE-2352 <small>Coastal Supply</small></td><td class="num">1,240.00</td><td class="tk"><i>⚑</i></td></tr>
+          </tbody>
+        </table>
+
+        <svg class="ac-links" aria-hidden="true"></svg>
+
+        <table class="ac-t" data-side="bank">
+          <caption>Bank statement · First Harbor ••2207</caption>
+          <thead><tr><th class="tk" aria-label="Tickmark"></th><th>Date</th><th>Description</th><th class="num">Amount</th></tr></thead>
+          <tbody>
+            <tr data-m="1"><td class="tk"><i>^</i></td><td>06/03</td><td>Deposit</td><td class="num">48,200.00</td></tr>
+            <tr data-m="2"><td class="tk"><i>^</i></td><td>06/10</td><td>Check 10442</td><td class="num">(18,415.20)</td></tr>
+            <tr data-m="3"><td class="tk"><i>^</i></td><td>06/14</td><td>Wire in, Arden</td><td class="num">72,950.00</td></tr>
+            <tr data-m="4"><td class="tk"><i>^</i></td><td>06/21</td><td>ACH payroll</td><td class="num">(96,380.45)</td></tr>
+            <tr data-m="5"><td class="tk"><i>^</i></td><td>06/27</td><td>ACH Dock4 lease</td><td class="num">(12,000.00)</td></tr>
+            <tr class="ac-t__gap"><td class="tk"></td><td colspan="3">No matching deposit through 06/30</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ac-recon">
+        <div class="ac-recon__row" data-step="gl"><span>Balance per general ledger</span><b>412,806.55</b><i class="ac-tick">Σ</i></div>
+        <div class="ac-recon__row" data-step="dit"><span>Less: deposit in transit, JE-2352 <a class="ac-sup" href="#ac-note-3" aria-label="Note 3">3</a></span><b>(1,240.00)</b><i class="ac-tick">⚑</i></div>
+        <div class="ac-recon__row" data-step="bank"><span>Balance per bank statement</span><b>411,566.55</b><i class="ac-tick">Σ</i></div>
+        <div class="ac-recon__row ac-recon__row--total" data-step="diff"><span>Unreconciled difference</span><b>0.00</b><i class="ac-tick">✓</i></div>
+      </div>
+
+      <footer class="ac-wp__foot">
+        <div class="ac-legend">
+          <p class="ac-legend__t">Tickmarks <a class="ac-sup" href="#ac-note-4" aria-label="Note 4">4</a></p>
+          <ul>
+            <li><i>✓</i> Agreed to bank statement</li>
+            <li><i>^</i> Traced to general ledger</li>
+            <li><i>Σ</i> Footed</li>
+            <li><i>⚑</i> Reconciling item, cleared 07/02 bank</li>
+          </ul>
+        </div>
+        <div class="ac-sign">
+          <span class="ac-sign__label">Sign-off <a class="ac-sup" href="#ac-note-2" aria-label="Note 2">2</a></span>
+          <div class="ac-sign__row" data-sign="prep"><span>Prepared</span><b>Bespoke engine</b><time>07/01/26</time></div>
+          <div class="ac-sign__row" data-sign="rev"><span>Reviewed</span><b class="ac-sign__ink">M. Keane</b><time>07/02/26</time></div>
+        </div>
+      </footer>
+    </div>
+
+    <div class="ac-notes">
+      <p class="ac-notes__title">Notes to the workpaper</p>
+      <article class="ac-note" id="ac-note-1" data-reveal>
+        <span class="ac-note__n">1</span>
+        <div>
           <h3>Automated tie-outs &amp; trial balance mapping</h3>
+          <ul>
+            <li>Automatically parse financial statements, general ledger detail reports, trial balances, and bank confirmations.</li>
+            <li>Extract key line items, reconcile account balances, and flag variance discrepancies directly within your engagement environment with zero manual data entry.</li>
+          </ul>
         </div>
-        <ul class="cap-list">
-          <li>Automatically parse financial statements, general ledger detail reports, trial balances, and bank confirmations.</li>
-          <li>Extract key line items, reconcile account balances, and flag variance discrepancies directly within your engagement environment with zero manual data entry.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v6a2 2 0 0 0 2 2H14"/></svg></span>
+      </article>
+      <article class="ac-note" id="ac-note-2" data-reveal>
+        <span class="ac-note__n">2</span>
+        <div>
           <h3>Dynamic automation audit checklist engine</h3>
+          <ul>
+            <li>Continuously map engagement progress against firm standards and regulatory frameworks using a custom automation audit checklist.</li>
+            <li>Leverage specialized audit automation tools to auto-verify supporting documentation, highlight missing workpaper schedules, and track sign-offs in real time.</li>
+          </ul>
         </div>
-        <ul class="cap-list">
-          <li>Continuously map engagement progress against firm standards and regulatory frameworks using a custom automation audit checklist.</li>
-          <li>Leverage specialized audit automation tools to auto-verify supporting documentation, highlight missing workpaper schedules, and track sign-offs in real time.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
+      </article>
+      <article class="ac-note" id="ac-note-3" data-reveal>
+        <span class="ac-note__n">3</span>
+        <div>
           <h3>Financial statement &amp; commentary generation</h3>
+          <ul>
+            <li>Convert raw general ledger data and supporting schedules into standardized, GAAP/IFRS-compliant financial statements and footnote disclosures in seconds.</li>
+            <li>Draft comprehensive engagement summary memos and management letters tailored strictly to your firm's quality control policies.</li>
+          </ul>
         </div>
-        <ul class="cap-list">
-          <li>Convert raw general ledger data and supporting schedules into standardized, GAAP/IFRS-compliant financial statements and footnote disclosures in seconds.</li>
-          <li>Draft comprehensive engagement summary memos and management letters tailored strictly to your firm's quality control policies.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+      </article>
+      <article class="ac-note" id="ac-note-4" data-reveal>
+        <span class="ac-note__n">4</span>
+        <div>
           <h3>Private RAG accounting knowledge base search</h3>
+          <ul>
+            <li>Securely query your firm's entire repository of historical audit workpapers, technical accounting research, and guidance notes using natural language.</li>
+            <li>Provide engagement staff with immediate, verifiable citations from authoritative standards and past engagements while keeping confidential client records completely private.</li>
+          </ul>
         </div>
-        <ul class="cap-list">
-          <li>Securely query your firm's entire repository of historical audit workpapers, technical accounting research, and guidance notes using natural language.</li>
-          <li>Provide engagement staff with immediate, verifiable citations from authoritative standards and past engagements while keeping confidential client records completely private.</li>
-        </ul>
-      </div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
+<!-- CLOSING -->
+<section class="section cl cl--accounting section--paper on-light" aria-label="Next steps">
   <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom financial software</p>
-      <h2 class="h2" data-reveal>Related <em>finance services.</em></h2>
-    </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/finance/wealth-management" data-reveal>
-        <h3>Wealth management</h3>
-        <p>AI and wealth management pipelines for onboarding, KYC extraction, quarterly commentary, and alternative asset parsing.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/finance/risk-management" data-reveal>
-        <h3>Risk management</h3>
-        <p>AI risk management software for credit and counterparty extraction, policy mapping, and audit-ready filings.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/finance" data-reveal>
-        <h3>All finance solutions</h3>
-        <p>The full range of custom financial software Bespoke builds for banks, funds, RIAs, and CPA firms.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / Finance / Accounting</p>
-    <h2 class="h1" data-reveal>Interested in how we build <em class="accent-ai">automated workpaper software?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers with financial backgrounds that design private, secure accounting systems tailored to your firm's proprietary methodologies.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
+    <div class="cl-grid">
+      <div class="cl-copy">
+        <p class="kicker" data-reveal="draw">Solutions / Finance / Accounting</p>
+        <h2 class="h1" data-reveal>Interested in how we build <em class="accent-ai">automated workpaper software?</em></h2>
+        <p class="lede" data-reveal>Partner with specialized software engineers with financial backgrounds that design private, secure accounting systems tailored to your firm's proprietary methodologies.</p>
+        <div data-reveal><div class="cl-actions "><a class="btn btn--primary" href="/contact">Contact <span class="arr" aria-hidden="true">→</span></a><a class="cl-link u-line" href="/demos">See more demos</a></div></div>
+      </div>
+      <div class="cl-rcpt" data-reveal>
+        <div class="cl-rcpt__paper">
+          <p class="cl-rcpt__brand">BESPOKE</p>
+          <p class="cl-rcpt__meta">Engagement estimate · W/P ref C-2</p>
+          <h2 class="cl-rcpt__t">Related finance services.</h2>
+          <ul class="cl-rcpt__items">
+          <li><a href="/finance/wealth-management"><h3>Wealth management</h3><span class="cl-rcpt__dots" aria-hidden="true"></span><i aria-hidden="true">→</i></a><p>AI and wealth management pipelines for onboarding, KYC extraction, quarterly commentary, and alternative asset parsing.</p></li>
+          <li><a href="/finance/risk-management"><h3>Risk management</h3><span class="cl-rcpt__dots" aria-hidden="true"></span><i aria-hidden="true">→</i></a><p>AI risk management software for credit and counterparty extraction, policy mapping, and audit-ready filings.</p></li>
+          <li><a href="/finance"><h3>All finance solutions</h3><span class="cl-rcpt__dots" aria-hidden="true"></span><i aria-hidden="true">→</i></a><p>The full range of custom financial software Bespoke builds for banks, funds, RIAs, and CPA firms.</p></li>
+          </ul>
+          <p class="cl-rcpt__line"><span>Manual tie-outs</span><b>0.00</b></p>
+          <p class="cl-rcpt__line cl-rcpt__line--total"><span>Next step</span><b>1 working session</b></p>
+          <p class="cl-rcpt__thanks">Footed and cross-footed. Thank you.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -383,5 +439,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Custom Knowledge Base Software">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-proserv.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/knowledge-base-software.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / General Services / Knowledge Base Software</p>
     <h1 class="display">Custom Knowledge Base <em>Software Solutions</em></h1>
@@ -259,94 +260,112 @@
 </section>
 
 <!-- CORE CAPABILITIES & KNOWLEDGE MANAGEMENT -->
-<section class="section cap-section on-light" aria-label="Core capabilities">
+<section class="section section--white on-light kb-section" data-sol aria-label="Core capabilities">
   <div class="container--wide container">
     <div class="section-head">
       <p class="kicker" data-reveal="draw">Core capabilities &amp; knowledge management</p>
       <h2 class="h2" data-reveal>Private, RAG-powered <em>knowledge architecture.</em></h2>
       <p class="lede" data-reveal>Standard internal wikis and SaaS documentation tools quickly become disorganized, out of date, and impossible to search effectively. We engineer bespoke knowledge platforms equipped with Retrieval-Augmented Generation (RAG) capabilities, giving your team instant, conversational answers backed by direct citations from your firm's verified files.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v5H4zM4 15h16v5H4z"/><path d="M9 9v6M15 9v6"/></svg></span>
+
+    <div class="kb-lab" data-viz="kb" data-reveal="scale">
+      <div class="kb-lab__top">
+        <div class="kb-qs" role="group" aria-label="Ask a question">
+          <button type="button" data-q="0" aria-pressed="true">What is our PTO carryover limit?</button>
+          <button type="button" data-q="1" aria-pressed="false">How do we onboard a new vendor?</button>
+          <button type="button" data-q="2" aria-pressed="false">Which clients require annual SOC 2 reports?</button>
+        </div>
+        <span class="kb-role">Viewing as <b>Associate</b> · HR, Operations</span>
+      </div>
+
+      <div class="kb-lab__grid">
+        <div class="kb-space">
+          <svg class="kb-space__svg" viewBox="0 0 520 420" role="img" aria-label="Document chunks from four sources plotted by meaning. The nearest chunks to the question are retrieved; restricted chunks are excluded.">
+            <g data-links></g>
+            <g data-dots></g>
+            <g class="kb-query" data-query transform="translate(160,150)">
+              <circle r="16" class="kb-query__halo"/>
+              <path d="M0,-8 L2.4,-2.4 L8,0 L2.4,2.4 L0,8 L-2.4,2.4 L-8,0 L-2.4,-2.4 Z" class="kb-query__star"/>
+            </g>
+          </svg>
+          <ul class="kb-legend" aria-label="Sources">
+            <li class="kb-legend__drive">Google Drive</li>
+            <li class="kb-legend__sp">SharePoint</li>
+            <li class="kb-legend__notion">Notion</li>
+            <li class="kb-legend__pdf">PDF vault</li>
+            <li class="kb-legend__lock">Restricted</li>
+          </ul>
+        </div>
+
+        <div class="kb-answer" aria-live="polite">
+          <p class="kb-answer__label">Answer <span data-meta>3 sources · 0 excluded</span></p>
+          <p class="kb-answer__text" data-answer>Employees can carry over up to 40 hours of unused PTO into the next plan year. Anything above the cap is forfeited on January 31.</p>
+          <ol class="kb-evidence" data-evidence></ol>
+        </div>
+      </div>
+      <span class="sol-illus kb-lab__illus">Illustrative</span>
+    </div>
+
+    <div class="kb-results">
+      <p class="kb-results__meta">4 results for <b>“knowledge platform capabilities”</b></p>
+      <div class="kb-results__grid">
+        <article class="kb-result" data-reveal>
+          <p class="kb-result__path">Platform <span>›</span> Ingestion <span>›</span> connectors</p>
           <h3>Unified multi-source data ingestion</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Automatically sync and index unstructured data across PDF vaults, Google Drive, SharePoint, Notion, and internal databases into a single, unified search layer.</li>
-          <li>Continuous background updates ensure new documents, updated policy guidelines, and revised SOPs are indexed instantly without manual maintenance.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+          <div class="kb-result__rel" aria-hidden="true"><i style="--r:0.96"></i><span>0.96</span></div>
+          <ul>
+            <li>Automatically sync and index unstructured data across PDF vaults, Google Drive, SharePoint, Notion, and internal databases into a single, unified search layer.</li>
+            <li>Continuous background updates ensure new documents, updated policy guidelines, and revised SOPs are indexed instantly without manual maintenance.</li>
+          </ul>
+        </article>
+        <article class="kb-result" data-reveal>
+          <p class="kb-result__path">Platform <span>›</span> Search <span>›</span> grounded answers</p>
           <h3>Hallucination-free private AI search</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Deploy internal conversational search interfaces that answer complex operational questions strictly using your uploaded documents as the source of truth.</li>
-          <li>Every AI-generated response includes exact document citations and page references, ensuring total transparency for legal, financial, and compliance workflows.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <div class="kb-result__rel" aria-hidden="true"><i style="--r:0.93"></i><span>0.93</span></div>
+          <ul>
+            <li>Deploy internal conversational search interfaces that answer complex operational questions strictly using your uploaded documents as the source of truth.</li>
+            <li>Every AI-generated response includes exact document citations and page references, ensuring total transparency for legal, financial, and compliance workflows.</li>
+          </ul>
+        </article>
+        <article class="kb-result" data-reveal>
+          <p class="kb-result__path">Platform <span>›</span> Governance <span>›</span> permissions</p>
           <h3>Granular role-based access controls (RBAC)</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Maintain strict data governance with custom permission layers matching your organization's hierarchy.</li>
-          <li>Ensure sensitive personnel files, financial models, or partner-level disclosures are only accessible and searchable by authorized team members.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10Z"/><path d="m9 11.5 2 2 4-4.5"/></svg></span>
+          <div class="kb-result__rel" aria-hidden="true"><i style="--r:0.89"></i><span>0.89</span></div>
+          <ul>
+            <li>Maintain strict data governance with custom permission layers matching your organization's hierarchy.</li>
+            <li>Ensure sensitive personnel files, financial models, or partner-level disclosures are only accessible and searchable by authorized team members.</li>
+          </ul>
+        </article>
+        <article class="kb-result" data-reveal>
+          <p class="kb-result__path">Platform <span>›</span> Security <span>›</span> isolation</p>
           <h3>Zero public model training &amp; enterprise security</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Protect your firm's intellectual property within an isolated private cloud setup.</li>
-          <li>Your internal documentation is processed securely and is never fed back into public LLM training sets or accessible outside your environment.</li>
-        </ul>
+          <div class="kb-result__rel" aria-hidden="true"><i style="--r:0.87"></i><span>0.87</span></div>
+          <ul>
+            <li>Protect your firm's intellectual property within an isolated private cloud setup.</li>
+            <li>Your internal documentation is processed securely and is never fed back into public LLM training sets or accessible outside your environment.</li>
+          </ul>
+        </article>
       </div>
     </div>
   </div>
 </section>
 
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
+<!-- CLOSING -->
+<section class="section cl cl--kb section--white on-light" aria-label="Next steps">
   <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom automation software</p>
-      <h2 class="h2" data-reveal>Related <em>services.</em></h2>
-    </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/general-services/document-automation" data-reveal>
-        <h3>Document automation</h3>
-        <p>Document drafting automation: dynamic template and clause libraries, unstructured data ingestion, and multi-format export.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/general-services/api-integrations" data-reveal>
-        <h3>API integrations</h3>
-        <p>Custom API development and middleware that connect Clio, Salesforce, QuickBooks, and internal databases into one flow.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/general-services" data-reveal>
-        <h3>All general services</h3>
-        <p>The full range of custom automation software Bespoke builds across documents, APIs, knowledge, and property operations.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / General Services / Knowledge Base Software</p>
-    <h2 class="h1" data-reveal>Ready to build <em class="accent-ai">custom knowledge base software?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers to design a private, intelligent knowledge system tailored to your organization's internal workflows.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
+    <div class="cl-grid cl-grid--kb">
+      <div class="cl-catalog">
+        <h2 class="cl-catalog__t">Card catalog · Related services.</h2>
+        <a class="cl-index" href="/general-services/document-automation" data-reveal><span class="cl-index__call">651.5 DOC</span><h3>Document automation</h3><p>Document drafting automation: dynamic template and clause libraries, unstructured data ingestion, and multi-format export.</p><span class="cl-index__hole" aria-hidden="true"></span></a>
+        <a class="cl-index" href="/general-services/api-integrations" data-reveal><span class="cl-index__call">005.8 API</span><h3>API integrations</h3><p>Custom API development and middleware that connect Clio, Salesforce, QuickBooks, and internal databases into one flow.</p><span class="cl-index__hole" aria-hidden="true"></span></a>
+        <a class="cl-index" href="/general-services" data-reveal><span class="cl-index__call">658.4 GEN</span><h3>All general services</h3><p>The full range of custom automation software Bespoke builds across documents, APIs, knowledge, and property operations.</p><span class="cl-index__hole" aria-hidden="true"></span></a>
+      </div>
+      <div class="cl-copy">
+        <p class="kicker" data-reveal="draw">Solutions / General Services / Knowledge Base Software</p>
+        <h2 class="h1" data-reveal>Ready to build <em class="accent-ai">custom knowledge base software?</em></h2>
+        <p class="lede" data-reveal>Partner with specialized software engineers to design a private, intelligent knowledge system tailored to your organization's internal workflows.</p>
+        <div data-reveal><div class="cl-actions "><a class="btn btn--primary" href="/contact">Contact <span class="arr" aria-hidden="true">→</span></a><a class="cl-link u-line" href="/demos">See more demos</a></div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -410,5 +429,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

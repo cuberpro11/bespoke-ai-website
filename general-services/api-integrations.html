@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Custom API Integration Services">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-proserv.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/api-integrations.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / General Services / API Integrations</p>
     <h1 class="display">Custom API <em>Integration Services</em></h1>
@@ -232,94 +233,158 @@
 </section>
 
 <!-- CORE CAPABILITIES & SYSTEM BRIDGING -->
-<section class="section cap-section on-light" aria-label="Core capabilities">
+<section class="section section--paper on-light ap-section" data-sol aria-label="Core capabilities">
   <div class="container--wide container">
     <div class="section-head">
       <p class="kicker" data-reveal="draw">Core capabilities &amp; system bridging</p>
       <h2 class="h2" data-reveal>Bridging the gaps between <em>complex software ecosystems.</em></h2>
       <p class="lede" data-reveal>Off-the-shelf software often traps critical business data in closed silos. Practice management platforms like Clio or MyCase, proprietary accounting databases, and modern CRM systems rarely speak to each other seamlessly out of the box. We engineer bespoke API solutions and custom middleware engines that bridge these technical gaps, enabling data to flow securely between your core systems.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span>
+
+    <div class="ap-bench" data-viz="api" data-reveal="scale">
+      <div class="ap-hub">
+        <div class="ap-hub__head"><span>Event flow</span><span class="sol-illus">Illustrative</span></div>
+        <svg class="ap-hub__svg" viewBox="0 0 460 400" role="img" aria-label="Clio sends a webhook to the Bespoke middleware, which transforms the payload and delivers it to Salesforce, QuickBooks and an internal Postgres database.">
+          <g class="ap-wires">
+            <path id="apW-clio" d="M140,86 C190,86 180,200 230,200"/>
+            <path id="apW-sf" d="M230,200 C280,200 270,86 320,86"/>
+            <path id="apW-qb" d="M230,200 C280,200 270,314 320,314"/>
+            <path id="apW-pg" d="M230,200 C180,200 190,314 140,314"/>
+          </g>
+          <g class="ap-node" data-node="clio" transform="translate(20,58)">
+            <rect width="120" height="56" rx="12"/>
+            <text x="14" y="25" class="ap-node__name">Clio</text>
+            <text x="14" y="42" class="ap-node__role">source · webhook</text>
+          </g>
+          <g class="ap-node" data-node="sf" transform="translate(320,58)">
+            <rect width="120" height="56" rx="12"/>
+            <text x="14" y="25" class="ap-node__name">Salesforce</text>
+            <text x="14" y="42" class="ap-node__role">REST · Account</text>
+          </g>
+          <g class="ap-node" data-node="qb" transform="translate(320,286)">
+            <rect width="120" height="56" rx="12"/>
+            <text x="14" y="25" class="ap-node__name">QuickBooks</text>
+            <text x="14" y="42" class="ap-node__role">REST · Invoice</text>
+          </g>
+          <g class="ap-node" data-node="pg" transform="translate(20,286)">
+            <rect width="120" height="56" rx="12"/>
+            <text x="14" y="25" class="ap-node__name">Postgres</text>
+            <text x="14" y="42" class="ap-node__role">internal · matters</text>
+          </g>
+          <g class="ap-core" transform="translate(230,200)">
+            <circle r="52" class="ap-core__ring"/>
+            <circle r="40" class="ap-core__disc"/>
+            <text y="-3" class="ap-core__name">Bespoke</text>
+            <text y="13" class="ap-core__role">middleware</text>
+          </g>
+          <circle class="ap-packet" r="6" cx="-20" cy="-20"/>
+          <circle class="ap-packet" r="6" cx="-20" cy="-20"/>
+          <circle class="ap-packet" r="6" cx="-20" cy="-20"/>
+        </svg>
+      </div>
+
+      <div class="ap-code">
+        <div class="ap-code__tabs">
+          <span class="ap-code__tab" data-tab="in">clio · matter.updated</span>
+          <span class="ap-code__tab" data-tab="out" data-on>normalized payload</span>
+          <span class="ap-code__map">map v12</span>
+        </div>
+        <pre class="ap-code__pre" data-code><code><span class="ap-ln">{</span>
+<span class="ap-ln">  <span class="k">"Account.Name"</span>: <span class="s">"Hartwell &amp; Co."</span>,</span>
+<span class="ap-ln">  <span class="k">"Matter__c.ExternalId"</span>: <span class="s">"clio-88214"</span>,</span>
+<span class="ap-ln">  <span class="k">"Stage"</span>: <span class="s">"Active"</span>,</span>
+<span class="ap-ln">  <span class="k">"Rate"</span>: { <span class="k">"amount"</span>: <span class="n">450</span>, <span class="k">"currency"</span>: <span class="s">"USD"</span>, <span class="k">"unit"</span>: <span class="s">"hour"</span> },</span>
+<span class="ap-ln">  <span class="k">"OpenedAt"</span>: <span class="s">"2026-03-14T00:00:00Z"</span>,</span>
+<span class="ap-ln">  <span class="k">"Files"</span>: [{ <span class="k">"name"</span>: <span class="s">"engagement.pdf"</span>, <span class="k">"sha256"</span>: <span class="s">"9c1e…a07b"</span> }]</span>
+<span class="ap-ln">}</span></code></pre>
+        <ol class="ap-log" data-log aria-label="Request log">
+          <li><time>14:02:07.118</time><b class="in">← WEBHOOK</b><span>clio matter.updated · HMAC verified</span></li>
+          <li><time>14:02:07.131</time><b>TRANSFORM</b><span>6 fields mapped · 1 file hashed</span></li>
+          <li><time>14:02:07.204</time><b class="out">→ PATCH</b><span>salesforce /sobjects/Account</span><em class="ok">200 · 73ms</em></li>
+          <li><time>14:02:07.266</time><b class="out">→ POST</b><span>quickbooks /v3/invoice</span><em class="warn">429 · retry 400ms</em></li>
+          <li><time>14:02:07.689</time><b class="out">→ POST</b><span>quickbooks /v3/invoice</span><em class="ok">201 · 88ms</em></li>
+          <li><time>14:02:07.702</time><b class="out">→ INSERT</b><span>postgres matters</span><em class="ok">1 row · 9ms</em></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="ap-ref">
+      <p class="ap-ref__title"><span>Reference</span><span>What we build, by endpoint</span></p>
+      <article class="ap-ep" data-reveal>
+        <div class="ap-ep__sig"><span class="ap-verb ap-verb--connect">CONNECT</span><code>/systems/{clio|salesforce|quickbooks}</code></div>
+        <div class="ap-ep__doc">
           <h3>Practice management &amp; enterprise system connectivity</h3>
+          <ul>
+            <li>Connect platforms like Clio, MyCase, Salesforce, or QuickBooks directly to your firm's internal databases and web applications.</li>
+            <li>Automatically trigger downstream tasks, such as generating engagement letters, creating client portals, or initiating billing sequences, the moment a matter or record updates in your primary software.</li>
+          </ul>
         </div>
-        <ul class="cap-list">
-          <li>Connect platforms like Clio, MyCase, Salesforce, or QuickBooks directly to your firm's internal databases and web applications.</li>
-          <li>Automatically trigger downstream tasks, such as generating engagement letters, creating client portals, or initiating billing sequences, the moment a matter or record updates in your primary software.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/></svg></span>
+      </article>
+      <article class="ap-ep" data-reveal>
+        <div class="ap-ep__sig"><span class="ap-verb ap-verb--rest">REST · GraphQL</span><code>/v1/* · /graphql</code></div>
+        <div class="ap-ep__doc">
           <h3>Full-lifecycle custom API development</h3>
+          <ul>
+            <li>Specialized custom API development designed to expose clean, secure, and well-documented endpoints for internal applications or external client-facing tools.</li>
+            <li>Build high-throughput REST and GraphQL architectures equipped with robust authentication, rate limiting, and real-time Webhook event listeners.</li>
+          </ul>
         </div>
-        <ul class="cap-list">
-          <li>Specialized custom API development designed to expose clean, secure, and well-documented endpoints for internal applications or external client-facing tools.</li>
-          <li>Build high-throughput REST and GraphQL architectures equipped with robust authentication, rate limiting, and real-time Webhook event listeners.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1 1 12 3v9Z"/><path d="M21 3v6h-6"/></svg></span>
+      </article>
+      <article class="ap-ep" data-reveal>
+        <div class="ap-ep__sig"><span class="ap-verb ap-verb--transform">TRANSFORM</span><code>/pipelines/normalize</code></div>
+        <div class="ap-ep__doc">
           <h3>Unstructured data transformation &amp; middleware pipelines</h3>
+          <ul>
+            <li>When off-the-shelf connectors fail to handle your proprietary business rules, we build custom API middleware that cleans, normalizes, and enriches data in transit between platforms.</li>
+            <li>Ensure complex financial calculations, custom legal fields, and document attachments transfer accurately between systems without manual intervention.</li>
+          </ul>
         </div>
-        <ul class="cap-list">
-          <li>When off-the-shelf connectors fail to handle your proprietary business rules, we build custom API middleware that cleans, normalizes, and enriches data in transit between platforms.</li>
-          <li>Ensure complex financial calculations, custom legal fields, and document attachments transfer accurately between systems without manual intervention.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8Z"/></svg></span>
+      </article>
+      <article class="ap-ep" data-reveal>
+        <div class="ap-ep__sig"><span class="ap-verb ap-verb--rag">RAG</span><code>/ai/search · /ai/draft · /ai/extract</code></div>
+        <div class="ap-ep__doc">
           <h3>Private RAG &amp; LLM system integrations</h3>
+          <ul>
+            <li>Connect private AI pipelines directly to your core operational tools via secure API endpoints.</li>
+            <li>Allow team members to trigger RAG document searches, automated drafting, and AI entity extraction directly from within the software interfaces they already use every day.</li>
+          </ul>
         </div>
-        <ul class="cap-list">
-          <li>Connect private AI pipelines directly to your core operational tools via secure API endpoints.</li>
-          <li>Allow team members to trigger RAG document searches, automated drafting, and AI entity extraction directly from within the software interfaces they already use every day.</li>
-        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="section cl cl--api section--white on-light" aria-label="Next steps">
+  <div class="container--wide container">
+    <div class="cl-grid">
+      <div class="cl-copy">
+        <p class="kicker" data-reveal="draw">Solutions / General Services / API Integrations</p>
+        <h2 class="h1" data-reveal>Ready to build <em class="accent-ai">custom API integrations?</em></h2>
+        <p class="lede" data-reveal>Partner with specialized software engineers to design private, secure API architectures that unify your tech stack and eliminate operational bottlenecks.</p>
+      </div>
+      <div class="cl-term" data-reveal="scale">
+        <p class="cl-term__bar"><i></i><i></i><i></i><span>request.sh</span></p>
+<pre class="cl-term__pre"><code><span class="c">$</span> curl -X POST https://getbespoke.ai/contact \
+    -H <span class="s">"Content-Type: application/json"</span> \
+    -d <span class="s">'{"project": "custom API integration"}'</span>
+
+<span class="ok">HTTP/1.1 201 Created</span>
+{
+  <span class="k">"next"</span>: <span class="s">"working session"</span>,
+  <span class="k">"reply_within"</span>: <span class="s">"1 business day"</span>
+}<span class="cl-term__caret" aria-hidden="true"></span></code></pre>
+        <div class="cl-term__actions">
+          <a class="btn btn--primary" href="/contact">Send request · Contact <span class="arr" aria-hidden="true">→</span></a>
+          <a class="cl-term__get" href="/demos"><b>GET</b> /demos</a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
-  <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom automation software</p>
-      <h2 class="h2" data-reveal>Related <em>services.</em></h2>
-    </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/general-services/document-automation" data-reveal>
-        <h3>Document automation</h3>
-        <p>Document drafting automation: dynamic template and clause libraries, unstructured data ingestion, and multi-format export.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/general-services/knowledge-base-software" data-reveal>
-        <h3>Knowledge base software</h3>
-        <p>Custom knowledge base software with RAG search, exact citations, and role-based access across your entire document vault.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/general-services" data-reveal>
-        <h3>All general services</h3>
-        <p>The full range of custom automation software Bespoke builds across documents, APIs, knowledge, and property operations.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / General Services / API Integrations</p>
-    <h2 class="h1" data-reveal>Ready to build <em class="accent-ai">custom API integrations?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers to design private, secure API architectures that unify your tech stack and eliminate operational bottlenecks.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
+    <div class="cl-resources">
+      <h2 class="cl-resources__t"><code>_links</code> Related services.</h2>
+        <a class="cl-res" href="/general-services/document-automation" data-reveal><code>rel="sibling" href="/general-services/document-automation"</code><h3>Document automation</h3><p>Document drafting automation: dynamic template and clause libraries, unstructured data ingestion, and multi-format export.</p></a>
+        <a class="cl-res" href="/general-services/knowledge-base-software" data-reveal><code>rel="sibling" href="/general-services/knowledge-base-software"</code><h3>Knowledge base software</h3><p>Custom knowledge base software with RAG search, exact citations, and role-based access across your entire document vault.</p></a>
+        <a class="cl-res" href="/general-services" data-reveal><code>rel="up" href="/general-services"</code><h3>All general services</h3><p>The full range of custom automation software Bespoke builds across documents, APIs, knowledge, and property operations.</p></a>
     </div>
   </div>
 </section>
@@ -383,5 +448,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

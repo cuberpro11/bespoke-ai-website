@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Custom LMS Software Development">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-proserv.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/learning-management-systems.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / EdTech / Learning Management Systems</p>
     <h1 class="display">Bespoke Learning Management <em>System Engineering</em></h1>
@@ -232,94 +233,107 @@
 </section>
 
 <!-- DOCUMENT & DATA AUTOMATION -->
-<section class="section cap-section on-light" aria-label="LMS engineering capabilities">
+<section class="section section--paper on-light lm-section" data-sol aria-label="LMS engineering capabilities">
   <div class="container--wide container">
     <div class="section-head">
       <p class="kicker" data-reveal="draw">Document &amp; data automation</p>
       <h2 class="h2" data-reveal>Bespoke LMS engineering for <em>content &amp; student workflows.</em></h2>
       <p class="lede" data-reveal>Educational platforms and training organizations spend hundreds of hours manually managing user roles, configuring course structures, and copying student performance data across disconnected systems. We deliver custom LMS solutions that automate repetitive administration and streamline instructional delivery.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h8"/></svg></span>
-          <h3>Custom build LMS platforms tailored to your pedagogy</h3>
+
+    <div class="lm-map" data-viz="lms" data-reveal="scale">
+      <div class="lm-map__head">
+        <div class="lm-syllabus" data-syllabus>
+          <span class="lm-syllabus__file">Syllabus_ClinicalDocumentation.pdf</span>
+          <span class="lm-syllabus__arrow" aria-hidden="true">→</span>
+          <span class="lm-syllabus__out"><b data-compiled>7</b> stations · 1 adaptive branch</span>
         </div>
-        <ul class="cap-list">
+        <div class="lm-learner" aria-live="polite"><span class="lm-learner__dot" aria-hidden="true"></span><span data-learner>Learner A · Checkpoint 58% · rerouted to review</span></div>
+        <span class="sol-illus">Illustrative</span>
+      </div>
+
+      <div class="lm-map__scroll">
+        <svg class="lm-svg" viewBox="0 36 1100 276" role="img" aria-label="A course drawn as a transit map: orientation, foundations, applied practice, a checkpoint quiz, case studies, capstone and credential. Learners who score below the threshold on the quiz take a review branch before rejoining at case studies.">
+          <path class="lm-line lm-line--main" d="M80,170 L1020,170"/>
+          <path class="lm-line lm-line--branch" d="M530,170 L600,240 L700,240 L770,170"/>
+          <path class="lm-trail" data-trail d="M80,170 L1020,170"/>
+
+          <g class="lm-st" data-g="platform" transform="translate(80,170)"><circle r="11"/><text y="-28">Orientation</text><text y="-44" class="lm-st__sub">portal &amp; roles</text></g>
+          <g class="lm-st" data-g="curriculum" transform="translate(230,170)"><circle r="9"/><text y="38">Foundations</text><text y="54" class="lm-st__sub">4 lessons</text></g>
+          <g class="lm-st" data-g="curriculum" transform="translate(380,170)"><circle r="9"/><text y="-26">Applied practice</text><text y="-42" class="lm-st__sub">6 lessons</text></g>
+          <g class="lm-st lm-st--x" data-g="dev" transform="translate(530,170)"><circle r="15"/><circle r="7" class="lm-st__in"/><text y="-30">Checkpoint quiz</text><text y="-46" class="lm-st__sub">AI-graded · pass ≥ 70%</text></g>
+          <g class="lm-st lm-st--b" data-g="dev" transform="translate(600,240)"><circle r="8"/><text y="32">Review</text><text y="48" class="lm-st__sub">key concepts</text></g>
+          <g class="lm-st lm-st--b" data-g="dev" transform="translate(700,240)"><circle r="8"/><text y="32">Adaptive set</text><text y="48" class="lm-st__sub">generated quiz</text></g>
+          <g class="lm-st" data-g="curriculum" transform="translate(770,170)"><circle r="9"/><text y="-26">Case studies</text><text y="-42" class="lm-st__sub">3 modules</text></g>
+          <g class="lm-st" data-g="curriculum" transform="translate(900,170)"><circle r="9"/><text y="38">Capstone</text><text y="54" class="lm-st__sub">instructor review</text></g>
+          <g class="lm-st lm-st--t" data-g="integrations" transform="translate(1020,170)"><rect x="-16" y="-16" width="32" height="32" rx="8"/><path d="M-6,0 l4,4 l8,-8" class="lm-st__tick"/><text y="-30">Credential</text><text y="42" class="lm-st__sub">SIS gradebook · LTI</text></g>
+
+          <circle class="lm-rider" data-rider r="7" cx="80" cy="170"/>
+          <g class="lm-bubble" data-bubble transform="translate(530,64)">
+            <rect x="-62" y="-16" width="124" height="28" rx="14"/>
+            <text y="3" data-bubble-text>58% · reroute</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="lm-lines">
+      <article class="lm-callout" data-g="platform" data-reveal>
+        <p class="lm-callout__route"><span class="lm-bullet lm-bullet--p">P</span>Orientation &amp; credential stations</p>
+        <h3>Custom build LMS platforms tailored to your pedagogy</h3>
+        <ul>
           <li>Move beyond off-the-shelf software limitations with a complete custom build LMS designed specifically around your institution's unique learning paths and credentialing requirements.</li>
           <li>Build custom student portals, interactive course modules, and tailored instructor environments with complete control over the user experience.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v6a2 2 0 0 0 2 2H14"/></svg></span>
-          <h3>End-to-end custom LMS software development</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="lm-callout" data-g="dev" data-reveal>
+        <p class="lm-callout__route"><span class="lm-bullet lm-bullet--d">A</span>Checkpoint &amp; adaptive branch</p>
+        <h3>End-to-end custom LMS software development</h3>
+        <ul>
           <li>Specialized custom LMS software development focused on deep institutional scalability, role-based permissions, and custom analytics engines.</li>
           <li>Integrate custom AI grading tools, automated quiz generation, and adaptive learning workflows directly into your primary portal.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
-          <h3>Automated curriculum assembly &amp; content ingestion</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="lm-callout" data-g="curriculum" data-reveal>
+        <p class="lm-callout__route"><span class="lm-bullet lm-bullet--c">C</span>Lesson &amp; module stations</p>
+        <h3>Automated curriculum assembly &amp; content ingestion</h3>
+        <ul>
           <li>Automatically ingest raw course outlines, textbooks, and video assets to generate structured syllabi, lesson modules, and student discussion prompts.</li>
           <li>Eliminate manual course setup bottlenecks while maintaining precise alignment with institutional standards and learning objectives.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/></svg></span>
-          <h3>Secure student data &amp; LTI API integrations</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="lm-callout" data-g="integrations" data-reveal>
+        <p class="lm-callout__route"><span class="lm-bullet lm-bullet--i">I</span>Terminus · records sync</p>
+        <h3>Secure student data &amp; LTI API integrations</h3>
+        <ul>
           <li>Synchronize student records, enrollment statuses, and grade books effortlessly using custom LTI (Learning Tools Interoperability) and Student Information System (SIS) API connections.</li>
           <li>Ensure full FERPA/COPPA compliance with secure data encryption, keeping institutional and student records completely protected.</li>
         </ul>
-      </div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
+<!-- CLOSING -->
+<section class="section cl cl--lms section--navy dark" aria-label="Next steps">
   <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">Explore more</p>
-      <h2 class="h2" data-reveal>Related <em>solutions.</em></h2>
+    <div class="cl-cert" data-reveal="scale">
+      <span class="cl-cert__corner cl-cert__corner--tl" aria-hidden="true"></span>
+      <span class="cl-cert__corner cl-cert__corner--tr" aria-hidden="true"></span>
+      <span class="cl-cert__corner cl-cert__corner--bl" aria-hidden="true"></span>
+      <span class="cl-cert__corner cl-cert__corner--br" aria-hidden="true"></span>
+      <p class="cl-cert__pre">Solutions / EdTech / Learning Management Systems</p>
+      <p class="cl-cert__type">Certificate of next steps</p>
+      <h2 class="h1">Interested in <em class="accent-ai">learning more?</em></h2>
+      <p class="cl-cert__body">Partner with specialized software engineers with edtech backgrounds to design private, secure learning platforms tailored to your institution's exact educational vision.</p>
+      <div class="cl-actions "><a class="btn btn--primary" href="/contact">Enroll · Contact <span class="arr" aria-hidden="true">→</span></a><a class="cl-link u-line" href="/demos">See more demos</a></div>
+      <span class="cl-cert__ribbon" aria-hidden="true"><b>B</b></span>
     </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/edtech" data-reveal>
-        <h3>All EdTech solutions</h3>
-        <p>Custom EdTech software across learning management, student information systems, AI grading, and private tutoring assistants.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/general-services" data-reveal>
-        <h3>General Services</h3>
-        <p>Custom automation software across document automation, API integrations, and knowledge base systems.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/legal" data-reveal>
-        <h3>Legal</h3>
-        <p>Custom legal software for contract automation, workflow automation, and bespoke CRM.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / EdTech / Learning Management Systems</p>
-    <h2 class="h1" data-reveal>Interested in <em class="accent-ai">learning more?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers with edtech backgrounds to design private, secure learning platforms tailored to your institution's exact educational vision.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
+    <div class="cl-electives">
+      <h2 class="cl-electives__t">Electives · Related solutions.</h2>
+        <a class="cl-elective" href="/edtech" data-reveal><span class="cl-elective__code">EDU 210</span><h3>All EdTech solutions</h3><p>Custom EdTech software across learning management, student information systems, AI grading, and private tutoring assistants.</p><span class="cl-elective__cr">3 credits <span class="arr" aria-hidden="true">→</span></span></a>
+        <a class="cl-elective" href="/general-services" data-reveal><span class="cl-elective__code">SVC 120</span><h3>General Services</h3><p>Custom automation software across document automation, API integrations, and knowledge base systems.</p><span class="cl-elective__cr">3 credits <span class="arr" aria-hidden="true">→</span></span></a>
+        <a class="cl-elective" href="/legal" data-reveal><span class="cl-elective__code">LAW 101</span><h3>Legal</h3><p>Custom legal software for contract automation, workflow automation, and bespoke CRM.</p><span class="cl-elective__cr">3 credits <span class="arr" aria-hidden="true">→</span></span></a>
     </div>
   </div>
 </section>
@@ -383,5 +397,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

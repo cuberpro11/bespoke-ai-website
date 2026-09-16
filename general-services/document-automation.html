@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Document Drafting Automation">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-proserv.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/document-automation.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / General Services / Document Automation</p>
     <h1 class="display">Document Drafting <em>Automation Solutions</em></h1>
@@ -232,96 +233,126 @@
 </section>
 
 <!-- CORE CAPABILITIES & DATA AUTOMATION -->
-<section class="section cap-section on-light" aria-label="Core capabilities">
+<section class="section section--paper on-light da-section" data-sol aria-label="Core capabilities">
   <div class="container--wide container">
     <div class="section-head">
       <p class="kicker" data-reveal="draw">Core capabilities &amp; data automation</p>
       <h2 class="h2" data-reveal>Tailored document drafting automation for <em>complex operations.</em></h2>
       <p class="lede" data-reveal>Knowledge workers and enterprise operations teams spend hundreds of hours manually copying, pasting, and formatting data across contracts, client proposals, regulatory filings, and disclosure packets. We engineer bespoke automation engines that transform unstructured data into standardized, publication-ready documents without compromising on security.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
-          <h3>Dynamic template &amp; clause library assembly</h3>
+
+    <div class="da-studio" data-viz="docauto" data-reveal="scale">
+      <form class="da-form" data-form>
+        <p class="da-form__title">Intake <span>change an answer and watch the agreement rebuild</span></p>
+
+        <label class="da-field">
+          <span class="da-field__label">Counterparty</span>
+          <input type="text" name="party" value="Northwind Logistics, Inc." maxlength="40" autocomplete="off">
+        </label>
+
+        <fieldset class="da-field">
+          <legend class="da-field__label">Governing law</legend>
+          <div class="da-seg">
+            <label><input type="radio" name="law" value="DE" checked><span>Delaware</span></label>
+            <label><input type="radio" name="law" value="NY"><span>New York</span></label>
+            <label><input type="radio" name="law" value="CA"><span>California</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="da-field">
+          <legend class="da-field__label">Fee structure</legend>
+          <div class="da-seg">
+            <label><input type="radio" name="fee" value="fixed" checked><span>Fixed fee</span></label>
+            <label><input type="radio" name="fee" value="hourly"><span>Hourly with cap</span></label>
+          </div>
+        </fieldset>
+
+        <label class="da-field">
+          <span class="da-field__label">Initial term</span>
+          <select name="term">
+            <option value="12">12 months</option>
+            <option value="24" selected>24 months</option>
+            <option value="36">36 months</option>
+          </select>
+        </label>
+
+        <label class="da-switch">
+          <input type="checkbox" name="nonsolicit" checked>
+          <span class="da-switch__ui" aria-hidden="true"></span>
+          <span>Include non-solicitation clause</span>
+        </label>
+        <p class="da-form__note" data-note hidden></p>
+      </form>
+
+      <div class="da-paper-wrap">
+        <article class="da-paper" data-doc aria-live="polite">
+          <p class="da-paper__title">Master Services Agreement</p>
+          <p class="da-paper__meta">Generated from template MSA-v7 · <span data-count>7</span> sections · <span class="sol-illus">Illustrative</span></p>
+          <ol class="da-clauses" data-clauses></ol>
+        </article>
+        <div class="da-export">
+          <span class="da-export__label">Export</span>
+          <button type="button" data-export="pdf">PDF</button>
+          <button type="button" data-export="docx">DOCX</button>
+          <button type="button" data-export="sign">E-sign packet</button>
+          <span class="da-export__status" data-export-status aria-live="polite"></span>
         </div>
-        <ul class="cap-list">
+      </div>
+    </div>
+
+    <div class="da-toc">
+      <p class="da-toc__title">Contents</p>
+      <article class="da-toc__item" data-reveal>
+        <div class="da-toc__line"><span class="da-toc__no">1.0</span><h3>Dynamic template &amp; clause library assembly</h3><span class="da-toc__dots" aria-hidden="true"></span><span class="da-toc__pg">Clauses</span></div>
+        <ul>
           <li>Convert complex legal, financial, and operational agreements into dynamic digital templates that automatically adapt based on intake logic.</li>
           <li>Automatically select, insert, and cross-reference conditional legal clauses, jurisdictional disclosures, and customized fee schedules with zero manual copying.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v5H4zM4 15h16v5H4z"/><path d="M9 9v6M15 9v6"/></svg></span>
-          <h3>Unstructured data ingestion &amp; auto-population</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="da-toc__item" data-reveal>
+        <div class="da-toc__line"><span class="da-toc__no">2.0</span><h3>Unstructured data ingestion &amp; auto-population</h3><span class="da-toc__dots" aria-hidden="true"></span><span class="da-toc__pg">Intake</span></div>
+        <ul>
           <li>Parse incoming client emails, scanned intake forms, CRM records, and financial statements directly into your document creation workflows.</li>
           <li>Extract key entity names, party roles, financial figures, and dates to automatically populate long-form contracts and agreements in seconds.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v6a2 2 0 0 0 2 2H14"/></svg></span>
-          <h3>Multi-format document generation &amp; export</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="da-toc__item" data-reveal>
+        <div class="da-toc__line"><span class="da-toc__no">3.0</span><h3>Multi-format document generation &amp; export</h3><span class="da-toc__dots" aria-hidden="true"></span><span class="da-toc__pg">Export</span></div>
+        <ul>
           <li>Generate perfectly styled, publication-ready PDFs, Word documents, and digital signing packages with a single click.</li>
           <li>Integrate automated approval routing, version control, and digital signature requests directly into your existing operational dashboards.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-          <h3>Private RAG clause search &amp; verification</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="da-toc__item" data-reveal>
+        <div class="da-toc__line"><span class="da-toc__no">4.0</span><h3>Private RAG clause search &amp; verification</h3><span class="da-toc__dots" aria-hidden="true"></span><span class="da-toc__pg">Precedent</span></div>
+        <ul>
           <li>Securely query your firm's entire repository of historical contracts, negotiated addendums, and precedent documents using natural language.</li>
           <li>Provide team members with instant, verifiable clause recommendations from past successful deals while keeping sensitive corporate agreements strictly private.</li>
         </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="section cl cl--docauto section--paper on-light" aria-label="Next steps">
+  <div class="container--wide container">
+    <div class="cl-cabinet">
+      <div class="cl-cabinet__drawer">
+        <h2 class="cl-cabinet__t">Related services.</h2>
+        <a class="cl-file" href="/general-services/api-integrations" data-reveal><span class="cl-file__tab">A · API integrations</span><span class="cl-file__face"><h3>API integrations</h3><p>Custom API development and middleware that connect Clio, Salesforce, QuickBooks, and internal databases into one flow.</p></span></a>
+        <a class="cl-file" href="/general-services/knowledge-base-software" data-reveal><span class="cl-file__tab">B · Knowledge base software</span><span class="cl-file__face"><h3>Knowledge base software</h3><p>Custom knowledge base software with RAG search, exact citations, and role-based access across your entire document vault.</p></span></a>
+        <a class="cl-file" href="/general-services" data-reveal><span class="cl-file__tab">C · All general services</span><span class="cl-file__face"><h3>All general services</h3><p>The full range of custom automation software Bespoke builds across documents, APIs, knowledge, and property operations.</p></span></a>
+      </div>
+      <div class="cl-openfile" data-reveal="scale">
+        <span class="cl-openfile__tab">Open · next step</span>
+        <p class="cl-openfile__crumb">Solutions / General Services / Document Automation</p>
+        <h2 class="h2">Ready to build modern <em class="accent-ai">document drafting automation?</em></h2>
+        <p class="cl-openfile__body">Partner with specialized software engineers to design private, secure document assembly engines tailored to your firm's unique operational workflows.</p>
+        <div class="cl-actions "><a class="btn btn--primary" href="/contact">Contact <span class="arr" aria-hidden="true">→</span></a><a class="cl-link u-line" href="/demos">See more demos</a></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
-  <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom automation software</p>
-      <h2 class="h2" data-reveal>Related <em>services.</em></h2>
-    </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/general-services/api-integrations" data-reveal>
-        <h3>API integrations</h3>
-        <p>Custom API development and middleware that connect Clio, Salesforce, QuickBooks, and internal databases into one flow.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/general-services/knowledge-base-software" data-reveal>
-        <h3>Knowledge base software</h3>
-        <p>Custom knowledge base software with RAG search, exact citations, and role-based access across your entire document vault.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/general-services" data-reveal>
-        <h3>All general services</h3>
-        <p>The full range of custom automation software Bespoke builds across documents, APIs, knowledge, and property operations.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-    </div>
-    <p class="rel-foot" data-reveal>Running a law firm or in-house legal team? See the legal-specific build at <a class="u-line" href="/legal/documentation-automation">legal contract automation</a>.</p>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / General Services / Document Automation</p>
-    <h2 class="h1" data-reveal>Ready to build modern <em class="accent-ai">document drafting automation?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers to design private, secure document assembly engines tailored to your firm's unique operational workflows.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
-    </div>
+    <p class="cl-foot" data-reveal>Running a law firm or in-house legal team? See the legal-specific build at <a class="u-line" href="/legal/documentation-automation">legal contract automation</a>.</p>
   </div>
 </section>
 
@@ -384,5 +415,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

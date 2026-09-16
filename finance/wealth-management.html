@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Wealth Management AI Solutions">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-finance.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/wealth-management.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / Finance / Wealth Management</p>
     <h1 class="display">Wealth Management <em>AI Solutions</em></h1>
@@ -232,94 +233,120 @@
 </section>
 
 <!-- DOCUMENT & DATA AUTOMATION -->
-<section class="section cap-section on-light" aria-label="Document and data automation">
+<section class="section section--paper on-light wm-section" data-sol aria-label="Document and data automation">
   <div class="container--wide container">
     <div class="section-head">
-      <p class="kicker" data-reveal="draw">Document &amp; data automation</p>
+      <p class="kicker" data-reveal="draw">Core capabilities &amp; data automation</p>
       <h2 class="h2" data-reveal>AI for wealth management <em>document &amp; data pipelines.</em></h2>
       <p class="lede" data-reveal>Portfolio managers spend hundreds of hours manually reviewing, extracting, and assembling data across client onboarding packets, tax records, and quarterly financial statements. We engineer bespoke document automation engines that transform unstructured financial documents into structured, actionable insights without compromising on data privacy.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v5H4zM4 15h16v5H4z"/><path d="M9 9v6M15 9v6"/></svg></span>
+
+    <div class="wm-map" data-viz="wealth" data-reveal="scale">
+      <div class="wm-map__head">
+        <div class="wm-map__who">
+          <span class="wm-map__eyebrow">Household balance sheet</span>
+          <b class="wm-map__name">The Whitaker Family</b>
+        </div>
+        <div class="wm-map__nw">
+          <span>Net worth</span>
+          <b>$<span data-nw>16.89</span>M</b>
+          <em data-delta>+3.4% QoQ</em>
+        </div>
+        <span class="sol-illus">Illustrative</span>
+      </div>
+
+      <ul class="wm-docs" aria-label="Documents parsed">
+        <li class="wm-doc is-parsed"><span class="wm-doc__name">Custodial statement</span><span class="wm-doc__out">412 positions · 2 custodians</span></li>
+        <li class="wm-doc is-parsed"><span class="wm-doc__name">Schedule K-1</span><span class="wm-doc__out">PE Fund III · Box 1 $48,210</span></li>
+        <li class="wm-doc is-parsed"><span class="wm-doc__name">Capital call notice</span><span class="wm-doc__out">VC Fund II · $300,000</span></li>
+        <li class="wm-doc is-parsed"><span class="wm-doc__name">Trust agreement</span><span class="wm-doc__out">3 beneficiaries · spendthrift</span></li>
+        <li class="wm-doc is-parsed"><span class="wm-doc__name">ACAT transfer form</span><span class="wm-doc__out">Acct ••4471 → custodian</span></li>
+      </ul>
+
+      <div class="wm-tree" data-tree aria-hidden="true"></div>
+
+      <div class="wm-foot">
+        <div class="wm-legend" aria-hidden="true"><span class="wm-legend__c">Custodial · from statements</span><span class="wm-legend__n">Non-custodial · from K-1s &amp; notices</span></div>
+        <div class="wm-time" role="group" aria-label="Quarter">
+          <button type="button" data-q="0">Q1</button>
+          <button type="button" data-q="1">Q2</button>
+          <button type="button" data-q="2">Q3</button>
+          <button type="button" data-q="3" aria-pressed="true">Q4</button>
+        </div>
+      </div>
+      <p class="wm-note" data-note aria-live="polite">Q4 · Real estate LP distributed $220k. Net worth closed the year at $16.9M, up 8.8% since onboarding.</p>
+    </div>
+
+    <div class="wm-packets">
+      <div class="wm-packets__head">
+        <p class="wm-packets__title">What the pipeline assembles</p>
+        <div class="wm-packets__nav">
+          <button type="button" data-dir="-1" aria-label="Previous page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+          <button type="button" data-dir="1" aria-label="Next page"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
+      </div>
+      <div class="wm-packets__track" tabindex="0" aria-label="Capabilities">
+        <article class="wm-sheet">
+          <span class="wm-sheet__tab">Onboarding packet</span>
+          <span class="wm-sheet__pg">1 / 4</span>
           <h3>Automated client onboarding &amp; KYC extraction</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Automatically parse scanned IDs, trust documents, tax returns, and account transfer forms (ACATs).</li>
-          <li>Extract key entity data, tax identifiers, and beneficiary details directly into your core CRM or custodian setup with zero manual data entry.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
+          <ul>
+            <li>Automatically parse scanned IDs, trust documents, tax returns, and account transfer forms (ACATs).</li>
+            <li>Extract key entity data, tax identifiers, and beneficiary details directly into your core CRM or custodian setup with zero manual data entry.</li>
+          </ul>
+          <span class="wm-sheet__stamp">Sent to CRM &amp; custodian</span>
+        </article>
+        <article class="wm-sheet">
+          <span class="wm-sheet__tab">Quarterly client deck</span>
+          <span class="wm-sheet__pg">2 / 4</span>
           <h3>Quarterly performance commentary &amp; client deck generation</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Convert raw portfolio performance metrics and benchmark shifts into polished, personalized client commentary decks in seconds.</li>
-          <li>Leverage AI and wealth management automation tools to draft client-ready quarterly reports tailored to individual risk profiles and financial goals.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1M9 13h1m4 0h1M9 17h1m4 0h1"/></svg></span>
+          <ul>
+            <li>Convert raw portfolio performance metrics and benchmark shifts into polished, personalized client commentary decks in seconds.</li>
+            <li>Leverage AI and wealth management automation tools to draft client-ready quarterly reports tailored to individual risk profiles and financial goals.</li>
+          </ul>
+          <span class="wm-sheet__stamp">Draft for advisor review</span>
+        </article>
+        <article class="wm-sheet">
+          <span class="wm-sheet__tab">Fund documents</span>
+          <span class="wm-sheet__pg">3 / 4</span>
           <h3>Institutional offering memorandum &amp; alternative asset parsing</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Instantly extract capital calls, distribution notices, and schedule K-1s from private equity, venture capital, and real estate fund documents.</li>
-          <li>Feed extracted data directly into client portal accounting engines to maintain accurate net worth tracking across non-custodial holdings.</li>
-        </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+          <ul>
+            <li>Instantly extract capital calls, distribution notices, and schedule K-1s from private equity, venture capital, and real estate fund documents.</li>
+            <li>Feed extracted data directly into client portal accounting engines to maintain accurate net worth tracking across non-custodial holdings.</li>
+          </ul>
+          <span class="wm-sheet__stamp">Posted to portal ledger</span>
+        </article>
+        <article class="wm-sheet">
+          <span class="wm-sheet__tab">Document vault</span>
+          <span class="wm-sheet__pg">4 / 4</span>
           <h3>Private RAG document vault search</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Securely query your firm's entire vault of legal trust documents, compliance filings, and investment mandates using natural language.</li>
-          <li>Provide advisors with immediate, verifiable citations from private files while ensuring client data is never used to train public models.</li>
-        </ul>
+          <ul>
+            <li>Securely query your firm's entire vault of legal trust documents, compliance filings, and investment mandates using natural language.</li>
+            <li>Provide advisors with immediate, verifiable citations from private files while ensuring client data is never used to train public models.</li>
+          </ul>
+          <span class="wm-sheet__stamp">Answers cite the source page</span>
+        </article>
       </div>
     </div>
   </div>
 </section>
 
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
+<!-- CLOSING -->
+<section class="section cl cl--wealth section--paper2 on-light" aria-label="Next steps">
   <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom financial software</p>
-      <h2 class="h2" data-reveal>Related <em>finance services.</em></h2>
+    <div class="cl-invite" data-reveal="scale">
+      <p class="cl-invite__pre">Solutions / Finance / Wealth Management</p>
+      <p class="cl-invite__request">The pleasure of your company is requested at a</p>
+      <p class="cl-invite__event">Private working session</p>
+      <h2 class="h2">Ready to build modern <em class="accent-ai">wealth management AI solutions?</em></h2>
+      <p class="cl-invite__body">Partner with specialized software engineers with finance backgrounds to design private, secure AI for wealth management solutions that fit your firm's unique needs.</p>
+      <div class="cl-actions "><a class="btn btn--primary" href="/contact">RSVP · Contact <span class="arr" aria-hidden="true">→</span></a><a class="cl-link u-line" href="/demos">See more demos</a></div>
     </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/finance/risk-management" data-reveal>
-        <h3>Risk management</h3>
-        <p>AI risk management software for credit and counterparty extraction, policy mapping, and audit-ready filings.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/finance/compliance" data-reveal>
-        <h3>Compliance</h3>
-        <p>Custom compliance software for KYC, AML and sanctions screening, regulatory tracking, and board reporting.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/finance" data-reveal>
-        <h3>All finance solutions</h3>
-        <p>The full range of custom financial software Bespoke builds for banks, funds, RIAs, and CPA firms.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / Finance / Wealth Management</p>
-    <h2 class="h1" data-reveal>Ready to build modern <em class="accent-ai">wealth management AI solutions?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers with finance backgrounds to design private, secure AI for wealth management solutions that fit your firm's unique needs.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
+    <div class="cl-places">
+      <h2 class="cl-places__t">Also at the table · Related finance services.</h2>
+      <a class="cl-place" href="/finance/risk-management" data-reveal><span class="cl-place__fold" aria-hidden="true"></span><h3>Risk management</h3><p>AI risk management software for credit and counterparty extraction, policy mapping, and audit-ready filings.</p></a>
+      <a class="cl-place" href="/finance/compliance" data-reveal><span class="cl-place__fold" aria-hidden="true"></span><h3>Compliance</h3><p>Custom compliance software for KYC, AML and sanctions screening, regulatory tracking, and board reporting.</p></a>
+      <a class="cl-place" href="/finance" data-reveal><span class="cl-place__fold" aria-hidden="true"></span><h3>All finance solutions</h3><p>The full range of custom financial software Bespoke builds for banks, funds, RIAs, and CPA firms.</p></a>
     </div>
   </div>
 </section>
@@ -383,5 +410,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>

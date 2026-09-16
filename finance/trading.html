@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=1be4cb11">
+<link rel="stylesheet" href="/assets/css/solutions.css?v=0d69159e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -219,7 +220,7 @@
 <!-- HERO -->
 <section class="hero hero--page" aria-label="Custom Trading Platform Development">
   <div class="hero__bg" aria-hidden="true"></div>
-  <img class="halftone" src="/assets/img/halftone-finance.png?v=1" alt="" aria-hidden="true">
+  <img class="halftone halftone--scene" src="/assets/img/hero/trading.jpg?v=1" alt="" aria-hidden="true" width="1536" height="1024">
   <div class="container--wide container hero__content">
     <p class="kicker">Solutions / Finance / Trading</p>
     <h1 class="display">Custom Trading <em>Platform Development</em></h1>
@@ -232,94 +233,156 @@
 </section>
 
 <!-- CORE CAPABILITIES & DATA AUTOMATION -->
-<section class="section cap-section on-light" aria-label="Document and data automation">
+<section class="section section--paper on-light tr-section" data-sol aria-label="Document and data automation">
   <div class="container--wide container">
     <div class="section-head">
       <p class="kicker" data-reveal="draw">Core capabilities &amp; data automation</p>
       <h2 class="h2" data-reveal>Custom trading software for <em>algorithmic &amp; institutional workflows.</em></h2>
       <p class="lede" data-reveal>Proprietary funds and asset managers spend hundreds of hours attempting to bend off-the-shelf trading terminals to fit custom execution strategies and risk models. We deliver full-stack custom trading software development tailored specifically around your firm's unique alpha generation engines, order routing logic, and data storage needs.</p>
     </div>
-    <div class="cap-grid" data-stagger>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/></svg></span>
-          <h3>High-performance execution &amp; broker-neutral connectivity</h3>
-        </div>
-        <ul class="cap-list">
-          <li>Specialized custom trading software designed to connect natively to multiple liquidity providers, exchanges, and prime brokers via FIX protocol and REST/WebSocket APIs.</li>
-          <li>Eliminate platform dependency by building a unified order management system (OMS) and execution management system (EMS) with microsecond latency controls.</li>
-        </ul>
+
+    <figure class="tr-term" data-viz="trading" data-reveal="scale">
+      <div class="tr-term__bar">
+        <span class="tr-live"><i></i>Order lifecycle</span>
+        <span class="tr-order">BUY 25,000 NVDA <span>·</span> VWAP <span>·</span> A-20931</span>
+        <span class="tr-clock">T+<b>255</b>&thinsp;µs</span>
+        <span class="sol-illus">Illustrative</span>
       </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8Z"/></svg></span>
-          <h3>Algorithmic strategy integration &amp; signal engines</h3>
+
+      <div class="tr-ladder-wrap">
+        <div class="tr-track" aria-hidden="true"><i></i></div>
+        <ol class="tr-ladder">
+          <li class="tr-stage is-done" data-stage="signal">
+            <span class="tr-stage__dot" aria-hidden="true"></span>
+            <span class="tr-stage__idx">01 Signal</span>
+            <b class="tr-stage__val">Momentum z-score 2.31</b>
+            <span class="tr-stage__sub">Rule z &gt; 2.0 fires a BUY</span>
+            <span class="tr-stage__t">+<b data-t="0">0</b> µs</span>
+          </li>
+          <li class="tr-stage is-done" data-stage="risk">
+            <span class="tr-stage__dot" aria-hidden="true"></span>
+            <span class="tr-stage__idx">02 Pre-trade risk</span>
+            <b class="tr-stage__val">3 of 3 checks pass</b>
+            <span class="tr-stage__sub tr-checks"><span>Position size</span><span>Drawdown limit</span><span>Fat-finger</span></span>
+            <span class="tr-stage__t">+<b data-t="38">38</b> µs</span>
+          </li>
+          <li class="tr-stage is-done" data-stage="router">
+            <span class="tr-stage__dot" aria-hidden="true"></span>
+            <span class="tr-stage__idx">03 Smart router</span>
+            <b class="tr-stage__val">Split across 3 venues</b>
+            <span class="tr-stage__sub">By displayed liquidity &amp; fee tier</span>
+            <span class="tr-stage__t">+<b data-t="61">61</b> µs</span>
+          </li>
+          <li class="tr-stage tr-stage--venues is-done" data-stage="venues">
+            <span class="tr-stage__dot" aria-hidden="true"></span>
+            <span class="tr-stage__idx">04 Venues</span>
+            <span class="tr-venue" data-qty="9000" style="--p:1"><span>ARCA <small>FIX 4.4</small></span><em>9,000</em><i aria-hidden="true"></i></span>
+            <span class="tr-venue" data-qty="11000" style="--p:1"><span>NSDQ <small>FIX 4.4</small></span><em>11,000</em><i aria-hidden="true"></i></span>
+            <span class="tr-venue" data-qty="5000" style="--p:1"><span>IEX <small>WebSocket</small></span><em>5,000</em><i aria-hidden="true"></i></span>
+            <span class="tr-stage__t">+<b data-t="212">212</b> µs</span>
+          </li>
+          <li class="tr-stage is-done" data-stage="fills">
+            <span class="tr-stage__dot" aria-hidden="true"></span>
+            <span class="tr-stage__idx">05 Fills</span>
+            <b class="tr-stage__val">25,000 filled</b>
+            <span class="tr-stage__sub">VWAP 131.424 · slippage 0.4 bps</span>
+            <span class="tr-stage__t">+<b data-t="240">240</b> µs</span>
+          </li>
+          <li class="tr-stage is-done" data-stage="pnl">
+            <span class="tr-stage__dot" aria-hidden="true"></span>
+            <span class="tr-stage__idx">06 Risk &amp; PnL</span>
+            <b class="tr-stage__val">Exposure +$3.29M</b>
+            <span class="tr-stage__sub">VaR 95% $41.2k · margin 18%</span>
+            <span class="tr-stage__t">+<b data-t="255">255</b> µs</span>
+          </li>
+        </ol>
+      </div>
+
+      <div class="tr-tape">
+        <div class="tr-tape__head">
+          <span>Tick feed <small>normalized · private pipeline</small></span>
+          <span class="tr-tape__last">Last <b class="tr-tape__px">131.42</b></span>
         </div>
-        <ul class="cap-list">
+        <svg viewBox="0 0 1200 96" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="trTapeFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#4a72f0" stop-opacity="0.28"/>
+              <stop offset="1" stop-color="#4a72f0" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <polygon class="tr-tape__area" fill="url(#trTapeFill)" points=""/>
+          <polyline class="tr-tape__line" fill="none" points=""/>
+          <g class="tr-tape__marks">
+            <circle r="4" data-i="-1"/><circle r="4" data-i="-1"/><circle r="4" data-i="-1"/>
+          </g>
+        </svg>
+      </div>
+      <figcaption class="sr-only">An order moves from signal to pre-trade risk checks, a smart order router, three trading venues, fills, and a risk and PnL update in about 255 microseconds.</figcaption>
+    </figure>
+
+    <div class="tr-caps" data-stagger>
+      <article class="tr-cap" data-reveal>
+        <span class="tr-cap__map">Stages 01–02 · Signal &amp; risk</span>
+        <h3>Algorithmic strategy integration &amp; signal engines</h3>
+        <ul>
           <li>Embed custom quantitative models, automated signal triggers, and algorithmic rebalancing rules directly into your trading engine.</li>
           <li>Combine real-time tick streaming with automated risk checks to ensure trade execution strictly adheres to firm drawdown limits and position sizing rules.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M6 17V9m5 8V5m5 12v-6"/></svg></span>
-          <h3>Real-time portfolio risk &amp; analytics dashboards</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="tr-cap" data-reveal>
+        <span class="tr-cap__map">Stages 03–04 · Router &amp; venues</span>
+        <h3>High-performance execution &amp; broker-neutral connectivity</h3>
+        <ul>
+          <li>Specialized custom trading software designed to connect natively to multiple liquidity providers, exchanges, and prime brokers via FIX protocol and REST/WebSocket APIs.</li>
+          <li>Eliminate platform dependency by building a unified order management system (OMS) and execution management system (EMS) with microsecond latency controls.</li>
+        </ul>
+      </article>
+      <article class="tr-cap" data-reveal>
+        <span class="tr-cap__map">Stages 05–06 · Fills &amp; PnL</span>
+        <h3>Real-time portfolio risk &amp; analytics dashboards</h3>
+        <ul>
           <li>Monitor real-time PnL, Value at Risk (VaR), portfolio exposure, and margin utilization across fragmented market venues in a single consolidated interface.</li>
           <li>Streamline post-trade settlement processing and automated trade reporting with direct database connections to back-office accounting tools.</li>
         </ul>
-      </div>
-      <div class="cap-col spot-card" data-reveal>
-        <div class="cap-head">
-          <span class="cap-ico reveal-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v6a2 2 0 0 0 2 2H14"/></svg></span>
-          <h3>Private data pipelines &amp; machine learning models</h3>
-        </div>
-        <ul class="cap-list">
+      </article>
+      <article class="tr-cap tr-cap--wide" data-reveal>
+        <span class="tr-cap__map">Beneath every stage · the feed</span>
+        <h3>Private data pipelines &amp; machine learning models</h3>
+        <ul>
           <li>Securely ingest, normalize, and process unstructured alternative market data, news sentiment feeds, and historical tick data using private data architecture.</li>
           <li>Deploy custom AI models to surface market regime shifts and liquidity imbalances without exposing proprietary signal logic to third-party SaaS vendors.</li>
         </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="section cl cl--trading section--navy dark" aria-label="Next steps">
+  <div class="container--wide container">
+    <div class="cl-grid">
+      <div class="cl-copy">
+        <p class="kicker" data-reveal="draw">Solutions / Finance / Trading</p>
+        <h2 class="h1" data-reveal>Interested in <em class="accent-ai">learning more?</em></h2>
+        <p class="lede" data-reveal>Partner with specialized software engineers with quantitative finance backgrounds to design private, high-performance trading infrastructure tailored to your firm's execution edge.</p>
+      </div>
+      <div class="cl-ticket" data-reveal="scale">
+        <p class="cl-ticket__head"><span>New order</span><span>Bespoke OMS</span></p>
+        <div class="cl-ticket__side" aria-hidden="true"><span>Buy off the shelf</span><span class="is-on">Build bespoke</span></div>
+        <dl class="cl-ticket__kv">
+          <div><dt>Instrument</dt><dd>Custom trading platform</dd></div>
+          <div><dt>Venue</dt><dd>Your infrastructure</dd></div>
+          <div><dt>Time in force</dt><dd>Until shipped</dd></div>
+        </dl>
+        <a class="cl-ticket__submit" href="/contact">Submit order · Contact <span class="arr" aria-hidden="true">→</span></a>
+        <a class="cl-ticket__alt u-line" href="/demos">See more demos</a>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- RELATED -->
-<section class="section section--paper2 on-light" aria-label="Related services">
-  <div class="container--wide container">
-    <div class="section-head">
-      <p class="kicker" data-reveal="draw">More custom financial software</p>
-      <h2 class="h2" data-reveal>Related <em>finance services.</em></h2>
-    </div>
-    <div class="rel-links" data-stagger>
-      <a class="rel-link spot-card" href="/finance/wealth-management" data-reveal>
-        <h3>Wealth management</h3>
-        <p>AI and wealth management pipelines for onboarding, KYC extraction, quarterly commentary, and alternative asset parsing.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/finance/risk-management" data-reveal>
-        <h3>Risk management</h3>
-        <p>AI risk management software for credit and counterparty extraction, policy mapping, and audit-ready filings.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-      <a class="rel-link spot-card" href="/finance" data-reveal>
-        <h3>All finance solutions</h3>
-        <p>The full range of custom financial software Bespoke builds for banks, funds, RIAs, and CPA firms.</p>
-        <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section cta-band dark" aria-label="Get started">
-  <div class="container">
-    <p class="kicker kicker--center" data-reveal="draw">Solutions / Finance / Trading</p>
-    <h2 class="h1" data-reveal>Interested in <em class="accent-ai">learning more?</em></h2>
-    <p class="lede" data-reveal>Partner with specialized software engineers with quantitative finance backgrounds to design private, high-performance trading infrastructure tailored to your firm's execution edge.</p>
-    <div class="hero__actions" data-reveal>
-      <a class="btn btn--white" href="/contact">Contact</a>
-      <a class="btn btn--ghost" href="/demos">See more demos <span class="arr" aria-hidden="true">→</span></a>
+    <div class="cl-watch" data-reveal>
+      <h2 class="cl-watch__title">Watchlist <span>Related finance services.</span></h2>
+        <a class="cl-watch__row" href="/finance/wealth-management"><b class="cl-watch__sym">WLTH</b><span class="cl-watch__txt"><h3>Wealth management</h3><span>AI and wealth management pipelines for onboarding, KYC extraction, quarterly commentary, and alternative asset parsing.</span></span><i aria-hidden="true">↗</i></a>
+        <a class="cl-watch__row" href="/finance/risk-management"><b class="cl-watch__sym">RISK</b><span class="cl-watch__txt"><h3>Risk management</h3><span>AI risk management software for credit and counterparty extraction, policy mapping, and audit-ready filings.</span></span><i aria-hidden="true">↗</i></a>
+        <a class="cl-watch__row" href="/finance"><b class="cl-watch__sym">FIN</b><span class="cl-watch__txt"><h3>All finance solutions</h3><span>The full range of custom financial software Bespoke builds for banks, funds, RIAs, and CPA firms.</span></span><i aria-hidden="true">↗</i></a>
     </div>
   </div>
 </section>
@@ -383,5 +446,6 @@
 <!-- /@shared:footer -->
 
 <script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>
