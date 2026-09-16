@@ -253,7 +253,16 @@
   .tr-stage__dot { margin-left: 0; margin-bottom: 0.5rem; }
   .tr-caps { grid-template-columns: 1fr; padding-inline: 0; }
   .tr-cap, .tr-cap--wide { grid-column: 1; }
-  .tr-cap::after { display: none; }
+  /* stacked, the brackets no longer sit under their stages, so each
+     capability becomes a card like the wide one */
+  .tr-cap::before, .tr-cap::after { display: none; }
+  .tr-cap {
+    padding: 1.4rem 1.4rem 1.1rem;
+    border-radius: 16px;
+    background: var(--white);
+    border: 1px solid var(--line-light);
+  }
+  .tr-caps { gap: 1rem; }
 }
 @media (max-width: 560px) {
   .tr-term__bar { padding: 0.8rem 1rem; }

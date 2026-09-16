@@ -966,9 +966,10 @@
       }
 
       const body = new URLSearchParams(new FormData(form)).toString();
-      const action = form.getAttribute("action") || window.location.pathname;
 
-      fetch(action, {
+      // Post to the site root, as Netlify recommends for AJAX submissions: the
+      // form-name field routes it, and "/" never touches the redirect rules.
+      fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body,

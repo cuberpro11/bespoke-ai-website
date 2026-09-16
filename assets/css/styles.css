@@ -4068,7 +4068,14 @@ body.nav-open .mobile-menu__panel { transform: none; }
 @media (max-width: 560px) {
   body { font-size: 1rem; }
   .stats-grid { grid-template-columns: 1fr; }
-  .people-grid { grid-template-columns: 1fr; }
+  /* two-up on phones: the team sits right under the hero, so a single
+     column of six tall cards pushed everything else a long way down */
+  .people-grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+  .person-card { padding: 1.1rem 0.8rem 1.2rem; }
+  .person-avatar { width: 68px; height: 68px; border-radius: 16px; margin-bottom: 0.8rem; }
+  .person-name { font-size: 1.2rem; margin-bottom: 0.3rem; }
+  .person-role { font-size: 0.6rem; letter-spacing: 0.08em; margin-bottom: 0.6rem; }
+  .person-desc { font-size: 0.8rem; line-height: 1.5; max-width: none; }
   .sec-grid { grid-template-columns: 1fr; }
   .cap-grid { grid-template-columns: 1fr; }
   .fin-dash { grid-template-columns: 1fr; }
@@ -4984,6 +4991,11 @@ body[data-page="contact"] {
   max-width: 46rem;
   margin-bottom: 2rem;
 }
+
+/* the band is .on-light (ink text, white cards), so it needs its own paper
+   ground; without it the dark body showed through */
+.services-band { background: var(--paper); }
+.services-band + .deliver-section { border-top: 1px solid var(--line-light); }
 
 .svc-grid {
   display: grid;
