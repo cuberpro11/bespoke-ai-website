@@ -71,6 +71,18 @@ class NetlifyLikeHandler(SimpleHTTPRequestHandler):
         self._strip_conditional_headers()
         super().do_HEAD()
 
+    def do_POST(self):
+        # Local stand-in for Netlify Forms AJAX posts from the contact forms.
+        length = int(self.headers.get("Content-Length") or 0)
+        if length:
+            self.rfile.read(length)
+        body = b"ok"
+        self.send_response(200)
+        self.send_header("Content-Type", "text/plain; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
     def translate_path(self, path):
         local = super().translate_path(path)
         if os.path.isdir(local):

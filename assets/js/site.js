@@ -924,10 +924,50 @@
 
   /* -------------------------------------------------------- contact form -- */
 
-  // Contact forms post to Netlify Forms over fetch, so the visitor never leaves
-  // the page and never has to have a mail client configured. Netlify picks the
-  // form up from the deployed HTML (data-netlify + a hidden form-name field),
-  // which keeps the site build-free.
+  // Footer mini-form and /contact share this handler, the same Netlify `contact`
+  // form, and the same success markup. Fetch posts to "/" so the visitor never
+  // leaves the page; Netlify routes on the hidden form-name field.
+  const CONTACT_OK = (() => {
+    const sparks = Array.from({ length: 8 }, (_, i) => `<i style="--p:${i}"></i>`).join("");
+    return (
+      '<div class="f-ok__mark" aria-hidden="true">' +
+        '<span class="f-ok__glow"></span>' +
+        '<span class="f-ok__ring"></span>' +
+        '<span class="f-ok__pulse"></span>' +
+        `<span class="f-ok__burst">${sparks}</span>` +
+        '<svg class="f-ok__check" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' +
+      "</div>" +
+      '<p class="f-ok__kicker">Sent</p>' +
+      '<p class="f-ok__title">Message received.</p>' +
+      '<p class="f-ok__lede">We\u2019ll reply within one business day.</p>'
+    );
+  })();
+
+  const mountContactSuccess = (wrap) => {
+    if (!wrap) return null;
+    let ok = wrap.querySelector(".f-form__ok");
+    if (!ok) {
+      ok = doc.createElement("div");
+      ok.className = "f-form__ok";
+      wrap.appendChild(ok);
+    }
+    ok.setAttribute("role", "status");
+    ok.setAttribute("aria-live", "polite");
+    ok.innerHTML = CONTACT_OK;
+    return ok;
+  };
+
+  const revealContactSuccess = (wrap) => {
+    if (!wrap) return;
+    const height = wrap.getBoundingClientRect().height;
+    if (height > 0) wrap.style.minHeight = Math.round(height) + "px";
+    wrap.classList.add("is-sent");
+    if (REDUCED) return;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => wrap.classList.add("is-celebrating"));
+    });
+  };
+
   doc.querySelectorAll("[data-contact-form]").forEach((box) => {
     const form = box.querySelector("form");
     if (!form) return;
@@ -935,8 +975,9 @@
     const wrap = box.querySelector(".f-form");
     const errEl = box.querySelector(".f-form__err");
     const submitBtn = form.querySelector('[type="submit"]');
-
     const submitLabel = submitBtn ? submitBtn.textContent : "";
+
+    mountContactSuccess(wrap);
 
     const showError = () => {
       if (errEl) errEl.hidden = false;
@@ -956,19 +997,17 @@
 
       // Netlify's honeypot: a filled bot-field means a bot. Pretend it worked.
       if (String(new FormData(form).get("bot-field") || "").trim()) {
-        if (wrap) wrap.classList.add("is-sent");
+        revealContactSuccess(wrap);
         return;
       }
 
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.textContent = "Sending…";
+        submitBtn.textContent = "Sending\u2026";
       }
 
       const body = new URLSearchParams(new FormData(form)).toString();
 
-      // Post to the site root, as Netlify recommends for AJAX submissions: the
-      // form-name field routes it, and "/" never touches the redirect rules.
       fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -976,7 +1015,7 @@
       })
         .then((res) => {
           if (!res.ok) throw new Error(String(res.status));
-          if (wrap) wrap.classList.add("is-sent");
+          revealContactSuccess(wrap);
           form.reset();
         })
         .catch(showError);

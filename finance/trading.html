@@ -50,7 +50,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/styles.css?v=97580cdb">
+<link rel="stylesheet" href="/assets/css/styles.css?v=383c24e5">
 <link rel="stylesheet" href="/assets/css/solutions.css?v=078888d1">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
@@ -420,7 +420,7 @@
         <div class="f-form">
           <form name="contact" method="POST" action="/contact" data-netlify="true" netlify-honeypot="bot-field" novalidate>
             <input type="hidden" name="form-name" value="contact">
-            <p class="f-form__hp" hidden><label>Leave this empty <input name="bot-field"></label></p>
+            <p class="f-form__hp" hidden><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
             <div class="row2">
               <input type="text" name="name" placeholder="Name" autocomplete="name" required>
               <input type="text" name="firm" placeholder="Firm" autocomplete="organization" required>
@@ -429,9 +429,17 @@
             <textarea name="message" placeholder="Where do documents slow you down?" class="f-form__stack"></textarea>
             <button class="btn btn--soft f-form__submit" type="submit">Request a working session</button>
           </form>
-          <div class="f-form__ok" role="status">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-            Thank you — we'll reply within one business day.
+          <div class="f-form__ok" role="status" aria-live="polite">
+            <div class="f-ok__mark" aria-hidden="true">
+              <span class="f-ok__glow"></span>
+              <span class="f-ok__ring"></span>
+              <span class="f-ok__pulse"></span>
+              <span class="f-ok__burst"><i style="--p:0"></i><i style="--p:1"></i><i style="--p:2"></i><i style="--p:3"></i><i style="--p:4"></i><i style="--p:5"></i><i style="--p:6"></i><i style="--p:7"></i></span>
+              <svg class="f-ok__check" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <p class="f-ok__kicker">Sent</p>
+            <p class="f-ok__title">Message received.</p>
+            <p class="f-ok__lede">We&rsquo;ll reply within one business day.</p>
           </div>
           <p class="f-form__err" role="alert" hidden>Something went wrong sending that. Please email <a class="u-line" href="mailto:contact@getbespoke.ai">contact@getbespoke.ai</a> directly.</p>
         </div>
@@ -445,7 +453,7 @@
 </footer>
 <!-- /@shared:footer -->
 
-<script src="/assets/js/site.js?v=6b07fe38" defer></script>
+<script src="/assets/js/site.js?v=21ec05ed" defer></script>
 <script src="/assets/js/solutions.js?v=613115b6" defer></script>
 </body>
 </html>
