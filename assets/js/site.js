@@ -182,12 +182,24 @@
   // solutions dropdown (hover intent + click + keyboard)
   doc.querySelectorAll(".nav__item--dd").forEach((item) => {
     const btn = item.querySelector("button.nav__link");
+    const panel = item.querySelector(".dropdown");
     if (!btn) return;
     let closeTimer = null;
+    const keepOnScreen = () => {
+      if (!panel) return;
+      panel.style.translate = "0";
+      const pad = 16;
+      const rect = panel.getBoundingClientRect();
+      let dx = 0;
+      if (rect.right > window.innerWidth - pad) dx = window.innerWidth - pad - rect.right;
+      if (rect.left + dx < pad) dx = pad - rect.left;
+      panel.style.translate = dx ? `${dx}px 0` : "0";
+    };
     const open = () => {
       clearTimeout(closeTimer);
       item.classList.add("is-open");
       btn.setAttribute("aria-expanded", "true");
+      requestAnimationFrame(keepOnScreen);
     };
     const close = () => {
       item.classList.remove("is-open");
@@ -204,6 +216,9 @@
       if (!item.contains(e.relatedTarget)) close();
     });
     doc.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+    window.addEventListener("resize", () => {
+      if (item.classList.contains("is-open")) keepOnScreen();
+    });
   });
 
   /* ------------------------------------------------------------- reveals -- */
