@@ -17,7 +17,7 @@ TODAY = datetime.date.today().isoformat()
 
 # Hubs first, then their children, then the rest — crawl order mirrors the IA.
 ORDER = ["/", "/legal", "/finance", "/edtech", "/general-services",
-         "/about", "/demos", "/insights", "/contact"]
+         "/about", "/demos", "/contact"]
 
 
 def url_for(rel):

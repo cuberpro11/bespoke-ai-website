@@ -85,8 +85,14 @@
   force = true
 
 [[redirects]]
+  from = "/insights"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/insights.html"
-  to = "/insights"
+  to = "/"
   status = 301
   force = true
 
