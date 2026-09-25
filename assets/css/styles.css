@@ -790,7 +790,16 @@ body.nav-open .mobile-menu__panel { transform: none; }
   padding-bottom: clamp(3rem, 7vw, 5.5rem);
   overflow: clip;
 }
-.hero--tall { min-height: min(92vh, 980px); display: flex; flex-direction: column; justify-content: center; }
+.hero--tall {
+  /* Fill the visible window on landing, and track resizes (dvh) with a vh fallback. */
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: var(--nav-h);
+  padding-bottom: clamp(1.25rem, 3vh, 2.5rem);
+}
 
 .hero__bg, .hero__canvas {
   position: absolute; inset: 0;
@@ -4118,7 +4127,6 @@ body.nav-open .mobile-menu__panel { transform: none; }
   .uc-body p { font-size: 1rem; }
 
   /* layout */
-  .hero--tall { min-height: min(75vh, 700px); }
   .hero__actions .btn { width: 100%; justify-content: center; }
   .switch-panel { grid-template-columns: 1fr; }
   .diagram-grid { grid-template-columns: 1fr; }
