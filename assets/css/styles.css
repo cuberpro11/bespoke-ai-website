@@ -1036,14 +1036,23 @@ body.nav-open .mobile-menu__panel { transform: none; }
 .app__nav-label { font-family: var(--mono); font-size: 0.78cqw; letter-spacing: 0.22em; color: var(--t-faint); padding: 0.9cqw 0.8cqw 0.5cqw; }
 .app__item {
   display: flex; align-items: center; gap: 0.9cqw;
+  width: 100%;
   padding: 0.85cqw 0.9cqw;
   border-radius: 0.7cqw;
+  background: transparent;
+  font-family: inherit;
   font-size: 1.18cqw; font-weight: 500;
+  text-align: left;
   color: var(--t-dim);
   border: 1px solid transparent;
+  cursor: pointer;
   transition: background-color var(--mid) ease-out, color var(--mid) ease-out, border-color var(--mid) ease-out;
 }
 .app__item svg { width: 1.35cqw; height: 1.35cqw; opacity: 0.85; }
+.app__item:hover {
+  color: var(--t-bright);
+  background: rgba(32, 80, 232, 0.08);
+}
 .app__item.is-active {
   background: rgba(32, 80, 232, 0.16);
   border-color: rgba(61, 109, 255, 0.35);
@@ -1965,14 +1974,15 @@ body.nav-open .mobile-menu__panel { transform: none; }
   }
   .app__item {
     flex: 1;
+    width: auto;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
     gap: 0.7cqw;
     padding: 1.6cqw 0.5cqw;
     font-size: 2.7cqw;
     font-weight: 600;
     border-radius: 1.8cqw;
-    text-align: center;
     position: relative;
   }
   .app__item svg {

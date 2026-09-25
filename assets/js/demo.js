@@ -720,6 +720,21 @@
 
   /* --------------------------------------------------------------- wiring -- */
 
+  const goToChapter = (i) => {
+    enterChapter(i);
+    syncLoop();
+  };
+
+  /* Sidebar tabs jump to the same chapters as the controls below. */
+  [
+    [el.sideDocs, 0],  /* Documents → 01 Ingest */
+    [el.sideChat, 2],  /* Assistant → 03 Ask */
+    [el.sideDraft, 4], /* Drafts → 05 Draft */
+  ].forEach(([node, i]) => {
+    if (!node) return;
+    node.addEventListener("click", () => goToChapter(i));
+  });
+
   if (REDUCED) {
     // static poster: the answered state — the richest, most legible frame
     stage.classList.add("is-static", "no-anim");
@@ -746,10 +761,7 @@
   });
 
   chapterBtns.forEach((b, i) =>
-    b.addEventListener("click", () => {
-      enterChapter(i);
-      syncLoop();
-    })
+    b.addEventListener("click", () => goToChapter(i))
   );
 
   const io = new IntersectionObserver(([en]) => { inView = en.isIntersecting; syncLoop(); }, { threshold: MOBILE ? 0.06 : 0.12 });
