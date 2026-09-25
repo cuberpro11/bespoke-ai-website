@@ -800,6 +800,20 @@ body.nav-open .mobile-menu__panel { transform: none; }
   padding-top: var(--nav-h);
   padding-bottom: clamp(1.25rem, 3vh, 2.5rem);
 }
+/* Scale the headline with both width and height so the three lines stay inside the viewport. */
+.hero--tall .display {
+  font-size: clamp(2.4rem, 6.8vw, 7rem);
+  font-size: clamp(2.4rem, min(6.8vw, 11vh), 7rem);
+}
+@media (min-width: 900px) {
+  .hero--tall .mask-line > span { white-space: nowrap; }
+}
+@media (max-height: 520px) {
+  .hero--tall .lede { margin-top: 0.7rem; font-size: 0.95rem; }
+  .hero--tall .hero__lede { margin-bottom: 0.7rem; }
+  .hero--tall .hero__actions { margin-top: 0.7rem; }
+  .hero--tall .hero__actions .btn { width: auto; }
+}
 
 .hero__bg, .hero__canvas {
   position: absolute; inset: 0;
