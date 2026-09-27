@@ -61,8 +61,14 @@
   force = true
 
 [[redirects]]
+  from = "/about"
+  to = "/custom-software-development-team"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/about.html"
-  to = "/about"
+  to = "/custom-software-development-team"
   status = 301
   force = true
 
@@ -96,9 +102,11 @@
   status = 301
   force = true
 
+# The original articles were retired; send old links home until the
+# Industry Analysis section is rebuilt.
 [[redirects]]
-  from = "/articles/:slug.html"
-  to = "/articles/:slug"
+  from = "/articles/*"
+  to = "/"
   status = 301
   force = true
 

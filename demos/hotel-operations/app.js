@@ -6,6 +6,31 @@
 
   var D = window.HOTEL;
   var I18N = window.HOTEL_I18N;
+
+  function demoReturnHref() {
+    var fallback = "/demos";
+    try {
+      if (!document.referrer) return fallback;
+      var url = new URL(document.referrer);
+      if (url.origin !== location.origin) return fallback;
+      var here = location.pathname.replace(/\/$/, "") || "/";
+      var there = url.pathname.replace(/\/$/, "") || "/";
+      if (there === here) return fallback;
+      return url.pathname + url.search + url.hash;
+    } catch (e) {
+      return fallback;
+    }
+  }
+
+  var demoReturn = demoReturnHref();
+  var demoReturnIsIndex = (function () {
+    try {
+      var path = new URL(demoReturn, location.origin).pathname.replace(/\/$/, "") || "/";
+      return path === "/demos" || path === "/demos.html";
+    } catch (e) {
+      return true;
+    }
+  })();
   var root = document.getElementById("app");
   var toastHost = document.getElementById("toasts");
   var toastTimer = null;
@@ -15,35 +40,6 @@
   var lastPage = null;
   var pinThread = false;
   var windowY = 0;
-  var LANG_KEY = "hotel-ops-lang";
-
-  function readLang() {
-    try {
-      var stored = localStorage.getItem(LANG_KEY);
-      if (stored === "ar" || stored === "en") return stored;
-    } catch (err) {}
-    return "en";
-  }
-
-  function applyDir(lang) {
-    var ar = lang === "ar";
-    document.documentElement.lang = ar ? "ar" : "en";
-    document.documentElement.dir = ar ? "rtl" : "ltr";
-    document.documentElement.classList.toggle("is-ar", ar);
-    document.title = ar ? "عمليات الفندق — عرض بيسكوك" : "Hotel Operations — Bespoke Demo";
-    var cueLang = ar ? "ar" : "en";
-    var cue = document.querySelector(".hx-video__cue-label");
-    var cueLink = document.querySelector(".hx-video__cue");
-    if (cue) cue.textContent = I18N.t(cueLang, "scrollCue");
-    if (cueLink) cueLink.setAttribute("aria-label", I18N.t(cueLang, "scrollCueAria"));
-  }
-
-  function setLang(next) {
-    state.lang = next;
-    try { localStorage.setItem(LANG_KEY, next); } catch (err) {}
-    applyDir(next);
-    render();
-  }
 
   function t(key, vars) {
     return I18N.t(state.lang, key, vars);
@@ -103,7 +99,7 @@
 
   var state = {
     page: "overview",
-    lang: readLang(),
+    lang: "en",
     now: new Date(D.BASE_NOW.getTime()),
     employees: D.EMPLOYEES,
     tasks: D.TASKS.map(function (x) { return Object.assign({}, x); }),
@@ -468,7 +464,7 @@
         }, n > 0 ? el("span", {}, String(n)) : null));
       });
     });
-    return el("div.fmap", {}, nodes);
+    return el("div.fmap-scroll", {}, el("div.fmap", {}, nodes));
   }
 
   /* ---------------------------------------------------------- composer -- */
@@ -657,7 +653,7 @@
             el("div", {}, alerts.map(function (m) {
               var e = findEmp(m.employeeId);
               var pillBg = m.kind === "alert" ? "var(--claret-soft)" : m.kind === "reminder" ? "var(--brass-soft)" : "var(--line-2)";
-              return el("div.row", {
+              return el("div.row.alertrow", {
                 style: { padding: "10px 18px", borderBottom: "1px solid var(--line-2)", alignItems: "flex-start", cursor: "pointer" },
                 onclick: function () { openMessages(m.employeeId); }
               },
@@ -702,7 +698,7 @@
           el("p", {}, t("colleaguesSub"))
         )
       ),
-      el("div.grid", { style: { gridTemplateColumns: "260px 1fr", alignItems: "start" } },
+      el("div.grid.split-staff", {},
         el("div.card", {},
           el("div.bd", { style: { paddingBottom: "8px" } },
             el("input", Object.assign({
@@ -746,7 +742,7 @@
               el("button", { type: "button", onclick: function () { quickAssign(emp.id); } }, t("assignTask"))
             )
           ),
-          el("div.card", { style: { display: "flex" } },
+          el("div.card.statstrip", {},
             [
               [String(s.done.length), t("completed7d")],
               [String(Math.round(s.onTimeRate * 100)) + "%", t("onTime")],
@@ -756,12 +752,13 @@
               return el("div.stat", { style: { flex: "1" } }, el("b", {}, pair[0]), el("span", {}, pair[1]));
             })
           ),
-          el("div.grid", { style: { gridTemplateColumns: "1fr 1fr", alignItems: "start" } },
+          el("div.grid.split-pair", {},
             el("div.card", {},
               el("div.hd", {},
                 el("h3", {}, t("assignedTasks")),
                 el("span.small.muted", {}, t("nOpen", { n: openCount }))
               ),
+              el("div.table-scroll", {},
               el("table.tbl", {},
                 el("tbody", {},
                   assigned.map(function (x) {
@@ -777,9 +774,11 @@
                   openCount === 0 ? el("tr", {}, el("td.muted", {}, t("nothingAssigned"))) : null
                 )
               )
+              )
             ),
             el("div.card", {},
               el("div.hd", {}, el("h3", {}, t("completedLog"))),
+              el("div.table-scroll", {},
               el("table.tbl", {},
                 el("tbody", {}, doneLog.map(function (x) {
                   var delta = D.minutesBetween(x.due, x.completedAt);
@@ -793,6 +792,7 @@
                     el("td.small", { style: { color: delta > 0 ? "var(--claret)" : "var(--sage)", whiteSpace: "nowrap" } }, lateLabel)
                   );
                 }))
+              )
               )
             )
           ),
@@ -885,6 +885,7 @@
             }, t("clear")) : null
           )
         ),
+        el("div.table-scroll", {},
         el("table.tbl" + (frame.list ? ".is-refresh" : ""), {},
           el("thead", {},
             el("tr", {},
@@ -927,6 +928,7 @@
               ? el("tr", {}, el("td.muted", { colSpan: 6, style: { padding: "28px", textAlign: "center" } }, t("noTasksMatch")))
               : null
           )
+        )
         )
       )
     ];
@@ -976,7 +978,7 @@
           el("p", {}, t("taskTypesSub"))
         )
       ),
-      el("div.grid", { style: { gridTemplateColumns: "1fr 1fr", alignItems: "start" } },
+      el("div.grid.split-pair", {},
         el("div.card", {},
           el("div.hd", {}, el("h3", {}, t("newTaskType"))),
           el("div.bd", {},
@@ -1114,7 +1116,7 @@
           el("p", {}, t("messagesSub"))
         )
       ),
-      el("div.grid", { style: { gridTemplateColumns: "300px 1fr", height: "calc(100vh - 190px)", minHeight: "480px" } },
+      el("div.grid.split-msgs", {},
         el("div.card", { style: { display: "flex", flexDirection: "column", overflow: "hidden" } },
           el("div.hd", { style: { gap: "6px" } },
             [
@@ -1359,15 +1361,15 @@
 
     var tree = el("div.hx", {},
       el("aside.side" + (frame.boot ? ".is-boot" : ""), {},
-        el("a.side__back", { href: "../../demos.html" },
+        el("a.side__back", { href: demoReturn },
           icon("arrowLeft"),
-          el("span", {}, t("backDemos"))
+          el("span", {}, demoReturnIsIndex ? t("backDemos") : (state.lang === "ar" ? "رجوع" : "Back"))
         ),
         el("div.brand", {},
           el("h1", {}, t("brandName")),
           el("span", {}, t("brandSub"))
         ),
-        el("nav", { style: { paddingTop: "10px", flex: "1" } }, NAV.map(function (item, i) {
+        el("nav.side__nav", {}, NAV.map(function (item, i) {
           var id = item[0];
           var label = item[1];
           var ico = item[2];
@@ -1392,24 +1394,11 @@
           el("span.small.muted", {}, fmtDay(state.now)),
           el("span.pill", {}, el("i", { style: { background: "var(--sage)" } }), t("camerasOnline")),
           el("span.small.muted", {}, t("occupancy")),
-          el("div.lang-toggle", {
-            role: "group",
-            "aria-label": t("langToggleAria")
-          },
-            el("button" + (state.lang === "en" ? ".on" : ""), {
-              type: "button",
-              onclick: function () { if (state.lang !== "en") setLang("en"); }
-            }, "EN"),
-            el("button" + (state.lang === "ar" ? ".on" : ""), {
-              type: "button",
-              onclick: function () { if (state.lang !== "ar") setLang("ar"); }
-            }, "عربي")
-          ),
           el("div.user", {},
             el("div.ua", {}, "E"),
             el("div", {},
               el("b", {}, "Elena Marsh"),
-              el("span.ltr", { dir: "ltr" }, "elena.marsh@themarlow.example")
+              el("span.ltr.user__mail", { dir: "ltr" }, "elena.marsh@themarlow.example")
             )
           )
         ),
@@ -1468,6 +1457,10 @@
   function restoreScroll(samePage) {
     function apply() {
       if (samePage) window.scrollTo(0, windowY);
+      else if (window.matchMedia("(max-width: 900px)").matches) {
+        var app = document.getElementById("app");
+        if (app) app.scrollIntoView({ block: "start" });
+      }
       var nodes = root.querySelectorAll("[data-scroll]");
       for (var i = 0; i < nodes.length; i++) {
         var key = nodes[i].getAttribute("data-scroll");
@@ -1491,6 +1484,5 @@
     render();
   }, 8000);
 
-  applyDir(state.lang);
   render();
 })();

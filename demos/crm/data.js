@@ -12,7 +12,7 @@ window.CRM_DATA = (function () {
       conversion: "12%", conversionNote: "1 signed this period",
       pipeline: "$120K", responseTime: "1.9h",
       channels: { Email: 3, Phone: 3, Website: 1 },
-      pipelineRows: [["Total Intakes", 7], ["Awaiting Response", 3], ["Consultations Booked", 3], ["Signed This Period", 1], ["Declined / Closed", 1]],
+      pipelineRows: [["Total Intake", 7], ["Awaiting Response", 3], ["Consultations Booked", 3], ["Signed This Period", 1], ["Declined / Closed", 1]],
       weeks: [
         { label: "Feb 10–16", Phone: 2, Email: 3, Website: 1 }
       ]
@@ -22,7 +22,7 @@ window.CRM_DATA = (function () {
       conversion: "15%", conversionNote: "4 signed this period",
       pipeline: "$415K", responseTime: "2.4h",
       channels: { Email: 12, Phone: 10, Website: 6 },
-      pipelineRows: [["Total Intakes", 27], ["Awaiting Response", 3], ["Consultations Booked", 11], ["Signed This Period", 4], ["Declined / Closed", 3]],
+      pipelineRows: [["Total Intake", 27], ["Awaiting Response", 3], ["Consultations Booked", 11], ["Signed This Period", 4], ["Declined / Closed", 3]],
       weeks: [
         { label: "Jan 13–19",   Phone: 2, Email: 1, Website: 1 },
         { label: "Jan 20–26",   Phone: 1, Email: 2, Website: 1 },
@@ -36,7 +36,7 @@ window.CRM_DATA = (function () {
       conversion: "17%", conversionNote: "12 signed this period",
       pipeline: "$1.1M", responseTime: "2.8h",
       channels: { Email: 31, Phone: 26, Website: 14 },
-      pipelineRows: [["Total Intakes", 71], ["Awaiting Response", 3], ["Consultations Booked", 29], ["Signed This Period", 12], ["Declined / Closed", 9]],
+      pipelineRows: [["Total Intake", 71], ["Awaiting Response", 3], ["Consultations Booked", 29], ["Signed This Period", 12], ["Declined / Closed", 9]],
       weeks: [
         { label: "Dec 16–22",   Phone: 2, Email: 2, Website: 1 },
         { label: "Dec 23–29",   Phone: 1, Email: 1, Website: 1 },
@@ -51,7 +51,7 @@ window.CRM_DATA = (function () {
     }
   };
 
-  var CHANNEL_COLOR = { Phone: "#4f46e5", Email: "#8b5cf6", Website: "#22d3ee" };
+  var CHANNEL_COLOR = { Phone: "#0f766e", Email: "#14b8a6", Website: "#5eead4" };
 
   var ACTIVITY = [
     { dot: "#4f46e5", text: "New intake: John Smith via email",            time: "10:30 AM" },

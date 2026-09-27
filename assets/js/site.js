@@ -123,12 +123,12 @@
     burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     mobileMenu.setAttribute("aria-hidden", String(!open));
     if (open) {
-      if (page && solutionPages.has(page)) {
+      if (section === "solutions") {
         requestAnimationFrame(() => {
           requestAnimationFrame(() => setMobileSolutionsOpen(true));
         });
       }
-      const first = menuPanel ? menuPanel.querySelector(".mobile-menu__close") : null;
+      const first = menuPanel ? menuPanel.querySelector(".mobile-menu__item--link, .mobile-menu__toggle") : null;
       if (first) requestAnimationFrame(() => first.focus());
     } else {
       setMobileSolutionsOpen(false);
@@ -1035,6 +1035,29 @@
         })
         .catch(showError);
     });
+  });
+
+  /* ---- team cards: flip to the bio ---- */
+  doc.addEventListener("click", (event) => {
+    const btn = event.target.closest(".person-flip__btn");
+    if (!btn) return;
+    const flip = btn.closest(".person-flip");
+    if (!flip) return;
+    const showBio = !flip.classList.contains("is-flipped");
+    flip.classList.toggle("is-flipped", showBio);
+    flip.querySelectorAll(".person-flip__face").forEach((face) => {
+      const isBack = face.classList.contains("person-flip__face--back");
+      const hidden = showBio ? !isBack : isBack;
+      if (hidden) face.setAttribute("inert", "");
+      else face.removeAttribute("inert");
+    });
+    flip.querySelectorAll(".person-flip__btn").forEach((control) => {
+      control.setAttribute("aria-pressed", showBio ? "true" : "false");
+    });
+    const next = flip.querySelector(
+      showBio ? ".person-flip__face--back .person-flip__btn" : ".person-flip__face--front .person-flip__btn"
+    );
+    if (next) next.focus();
   });
 
   /* ---- extended motion (additive) ---- */

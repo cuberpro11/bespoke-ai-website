@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>NYC Real Estate AI Portal — Bespoke Demo</title>
-<meta name="description" content="Bespoke demo: a property operations portal covering a 50-unit NYC portfolio — live triage monitor, tenant roster, expense ledger, and AI autopilot settings.">
+<title>NYC Real Estate AI Portal — Bespoke AI Demo</title>
+<meta name="description" content="Bespoke AI demo: a property operations portal covering a 50-unit NYC portfolio — live triage monitor, tenant roster, expense ledger, and AI autopilot settings.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
 <link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon.png">
@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=1">
+<link rel="stylesheet" href="styles.css?v=3">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -26,20 +26,16 @@
 <a class="skip-link" href="#main">Skip to the demo</a>
 
 <header class="apphead">
-  <div class="apphead__brand">
-    <span class="apphead__mark" aria-hidden="true">B</span>
+  <a class="apphead__brand" href="/">
+    <span class="apphead__mark">
+      <img src="../../assets/img/brain-mark.svg" alt="" width="22" height="22">
+    </span>
     <span class="apphead__name">Bespoke</span>
-    <span class="apphead__dot" aria-hidden="true">·</span>
-    <span class="apphead__sub">NYC Real Estate AI Portal</span>
-  </div>
-  <div class="apphead__user">
-    <a class="apphead__back" href="/demos">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      <span>Bespoke demos</span>
-    </a>
-    <span class="apphead__mail">am@getbespoke.ai</span>
-    <span class="apphead__avatar" aria-hidden="true">AM</span>
-  </div>
+  </a>
+  <a class="apphead__back" href="/demos">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>Bespoke demos</span>
+  </a>
 </header>
 
 <div class="shell">
@@ -79,27 +75,23 @@
 
       <div class="stats">
         <article class="stat">
-          <p class="stat__label">Total portfolios</p>
+          <p class="stat__label">Total Portfolio</p>
           <p class="stat__value">50 <small>Apts</small></p>
-          <p class="stat__note">Brooklyn, Manhattan, Queens &amp; the Bronx</p>
         </article>
 
         <article class="stat">
           <p class="stat__label">Active workflow tickets</p>
-          <p class="stat__value stat__value--blue">3</p>
-          <p class="stat__note">Pending action or tenant verification</p>
+          <div class="stat__value">3 <button class="stat__view" type="button" id="viewEmergencies">View</button></div>
         </article>
 
         <article class="stat">
           <p class="stat__label">Total paid ledger</p>
           <p class="stat__value">$785</p>
-          <p class="stat__note">Compiled from approved quotes</p>
         </article>
 
         <article class="stat">
           <p class="stat__label">AI autopilot mode</p>
           <p class="stat__value stat__value--green" id="autopilotState">Enabled <small id="autopilotCap">(quotes &lt; $150)</small></p>
-          <p class="stat__note">Dispatches cheap routine repairs automatically</p>
           <span class="stat__toggle">
             <button class="toggle" type="button" id="autopilotToggleTop" aria-pressed="true" aria-label="AI autopilot"></button>
           </span>
@@ -117,7 +109,7 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
               <input type="search" id="unitSearch" placeholder="Filter by unit or tenant" aria-label="Filter by unit or tenant">
             </label>
-            <div class="tabs" id="unitTabs" role="group" aria-label="Filter by borough"></div>
+            <div class="chips" id="unitTabs" role="group" aria-label="Filter by borough"></div>
           </div>
         </div>
 
@@ -138,7 +130,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
           <input type="search" id="tenantSearch" placeholder="Search tenants" aria-label="Search tenants">
         </label>
-        <div class="tabs" id="tenantTabs" role="group" aria-label="Filter by borough"></div>
+        <div class="chips" id="tenantTabs" role="group" aria-label="Filter by borough"></div>
       </div>
 
       <section class="panel" style="padding-left:0;padding-right:0" aria-label="Tenant roster">
@@ -251,7 +243,6 @@
     </section>
 
     <footer class="demo-foot">
-      <p>Bespoke demo environment — illustrative portfolio data, no live tenant records.</p>
       <a href="/demos">← Back to all demos</a>
     </footer>
 
@@ -259,6 +250,7 @@
 </div>
 
 <script src="data.js?v=1" defer></script>
-<script src="app.js?v=1" defer></script>
+<script src="app.js?v=2" defer></script>
+<script src="/assets/js/demo-back.js" defer></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Local preview server that matches how Netlify serves the site.
 
-Pretty URLs (`/about` → about.html, `/legal` → legal/index.html), the
+Pretty URLs (`/contact` → contact.html, `/legal` → legal/index.html), the
 custom 404 page, and no browser caching. On start — and whenever you edit
 partials or CSS/JS — it restamps shared nav/footer and asset hashes so a
 refresh shows your changes.
@@ -13,7 +13,7 @@ import os
 import subprocess
 import sys
 import threading
-from http.server import HTTPServer, SimpleHTTPRequestHandler
+from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SYNC = os.path.join(ROOT, "tools", "sync-shared.py")
@@ -125,4 +125,4 @@ if __name__ == "__main__":
     refresh_shared()
     print(f"Preview: http://127.0.0.1:{port}/", flush=True)
     print("Edit HTML, CSS, JS, or partials/ and refresh. Ctrl+C to stop.", flush=True)
-    HTTPServer(("127.0.0.1", port), NetlifyLikeHandler).serve_forever()
+    ThreadingHTTPServer(("127.0.0.1", port), NetlifyLikeHandler).serve_forever()

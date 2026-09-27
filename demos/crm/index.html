@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Client Relations Portal — Bespoke Demo</title>
-<meta name="description" content="Bespoke demo: a legal client relations portal — intake dashboard, lead scoring, AI-proposed actions, consultation booking, and integrations.">
+<title>Client Relations Portal — Bespoke AI Demo</title>
+<meta name="description" content="Bespoke AI demo: a legal client relations portal — intake dashboard, lead scoring, AI-proposed actions, consultation booking, and integrations.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
 <link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon.png">
@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=1">
+<link rel="stylesheet" href="styles.css?v=4">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -25,14 +25,20 @@
 <body>
 <a class="skip-link" href="#main">Skip to the demo</a>
 
+<header class="apphead">
+  <a class="apphead__brand" href="/">
+    <img class="apphead__mark" src="../../assets/img/brain-mark.svg" alt="" width="28" height="28">
+    <span class="apphead__name">Bespoke</span>
+  </a>
+  <a class="apphead__back" href="/demos">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>Bespoke demos</span>
+  </a>
+</header>
+
 <div class="shell">
 
   <nav class="sidebar" aria-label="Portal sections">
-    <div class="brand">
-      <div class="brand__name">Your Firm</div>
-      <div class="brand__sub">Client Relations Portal</div>
-    </div>
-
     <div class="sidenav" role="tablist">
       <button class="sidenav__item is-active" type="button" role="tab" aria-selected="true" data-view="dashboard">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
@@ -59,13 +65,6 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.4l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0-1.2-2.9H2a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1.1 1.7 1.7 0 0 0-.4-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V2a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H22a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>
         <span>Settings</span>
       </button>
-    </div>
-
-    <div class="sidefoot">
-      <a href="/demos">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back to Bespoke demos
-      </a>
     </div>
   </nav>
 
@@ -162,7 +161,6 @@
       <section style="margin-bottom:22px" aria-label="Connected integrations">
         <div class="clientsec__head">
           <h2 class="clientsec__title">Connected</h2>
-          <span class="clientsec__count" id="connectedCount"></span>
         </div>
         <div class="intlist" id="connectedList"></div>
       </section>
@@ -170,7 +168,6 @@
       <section aria-label="Available integrations">
         <div class="clientsec__head">
           <h2 class="clientsec__title">Available</h2>
-          <span class="clientsec__count" id="availableCount"></span>
         </div>
         <div class="intlist" id="availableList"></div>
       </section>
@@ -187,15 +184,68 @@
             <span class="profile__avatar" aria-hidden="true">AU</span>
             <div>
               <div class="profile__name">Admin User</div>
-              <div class="profile__meta">admin@yourlawfirm.com</div>
-              <div class="profile__meta">Your Law Firm</div>
+              <div class="profile__meta">Firm administrator</div>
             </div>
           </div>
+          <dl class="setrows">
+            <div><dt>Name</dt><dd>Admin User</dd></div>
+            <div><dt>Email</dt><dd>admin@yourlawfirm.com</dd></div>
+            <div><dt>Firm</dt><dd>Your Law Firm</dd></div>
+          </dl>
+        </section>
+
+        <section class="card" aria-label="Firm profile">
+          <h3 class="card__title card__title--row">Firm profile <button class="introw__btn" type="button" data-noop="1">Edit</button></h3>
+          <dl class="setrows">
+            <div><dt>Practice areas</dt><dd>Personal injury · Medical malpractice · Product liability</dd></div>
+            <div><dt>Office</dt><dd>New York, NY</dd></div>
+            <div><dt>Time zone</dt><dd>Eastern Time (ET)</dd></div>
+            <div><dt>Business hours</dt><dd>Mon–Fri, 8:00 AM – 6:00 PM</dd></div>
+          </dl>
+        </section>
+
+        <section class="card" aria-label="Team and roles">
+          <h3 class="card__title card__title--row">Team &amp; roles <button class="introw__btn introw__btn--connect" type="button" data-noop="1">Invite member</button></h3>
+          <div class="teamrows">
+            <div class="teamrow"><span class="teamrow__avatar" aria-hidden="true">AU</span><span class="teamrow__who"><b>Admin User</b><span>admin@yourlawfirm.com</span></span><span class="rolepill rolepill--admin">Admin</span></div>
+            <div class="teamrow"><span class="teamrow__avatar" aria-hidden="true">RA</span><span class="teamrow__who"><b>Rosa Alvarez</b><span>r.alvarez@yourlawfirm.com</span></span><span class="rolepill">Partner</span></div>
+            <div class="teamrow"><span class="teamrow__avatar" aria-hidden="true">DO</span><span class="teamrow__who"><b>David Okafor</b><span>d.okafor@yourlawfirm.com</span></span><span class="rolepill">Associate</span></div>
+            <div class="teamrow"><span class="teamrow__avatar" aria-hidden="true">ML</span><span class="teamrow__who"><b>Mei Lin</b><span>m.lin@yourlawfirm.com</span></span><span class="rolepill">Intake specialist</span></div>
+          </div>
+        </section>
+
+        <section class="card" aria-label="Intake and lead scoring">
+          <h3 class="card__title">Intake &amp; lead scoring</h3>
+          <dl class="setrows">
+            <div><dt>High-value threshold</dt><dd>$75,000 estimated value</dd></div>
+            <div><dt>First-response target</dt><dd>Within 2 hours</dd></div>
+            <div><dt>New lead assignment</dt><dd>Round-robin by practice area</dd></div>
+          </dl>
+          <div class="setswitches" data-group="intake"></div>
+        </section>
+
+        <section class="card" aria-label="AI agent">
+          <h3 class="card__title">AI agent</h3>
+          <dl class="setrows">
+            <div><dt>Reply tone</dt><dd>Warm, professional</dd></div>
+            <div><dt>Model data retention</dt><dd>Zero retention</dd></div>
+          </dl>
+          <div class="setswitches" data-group="agent"></div>
         </section>
 
         <section class="card" aria-label="Notifications">
           <h3 class="card__title">Notifications</h3>
           <div id="notifRows"></div>
+        </section>
+
+        <section class="card" aria-label="Security">
+          <h3 class="card__title">Security</h3>
+          <dl class="setrows">
+            <div><dt>Session timeout</dt><dd>30 minutes</dd></div>
+            <div><dt>Audit log retention</dt><dd>7 years</dd></div>
+            <div><dt>Data residency</dt><dd>United States (East)</dd></div>
+          </dl>
+          <div class="setswitches" data-group="security"></div>
         </section>
       </div>
     </section>
@@ -206,7 +256,8 @@
 <div id="modalRoot"></div>
 <div id="toastRoot"></div>
 
-<script src="data.js?v=1" defer></script>
-<script src="app.js?v=1" defer></script>
+<script src="data.js?v=2" defer></script>
+<script src="app.js?v=3" defer></script>
+<script src="/assets/js/demo-back.js" defer></script>
 </body>
 </html>

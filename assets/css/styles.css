@@ -352,7 +352,7 @@ body[data-page="general-services"] .hero + .section .section-head > .kicker {
 .scroll-progress {
   position: absolute;
   left: 0; right: 0; bottom: -1px;
-  height: 1.5px;
+  height: 4px;
   background: linear-gradient(90deg, var(--cobalt), var(--cobalt-bright));
   transform: scaleX(0);
   transform-origin: left;
@@ -571,7 +571,14 @@ body[data-page="general-services"] .hero + .section .section-head > .kicker {
 body.nav-open .nav__burger span:nth-child(1) { top: 21px; transform: rotate(45deg); }
 body.nav-open .nav__burger span:nth-child(2) { opacity: 0; }
 body.nav-open .nav__burger span:nth-child(3) { top: 21px; transform: rotate(-45deg); }
-body.nav-open .nav { z-index: 230; }
+body.nav-open .nav {
+  z-index: 230;
+  height: var(--nav-h);
+  background: var(--surface-menu);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border-bottom-color: var(--line-dark);
+}
 
 /* mobile overlay */
 .mobile-menu {
@@ -606,7 +613,7 @@ body.nav-open .mobile-menu__backdrop { opacity: 1; }
   -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
   padding:
-    max(0.85rem, env(safe-area-inset-top))
+    calc(var(--nav-h) + max(0.85rem, env(safe-area-inset-top)))
     max(var(--gutter), env(safe-area-inset-right))
     max(1rem, env(safe-area-inset-bottom))
     max(var(--gutter), env(safe-area-inset-left));
@@ -615,13 +622,7 @@ body.nav-open .mobile-menu__backdrop { opacity: 1; }
 }
 body.nav-open .mobile-menu__panel { transform: none; }
 .mobile-menu__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid var(--line-dark);
-  flex: none;
+  display: none;
 }
 .mobile-menu__header .brand {
   font-size: 1.32rem;
@@ -790,7 +791,18 @@ body.nav-open .mobile-menu__panel { transform: none; }
   padding-bottom: clamp(3rem, 7vw, 5.5rem);
   overflow: clip;
 }
-.hero--tall { min-height: min(92vh, 980px); display: flex; flex-direction: column; justify-content: center; }
+.hero--tall {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: calc(var(--nav-h) + clamp(0.75rem, 2.5vh, 3.5rem));
+  padding-bottom: clamp(1.25rem, 3vh, 3rem);
+}
+.hero--tall .display {
+  font-size: clamp(2.5rem, min(7.6vw, 10vh), 6.6rem);
+}
 
 .hero__bg, .hero__canvas {
   position: absolute; inset: 0;
@@ -1013,12 +1025,19 @@ body.nav-open .mobile-menu__panel { transform: none; }
 .app__nav-label { font-family: var(--mono); font-size: 0.78cqw; letter-spacing: 0.22em; color: var(--t-faint); padding: 0.9cqw 0.8cqw 0.5cqw; }
 .app__item {
   display: flex; align-items: center; gap: 0.9cqw;
+  width: 100%;
   padding: 0.85cqw 0.9cqw;
   border-radius: 0.7cqw;
   font-size: 1.18cqw; font-weight: 500;
   color: var(--t-dim);
   border: 1px solid transparent;
+  text-align: left;
+  cursor: pointer;
   transition: background-color var(--mid) ease-out, color var(--mid) ease-out, border-color var(--mid) ease-out;
+}
+.app__item:hover {
+  background: rgba(32, 80, 232, 0.12);
+  color: var(--t-bright);
 }
 .app__item svg { width: 1.35cqw; height: 1.35cqw; opacity: 0.85; }
 .app__item.is-active {
@@ -1564,6 +1583,7 @@ body.nav-open .mobile-menu__panel { transform: none; }
   color: #fff; font-weight: 600; font-size: 1.05cqw;
   border-radius: 0.8cqw;
   padding: 1cqw;
+  cursor: pointer;
   transition: background-color var(--fast) linear, transform var(--fast) ease-out, box-shadow var(--fast) linear;
 }
 .btn-export.is-hot { background: var(--cobalt-bright); transform: scale(1.04); box-shadow: 0 1cqw 2.6cqw -0.8cqw rgba(61, 109, 255, 0.9); }
@@ -1577,6 +1597,10 @@ body.nav-open .mobile-menu__panel { transform: none; }
   pointer-events: none;
 }
 .chip-row.is-in { opacity: 1; transform: none; }
+.chip-row.is-in [data-el="chip-draft"] {
+  pointer-events: auto;
+  cursor: pointer;
+}
 .sugg-chip {
   display: inline-flex; align-items: center; gap: 0.55cqw;
   font-size: 0.95cqw; font-weight: 500;
@@ -3317,31 +3341,53 @@ body.nav-open .mobile-menu__panel { transform: none; }
 .team-cell p { color: var(--t-dim); font-size: 0.93rem; }
 .team-cell .tc-mono { font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.2em; color: var(--sky); text-transform: uppercase; display: block; margin-bottom: 1.1rem; }
 
-/* meet the team */
-.people-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
-.person-card {
-  padding: 1.7rem 1.4rem 1.9rem;
-  text-align: center;
+/* meet the team — flip cards. The 3D turn lives on the inner, not the card,
+   so a parent overflow or hover transform cannot flatten it. */
+.people-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; align-items: stretch; }
+.person-card { display: flex; min-width: 0; }
+.person-flip { flex: 1; display: flex; width: 100%; perspective: 1400px; }
+.person-flip__inner {
+  flex: 1;
+  display: grid;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform var(--slow) var(--ease-out);
+}
+.person-flip.is-flipped .person-flip__inner { transform: rotateY(180deg); }
+.person-flip__face {
+  grid-area: 1 / 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  position: relative;
+  backface-visibility: hidden;
+  background: var(--white);
+  border: 1px solid var(--line-light);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: border-color var(--mid) ease-out;
+}
+.person-card:hover .person-flip__face { border-color: rgba(32, 80, 232, 0.35); }
+.person-flip__face--back {
+  transform: rotateY(180deg);
+  justify-content: center;
+  padding: 2rem 1.75rem 4.25rem;
 }
 .person-avatar {
-  width: 96px;
-  height: 96px;
-  margin-bottom: 1.15rem;
-  border-radius: 22px;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  margin: 0;
+  border-radius: 0;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 0 10px 26px -14px rgba(12, 26, 58, 0.4);
+  box-shadow: none;
+  background: #111114;
 }
 .person-avatar img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 18%;
+  object-position: center 22%;
 }
 .person-avatar--placeholder {
   display: flex;
@@ -3359,6 +3405,10 @@ body.nav-open .mobile-menu__panel { transform: none; }
   letter-spacing: -0.04em;
   color: var(--cobalt-deep);
 }
+.person-meta {
+  padding: 1.25rem 4.25rem 1.35rem 1.35rem;
+  text-align: left;
+}
 .person-name {
   display: block;
   font-family: var(--serif);
@@ -3367,18 +3417,66 @@ body.nav-open .mobile-menu__panel { transform: none; }
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--ink-900);
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.4rem;
 }
 .person-role {
+  display: block;
   font-family: var(--sans);
   font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--cobalt);
-  margin-bottom: 0.95rem;
+  line-height: 1.45;
+  margin-bottom: 0;
 }
-.person-desc { font-size: 0.88rem; line-height: 1.55; color: var(--ink-600); max-width: 26ch; margin-inline: auto; }
+.person-flip__head {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line-light);
+}
+.person-desc {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--ink-600);
+  max-width: 36ch;
+  margin: 0;
+  text-align: left;
+}
+.person-flip__btn {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--ink-400);
+  border: 1px solid var(--line-light);
+  background: var(--white);
+  transition: color var(--fast) ease, border-color var(--fast) ease, background var(--fast) ease;
+}
+.person-flip__btn:hover,
+.person-flip__btn:focus-visible {
+  color: var(--cobalt);
+  border-color: rgba(36, 84, 216, 0.35);
+  background: rgba(36, 84, 216, 0.06);
+}
+.person-flip__btn:focus-visible {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .person-flip { perspective: none; }
+  .person-flip__inner,
+  .person-flip.is-flipped .person-flip__inner { transform: none; transition: none; }
+  .person-flip__face,
+  .person-flip__face--back { transform: none; backface-visibility: visible; transition: opacity var(--fast) ease; }
+  .person-flip__face--back { opacity: 0; }
+  .person-flip.is-flipped .person-flip__face--front { opacity: 0; }
+  .person-flip.is-flipped .person-flip__face--back { opacity: 1; }
+}
 
 /* insights */
 .insight-featured {
@@ -3405,10 +3503,10 @@ body.nav-open .mobile-menu__panel { transform: none; }
 .insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
 .insight-card { padding: 1.7rem 1.6rem 1.9rem; display: flex; flex-direction: column; min-height: 300px; }
 
-/* demo previews */
-.hero--demos {
-  padding-top: calc(var(--nav-h) + 1.6rem);
-  padding-bottom: 1.8rem;
+/* demo previews — hero spacing matches other interior pages (.hero--page) */
+.hero--demos .lede {
+  max-width: 46rem;
+  margin-top: 1.25rem;
 }
 .demos-page {
   padding-top: clamp(2.2rem, 4vw, 3.2rem);
@@ -4118,7 +4216,7 @@ body.nav-open .mobile-menu__panel { transform: none; }
   .uc-body p { font-size: 1rem; }
 
   /* layout */
-  .hero--tall { min-height: min(75vh, 700px); }
+  .hero--tall { min-height: 100vh; min-height: 100dvh; }
   .hero__actions .btn { width: 100%; justify-content: center; }
   .switch-panel { grid-template-columns: 1fr; }
   .diagram-grid { grid-template-columns: 1fr; }
@@ -4166,14 +4264,11 @@ body.nav-open .mobile-menu__panel { transform: none; }
 @media (max-width: 560px) {
   body { font-size: 1rem; }
   .stats-grid { grid-template-columns: 1fr; }
-  /* two-up on phones: the team sits right under the hero, so a single
-     column of six tall cards pushed everything else a long way down */
-  .people-grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
-  .person-card { padding: 1.1rem 0.8rem 1.2rem; }
-  .person-avatar { width: 68px; height: 68px; border-radius: 16px; margin-bottom: 0.8rem; }
-  .person-name { font-size: 1.2rem; margin-bottom: 0.3rem; }
-  .person-role { font-size: 0.6rem; letter-spacing: 0.08em; margin-bottom: 0.6rem; }
-  .person-desc { font-size: 0.8rem; line-height: 1.5; max-width: none; }
+  /* one-up on phones: the portraits are tall, so two columns would crush them */
+  .people-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .person-name { font-size: 1.35rem; }
+  .person-role { font-size: 0.64rem; letter-spacing: 0.1em; }
+  .person-desc { font-size: 1rem; max-width: none; }
   .sec-grid { grid-template-columns: 1fr; }
   .cap-grid { grid-template-columns: 1fr; }
   .fin-dash { grid-template-columns: 1fr; }
@@ -5180,10 +5275,17 @@ body[data-page="contact"] {
   margin-bottom: 2rem;
 }
 
-/* the band is .on-light (ink text, white cards), so it needs its own paper
-   ground; without it the dark body showed through */
-.services-band { background: var(--paper); }
-.services-band + .deliver-section { border-top: 1px solid var(--line-light); }
+/* Light ground of its own so the dark page body does not show through. */
+.services-band {
+  background: var(--white);
+  color: var(--ink-900);
+}
+.services-band .h2,
+.services-band .svc-col__hub h3 { color: var(--ink-900); }
+.services-band .lede,
+.services-band .svc-col__hub p,
+.services-band .svc-foot { color: var(--ink-600); }
+.services-band .link-arrow { color: var(--cobalt); }
 
 .svc-grid {
   display: grid;
@@ -5235,7 +5337,7 @@ body[data-page="contact"] {
 
 .svc-col__list {
   list-style: none;
-  margin: auto 0 0;
+  margin: 1.15rem 0 0;
   padding: 1rem 0 0;
   border-top: 1px solid var(--line-light);
   display: grid;

@@ -680,6 +680,36 @@
     paintChapters();
   };
 
+  /* Replay cues up to `t`, then keep playing from that frame. */
+  const seekTo = (n, t = 0) => {
+    enterChapter(n);
+    if (t > 0) {
+      chT = t;
+      const ch = chapters[n];
+      for (const cue of ch.cues) {
+        if (cue.tick) {
+          if (t >= cue.t) {
+            cue.tick(Math.min(1, (t - cue.t) / cue.dur));
+            if (t >= cue.t + cue.dur) cue._done = true;
+          }
+        } else if (t >= cue.t) {
+          cue._ran = true;
+          cue.run();
+        }
+      }
+      const bar = chapterBtns[n]?.querySelector(".ch-bar i");
+      if (bar) bar.style.setProperty("--p", Math.min(1, t / ch.dur).toFixed(3));
+    }
+    syncLoop();
+  };
+
+  /* In-app controls scrub to the frame where that part of the product is on screen. */
+  [el.sideDocs, el.sideChat, el.sideDraft].forEach((item) => {
+    if (item) item.addEventListener("click", () => seekTo(Number(item.dataset.chapter) || 0));
+  });
+  if (el.chipDraft) el.chipDraft.addEventListener("click", () => seekTo(4, 1300));
+  if (el.exportBtn) el.exportBtn.addEventListener("click", () => seekTo(5, 5000));
+
   const syncLoop = () => {
     if (playing() && rafId === null) {
       last = null;
@@ -763,27 +793,7 @@
     syncLoop();
   });
 
-  // deterministic seek hook (used by tests/QA tooling; harmless in production)
-  window.__demoSeek = (n, t = 0) => {
-    enterChapter(n);
-    if (t > 0) {
-      chT = t;
-      const ch = chapters[n];
-      for (const cue of ch.cues) {
-        if (cue.tick) {
-          if (t >= cue.t) {
-            cue.tick(Math.min(1, (t - cue.t) / cue.dur));
-            if (t >= cue.t + cue.dur) cue._done = true;
-          }
-        } else if (t >= cue.t) {
-          cue._ran = true;
-          cue.run();
-        }
-      }
-      const bar = chapterBtns[n]?.querySelector(".ch-bar i");
-      if (bar) bar.style.setProperty("--p", Math.min(1, t / ch.dur).toFixed(3));
-    }
-  };
+  window.__demoSeek = seekTo;
 
   // re-slot grouped chips on resize so they track folder geometry
   let rz = null;

@@ -47,6 +47,10 @@
 
   function isHigh(c) { return c.value > 75000 && state.status[c.id] !== "signed" && state.status[c.id] !== "declined"; }
 
+  function isBlank(s) {
+    return s == null || s === "" || s === "—" || s === "-" || s === "–";
+  }
+
   function bucket(c) {
     var st = state.status[c.id];
     if (st === "signed") { return "signed"; }
@@ -117,7 +121,7 @@
     var m = D.metrics[state.period];
 
     $("#kpis").innerHTML =
-      kpiCard("Total Intakes", String(m.intakes), m.intakeDelta, true, "intakes") +
+      kpiCard("Total Intake", String(m.intakes), m.intakeDelta, true, "intakes") +
       kpiCard("Conversion Rate", m.conversion, m.conversionNote, false, "conv") +
       kpiCard("Pipeline Value", m.pipeline, "Signed clients (est.)", false, "pipeline") +
       kpiCard("Avg. Response Time", m.responseTime, "Time to first response", false, "response");
@@ -170,7 +174,7 @@
         if (h > 0) {
           svg.push('<rect class="chart__bar" x="' + x.toFixed(1) + '" y="' + y.toFixed(1) +
                    '" width="' + (barW - 2).toFixed(1) + '" height="' + h.toFixed(1) +
-                   '" rx="2" fill="' + D.channelColor[s] + '"><title>' + esc(w.label + " · " + s + ": " + v) + "</title></rect>");
+                   '" rx="3" fill="' + D.channelColor[s] + '"><title>' + esc(w.label + " · " + s + ": " + v) + "</title></rect>");
         }
       });
 
@@ -208,8 +212,11 @@
     $("#channelBars").innerHTML = order.map(function (k) {
       var v = m.channels[k];
       var pct = total ? Math.round((v / total) * 100) : 0;
+      var iconKey = { Email: "email", Phone: "phone", Website: "website" }[k];
       return '<div class="bar"><div class="bar__top">' +
-             '<span class="bar__label"><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:' + D.channelColor[k] + '"></i>' + k + "</span>" +
+             '<span class="bar__label"><span class="bar__ico" style="color:' + D.channelColor[k] + '" aria-hidden="true">' +
+             '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+             CHAN_ICON[iconKey] + "</svg></span>" + k + "</span>" +
              '<span class="bar__num"><b>' + v + "</b> (" + pct + "%)</span></div>" +
              '<div class="bar__track"><div class="bar__fill" style="width:' + pct + "%;background:" + D.channelColor[k] + '"></div></div></div>';
     }).join("");
@@ -244,12 +251,6 @@
     website: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/>'
   };
 
-  function chanIcon(ch) {
-    return '<span class="clientcard__chan clientcard__chan--' + ch + '" aria-hidden="true">' +
-           '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-           CHAN_ICON[ch] + "</svg></span>";
-  }
-
   function statusPill(c) {
     var st = state.status[c.id];
     if (st === "signed")   { return '<span class="pill pill--signed">Signed</span>'; }
@@ -273,24 +274,26 @@
       if (!rows.length) { return ""; }
 
       var cards = rows.map(function (c) {
-        var hot = sec.key === "needs" && isHigh(c);
-        return '<button class="clientcard' + (hot ? " is-hot" : "") + '" type="button" data-client="' + c.id + '">' +
-          chanIcon(c.channel) +
+        var meta = [c.source, c.contacted, c.caseNumber];
+        if (!isBlank(c.attorney)) { meta.push(c.attorney); }
+        var value = c.value
+          ? '<span class="clientcard__value"><b>' + money(c.value) + "</b>" +
+            (isBlank(c.valueRange) ? "" : "<span>" + esc(c.valueRange) + "</span>") + "</span>"
+          : "";
+        return '<button class="clientcard' + (isHigh(c) ? " is-hot" : "") + '" type="button" data-client="' + c.id + '">' +
           '<span class="clientcard__body">' +
             '<span class="clientcard__top"><span class="clientcard__name">' + esc(c.name) + "</span>" +
               statusPill(c) + highPill(c) + "</span>" +
             '<span class="clientcard__case">' + esc(c.caseType) + "</span>" +
-            '<span class="clientcard__meta">' + esc(c.source) + " · " + esc(c.contacted) +
-              " · " + esc(c.caseNumber) + " · " + esc(c.attorney) + "</span>" +
+            '<span class="clientcard__meta">' + meta.map(esc).join(" · ") + "</span>" +
           "</span>" +
-          '<span class="clientcard__value"><b>' + (c.value ? money(c.value) : "—") + "</b>" +
-            "<span>" + esc(c.valueRange) + "</span></span>" +
+          value +
           "</button>";
       }).join("");
 
       return '<section class="clientsec">' +
         '<div class="clientsec__head"><h2 class="clientsec__title">' + esc(sec.title) + "</h2>" +
-        '<span class="clientsec__count">' + rows.length + " · " + esc(sec.note) + "</span></div>" +
+        '<span class="clientsec__count">' + rows.length + "</span></div>" +
         '<div class="clientlist">' + cards + "</div></section>";
     }).join("");
 
@@ -621,21 +624,32 @@
 
   /* ------------------------------------------------------ integrations -- */
 
-  function renderIntegrations() {
-    $("#connectedCount").textContent = D.connected.length + " services";
-    $("#availableCount").textContent = D.available.length + " services";
+  var BRAND_LOGO = {
+    "MyCase": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#0E8A5F"/><path fill="#fff" d="M5.2 17V7.2h2.1l2.7 5.2 2.7-5.2h2.1V17h-1.8V10l-2.1 4h-1.8L7 10v7H5.2z"/></svg>',
+    "Gmail": '<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#4caf50" d="M45 16.2l-5 2.75-5 4.75L35 40h7c1.657 0 3-1.343 3-3V16.2z"/><path fill="#1e88e5" d="M3 16.2l3.614 1.71L13 23.7V40H6c-1.657 0-3-1.343-3-3V16.2z"/><polygon fill="#e53935" points="35,11.2 24,19.45 13,11.2 12,17 13,23.7 24,31.95 35,23.7 36,17"/><path fill="#c62828" d="M3 12.298V16.2l10 7.5V11.2L9.876 8.859C9.132 8.301 8.228 8 7.298 8h0C4.924 8 3 9.924 3 12.298z"/><path fill="#fbc02d" d="M45 12.298V16.2l-10 7.5V11.2l3.124-2.341C38.868 8.301 39.772 8 40.702 8h0C43.076 8 45 9.924 45 12.298z"/></svg>',
+    "Dropbox": '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0061FF" d="M6 1.807 0 5.629l6 3.822 6.001-3.822L6 1.807zM18 1.807l-6 3.822 6 3.822 6-3.822-6-3.822zM0 13.274l6 3.822 6.001-3.822L6 9.452 0 13.274zM18 9.452l-6 3.822 6 3.822 6-3.822-6-3.822zM6 18.371l6.001 3.822 6-3.822-6-3.822L6 18.371z"/></svg>',
+    "Google Calendar": '<svg viewBox="0 0 48 48" aria-hidden="true"><polygon fill="#1e88e5" points="25.68,20.92 26.69,22.36 28.27,21.21 28.27,29.56 30,29.56 30,18.62 28.56,18.62"/><path fill="#1e88e5" d="M22.94 23.75c.63-.58 1.02-1.37 1.02-2.25 0-1.75-1.53-3.17-3.42-3.17-1.6 0-2.97.79-3.42 1.9l1.23.52c.31-.79 1.09-1.3 2.19-1.3 1.31 0 2.18.98 2.18 2.17 0 1.14-.87 2.17-2.18 2.17h-.86v1.19h.86c1.52 0 2.49 1.02 2.49 2.29 0 1.34-1.07 2.34-2.49 2.34-1.3 0-2.19-.68-2.49-1.59l-1.23.52c.45 1.32 1.82 2.19 3.72 2.19 1.89 0 3.42-1.42 3.42-3.17 0-1.05-.37-1.91-1.06-2.59z"/><polygon fill="#fbc02d" points="34,42 14,42 13,38 14,34 34,34 35,38"/><polygon fill="#4caf50" points="38,35 42,34 42,14 38,13 34,14 34,34"/><path fill="#1e88e5" d="M34 14l1-4-1-4H9C7.34 6 6 7.34 6 9v25l4 1 4-1V14h20z"/><polygon fill="#e53935" points="34,34 34,42 42,34"/><path fill="#1565c0" d="M39 6h-5v8h8V9c0-1.66-1.34-3-3-3z"/><path fill="#1565c0" d="M9 42h5v-8H6v5c0 1.66 1.34 3 3 3z"/></svg>',
+    "Clio": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#1F8A4C"/><text x="12" y="15.5" text-anchor="middle" fill="#fff" font-size="7.5" font-family="Georgia, serif" font-weight="700">clio</text></svg>',
+    "Google Drive": '<svg viewBox="0 0 87.3 78" aria-hidden="true"><path fill="#0066da" d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3L27.5 53H0c0 1.55.4 3.1 1.2 4.5z"/><path fill="#00ac47" d="M43.65 25 29.9 1.2c-1.35.8-2.5 1.9-3.3 3.3L1.2 48.5A9.06 9.06 0 0 0 0 53h27.5z"/><path fill="#ea4335" d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5H59.8l5.85 11.5z"/><path fill="#00832d" d="M43.65 25 57.4 1.2c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z"/><path fill="#2684fc" d="M59.8 53H27.5L13.75 76.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z"/><path fill="#ffba00" d="M73.4 26.5 60.7 4.5c-.8-1.4-1.95-2.5-3.3-3.3L43.65 25l16.15 28H87.3c0-1.55-.4-3.1-1.2-4.5z"/></svg>',
+    "Microsoft SharePoint": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="12" r="8" fill="#038387"/><circle cx="16.5" cy="12" r="6.2" fill="#37C6D0"/><path fill="#fff" d="M8.2 8.1c1.5 0 2.6.9 2.6 2.2 0 .9-.5 1.5-1.4 1.8l1.6 2.8H9.4l-1.4-2.5H7.2V15H5.7V8.1h2.5zm-.1 2.9c.6 0 1-.3 1-.8s-.4-.8-1-.8H7.2v1.6h.9z"/></svg>',
+    "Salesforce": '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#00A1E0" d="M10.006 5.415a4.195 4.195 0 0 1 3.045-1.306c1.56 0 2.954.9 3.69 2.205.63-.3 1.35-.45 2.1-.45 2.85 0 5.159 2.34 5.159 5.22s-2.31 5.22-5.176 5.22c-.345 0-.69-.044-1.02-.104a3.75 3.75 0 0 1-3.3 1.95c-.6 0-1.155-.15-1.65-.375a4.314 4.314 0 0 1-3.974 2.625 4.302 4.302 0 0 1-4.05-2.82c-.27.062-.54.076-.825.076-2.204 0-4.005-1.8-4.005-4.05 0-1.5.811-2.805 2.01-3.51-.255-.57-.39-1.2-.39-1.846 0-2.58 2.1-4.65 4.65-4.65 1.53 0 2.85.705 3.72 1.8"/></svg>',
+    "DocuSign": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#FFCC22"/><path fill="none" stroke="#1A1A1A" stroke-width="1.6" stroke-linecap="round" d="M5 14.5c1.8-3.2 3.4-4.8 5.2-4.8 1.6 0 2.2 1.8 3.6 1.8 1.2 0 2-1.2 3.2-1.2"/><path fill="#1A1A1A" d="M6 17h12v1.3H6z"/></svg>',
+    "Slack": '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#E01E5A" d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z"/><path fill="#36C5F0" d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z"/><path fill="#2EB67D" d="M18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z"/><path fill="#ECB22E" d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg>'
+  };
 
+  function intRow(i, action) {
+    return '<div class="introw"><span class="introw__logo" aria-hidden="true">' + (BRAND_LOGO[i.name] || "") + "</span>" +
+      '<span><span class="introw__name">' + esc(i.name) + '</span><br><span class="introw__meta">' + esc(i.account || i.blurb) + "</span></span>" +
+      '<span class="introw__right">' + action + "</span></div>";
+  }
+
+  function renderIntegrations() {
     $("#connectedList").innerHTML = D.connected.map(function (i) {
-      return '<div class="introw"><span class="introw__logo" style="background:' + i.color + '" aria-hidden="true">' + i.letter + "</span>" +
-        '<span><span class="introw__name">' + esc(i.name) + '</span><br><span class="introw__meta">' + esc(i.account) + "</span></span>" +
-        '<span class="introw__right"><span class="pill pill--signed">Connected</span>' +
-        '<button class="introw__btn" type="button" data-noop="1">Manage</button></span></div>';
+      return intRow(i, '<button class="introw__btn" type="button" data-noop="1">Manage</button>');
     }).join("");
 
     $("#availableList").innerHTML = D.available.map(function (i) {
-      return '<div class="introw"><span class="introw__logo" style="background:' + i.color + '" aria-hidden="true">' + i.letter + "</span>" +
-        '<span><span class="introw__name">' + esc(i.name) + '</span><br><span class="introw__meta">' + esc(i.blurb) + "</span></span>" +
-        '<span class="introw__right"><button class="introw__btn introw__btn--connect" type="button" data-noop="1">Connect</button></span></div>';
+      return intRow(i, '<button class="introw__btn introw__btn--connect" type="button" data-noop="1">Connect</button>');
     }).join("");
   }
 
@@ -665,6 +679,42 @@
     });
   }
 
+  var SETTING_SWITCHES = {
+    intake: [
+      { key: "conflicts", label: "Automatic conflict check",           meta: "Run against all matters before first contact", on: true },
+      { key: "autobook",  label: "Auto-book consultations",            meta: "Offer calendar slots to qualified leads",      on: true },
+      { key: "sol",       label: "Flag statute-of-limitations risk",   meta: "Highlight leads within 90 days of expiry",     on: true }
+    ],
+    agent: [
+      { key: "drafts",    label: "Draft replies to new inquiries",     meta: "Prepared within minutes of intake",            on: true },
+      { key: "approval",  label: "Require attorney approval",          meta: "Nothing is sent without sign-off",             on: true },
+      { key: "summaries", label: "Summarize calls and attachments",    meta: "Added to the client record automatically",     on: true }
+    ],
+    security: [
+      { key: "twofa",     label: "Require two-factor authentication",  meta: "Applies to every team member",                 on: true },
+      { key: "sso",       label: "Single sign-on",                     meta: "Google Workspace",                             on: false }
+    ]
+  };
+
+  function renderSettingSwitches() {
+    $$(".setswitches[data-group]").forEach(function (host) {
+      var rows = SETTING_SWITCHES[host.getAttribute("data-group")] || [];
+      host.innerHTML = rows.map(function (n, i) {
+        return '<div class="switchrow"><div><div>' + esc(n.label) + "</div>" +
+          '<div class="switchrow__meta">' + esc(n.meta) + "</div></div>" +
+          '<button class="toggle" type="button" data-i="' + i + '" aria-pressed="' +
+          (n.on ? "true" : "false") + '" aria-label="' + esc(n.label) + '"></button></div>';
+      }).join("");
+      $$(".toggle", host).forEach(function (b) {
+        b.addEventListener("click", function () {
+          var row = rows[Number(b.getAttribute("data-i"))];
+          row.on = !row.on;
+          b.setAttribute("aria-pressed", row.on ? "true" : "false");
+        });
+      });
+    });
+  }
+
   document.addEventListener("click", function (e) {
     var noop = e.target.closest ? e.target.closest("[data-noop]") : null;
     if (noop) { toast("Demo environment — this action is not wired to a live system."); }
@@ -677,5 +727,6 @@
   renderAgentActions();
   renderIntegrations();
   renderNotifs();
+  renderSettingSwitches();
   setView("dashboard");
 })();

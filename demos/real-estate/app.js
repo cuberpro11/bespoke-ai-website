@@ -74,10 +74,10 @@
 
   function renderUnitTabs() {
     $("#unitTabs").innerHTML = D.boroughs.map(function (b) {
-      return '<button class="tab' + (b === state.unitBorough ? " is-active" : "") +
+      return '<button class="chip' + (b === state.unitBorough ? " is-active" : "") +
              '" type="button" data-borough="' + b + '">' + b + "</button>";
     }).join("");
-    $$("#unitTabs .tab").forEach(function (t) {
+    $$("#unitTabs .chip").forEach(function (t) {
       t.addEventListener("click", function () {
         state.unitBorough = t.getAttribute("data-borough");
         renderUnitTabs();
@@ -131,10 +131,10 @@
 
   function renderTenantTabs() {
     $("#tenantTabs").innerHTML = D.boroughs.map(function (b) {
-      return '<button class="tab' + (b === state.tenantBorough ? " is-active" : "") +
+      return '<button class="chip' + (b === state.tenantBorough ? " is-active" : "") +
              '" type="button" data-borough="' + b + '">' + b + "</button>";
     }).join("");
-    $$("#tenantTabs .tab").forEach(function (t) {
+    $$("#tenantTabs .chip").forEach(function (t) {
       t.addEventListener("click", function () {
         state.tenantBorough = t.getAttribute("data-borough");
         renderTenantTabs();
@@ -189,7 +189,7 @@
                "<small>" + esc(e.issue) + "</small></div></td></tr>";
       }).join("");
 
-      out.push('<div class="section__head"><h2 class="section__title">Active Emergencies</h2>' +
+      out.push('<div class="section__head" id="active-emergencies"><h2 class="section__title">Active Emergencies</h2>' +
                '<span class="section__count">' + emergencies.length + "</span></div>" +
                tenantTable([eRows], "Open ticket"));
     }
@@ -226,6 +226,17 @@
 
     $("#tenantSections").innerHTML = out.join("");
   }
+
+  $("#viewEmergencies").addEventListener("click", function () {
+    state.tenantBorough = "All";
+    state.tenantQuery = "";
+    $("#tenantSearch").value = "";
+    renderTenantTabs();
+    renderTenants();
+    setView("tenants");
+    var target = $("#active-emergencies");
+    if (target) { target.scrollIntoView({ behavior: "smooth", block: "start" }); }
+  });
 
   $("#tenantSearch").addEventListener("input", function (e) {
     state.tenantQuery = e.target.value;
