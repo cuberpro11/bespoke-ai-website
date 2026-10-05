@@ -3565,19 +3565,35 @@ body.nav-open .mobile-menu__panel { transform: none; }
   padding: 0.28rem 0.65rem;
   text-align: center;
 }
-/* real screenshots of each demo, 16:10, captured at 2x */
-.demo-preview__shot { display: block; overflow: hidden; background: var(--paper); }
+/* real screenshots of each demo, 16:10, captured at 2x.
+   Crop is centered on the product UI. Shots with extra canvas
+   get a per-image zoom so the interface fills the frame. */
+.demo-preview__shot {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--paper);
+}
 .demo-preview__shot img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 10;
+  height: 100%;
   object-fit: cover;
-  object-position: top left;
+  object-position: center center;
+  transform: scale(var(--shot-zoom, 1));
+  transform-origin: var(--shot-origin, center center);
   transition: transform 600ms var(--ease-out);
 }
+/* This capture leaves a large empty canvas under the app. Zoom from the
+   top-left so the interface fills the frame without clipping the sidebar. */
+.demo-preview__shot img[src*="knowledge-base"] {
+  --shot-zoom: 1.5;
+  --shot-origin: left top;
+}
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .demo-preview:hover .demo-preview__shot img { transform: scale(1.025); }
+  .demo-preview:hover .demo-preview__shot img {
+    transform: scale(calc(var(--shot-zoom, 1) * 1.025));
+  }
 }
 .demo-preview p.demo-preview__see {
   margin-top: 0.85rem;
