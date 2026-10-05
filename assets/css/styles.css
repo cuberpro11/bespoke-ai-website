@@ -4715,14 +4715,13 @@ body[data-page="contact"] {
    ========================================================================== */
 
 .dropdown--mega {
-  /* One row of four columns: a wide strip that opens rightward from the
-     trigger. site.js (keepOnScreen) slides it back left only as far as the
-     viewport needs and publishes the shift as --dd-shift so the caret stays
-     under "Solutions". */
+  /* One row of four columns, centered in the viewport. site.js (keepOnScreen)
+     places the strip and publishes the trigger position as --dd-caret so the
+     caret stays under "Solutions". */
   left: 0;
   right: auto;
   translate: 0;
-  transform-origin: top left;
+  transform-origin: var(--dd-caret, 50%) top;
   padding: 0.85rem;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -4733,7 +4732,7 @@ body[data-page="contact"] {
   gap: 0.25rem;
 }
 .dropdown--mega::before {
-  left: calc(3.6rem - var(--dd-shift, 0px));
+  left: var(--dd-caret, 50%);
   right: auto;
   translate: -50% 0;
 }

@@ -187,11 +187,21 @@
     let closeTimer = null;
     const keepOnScreen = () => {
       if (!panel) return;
-      panel.style.translate = "0";
       const pad = 16;
+      const itemRect = item.getBoundingClientRect();
       // Layout box, not getBoundingClientRect: the open animation scales the
       // panel, which would under-measure it on the first frame.
-      const left = item.getBoundingClientRect().left + panel.offsetLeft;
+      if (panel.classList.contains("dropdown--mega")) {
+        const width = panel.offsetWidth;
+        const maxLeft = Math.max(pad, window.innerWidth - pad - width);
+        const left = Math.min(Math.max(pad, (window.innerWidth - width) / 2), maxLeft);
+        const dx = left - itemRect.left - panel.offsetLeft;
+        panel.style.translate = `${dx}px 0`;
+        panel.style.setProperty("--dd-caret", `${itemRect.left + itemRect.width / 2 - left}px`);
+        return;
+      }
+      panel.style.translate = "0";
+      const left = itemRect.left + panel.offsetLeft;
       const right = left + panel.offsetWidth;
       let dx = 0;
       if (right > window.innerWidth - pad) dx = window.innerWidth - pad - right;
@@ -201,9 +211,9 @@
     };
     const open = () => {
       clearTimeout(closeTimer);
+      keepOnScreen();
       item.classList.add("is-open");
       btn.setAttribute("aria-expanded", "true");
-      requestAnimationFrame(keepOnScreen);
     };
     const close = () => {
       item.classList.remove("is-open");
