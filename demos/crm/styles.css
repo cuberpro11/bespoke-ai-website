@@ -98,6 +98,26 @@ input, textarea { font: inherit; }
 }
 .apphead__back:hover { color: var(--ink); border-color: #d1d5db; }
 
+/* Desktop: the header's first 220px belongs to the sidebar column, so the
+   navy runs unbroken from the top of the page and only the content column
+   gets the white bar and its hairline. */
+@media (min-width: 821px) {
+  .apphead {
+    background: linear-gradient(90deg, var(--navy) 0 220px, rgba(255, 255, 255, .92) 220px);
+    border-bottom: 0;
+  }
+  .apphead::after {
+    content: "";
+    position: absolute;
+    left: 220px;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--line);
+  }
+  .apphead__brand { color: #fff; }
+}
+
 /* -------------------------------------------------------------- layout -- */
 
 .shell { display: grid; grid-template-columns: 220px minmax(0, 1fr); min-height: calc(100vh - 56px); }
@@ -272,7 +292,7 @@ input, textarea { font: inherit; }
 .clientsec__title { margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .01em; }
 .clientsec__count { color: var(--faint); font-size: 12px; }
 
-.clientlist { display: grid; gap: 10px; }
+.clientlist { display: grid; gap: 10px; max-width: 1040px; }
 
 .clientcard {
   display: flex;
@@ -468,7 +488,16 @@ input, textarea { font: inherit; }
 
 /* ------------------------------------------------------------ ai agent -- */
 
-.agent { max-width: 820px; margin: 0 auto; padding-top: 26px; }
+/* Full-height column so the composer sits at the bottom of the view, like a
+   chat app; the conversation grows above it and the box stays pinned. */
+.agent {
+  max-width: 820px;
+  margin: 0 auto;
+  padding-top: 26px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 56px - 22px - 44px);
+}
 .agent__hello { text-align: center; margin-bottom: 26px; }
 .agent__mark {
   display: grid; place-items: center;
@@ -492,7 +521,7 @@ input, textarea { font: inherit; }
 .agent__action:hover { border-color: var(--blue-edge); background: var(--blue-wash); }
 .agent__action i { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; background: var(--blue-wash); color: var(--blue); flex: none; }
 
-.composer { display: flex; gap: 10px; align-items: flex-end; padding: 12px; border: 1px solid var(--line); border-radius: 13px; background: var(--paper); box-shadow: var(--shadow); }
+.composer { position: sticky; bottom: 16px; margin-top: auto; display: flex; gap: 10px; align-items: flex-end; padding: 12px; border: 1px solid var(--line); border-radius: 13px; background: var(--paper); box-shadow: var(--shadow); }
 .composer textarea { flex: 1 1 auto; border: 0; resize: none; min-height: 44px; font-size: 14px; outline: none; background: none; }
 .composer .btn { width: auto; }
 
@@ -503,7 +532,7 @@ input, textarea { font: inherit; }
 
 /* -------------------------------------------------------- integrations -- */
 
-.intlist { display: grid; gap: 10px; }
+.intlist { display: grid; gap: 10px; max-width: 960px; }
 .introw { display: flex; align-items: center; gap: 13px; padding: 13px 15px; border: 1px solid var(--line); border-radius: 11px; background: var(--paper); box-shadow: var(--shadow); }
 .introw__logo {
   display: grid; place-items: center;

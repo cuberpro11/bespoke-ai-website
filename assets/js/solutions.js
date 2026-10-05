@@ -1761,6 +1761,105 @@
     });
   };
 
+  /* ================================================================== sis */
+  /* Student information systems: the two questions from the page copy are
+     asked of the record in turn. The first answer ships rendered. */
+  VIZ.sis = (root) => {
+    const q = $("[data-q]", root);
+    const box = $(".si-ask__q", root);
+    const status = $("[data-status]", root);
+    const answers = $$("[data-ans]", root);
+    const Q = [
+      { text: "Tell me how many of our seniors graduated this year", from: "Answered from Registrar, Bursar and Degree Audit · 1.2s" },
+      { text: "Analyze our current budget and produce a detailed report on possible waste expenditures", from: "Answered from Finance, Procurement and Facilities · 2.4s" },
+    ];
+    if (REDUCED || !q || answers.length !== Q.length) return;
+    let i = 0;
+    loopWhileVisible(root, async (wait) => {
+      await wait(4200);
+      i = (i + 1) % Q.length;
+      answers.forEach((a) => a.classList.add("is-hidden"));
+      await wait(380);
+      answers.forEach((a) => (a.hidden = true));
+      q.textContent = "";
+      status.textContent = " ";
+      box.classList.add("is-typing");
+      for (const ch of Q[i].text) {
+        q.textContent += ch;
+        await wait(26);
+      }
+      box.classList.remove("is-typing");
+      status.textContent = "Searching 6 departmental databases…";
+      await wait(1100);
+      status.textContent = Q[i].from;
+      const a = answers[i];
+      a.hidden = false;
+      await wait(30);
+      a.classList.remove("is-hidden");
+    });
+  };
+
+  /* =============================================================== enroll */
+  /* Enrollment: one funnel per applicant track. Auto-advances while on
+     screen until a visitor picks a track themselves. */
+  VIZ.enroll = (root) => {
+    const tabs = $$("[data-track]", root);
+    const nums = $$("[data-n]", root);
+    const bars = $$(".en-stages i", root);
+    const kpis = $$("[data-k]", root);
+    const app = $(".en-app", root);
+    const T = [
+      { n: [18420, 9610, 7020, 3140, 1105], k: ["35.2%", "$14,800", "11"],
+        who: ["Ji-woo Han", "Undergraduate · Biology · Early Action"],
+        docs: [["High school transcript", "Parsed · 3.92 GPA"], ["Test scores", "Optional · not submitted"], ["Recommendation letters", "2 of 2 received"], ["Portfolio", "Research abstract uploaded"]],
+        score: "87 / 100", award: "Eligible · Presidential Scholarship $12,000 / yr" },
+      { n: [6240, 2980, 2210, 870, 412], k: ["47.4%", "$9,200", "18"],
+        who: ["Daniel Mensah", "Graduate · M.S. Data Science · Fall"],
+        docs: [["Undergraduate transcript", "Parsed · 3.68 GPA"], ["Statement of purpose", "Received · 1,040 words"], ["Recommendation letters", "3 of 3 received"], ["Résumé", "4 years industry experience"]],
+        score: "91 / 100", award: "Eligible · Graduate assistantship" },
+      { n: [9850, 4120, 2760, 940, 268], k: ["28.5%", "$11,500", "24"],
+        who: ["Lucía Romero", "International · Economics · Regular Decision"],
+        docs: [["Secondary school record", "Translated & evaluated"], ["English proficiency", "TOEFL 108"], ["Financial certification", "Verified for I-20"], ["Passport", "Uploaded · expiry checked"]],
+        score: "84 / 100", award: "Eligible · Global Scholars award $9,000 / yr" },
+      { n: [3120, 1880, 1460, 1010, 590], k: ["58.4%", "$6,900", "9"],
+        who: ["Ava Thompson", "Transfer · Nursing · Spring entry"],
+        docs: [["College transcripts", "2 institutions parsed"], ["Credit evaluation", "42 of 48 credits accepted"], ["Prerequisites", "Anatomy & Chemistry met"], ["Recommendation letter", "1 of 1 received"]],
+        score: "88 / 100", award: "Eligible · Transfer Achievement $5,000 / yr" },
+    ];
+    let cur = 0;
+    let auto = !REDUCED;
+    const esc = (t) => String(t).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+    const show = (idx) => {
+      const from = T[cur].n;
+      const d = T[idx];
+      cur = idx;
+      tabs.forEach((t, i) => t.setAttribute("aria-pressed", String(i === idx)));
+      d.n.forEach((v, i) => {
+        tweenText(nums[i], from[i], v, 700, (x) => fmt(Math.round(x)));
+        bars[i].style.setProperty("--p", (v / d.n[0]).toFixed(3));
+      });
+      d.k.forEach((v, i) => (kpis[i].textContent = v));
+      $(".en-app__name", app).textContent = d.who[0];
+      $(".en-app__meta", app).textContent = d.who[1];
+      $(".en-app__docs", app).innerHTML = d.docs
+        .map(([a, b]) => `<li class="is-done"><span>${esc(a)}</span><em>${esc(b)}</em></li>`)
+        .join("");
+      $(".en-app__aid b", app).textContent = d.score;
+      $(".en-app__award", app).textContent = d.award;
+    };
+    tabs.forEach((t, i) =>
+      t.addEventListener("click", () => {
+        auto = false;
+        if (i !== cur) show(i);
+      })
+    );
+    if (REDUCED) return;
+    loopWhileVisible(root, async (wait) => {
+      await wait(4800);
+      if (auto) show((cur + 1) % T.length);
+    });
+  };
+
   /* @modules */
 
   /* ------------------------------------------------------------------ boot */

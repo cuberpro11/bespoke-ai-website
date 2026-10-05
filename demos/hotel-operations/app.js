@@ -1363,7 +1363,7 @@
       el("aside.side" + (frame.boot ? ".is-boot" : ""), {},
         el("a.side__back", { href: demoReturn },
           icon("arrowLeft"),
-          el("span", {}, demoReturnIsIndex ? t("backDemos") : (state.lang === "ar" ? "رجوع" : "Back"))
+          el("span", {}, demoReturnIsIndex ? t("backDemos") : "Back")
         ),
         el("div.brand", {},
           el("h1", {}, t("brandName")),

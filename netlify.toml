@@ -12,41 +12,115 @@
   force = true
 
 # ------------------------------------------------- renamed solution hubs (SEO)
-# /law -> /legal and /professional-services -> /general-services.
-# Children of the old paths are swept up by the splat rules.
+# Batch 3 moved each category to a keyword slug; every old hub, child page,
+# and .html form 301s straight to its new home. The older renames
+# (/law, /professional-services) point at the final URLs too, so nothing
+# goes through a redirect chain. Children are swept up by the splat rules.
+[[redirects]]
+  from = "/finance"
+  to = "/custom-financial-software"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/finance.html"
+  to = "/custom-financial-software"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/finance/*"
+  to = "/custom-financial-software/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/legal"
+  to = "/custom-legal-software"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/legal.html"
+  to = "/custom-legal-software"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/legal/*"
+  to = "/custom-legal-software/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/edtech"
+  to = "/custom-edtech-software"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/edtech.html"
+  to = "/custom-edtech-software"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/edtech/*"
+  to = "/custom-edtech-software/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/general-services"
+  to = "/custom-general-service-software"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/general-services.html"
+  to = "/custom-general-service-software"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/general-services/*"
+  to = "/custom-general-service-software/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/law"
-  to = "/legal"
+  to = "/custom-legal-software"
   status = 301
   force = true
 
 [[redirects]]
   from = "/law.html"
-  to = "/legal"
+  to = "/custom-legal-software"
   status = 301
   force = true
 
 [[redirects]]
   from = "/law/*"
-  to = "/legal/:splat"
+  to = "/custom-legal-software/:splat"
   status = 301
   force = true
 
 [[redirects]]
   from = "/professional-services"
-  to = "/general-services"
+  to = "/custom-general-service-software"
   status = 301
   force = true
 
 [[redirects]]
   from = "/professional-services.html"
-  to = "/general-services"
+  to = "/custom-general-service-software"
   status = 301
   force = true
 
 [[redirects]]
   from = "/professional-services/*"
-  to = "/general-services/:splat"
+  to = "/custom-general-service-software/:splat"
   status = 301
   force = true
 
@@ -81,12 +155,6 @@
 [[redirects]]
   from = "/demos.html"
   to = "/demos"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/finance.html"
-  to = "/finance"
   status = 301
   force = true
 

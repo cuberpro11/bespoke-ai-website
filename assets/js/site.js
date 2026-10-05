@@ -189,11 +189,15 @@
       if (!panel) return;
       panel.style.translate = "0";
       const pad = 16;
-      const rect = panel.getBoundingClientRect();
+      // Layout box, not getBoundingClientRect: the open animation scales the
+      // panel, which would under-measure it on the first frame.
+      const left = item.getBoundingClientRect().left + panel.offsetLeft;
+      const right = left + panel.offsetWidth;
       let dx = 0;
-      if (rect.right > window.innerWidth - pad) dx = window.innerWidth - pad - rect.right;
-      if (rect.left + dx < pad) dx = pad - rect.left;
+      if (right > window.innerWidth - pad) dx = window.innerWidth - pad - right;
+      if (left + dx < pad) dx = pad - left;
       panel.style.translate = dx ? `${dx}px 0` : "0";
+      panel.style.setProperty("--dd-shift", `${dx}px`);
     };
     const open = () => {
       clearTimeout(closeTimer);
@@ -1037,12 +1041,14 @@
     });
   });
 
-  /* ---- team cards: flip to the bio ---- */
+  /* ---- team cards: flip to the bio ----
+     The whole card flips on click; the corner button stays as the keyboard
+     and screen-reader control. Links and text selections are left alone. */
   doc.addEventListener("click", (event) => {
-    const btn = event.target.closest(".person-flip__btn");
-    if (!btn) return;
-    const flip = btn.closest(".person-flip");
+    const flip = event.target.closest(".person-flip");
     if (!flip) return;
+    const btn = event.target.closest(".person-flip__btn");
+    if (!btn && (event.target.closest("a") || String(window.getSelection()).trim())) return;
     const showBio = !flip.classList.contains("is-flipped");
     flip.classList.toggle("is-flipped", showBio);
     flip.querySelectorAll(".person-flip__face").forEach((face) => {
@@ -1057,7 +1063,7 @@
     const next = flip.querySelector(
       showBio ? ".person-flip__face--back .person-flip__btn" : ".person-flip__face--front .person-flip__btn"
     );
-    if (next) next.focus();
+    if (btn && next) next.focus();
   });
 
   /* ---- extended motion (additive) ---- */

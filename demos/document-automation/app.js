@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BESPOKE — Document automation platform demo
+   BESPOKE — Knowledge base demo
    Self-contained runtime. No build step, no network: answers are scripted so
    the demo behaves identically every time it is shown.
    ========================================================================== */
@@ -334,5 +334,7 @@
   renderDoc();
   renderClauseChips();
   renderClauses();
-  setView("ask");
+  var initial = (location.hash || "").replace(/^#/, "");
+  var views = { ask: true, library: true, assemble: true, clauses: true };
+  setView(views[initial] ? initial : "ask");
 })();

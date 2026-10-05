@@ -715,6 +715,79 @@ def scene_crm(s):
     ground(s, 960, 0.1, 0.04)
 
 
+
+def scene_sis(s):
+    """Student information systems: department records converge on one record."""
+    dx = 70
+    s.light(1100 + dx, 420, 480, 0.55)
+    # campus hall behind: pediment, columns, steps
+    s.poly([(760 + dx, 300), (1110 + dx, 170), (1460 + dx, 300)], 0.2)
+    s.rect((760 + dx, 300, 1460 + dx, 330), 0.24)
+    for k in range(8):
+        x = 790 + dx + k * 92
+        s.rect((x, 340, x + 34, 640), 0.16 + 0.03 * (k % 2))
+        s.rect((x - 8, 330, x + 42, 344), 0.26)
+    for k in range(4):
+        s.rect((740 + dx - k * 20, 640 + k * 18, 1480 + dx + k * 20, 658 + k * 18), 0.12 + k * 0.02)
+    ground(s, 720, 0.12, 0.04)
+    # the unified record, front and centre
+    rec = [(940 + dx, 420), (1290 + dx, 400), (1310 + dx, 860), (920 + dx, 880)]
+    s.paste_quad(page_tex(81, 520, 700, title="STUDENT RECORD", highlight=4, base=0.72), rec)
+    s.gd.polygon(s.P(rec), fill=v(0.45))
+    hub = quad_point(rec, 0.5, 0.18)
+    # departmental records around it, each wired into the record
+    cards = [
+        ((640 + dx, 380), "TRANSCRIPT"), ((630 + dx, 620), "FINANCIAL AID"), ((690 + dx, 840), "HEALTH"),
+        ((1400, 330), "REGISTRAR"), ((1430, 600), "DEGREE AUDIT"), ((1410, 840), "FACULTY"),
+    ]
+    for i, ((cx, cy), label) in enumerate(cards):
+        w, h = 170, 120
+        q = [(cx - w / 2, cy - h / 2), (cx + w / 2, cy - h / 2 - 6), (cx + w / 2 + 4, cy + h / 2), (cx - w / 2 + 2, cy + h / 2 + 6)]
+        s.paste_quad(page_tex(90 + i, 340, 240, base=0.5), q, 0.95)
+        s.text((cx, cy - h / 2 - 22), label, 20, 0.7, "mono", anchor="mm")
+        edge = (cx + (w / 2 if cx < hub[0] else -w / 2), cy)
+        s.line([edge, (lerp(edge[0], hub[0], 0.5), edge[1]), hub], 0.55, 3, glow=0.35)
+        s.ellipse((edge[0] - 7, edge[1] - 7, edge[0] + 7, edge[1] + 7), 0.9)
+    s.ellipse((hub[0] - 14, hub[1] - 14, hub[0] + 14, hub[1] + 14), 0.95)
+    s.gd.ellipse([(hub[0] - 60) * SS, (hub[1] - 60) * SS, (hub[0] + 60) * SS, (hub[1] + 60) * SS], fill=v(0.8))
+
+
+def scene_enrollment(s):
+    """Enrollment: applications pour into a funnel and leave as admissions."""
+    s.light(1110, 380, 470, 0.55)
+    ground(s, 760, 0.12, 0.04)
+    rnd = random.Random(52)
+    # incoming applications, fanned across the top
+    for i in range(14):
+        x = rnd.uniform(780, 1450)
+        y = rnd.uniform(170, 330)
+        a = rnd.uniform(-0.5, 0.5)
+        w, h = rnd.uniform(110, 150), rnd.uniform(74, 96)
+        c, sn = math.cos(a), math.sin(a)
+        pts = [(x + dx * c - dy * sn, y + dx * sn + dy * c) for dx, dy in ((-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2))]
+        s.poly(pts, rnd.uniform(0.45, 0.75), outline=0.85, width=2)
+        s.line([pts[0], ((pts[0][0] + pts[2][0]) / 2, (pts[0][1] + pts[2][1]) / 2), pts[1]], 0.3, 2)
+    # the funnel
+    top_l, top_r, neck_l, neck_r = (780, 400), (1440, 400), (1060, 600), (1160, 600)
+    s.poly([top_l, top_r, neck_r, neck_l], 0.22)
+    s.ellipse((780, 360, 1440, 440), 0.34, outline=0.8, width=4)
+    for k in range(1, 6):
+        t = k / 6
+        l = (lerp(top_l[0], neck_l[0], t), lerp(top_l[1], neck_l[1], t))
+        r = (lerp(top_r[0], neck_r[0], t), lerp(top_r[1], neck_r[1], t))
+        s.line([l, r], 0.3 + t * 0.25, 2)
+    s.rect((1060, 600, 1160, 680), 0.3)
+    s.gd.rectangle([1070 * SS, 560 * SS, 1150 * SS, 720 * SS], fill=v(0.75))
+    # stages printed on the funnel walls
+    for k, label in enumerate(["APPLIED", "REVIEWED", "ADMITTED"]):
+        t = (k + 0.6) / 3.2
+        y = lerp(425, 590, t)
+        s.text((lerp(800, 1070, t) - 20, y), label, 20, 0.75, "mono", anchor="rm")
+    # the acceptance letter that comes out
+    letter = [(990, 700), (1250, 692), (1262, 900), (982, 908)]
+    s.paste_quad(page_tex(61, 520, 460, title="ADMITTED", seal=True, sign=True, base=0.74), letter)
+    s.gd.polygon(s.P(letter), fill=v(0.5))
+
 SCENES = {
     "trading": scene_trading,
     "risk-management": scene_risk,
@@ -730,6 +803,8 @@ SCENES = {
     "documentation-automation": scene_legaldoc,
     "workflow-automation": scene_workflow,
     "client-relations-management": scene_crm,
+    "student-information-systems": scene_sis,
+    "enrollment-information-systems": scene_enrollment,
 }
 
 

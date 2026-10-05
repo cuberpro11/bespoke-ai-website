@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BESPOKE — Client Relations Portal demo
+   BESPOKE — Personal Injury Intake System demo
    Self-contained runtime. No build step, no network, no chart library.
    Mirrors the Figma "CRM Demo" prototype (Version 84).
    ========================================================================== */

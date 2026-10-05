@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Local preview server that matches how Netlify serves the site.
 
-Pretty URLs (`/contact` → contact.html, `/legal` → legal/index.html), the
+Pretty URLs (`/contact` → contact.html, `/custom-legal-software` → custom-legal-software/index.html), the
 custom 404 page, and no browser caching. On start — and whenever you edit
 partials or CSS/JS — it restamps shared nav/footer and asset hashes so a
 refresh shows your changes.

@@ -156,20 +156,35 @@
     return D.tenants.filter(function (t) { return t.unit === unit; })[0];
   }
 
-  function tenantTable(rows, extra) {
-    if (!rows.length) { return ""; }
-    return '<div class="tablewrap"><table class="table"><thead><tr>' +
-             "<th>Unit</th><th>Tenant</th><th>Contact</th><th>Address</th><th>Borough</th>" +
-             (extra ? "<th>" + extra + "</th>" : "") +
-           "</tr></thead><tbody>" + rows.join("") + "</tbody></table></div>";
+  /* Open items lead as cards (same visual language as the dashboard's unit
+     tiles); the full roster follows as one fixed-layout table so every
+     column lines up no matter which filter is active. */
+
+  function phoneIcon() {
+    return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>';
   }
 
-  function baseCells(t) {
-    return '<td class="mono">' + esc(t.unit) + "</td>" +
-           "<td>" + esc(t.name) + "</td>" +
-           '<td class="dim">' + esc(t.phone) + "</td>" +
-           '<td class="dim">' + esc(t.address) + "</td>" +
-           "<td>" + esc(t.borough) + "</td>";
+  function tenantCard(t, tone, badge, title, detail) {
+    return '<article class="tcard tcard--' + tone + '">' +
+             '<header class="tcard__top">' +
+               '<span class="tcard__unit">' + esc(t.unit) + "</span>" +
+               '<span class="tcard__boro">' + esc(t.borough) + "</span>" +
+               '<span class="badge badge--' + tone + '">' + esc(badge) + "</span>" +
+             "</header>" +
+             '<h3 class="tcard__name">' + esc(t.name) + "</h3>" +
+             (title ? '<p class="tcard__ticket">' + esc(title) + "</p>" : "") +
+             '<p class="tcard__detail">' + esc(detail) + "</p>" +
+             '<footer class="tcard__foot">' +
+               '<span class="tcard__phone">' + phoneIcon() + esc(t.phone) + "</span>" +
+               '<span class="tcard__addr">' + esc(t.address) + "</span>" +
+             "</footer>" +
+           "</article>";
+  }
+
+  function sectionHead(title, count, id) {
+    return '<div class="tsec__head"' + (id ? ' id="' + id + '"' : "") + '>' +
+             '<h2 class="section__title">' + title + "</h2>" +
+             '<span class="section__count">' + count + "</span></div>";
   }
 
   function renderTenants() {
@@ -181,17 +196,11 @@
     });
 
     if (emergencies.length) {
-      var eRows = emergencies.map(function (e) {
-        var t = byUnit(e.unit);
-        return "<tr>" + baseCells(t) +
-               '<td><div class="rowstack"><span><span class="mono">' + esc(e.ticket) + "</span> " +
-               '<span class="badge badge--urgent">' + esc(e.category) + "</span></span>" +
-               "<small>" + esc(e.issue) + "</small></div></td></tr>";
-      }).join("");
-
-      out.push('<div class="section__head" id="active-emergencies"><h2 class="section__title">Active Emergencies</h2>' +
-               '<span class="section__count">' + emergencies.length + "</span></div>" +
-               tenantTable([eRows], "Open ticket"));
+      out.push('<section class="tsec" aria-label="Active emergencies">' +
+               sectionHead("Active Emergencies", emergencies.length, "active-emergencies") +
+               '<div class="tcards">' + emergencies.map(function (e) {
+                 return tenantCard(byUnit(e.unit), "urgent", e.category, e.ticket, e.issue);
+               }).join("") + "</div></section>");
     }
 
     var attention = D.attention.filter(function (a) {
@@ -200,28 +209,37 @@
     });
 
     if (attention.length) {
-      var aRows = attention.map(function (a) {
-        var t = byUnit(a.unit);
-        return "<tr>" + baseCells(t) +
-               '<td><div class="rowstack"><span class="badge badge--warn">Lease</span>' +
-               "<small>" + esc(a.note) + "</small></div></td></tr>";
-      }).join("");
-
-      out.push('<div class="section__head"><h2 class="section__title">Needs Attention</h2>' +
-               '<span class="section__count">' + attention.length + "</span></div>" +
-               tenantTable([aRows], "Why"));
+      out.push('<section class="tsec" aria-label="Needs attention">' +
+               sectionHead("Needs Attention", attention.length) +
+               '<div class="tcards">' + attention.map(function (a) {
+                 return tenantCard(byUnit(a.unit), "warn", "Lease", "", a.note);
+               }).join("") + "</div></section>");
     }
 
     var all = D.tenants.filter(matchesTenant);
     if (all.length) {
-      var allRows = all.map(function (t) { return "<tr>" + baseCells(t) + "</tr>"; }).join("");
-      out.push('<div class="section__head"><h2 class="section__title">All Tenants</h2>' +
-               '<span class="section__count">' + all.length + " of " + D.tenants.length + "</span></div>" +
-               tenantTable([allRows], ""));
+      var rows = all.map(function (t) {
+        var st = D.status[t.status] || D.status.clean;
+        return "<tr>" +
+                 '<td class="mono">' + esc(t.unit) + "</td>" +
+                 '<td class="strong">' + esc(t.name) + "</td>" +
+                 '<td class="dim nowrap">' + esc(t.phone) + "</td>" +
+                 '<td class="dim">' + esc(t.address) + "</td>" +
+                 "<td>" + esc(t.borough) + "</td>" +
+                 '<td><span class="tstatus"><i style="background:' + st.dot + '"></i>' + esc(st.label) + "</span></td>" +
+               "</tr>";
+      }).join("");
+
+      out.push('<section class="tsec" aria-label="All tenants">' +
+               sectionHead("All Tenants", all.length + " of " + D.tenants.length) +
+               '<div class="panel tpanel"><div class="tablewrap"><table class="table table--roster">' +
+                 '<colgroup><col class="c-unit"><col class="c-name"><col class="c-phone"><col><col class="c-boro"><col class="c-status"></colgroup>' +
+                 "<thead><tr><th>Unit</th><th>Tenant</th><th>Contact</th><th>Address</th><th>Borough</th><th>Status</th></tr></thead>" +
+                 "<tbody>" + rows + "</tbody></table></div></div></section>");
     }
 
     if (!out.length) {
-      out.push('<div class="section__head"><span class="section__count">No tenants match that search.</span></div>');
+      out.push('<div class="panel tpanel"><p class="units__empty">No tenants match that search.</p></div>');
     }
 
     $("#tenantSections").innerHTML = out.join("");

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BESPOKE — Client Relations Portal demo
+   BESPOKE — Personal Injury Intake System demo
    Mirrors the Figma "CRM Demo" prototype (Version 84).
    ========================================================================== */
 
@@ -261,8 +261,7 @@ window.CRM_DATA = (function () {
     { label: "Analyze Potential Case Value",                  icon: "value",    group: "crm" },
     { label: "Analyze Deposition Testimony",                  icon: "file",     group: "legal" },
     { label: "Analysis and Chronology of Medical Records",    icon: "activity", group: "legal" },
-    { label: "Trial Prep Assistance",                         icon: "scale",    group: "legal" },
-    { label: "Draft & Respond to Discovery",                  icon: "fileedit", group: "legal" }
+    { label: "Trial Prep Assistance",                         icon: "scale",    group: "legal" }
   ];
 
   var INTEGRATIONS_CONNECTED = [

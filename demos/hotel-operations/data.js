@@ -78,8 +78,8 @@
     { id: "m9", employeeId: "e4", from: "employee", kind: "message", text: "Le Bernardin confirmed for the Whitfields at 20:00. Two more to go.", time: t(14, 12) }
   ];
 
-  function localeTag(lang) {
-    return lang === "ar" ? "ar-AE" : "en-US";
+  function localeTag() {
+    return "en-US";
   }
   function fmtTime(d, lang) {
     return d.toLocaleTimeString(localeTag(lang), {
