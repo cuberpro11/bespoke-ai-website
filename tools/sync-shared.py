@@ -28,6 +28,7 @@ SKIP_DIRS = {".git", "assets", "partials", "tools", "new-icons", "node_modules"}
 PARTIAL_NAMES = ("nav", "footer")
 ASSET_PATHS = (
     "assets/css/styles.css",
+    "assets/css/bvs.css",
     "assets/js/site.js",
     "assets/js/demo.js",
     "assets/css/solutions.css",

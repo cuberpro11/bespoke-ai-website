@@ -50,6 +50,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=e877cf9c">
+<link rel="stylesheet" href="/assets/css/bvs.css?v=1acbb054">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -373,65 +374,36 @@
 </section>
 
 <!-- BESPOKE VS SUBSCRIPTION -->
-<section class="section bvs on-light" aria-label="Bespoke software versus subscriptions">
+<section class="section bvs bvs--split on-light" aria-label="Bespoke software versus subscriptions">
   <div class="container">
-    <div class="bvs__top">
-      <div class="section-head">
+    <div class="section-head">
         <p class="kicker" data-reveal="draw">Bespoke vs. subscription</p>
         <h2 class="h2" data-reveal>Stop renting software built <em>for someone else’s business.</em></h2>
         <p class="lede" data-reveal>Off-the-shelf automation tools bill per user, per workflow, and per renewal. Every new hire or added process raises the price, while you bend your operations around features designed for a generic customer. Bespoke software is built once around how your firm runs, with no subscription meter and no workarounds.</p>
       </div>
-      <figure class="bvs-chart" data-reveal="scale">
-        <div class="bvs-chart__head">
-          <span class="bvs-chart__title">Five-year cost of ownership</span>
-          <span class="bvs-chart__tag">Illustrative</span>
-        </div>
-        <svg viewBox="0 0 560 284" role="img" aria-label="Illustrative cumulative cost over five years. Per-user SaaS tools costs step up at every annual renewal; a bespoke build is a one-time investment plus flat upkeep, and becomes the cheaper option from year two onward.">
-          <g class="bvs-grid"><line x1="40" y1="30" x2="540" y2="30" stroke-dasharray="2 5"/><line x1="40" y1="85" x2="540" y2="85" stroke-dasharray="2 5"/><line x1="40" y1="140" x2="540" y2="140" stroke-dasharray="2 5"/><line x1="40" y1="195" x2="540" y2="195" stroke-dasharray="2 5"/><line x1="40" y1="250" x2="540" y2="250"/></g>
-          <g class="bvs-axis"><text x="40" y="272" text-anchor="middle">Launch</text><text x="140" y="272" text-anchor="middle">Yr 1</text><text x="240" y="272" text-anchor="middle">Yr 2</text><text x="340" y="272" text-anchor="middle">Yr 3</text><text x="440" y="272" text-anchor="middle">Yr 4</text><text x="540" y="272" text-anchor="middle">Yr 5</text><text transform="translate(16 140) rotate(-90)" text-anchor="middle">Cumulative cost</text></g>
-          <path class="bvs-gap" d="M240,162.1 V141.7 H340 V96.1 H440 V45.9 H540 V143.2 Z"/>
-          <path class="bvs-sub" pathLength="1" d="M40,250 V218.6 H140 V182.5 H240 V141.7 H340 V96.1 H440 V45.9 H540"/>
-          <path class="bvs-own" pathLength="1" d="M40,250 V174.6 L540,143.2"/>
-          <g class="bvs-even"><circle cx="240" cy="162.1" r="5"/><circle cx="240" cy="162.1" r="11"/><text x="252" y="190">Break-even</text></g>
-          <text class="bvs-gap-label" x="452" y="70"><tspan x="452">What you keep</tspan><tspan x="452" dy="17">no renewals,</tspan><tspan x="452" dy="15">no seat fees</tspan></text>
-          <text class="bvs-end bvs-end--sub" x="536" y="36" text-anchor="end">Per-user SaaS tools</text>
-          <text class="bvs-end bvs-end--own" x="536" y="133" text-anchor="end">Bespoke build</text>
-        </svg>
-        <div class="bvs-chart__legend"><span><i class="bvs-key--sub"></i>Per-user SaaS tools</span><span><i class="bvs-key--own"></i>Bespoke build</span></div>
-        <figcaption>Per-user tools get more expensive with every hire and every renewal. A bespoke build is a one-time investment plus predictable upkeep.</figcaption>
-      </figure>
-    </div>
-    <ul class="bvs-pillars" data-stagger>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">01</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
-        <h3>No per-user or subscription fees</h3>
-        <p>Our pricing is market competitive, and we never charge per seat, per user, or per automation run. Scale your team and your workflows without scaling your software bill. In the long run, bespoke wins.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">02</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3Z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5Z"/><path d="m2 2 7.6 7.6"/><circle cx="11" cy="11" r="2"/></svg></span>
-        <h3>Exactly the workflow you need</h3>
-        <p>A User Experience Designer is assigned to every project to map how your team actually works, so you get exactly what you want rather than a tool you’re only partially satisfied with.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">03</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3 21 2M16 7l3 3M14 9l2 2"/></svg></span>
-        <h3>You own every line</h3>
-        <p>The code, integrations, and data are yours. No vendor can raise prices, sunset a feature, or lock your documents behind an export fee.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">04</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.3 4.3M14.8 14.8l4.3 4.3M14.8 9.2l4.3-4.3M4.9 19.1l4.3-4.3"/></svg></span>
-        <h3>Support that doesn’t end at launch</h3>
-        <p>Our engineers stay with you after go-live to handle support challenges, build new features, and respond fast when something urgent comes up.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">05</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 1 10-10c0 2.8-2.2 4-4 4h-1.5a2 2 0 0 0-1.5 3.3A2 2 0 0 1 12 22Z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg></span>
-        <h3>Branded as your firm</h3>
-        <p>Portals, emails, and documents carry your firm’s name, logo, and colors, so clients experience your brand from end to end.</p>
-      </li>
+    <figure class="bv-sp" data-reveal="scale">
+      <div class="bv-sp__half bv-sp__half--sub">
+        <p class="bv-sp__lbl">Per-user SaaS tools</p>
+        <div class="bv-sp__tower" aria-hidden="true"><span class="bv-sp__stack" style="height:100%"><i class="bv-sp__seg bv-fade" style="flex-grow:24.6;--d:0"><b>Yr 5</b></i><i class="bv-sp__seg bv-fade" style="flex-grow:22.3;--d:1"><b>Yr 4</b></i><i class="bv-sp__seg bv-fade" style="flex-grow:20.0;--d:2"><b>Yr 3</b></i><i class="bv-sp__seg bv-fade" style="flex-grow:17.7;--d:3"><b>Yr 2</b></i><i class="bv-sp__seg bv-fade" style="flex-grow:15.4;--d:4"><b>Yr 1</b></i></span></div>
+      </div>
+      <div class="bv-sp__mid">
+        <p class="bv-title"><span>Five-year cost of ownership</span><span class="bv-tag">Illustrative</span></p>
+        <p class="bv-keep"><b>What you keep</b> no renewals, no seat fees</p>
+        <p class="bv-sp__even">Break-even · Yr 3</p>
+        <figcaption class="bv-cap">Per-user tools get more expensive with every hire and every renewal. A bespoke build is a one-time investment plus predictable upkeep.</figcaption>
+        <p class="bv-sr">Illustrative cumulative cost over five years. Per-user SaaS tools costs step up at every annual renewal; a bespoke build is a one-time investment plus flat upkeep, and becomes the cheaper option from year two onward.</p>
+      </div>
+      <div class="bv-sp__half bv-sp__half--own">
+        <p class="bv-sp__lbl">Bespoke build</p>
+        <div class="bv-sp__tower" aria-hidden="true"><span class="bv-sp__stack" style="height:52.3%"><i class="bv-sp__seg bv-fade" style="flex-grow:3.1;--d:0"></i><i class="bv-sp__seg bv-fade" style="flex-grow:3.1;--d:1"></i><i class="bv-sp__seg bv-fade" style="flex-grow:3.1;--d:2"></i><i class="bv-sp__seg bv-fade" style="flex-grow:3.1;--d:3"></i><i class="bv-sp__seg bv-fade" style="flex-grow:40.0;--d:4"><b>Yr 1</b></i></span></div>
+      </div>
+    </figure>
+    <ul class="bv-sp__strip" data-stagger>
+      <li data-reveal><span class="bv-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span class="bv-sp__n">01</span><h3>No per-user or subscription fees</h3><p>Our pricing is market competitive, and we never charge per seat, per user, or per automation run. Scale your team and your workflows without scaling your software bill. In the long run, bespoke wins.</p></li>
+<li data-reveal><span class="bv-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3Z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5Z"/><path d="m2 2 7.6 7.6"/><circle cx="11" cy="11" r="2"/></svg></span><span class="bv-sp__n">02</span><h3>Exactly the workflow you need</h3><p>A User Experience Designer is assigned to every project to map how your team actually works, so you get exactly what you want rather than a tool you’re only partially satisfied with.</p></li>
+<li data-reveal><span class="bv-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3 21 2M16 7l3 3M14 9l2 2"/></svg></span><span class="bv-sp__n">03</span><h3>You own every line</h3><p>The code, integrations, and data are yours. No vendor can raise prices, sunset a feature, or lock your documents behind an export fee.</p></li>
+<li data-reveal><span class="bv-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.3 4.3M14.8 14.8l4.3 4.3M14.8 9.2l4.3-4.3M4.9 19.1l4.3-4.3"/></svg></span><span class="bv-sp__n">04</span><h3>Support that doesn’t end at launch</h3><p>Our engineers stay with you after go-live to handle support challenges, build new features, and respond fast when something urgent comes up.</p></li>
+<li data-reveal><span class="bv-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 1 10-10c0 2.8-2.2 4-4 4h-1.5a2 2 0 0 0-1.5 3.3A2 2 0 0 1 12 22Z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg></span><span class="bv-sp__n">05</span><h3>Branded as your firm</h3><p>Portals, emails, and documents carry your firm’s name, logo, and colors, so clients experience your brand from end to end.</p></li>
     </ul>
   </div>
 </section>
@@ -514,6 +486,6 @@
 </footer>
 <!-- /@shared:footer -->
 
-<script src="/assets/js/site.js?v=3f4b602c" defer></script>
+<script src="/assets/js/site.js?v=58242646" defer></script>
 </body>
 </html>

@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=e877cf9c">
+<link rel="stylesheet" href="/assets/css/bvs.css?v=1acbb054">
 <link rel="stylesheet" href="/assets/css/solutions.css?v=c345787a">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
@@ -322,65 +323,72 @@
 </section>
 
 <!-- BESPOKE VS SUBSCRIPTION -->
-<section class="section bvs on-light" aria-label="Bespoke software versus subscriptions">
+<section class="section bvs bvs--inbox on-light" aria-label="Bespoke software versus subscriptions">
   <div class="container">
-    <div class="bvs__top">
+    <div class="bv-ib__top">
       <div class="section-head">
         <p class="kicker" data-reveal="draw">Bespoke vs. subscription</p>
         <h2 class="h2" data-reveal>Inbox automation without <em>a per-mailbox bill.</em></h2>
         <p class="lede" data-reveal>Help desk and email automation tools charge per agent, per mailbox, and per AI resolution, so a busier inbox becomes a more expensive one. A bespoke email response engine is built once around your firm’s tone and routing rules, with no per-seat or per-message pricing.</p>
       </div>
-      <figure class="bvs-chart" data-reveal="scale">
-        <div class="bvs-chart__head">
-          <span class="bvs-chart__title">Five-year cost of ownership</span>
-          <span class="bvs-chart__tag">Illustrative</span>
-        </div>
-        <svg viewBox="0 0 560 284" role="img" aria-label="Illustrative cumulative cost over five years. Per-agent help desk tools costs step up at every annual renewal; a bespoke build is a one-time investment plus flat upkeep, and becomes the cheaper option from year two onward.">
-          <g class="bvs-grid"><line x1="40" y1="30" x2="540" y2="30" stroke-dasharray="2 5"/><line x1="40" y1="85" x2="540" y2="85" stroke-dasharray="2 5"/><line x1="40" y1="140" x2="540" y2="140" stroke-dasharray="2 5"/><line x1="40" y1="195" x2="540" y2="195" stroke-dasharray="2 5"/><line x1="40" y1="250" x2="540" y2="250"/></g>
-          <g class="bvs-axis"><text x="40" y="272" text-anchor="middle">Launch</text><text x="140" y="272" text-anchor="middle">Yr 1</text><text x="240" y="272" text-anchor="middle">Yr 2</text><text x="340" y="272" text-anchor="middle">Yr 3</text><text x="440" y="272" text-anchor="middle">Yr 4</text><text x="540" y="272" text-anchor="middle">Yr 5</text><text transform="translate(16 140) rotate(-90)" text-anchor="middle">Cumulative cost</text></g>
-          <path class="bvs-gap" d="M240,162.1 V141.7 H340 V96.1 H440 V45.9 H540 V143.2 Z"/>
-          <path class="bvs-sub" pathLength="1" d="M40,250 V218.6 H140 V182.5 H240 V141.7 H340 V96.1 H440 V45.9 H540"/>
-          <path class="bvs-own" pathLength="1" d="M40,250 V174.6 L540,143.2"/>
-          <g class="bvs-even"><circle cx="240" cy="162.1" r="5"/><circle cx="240" cy="162.1" r="11"/><text x="252" y="190">Break-even</text></g>
-          <text class="bvs-gap-label" x="452" y="70"><tspan x="452">What you keep</tspan><tspan x="452" dy="17">no renewals,</tspan><tspan x="452" dy="15">no seat fees</tspan></text>
-          <text class="bvs-end bvs-end--sub" x="536" y="36" text-anchor="end">Per-agent help desk tools</text>
-          <text class="bvs-end bvs-end--own" x="536" y="133" text-anchor="end">Bespoke build</text>
-        </svg>
-        <div class="bvs-chart__legend"><span><i class="bvs-key--sub"></i>Per-agent help desk tools</span><span><i class="bvs-key--own"></i>Bespoke build</span></div>
-        <figcaption>Per-agent and per-resolution pricing grows with your inbox. A bespoke build is a one-time investment plus predictable upkeep.</figcaption>
+      <figure class="bv-ib" data-reveal="scale">
+        <p class="bv-ib__bar">Five-year cost of ownership<span class="bv-tag">Illustrative</span></p>
+        <ul class="bv-ib__list" aria-hidden="true">
+          <li class="bv-ib__m bv-ib__m--sub is-unread">
+              <span class="bv-ib__from">Per-agent help desk tools</span>
+              <span class="bv-ib__subj">Yr 1</span>
+              <span class="bv-ib__amt"><i class="bv-grow-x" style="--w:38%;--d:0"></i></span>
+            </li><li class="bv-ib__m bv-ib__m--own">
+              <span class="bv-ib__from">Bespoke build</span>
+              <span class="bv-ib__subj">Yr 1</span>
+              <span class="bv-ib__amt"><i class="bv-grow-x" style="--w:100%;--d:0"></i></span>
+            </li><li class="bv-ib__m bv-ib__m--sub is-unread">
+              <span class="bv-ib__from">Renewal</span>
+              <span class="bv-ib__subj">Yr 2</span>
+              <span class="bv-ib__amt"><i class="bv-grow-x" style="--w:44%;--d:1"></i></span>
+            </li><li class="bv-ib__m bv-ib__m--sub is-unread">
+              <span class="bv-ib__from">Renewal</span>
+              <span class="bv-ib__subj">Yr 3 <em class="bv-ib__tag">Break-even</em></span>
+              <span class="bv-ib__amt"><i class="bv-grow-x" style="--w:50%;--d:2"></i></span>
+            </li><li class="bv-ib__m bv-ib__m--sub is-unread">
+              <span class="bv-ib__from">Renewal</span>
+              <span class="bv-ib__subj">Yr 4</span>
+              <span class="bv-ib__amt"><i class="bv-grow-x" style="--w:56%;--d:3"></i></span>
+            </li><li class="bv-ib__m bv-ib__m--sub is-unread">
+              <span class="bv-ib__from">Renewal</span>
+              <span class="bv-ib__subj">Yr 5</span>
+              <span class="bv-ib__amt"><i class="bv-grow-x" style="--w:62%;--d:4"></i></span>
+            </li><li class="bv-ib__m bv-ib__m--own bv-ib__m--thread">
+              <span class="bv-ib__from">Upkeep <span class="bv-ib__count">4</span></span>
+              <span class="bv-ib__subj">Yr 2–5</span>
+              <span class="bv-ib__amt"><i class="bv-grow-x" style="--w:8%;--d:5"></i></span>
+            </li>
+        </ul>
+        <p class="bv-sr">Illustrative cumulative cost over five years. Per-agent help desk tools costs step up at every annual renewal; a bespoke build is a one-time investment plus flat upkeep, and becomes the cheaper option from year two onward.</p>
+        <div class="bv-ib__foot"><p class="bv-keep"><b>What you keep</b> no renewals, no seat fees</p><figcaption class="bv-cap">Per-agent and per-resolution pricing grows with your inbox. A bespoke build is a one-time investment plus predictable upkeep.</figcaption></div>
       </figure>
     </div>
-    <ul class="bvs-pillars" data-stagger>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">01</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
-        <h3>No per-agent or per-message fees</h3>
-        <p>Our pricing is market competitive, and we never charge per mailbox, per agent, or per AI reply. Handle twice the volume without twice the bill. Bespoke AI is more affordable over time.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">02</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3Z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5Z"/><path d="m2 2 7.6 7.6"/><circle cx="11" cy="11" r="2"/></svg></span>
-        <h3>Written in your voice</h3>
-        <p>A User Experience Designer is assigned to every project and works with your team to define routing rules, review queues, and reply templates that sound exactly like your firm.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">03</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3 21 2M16 7l3 3M14 9l2 2"/></svg></span>
-        <h3>You own the engine</h3>
-        <p>Your code, prompts, and correspondence history stay in your environment, never on a shared vendor platform that could change its terms or access.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">04</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.3 4.3M14.8 14.8l4.3 4.3M14.8 9.2l4.3-4.3M4.9 19.1l4.3-4.3"/></svg></span>
-        <h3>Support after go-live</h3>
-        <p>We stay on after launch to handle support issues, tune responses, add new inboxes and workflows, and respond to emergencies quickly.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">05</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 1 10-10c0 2.8-2.2 4-4 4h-1.5a2 2 0 0 0-1.5 3.3A2 2 0 0 1 12 22Z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg></span>
-        <h3>Branded on every reply</h3>
-        <p>Every automated reply, signature, and client portal carries your firm’s name and brand, so clients never see a third-party tool.</p>
-      </li>
+    <ul class="bv-ib__cards" data-stagger>
+      <li class="bv-ib__card" data-reveal>
+          <p class="bv-ib__hd"><span class="bv-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span class="bv-ib__n">01</span></p>
+          <h3>No per-agent or per-message fees</h3><p>Our pricing is market competitive, and we never charge per mailbox, per agent, or per AI reply. Handle twice the volume without twice the bill. Bespoke AI is more affordable over time.</p>
+        </li>
+<li class="bv-ib__card" data-reveal>
+          <p class="bv-ib__hd"><span class="bv-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3Z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5Z"/><path d="m2 2 7.6 7.6"/><circle cx="11" cy="11" r="2"/></svg></span><span class="bv-ib__n">02</span></p>
+          <h3>Written in your voice</h3><p>A User Experience Designer is assigned to every project and works with your team to define routing rules, review queues, and reply templates that sound exactly like your firm.</p>
+        </li>
+<li class="bv-ib__card" data-reveal>
+          <p class="bv-ib__hd"><span class="bv-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3 21 2M16 7l3 3M14 9l2 2"/></svg></span><span class="bv-ib__n">03</span></p>
+          <h3>You own the engine</h3><p>Your code, prompts, and correspondence history stay in your environment, never on a shared vendor platform that could change its terms or access.</p>
+        </li>
+<li class="bv-ib__card" data-reveal>
+          <p class="bv-ib__hd"><span class="bv-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.3 4.3M14.8 14.8l4.3 4.3M14.8 9.2l4.3-4.3M4.9 19.1l4.3-4.3"/></svg></span><span class="bv-ib__n">04</span></p>
+          <h3>Support after go-live</h3><p>We stay on after launch to handle support issues, tune responses, add new inboxes and workflows, and respond to emergencies quickly.</p>
+        </li>
+<li class="bv-ib__card" data-reveal>
+          <p class="bv-ib__hd"><span class="bv-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 1 10-10c0 2.8-2.2 4-4 4h-1.5a2 2 0 0 0-1.5 3.3A2 2 0 0 1 12 22Z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg></span><span class="bv-ib__n">05</span></p>
+          <h3>Branded on every reply</h3><p>Every automated reply, signature, and client portal carries your firm’s name and brand, so clients never see a third-party tool.</p>
+        </li>
     </ul>
   </div>
 </section>
@@ -476,7 +484,7 @@
 </footer>
 <!-- /@shared:footer -->
 
-<script src="/assets/js/site.js?v=3f4b602c" defer></script>
+<script src="/assets/js/site.js?v=58242646" defer></script>
 <script src="/assets/js/solutions.js?v=f27985ef" defer></script>
 </body>
 </html>

@@ -1076,6 +1076,31 @@
     if (btn && next) next.focus();
   });
 
+  /* ---- bespoke vs subscription: horizon slider (risk page) ----
+     The figure ships drawn at Yr 5; dragging the horizon redraws both
+     cumulative meters, the gap between them, and the break-even badge. */
+  doc.querySelectorAll("[data-bv-horizon]").forEach((fig) => {
+    const data = JSON.parse(fig.dataset.bvHorizon);
+    const range = fig.querySelector(".bv-hz__range");
+    const out = fig.querySelector(".bv-hz__out");
+    const [subFill, ownFill] = fig.querySelectorAll(".bv-hz__fill");
+    const gap = fig.querySelector(".bv-hz__gap");
+    const even = fig.querySelector(".bv-hz__even");
+    const draw = () => {
+      const i = Number(range.value) - 1;
+      const sub = data.sub[i], own = data.own[i];
+      out.textContent = data.years[i];
+      subFill.style.setProperty("--w", sub + "%");
+      ownFill.style.setProperty("--w", own + "%");
+      gap.style.setProperty("--l", own + "%");
+      gap.style.setProperty("--w", Math.max(0, sub - own) + "%");
+      gap.classList.toggle("is-off", sub <= own);
+      even.classList.toggle("is-on", i >= data.even);
+    };
+    range.addEventListener("input", draw);
+    draw();
+  });
+
   /* ---- extended motion (additive) ---- */
 
   updateParallax();

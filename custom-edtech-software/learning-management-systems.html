@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=e877cf9c">
+<link rel="stylesheet" href="/assets/css/bvs.css?v=1acbb054">
 <link rel="stylesheet" href="/assets/css/solutions.css?v=c345787a">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
@@ -310,66 +311,56 @@
 </section>
 
 <!-- BESPOKE VS SUBSCRIPTION -->
-<section class="section bvs on-light" aria-label="Bespoke software versus subscriptions">
+<section class="section bvs bvs--transit on-light" aria-label="Bespoke software versus subscriptions">
   <div class="container">
-    <div class="bvs__top">
+    <div class="bv-tr__top">
       <div class="section-head">
         <p class="kicker" data-reveal="draw">Bespoke vs. subscription</p>
         <h2 class="h2" data-reveal>Your LMS shouldn’t bill you <em>for every enrolled learner.</em></h2>
         <p class="lede" data-reveal>Commercial learning management systems charge per active learner, per course seat, or per add-on module, and the invoice rises with every cohort you enroll. Institutions end up paying more each term for a platform that still forces instructors into someone else’s course structure. A bespoke LMS is built once around your pedagogy, with no per-learner meter.</p>
       </div>
-      <figure class="bvs-chart" data-reveal="scale">
-        <div class="bvs-chart__head">
-          <span class="bvs-chart__title">Five-year cost of ownership</span>
-          <span class="bvs-chart__tag">Illustrative</span>
-        </div>
-        <svg viewBox="0 0 560 284" role="img" aria-label="Illustrative cumulative cost over five years. Per-learner LMS licensing costs step up at every annual renewal; a bespoke build is a one-time investment plus flat upkeep, and becomes the cheaper option from year two onward.">
-          <g class="bvs-grid"><line x1="40" y1="30" x2="540" y2="30" stroke-dasharray="2 5"/><line x1="40" y1="85" x2="540" y2="85" stroke-dasharray="2 5"/><line x1="40" y1="140" x2="540" y2="140" stroke-dasharray="2 5"/><line x1="40" y1="195" x2="540" y2="195" stroke-dasharray="2 5"/><line x1="40" y1="250" x2="540" y2="250"/></g>
-          <g class="bvs-axis"><text x="40" y="272" text-anchor="middle">Launch</text><text x="140" y="272" text-anchor="middle">Yr 1</text><text x="240" y="272" text-anchor="middle">Yr 2</text><text x="340" y="272" text-anchor="middle">Yr 3</text><text x="440" y="272" text-anchor="middle">Yr 4</text><text x="540" y="272" text-anchor="middle">Yr 5</text><text transform="translate(16 140) rotate(-90)" text-anchor="middle">Cumulative cost</text></g>
-          <path class="bvs-gap" d="M240,162.1 V141.7 H340 V96.1 H440 V45.9 H540 V143.2 Z"/>
-          <path class="bvs-sub" pathLength="1" d="M40,250 V218.6 H140 V182.5 H240 V141.7 H340 V96.1 H440 V45.9 H540"/>
-          <path class="bvs-own" pathLength="1" d="M40,250 V174.6 L540,143.2"/>
-          <g class="bvs-even"><circle cx="240" cy="162.1" r="5"/><circle cx="240" cy="162.1" r="11"/><text x="252" y="190">Break-even</text></g>
-          <text class="bvs-gap-label" x="452" y="70"><tspan x="452">What you keep</tspan><tspan x="452" dy="17">no renewals,</tspan><tspan x="452" dy="15">no seat fees</tspan></text>
-          <text class="bvs-end bvs-end--sub" x="536" y="36" text-anchor="end">Per-learner LMS licensing</text>
-          <text class="bvs-end bvs-end--own" x="536" y="133" text-anchor="end">Bespoke build</text>
+      <figure class="bv-tr" data-reveal="scale">
+        <p class="bv-title"><span>Five-year cost of ownership</span><span class="bv-tag">Illustrative</span></p>
+        <svg class="bv-tr__svg" viewBox="0 0 620 230" aria-hidden="true">
+          <line class="bv-tr__even" x1="310" y1="78" x2="310" y2="178"/>
+          <text class="bv-tr__evenl" x="322" y="133.0">Break-even</text>
+          <path class="bv-tr__line bv-tr__line--sub" d="M60,78 H560"/>
+          <path class="bv-tr__line bv-tr__line--own" d="M60,178 H560"/>
+          <circle class="bv-tr__st bv-tr__st--sub" cx="60" cy="78" r="11.5"/><circle class="bv-tr__st bv-tr__st--sub" cx="185" cy="78" r="12.4"/><circle class="bv-tr__st bv-tr__st--sub" cx="310" cy="78" r="13.4"/><circle class="bv-tr__st bv-tr__st--sub" cx="435" cy="78" r="14.4"/><circle class="bv-tr__st bv-tr__st--sub" cx="560" cy="78" r="15.3"/><circle class="bv-tr__st bv-tr__st--own" cx="60" cy="178" r="21.8"/><circle class="bv-tr__st bv-tr__st--own" cx="185" cy="178" r="6.3"/><circle class="bv-tr__st bv-tr__st--own" cx="310" cy="178" r="6.3"/><circle class="bv-tr__st bv-tr__st--own" cx="435" cy="178" r="6.3"/><circle class="bv-tr__st bv-tr__st--own" cx="560" cy="178" r="6.3"/><text class="bv-tr__y" x="60" y="48">Yr 1</text><text class="bv-tr__y" x="185" y="48">Yr 2</text><text class="bv-tr__y" x="310" y="48">Yr 3</text><text class="bv-tr__y" x="435" y="48">Yr 4</text><text class="bv-tr__y" x="560" y="48">Yr 5</text>
         </svg>
-        <div class="bvs-chart__legend"><span><i class="bvs-key--sub"></i>Per-learner LMS licensing</span><span><i class="bvs-key--own"></i>Bespoke build</span></div>
-        <figcaption>Per-learner licensing grows with every cohort and every renewal. A bespoke build is a one-time investment plus predictable upkeep.</figcaption>
+        <div class="bv-legend"><span><i class="bv-key bv-key--sub"></i>Per-learner LMS licensing</span><span><i class="bv-key bv-key--own"></i>Bespoke build</span></div>
+        <p class="bv-sr">Illustrative cumulative cost over five years. Per-learner LMS licensing costs step up at every annual renewal; a bespoke build is a one-time investment plus flat upkeep, and becomes the cheaper option from year two onward.</p>
+        <p class="bv-keep"><b>What you keep</b> no renewals, no seat fees</p>
+        <figcaption class="bv-cap">Per-learner licensing grows with every cohort and every renewal. A bespoke build is a one-time investment plus predictable upkeep.</figcaption>
       </figure>
     </div>
-    <ul class="bvs-pillars" data-stagger>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">01</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
-        <h3>No per-learner fees</h3>
-        <p>Our pricing is market competitive, and we never charge per learner, per seat, or per course. Grow your enrollment and catalog without growing your software bill, which makes bespoke the more affordable LMS over time.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">02</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3Z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5Z"/><path d="m2 2 7.6 7.6"/><circle cx="11" cy="11" r="2"/></svg></span>
-        <h3>Built around your pedagogy</h3>
-        <p>A User Experience Designer is assigned to every project and works with your instructors, instructional designers, and administrators, so the LMS fits how you teach rather than the other way around.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">03</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3 21 2M16 7l3 3M14 9l2 2"/></svg></span>
-        <h3>Your institution owns it</h3>
-        <p>Course content, learner records, and the source code belong to your institution. No vendor can lock your curriculum behind an export fee or retire a feature you depend on.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">04</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.3 4.3M14.8 14.8l4.3 4.3M14.8 9.2l4.3-4.3M4.9 19.1l4.3-4.3"/></svg></span>
-        <h3>Support every term</h3>
-        <p>We stay on after launch to handle support issues, add features like new assessment types, and respond to emergencies during exam weeks and enrollment peaks.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">05</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 1 10-10c0 2.8-2.2 4-4 4h-1.5a2 2 0 0 0-1.5 3.3A2 2 0 0 1 12 22Z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg></span>
-        <h3>Your institution’s brand</h3>
-        <p>Student portals, course pages, and certificates carry your institution’s colors, logo, and domain, so learners experience your brand, not a vendor’s.</p>
-      </li>
-    </ul>
+    <ol class="bv-tr__route" data-stagger>
+      <li class="bv-tr__stop" data-reveal>
+          <span class="bv-tr__dot" aria-hidden="true"></span>
+          <p class="bv-tr__n">01</p>
+          <h3>No per-learner fees</h3><p>Our pricing is market competitive, and we never charge per learner, per seat, or per course. Grow your enrollment and catalog without growing your software bill, which makes bespoke the more affordable LMS over time.</p>
+        </li>
+<li class="bv-tr__stop" data-reveal>
+          <span class="bv-tr__dot" aria-hidden="true"></span>
+          <p class="bv-tr__n">02</p>
+          <h3>Built around your pedagogy</h3><p>A User Experience Designer is assigned to every project and works with your instructors, instructional designers, and administrators, so the LMS fits how you teach rather than the other way around.</p>
+        </li>
+<li class="bv-tr__stop" data-reveal>
+          <span class="bv-tr__dot" aria-hidden="true"></span>
+          <p class="bv-tr__n">03</p>
+          <h3>Your institution owns it</h3><p>Course content, learner records, and the source code belong to your institution. No vendor can lock your curriculum behind an export fee or retire a feature you depend on.</p>
+        </li>
+<li class="bv-tr__stop" data-reveal>
+          <span class="bv-tr__dot" aria-hidden="true"></span>
+          <p class="bv-tr__n">04</p>
+          <h3>Support every term</h3><p>We stay on after launch to handle support issues, add features like new assessment types, and respond to emergencies during exam weeks and enrollment peaks.</p>
+        </li>
+<li class="bv-tr__stop" data-reveal>
+          <span class="bv-tr__dot" aria-hidden="true"></span>
+          <p class="bv-tr__n">05</p>
+          <h3>Your institution’s brand</h3><p>Student portals, course pages, and certificates carry your institution’s colors, logo, and domain, so learners experience your brand, not a vendor’s.</p>
+        </li>
+    </ol>
   </div>
 </section>
 
@@ -461,7 +452,7 @@
 </footer>
 <!-- /@shared:footer -->
 
-<script src="/assets/js/site.js?v=3f4b602c" defer></script>
+<script src="/assets/js/site.js?v=58242646" defer></script>
 <script src="/assets/js/solutions.js?v=f27985ef" defer></script>
 </body>
 </html>

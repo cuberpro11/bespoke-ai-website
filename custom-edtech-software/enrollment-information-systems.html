@@ -51,6 +51,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=e877cf9c">
+<link rel="stylesheet" href="/assets/css/bvs.css?v=1acbb054">
 <link rel="stylesheet" href="/assets/css/solutions.css?v=c345787a">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
@@ -406,66 +407,67 @@
 </section>
 
 <!-- BESPOKE VS SUBSCRIPTION -->
-<section class="section bvs on-light" aria-label="Bespoke software versus subscriptions">
+<section class="section bvs bvs--funnel on-light" aria-label="Bespoke software versus subscriptions">
   <div class="container">
-    <div class="bvs__top">
+    <div class="bv-fn__top">
       <div class="section-head">
         <p class="kicker" data-reveal="draw">Bespoke vs. subscription</p>
         <h2 class="h2" data-reveal>Going bespoke beats <em>legacy EdTech subscriptions.</em></h2>
         <p class="lede" data-reveal>Colleges and universities are currently being drained of valuable capital funds by legacy admissions SaaS vendors that charge aggressive, per-applicant or per-seat subscription models. Institutions are forced to pay escalating annual fees for rigid platforms that cannot adapt to changing admissions policies or specialized review criteria. Bespoke AI offers a transparent, sustainable alternative to the predatory pricing structures that higher education institutions are accustomed to.</p>
       </div>
-      <figure class="bvs-chart" data-reveal="scale">
-        <div class="bvs-chart__head">
-          <span class="bvs-chart__title">Five-year cost of ownership</span>
-          <span class="bvs-chart__tag">Illustrative</span>
+      <figure class="bv-fn" data-reveal>
+        <p class="bv-title"><span>Five-year cost of ownership</span><span class="bv-tag">Illustrative</span></p>
+        <div class="bv-fn__rows" aria-hidden="true">
+          <div class="bv-fn__row">
+              <span class="bv-fn__y">Yr 1</span>
+              <span class="bv-fn__band"><i class="bv-fn__sub bv-fade" style="--w:15.4%;--d:0"></i><i class="bv-fn__own bv-fade" style="--w:40%;--d:0"></i></span>
+              <span></span>
+            </div><div class="bv-fn__row">
+              <span class="bv-fn__y">Yr 2</span>
+              <span class="bv-fn__band"><i class="bv-fn__sub bv-fade" style="--w:33.1%;--d:1"></i><i class="bv-fn__own bv-fade" style="--w:43.1%;--d:1"></i></span>
+              <span></span>
+            </div><div class="bv-fn__row bv-fn__row--even">
+              <span class="bv-fn__y">Yr 3</span>
+              <span class="bv-fn__band"><i class="bv-fn__sub bv-fade" style="--w:53.1%;--d:2"></i><i class="bv-fn__own bv-fade" style="--w:46.2%;--d:2"></i></span>
+              <span class="bv-fn__flag">Break-even</span>
+            </div><div class="bv-fn__row">
+              <span class="bv-fn__y">Yr 4</span>
+              <span class="bv-fn__band"><i class="bv-fn__sub bv-fade" style="--w:75.4%;--d:3"></i><i class="bv-fn__own bv-fade" style="--w:49.2%;--d:3"></i></span>
+              <span></span>
+            </div><div class="bv-fn__row">
+              <span class="bv-fn__y">Yr 5</span>
+              <span class="bv-fn__band"><i class="bv-fn__sub bv-fade" style="--w:100%;--d:4"></i><i class="bv-fn__own bv-fade" style="--w:52.3%;--d:4"></i></span>
+              <span></span>
+            </div>
         </div>
-        <svg viewBox="0 0 560 284" role="img" aria-label="Illustrative cumulative cost over five years. Per-applicant admissions SaaS costs step up at every annual renewal; a bespoke build is a one-time investment plus flat upkeep, and becomes the cheaper option from year two onward.">
-          <g class="bvs-grid"><line x1="40" y1="30" x2="540" y2="30" stroke-dasharray="2 5"/><line x1="40" y1="85" x2="540" y2="85" stroke-dasharray="2 5"/><line x1="40" y1="140" x2="540" y2="140" stroke-dasharray="2 5"/><line x1="40" y1="195" x2="540" y2="195" stroke-dasharray="2 5"/><line x1="40" y1="250" x2="540" y2="250"/></g>
-          <g class="bvs-axis"><text x="40" y="272" text-anchor="middle">Launch</text><text x="140" y="272" text-anchor="middle">Yr 1</text><text x="240" y="272" text-anchor="middle">Yr 2</text><text x="340" y="272" text-anchor="middle">Yr 3</text><text x="440" y="272" text-anchor="middle">Yr 4</text><text x="540" y="272" text-anchor="middle">Yr 5</text><text transform="translate(16 140) rotate(-90)" text-anchor="middle">Cumulative cost</text></g>
-          <path class="bvs-gap" d="M240,162.1 V141.7 H340 V96.1 H440 V45.9 H540 V143.2 Z"/>
-          <path class="bvs-sub" pathLength="1" d="M40,250 V218.6 H140 V182.5 H240 V141.7 H340 V96.1 H440 V45.9 H540"/>
-          <path class="bvs-own" pathLength="1" d="M40,250 V174.6 L540,143.2"/>
-          <g class="bvs-even"><circle cx="240" cy="162.1" r="5"/><circle cx="240" cy="162.1" r="11"/><text x="252" y="190">Break-even</text></g>
-          <text class="bvs-gap-label" x="452" y="70"><tspan x="452">What you keep</tspan><tspan x="452" dy="17">no renewals,</tspan><tspan x="452" dy="15">no seat fees</tspan></text>
-          <text class="bvs-end bvs-end--sub" x="536" y="36" text-anchor="end">Per-applicant admissions SaaS</text>
-          <text class="bvs-end bvs-end--own" x="536" y="133" text-anchor="end">Bespoke build</text>
-        </svg>
-        <div class="bvs-chart__legend"><span><i class="bvs-key--sub"></i>Per-applicant admissions SaaS</span><span><i class="bvs-key--own"></i>Bespoke build</span></div>
-        <figcaption>Per-applicant and per-seat admissions fees climb with every cycle. A bespoke build is a one-time investment plus predictable upkeep.</figcaption>
+        <p class="bv-sr">Illustrative cumulative cost over five years. Per-applicant admissions SaaS costs step up at every annual renewal; a bespoke build is a one-time investment plus flat upkeep, and becomes the cheaper option from year two onward.</p>
+        <div class="bv-legend"><span><i class="bv-key bv-key--sub"></i>Per-applicant admissions SaaS</span><span><i class="bv-key bv-key--own"></i>Bespoke build</span></div>
+        <p class="bv-keep"><b>What you keep</b> no renewals, no seat fees</p>
+        <figcaption class="bv-cap">Per-applicant and per-seat admissions fees climb with every cycle. A bespoke build is a one-time investment plus predictable upkeep.</figcaption>
       </figure>
     </div>
-    <ul class="bvs-pillars" data-stagger>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">01</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
-        <h3>Predictable, Market-Competitive Capital Investment</h3>
-        <p>We provide market-competitive engineering pricing with zero per-applicant processing fees, no seat licensing costs, and no recurring annual SaaS subscriptions. You pay once for custom engineering, keeping your admissions operating costs flat regardless of how many applications your university processes. Your institution only pays the normal recurring costs for system upkeep, maintenance, or additional features.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">02</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3Z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5Z"/><path d="m2 2 7.6 7.6"/><circle cx="11" cy="11" r="2"/></svg></span>
-        <h3>100% Custom Evaluation Workflows (No Cookie-Cutter Templates)</h3>
-        <p>When we say bespoke, we really mean bespoke. Every institution evaluates applicants differently. A User Experience Designer is assigned to every project and works in close partnership with your Deans of Admission, financial aid officers, and IT leaders to design custom scoring algorithms, review workflows, and applicant portals that match your exact recruitment strategy.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">03</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3 21 2M16 7l3 3M14 9l2 2"/></svg></span>
-        <h3>Full Intellectual Property &amp; System Ownership</h3>
-        <p>Your institution owns the software and source code outright. You retain total control over applicant data, system logic, and future platform enhancements, converting software expenses into a permanent institutional asset on your balance sheet.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">04</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a10 10 0 1 1 10-10c0 2.8-2.2 4-4 4h-1.5a2 2 0 0 0-1.5 3.3A2 2 0 0 1 12 22Z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg></span>
-        <h3>Bespoke Institutional Branding</h3>
-        <p>Your prospective applicant portal is fully custom-branded to align with your university’s official visual identity, logo guidelines, colors, and campus domain structure. The goal is to establish an impressive, high-touch brand experience for prospective students and their families.</p>
-      </li>
-      <li class="bvs-pillar" data-reveal>
-        <span class="bvs-pillar__n">05</span>
-        <span class="bvs-pillar__ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m4.9 4.9 4.3 4.3M14.8 14.8l4.3 4.3M14.8 9.2l4.3-4.3M4.9 19.1l4.3-4.3"/></svg></span>
-        <h3>Dedicated Engineering Support &amp; Long-Term Partnership</h3>
-        <p>We don’t just deploy software and disappear. Bespoke AI remains your dedicated engineering partner by providing ongoing maintenance, emergency support during high-volume deadline windows, and custom feature additions as your admissions strategies evolve.</p>
-      </li>
-    </ul>
+    <ol class="bv-fn__list" data-stagger>
+      <li class="bv-fn__item" data-reveal style="--k:0">
+          <span class="bv-fn__n">01</span>
+          <div><h3>Predictable, Market-Competitive Capital Investment</h3><p>We provide market-competitive engineering pricing with zero per-applicant processing fees, no seat licensing costs, and no recurring annual SaaS subscriptions. You pay once for custom engineering, keeping your admissions operating costs flat regardless of how many applications your university processes. Your institution only pays the normal recurring costs for system upkeep, maintenance, or additional features.</p></div>
+        </li>
+<li class="bv-fn__item" data-reveal style="--k:1">
+          <span class="bv-fn__n">02</span>
+          <div><h3>100% Custom Evaluation Workflows (No Cookie-Cutter Templates)</h3><p>When we say bespoke, we really mean bespoke. Every institution evaluates applicants differently. A User Experience Designer is assigned to every project and works in close partnership with your Deans of Admission, financial aid officers, and IT leaders to design custom scoring algorithms, review workflows, and applicant portals that match your exact recruitment strategy.</p></div>
+        </li>
+<li class="bv-fn__item" data-reveal style="--k:2">
+          <span class="bv-fn__n">03</span>
+          <div><h3>Full Intellectual Property &amp; System Ownership</h3><p>Your institution owns the software and source code outright. You retain total control over applicant data, system logic, and future platform enhancements, converting software expenses into a permanent institutional asset on your balance sheet.</p></div>
+        </li>
+<li class="bv-fn__item" data-reveal style="--k:3">
+          <span class="bv-fn__n">04</span>
+          <div><h3>Bespoke Institutional Branding</h3><p>Your prospective applicant portal is fully custom-branded to align with your university’s official visual identity, logo guidelines, colors, and campus domain structure. The goal is to establish an impressive, high-touch brand experience for prospective students and their families.</p></div>
+        </li>
+<li class="bv-fn__item" data-reveal style="--k:4">
+          <span class="bv-fn__n">05</span>
+          <div><h3>Dedicated Engineering Support &amp; Long-Term Partnership</h3><p>We don’t just deploy software and disappear. Bespoke AI remains your dedicated engineering partner by providing ongoing maintenance, emergency support during high-volume deadline windows, and custom feature additions as your admissions strategies evolve.</p></div>
+        </li>
+    </ol>
   </div>
 </section>
 
@@ -556,7 +558,7 @@
 </footer>
 <!-- /@shared:footer -->
 
-<script src="/assets/js/site.js?v=3f4b602c" defer></script>
+<script src="/assets/js/site.js?v=58242646" defer></script>
 <script src="/assets/js/solutions.js?v=f27985ef" defer></script>
 </body>
 </html>
