@@ -42,7 +42,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Inter:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/styles.css?v=607174da">
+<link rel="stylesheet" href="/assets/css/styles.css?v=6989d52e">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -258,6 +258,202 @@
   </div>
 </section>
 
+<!-- ===================================================== FEATURED DEMO -->
+<section class="demo-section section--flush-top dark" id="demo" aria-label="Product demonstration">
+  <div class="container--wide container demo-wrap">
+    <div class="section-head" data-reveal>
+      <p class="kicker" data-reveal="draw">A custom build in action</p>
+      <h2 class="h2">Purpose-built software for your business</h2>
+    </div>
+
+    <div class="demo-shell" data-tilt="0.8" data-reveal="scale">
+      <div class="demo-frame">
+        <div class="demo-chrome" aria-hidden="true">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <div class="addr">
+            <svg width="10" height="11" viewBox="0 0 12 13" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="5.5" width="9" height="6" rx="1.5"/><path d="M3.5 5.5V4a2.5 2.5 0 0 1 5 0v1.5"/></svg>
+            <span class="addr__url">workspace.bespoke.ai</span>
+            <span class="addr__app">Bespoke AI</span>
+          </div>
+          <span class="demo-live"><i></i>LIVE&nbsp;WORKSPACE</span>
+        </div>
+
+        <div class="demo-stage" id="demo-stage">
+          <div class="app">
+            <!-- sidebar -->
+            <aside class="app__side">
+              <div class="app__logo">
+                <img src="/assets/img/brain-mark.svg" alt="" aria-hidden="true">
+                Bespoke AI
+              </div>
+              <div class="app__nav-label">Workspace</div>
+              <button class="app__item" type="button" data-el="side-docs" data-chapter="0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>
+                Documents <span class="badge" data-el="badge-docs">8</span>
+              </button>
+              <button class="app__item" type="button" data-el="side-chat" data-chapter="2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.4 8.4 8.5 8.5 0 0 1-3.8-.9L3 21l2-5.8a8.38 8.38 0 0 1-.9-3.8 8.4 8.4 0 0 1 8.4-8.4 8.4 8.4 0 0 1 8.5 8.5Z"/></svg>
+                Assistant
+              </button>
+              <button class="app__item" type="button" data-el="side-draft" data-chapter="4">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                Drafts <span class="badge" data-el="badge-draft">1</span>
+              </button>
+              <div class="side-meta">
+                <span data-el="side-status">SECURE&nbsp;ENCLAVE&nbsp;· <em>ACTIVE</em></span>
+                <span>SSO&nbsp;·&nbsp;SCIM&nbsp;·&nbsp;AUDIT&nbsp;LOG</span>
+              </div>
+            </aside>
+
+            <!-- main -->
+            <div class="app__main">
+
+              <!-- scene: documents -->
+              <div class="scene" data-scene="docs" aria-hidden="true">
+                <div class="scene__bar">
+                  <span class="scene__title">Matter intake</span>
+                  <span class="scene__status" data-el="docs-status">Waiting for upload…</span>
+                </div>
+                <div class="dropzone" data-el="dropzone">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0 4 4m-4-4-4 4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+                  <span>Drop your deal documents</span>
+                </div>
+                <div class="folder-grid" data-el="folder-grid"></div>
+                <div class="file-layer" data-el="file-layer"></div>
+              </div>
+
+              <!-- scene: assistant -->
+              <div class="scene" data-scene="chat" aria-hidden="true">
+                <div class="scene__bar">
+                  <span class="scene__title">Assistant</span>
+                  <span class="scene__status" data-el="chat-status">Grounded on 8 documents</span>
+                </div>
+                <div class="chat">
+                  <div class="chat__scroll" data-el="chat-scroll">
+                    <div class="msg msg--user" data-el="msg-user"></div>
+                    <div class="msg msg--ai" data-el="msg-ai">
+                      <div class="ai-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.2 2.2m8.4 8.4 2.2 2.2m0-12.8-2.2 2.2M7.8 16.2l-2.2 2.2"/></svg></div>
+                      <div class="ai-body">
+                        <div class="ai-step" data-el="ai-step"></div>
+                        <div class="ai-text" data-el="ai-text"></div>
+                        <div class="chip-row" data-el="chip-row">
+                          <button class="sugg-chip" data-el="chip-draft">
+                            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                            Draft client memo
+                          </button>
+                          <button class="sugg-chip">Export exposure table</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="chat__composer" data-el="composer">
+                    <span class="typed" data-el="composer-text"></span><span class="ph" data-el="composer-ph">Ask across every document…</span>
+                    <span class="send" data-el="send-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4Z"/></svg></span>
+                  </div>
+                </div>
+                <aside class="sources" aria-hidden="true">
+                  <div class="sources__title">Sources</div>
+                  <div class="source" data-el="src-1"><span class="s-n">1</span><span class="s-name">ISDA Master — Meridian.pdf</span></div>
+                  <div class="source" data-el="src-2"><span class="s-n">2</span><span class="s-name">CSA Amendment (2024).pdf</span></div>
+                  <div class="source" data-el="src-3"><span class="s-n">3</span><span class="s-name">GMSLA — Meridian Sec.pdf</span></div>
+                </aside>
+              </div>
+
+              <!-- scene: drafts -->
+              <div class="scene" data-scene="draft" aria-hidden="true">
+                <div class="scene__bar">
+                  <span class="scene__title">Drafts</span>
+                  <span class="scene__status" data-el="draft-status">Composing from cited sources…</span>
+                </div>
+                <div class="draft-wrap">
+                  <div class="draft-page">
+                    <div class="draft-body" data-el="draft-body">
+                      <div class="draft-think" data-el="draft-think" aria-hidden="true">
+                        <i></i><span>Composing…</span>
+                      </div>
+                      <div class="draft-lines" data-el="draft-lines"></div>
+                    </div>
+                  </div>
+                  <div class="draft-side">
+                    <div class="draft-card">
+                      <b data-el="draft-check-title">Verifying…</b>
+                      <div class="mini-row" data-el="check-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Citations linked — 12</div>
+                      <div class="mini-row" data-el="check-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Defined terms verified</div>
+                      <div class="mini-row" data-el="check-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>House style applied</div>
+                    </div>
+                      <button class="btn-export" data-el="export-btn" type="button">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                      Export .docx
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- doc viewer overlay -->
+              <div class="viewer" data-el="viewer" aria-hidden="true">
+                <div class="viewer__bar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>
+                  CSA Amendment (2024).pdf
+                  <span class="pg">p. 4 / 12 · anchored to §4(b)</span>
+                </div>
+                <div class="viewer__page">
+                  <h5>AMENDMENT TO THE 1994 CREDIT SUPPORT ANNEX</h5>
+                  <div class="doc-lines" data-el="doc-lines">
+                    <div class="doc-line w-95"></div>
+                    <div class="doc-line w-90"></div>
+                    <div class="doc-line w-70"></div>
+                    <div class="doc-heading"></div>
+                    <div class="doc-line w-90"></div>
+                    <div class="doc-line w-80"></div>
+                    <div class="doc-clause" data-el="doc-clause">
+                      <span class="pin" aria-hidden="true"></span>
+                      <b>§4(b) — Threshold.</b> <span class="hl">The Threshold with respect to Party B is reduced from USD 250,000 to USD 100,000, effective 1 March 2024, and the cure period in respect of any Delivery Amount is shortened to one (1) Business Day.</span>
+                    </div>
+                    <span class="cite-flag" data-el="cite-flag">§4(b) · CITED AS [2]</span>
+                    <div class="doc-line w-90"></div>
+                    <div class="doc-line w-95"></div>
+                    <div class="doc-line w-60"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- toast + cursor -->
+              <div class="demo-toast" data-el="toast">
+                <span class="t-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <span><b>Exposure_Memo_Meridian.docx</b><span>Saved to matter workspace · 184&nbsp;KB</span></span>
+              </div>
+              <div class="demo-cursor" data-el="cursor" aria-hidden="true">
+                <svg width="100%" height="100%" viewBox="0 0 24 24" fill="currentColor"><path d="M5.5 3.2a.7.7 0 0 1 1.13-.55l12.2 9.42a.7.7 0 0 1-.35 1.25l-5.38.7 3.03 5.51a.7.7 0 0 1-.28.95l-1.9 1.05a.7.7 0 0 1-.95-.28l-3.03-5.5-3.95 3.7a.7.7 0 0 1-1.18-.5Z" stroke="#0B1120" stroke-width="1.2"/></svg>
+                <span class="ring" aria-hidden="true"></span>
+              </div>
+
+            </div><!-- /app__main -->
+          </div><!-- /app -->
+        </div><!-- /demo-stage -->
+      </div><!-- /demo-frame -->
+    </div><!-- /demo-shell -->
+
+    <div class="demo-deck" data-reveal>
+      <button class="demo-ctl" data-el="demo-toggle" type="button" aria-label="Pause demonstration">
+        <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5-13-7.5Z"/></svg>
+        <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 4h3.6v16H6.5zM13.9 4h3.6v16h-3.6z"/></svg>
+      </button>
+      <div class="chapters" data-el="chapters" role="group" aria-label="Demonstration chapters">
+        <button class="chapter" type="button" data-ch="0"><small>01</small><b>Ingest</b><span class="ch-bar"><i></i></span></button>
+        <button class="chapter" type="button" data-ch="1"><small>02</small><b>Organize</b><span class="ch-bar"><i></i></span></button>
+        <button class="chapter" type="button" data-ch="2"><small>03</small><b>Ask</b><span class="ch-bar"><i></i></span></button>
+        <button class="chapter" type="button" data-ch="3"><small>04</small><b>Trace</b><span class="ch-bar"><i></i></span></button>
+        <button class="chapter" type="button" data-ch="4"><small>05</small><b>Draft</b><span class="ch-bar"><i></i></span></button>
+        <button class="chapter" type="button" data-ch="5"><small>06</small><b>Deliver</b><span class="ch-bar"><i></i></span></button>
+      </div>
+    </div>
+
+    <div class="demo-caption" data-reveal>
+      <p><b>Watch the full loop:</b> eight documents land in a workspace, organize themselves into matters, answer a margin terms question with linked citations, then become a client ready memo, exported.</p>
+    </div>
+  </div>
+</section>
+
 <section class="section section--paper on-light section--flush-top demos-page" aria-label="Demo previews">
   <div class="container">
     <div class="demo-preview-grid" data-stagger>
@@ -383,7 +579,6 @@
         <h4>Company</h4>
         <a class="f-link" href="/custom-software-development-team">About</a>
         <a class="f-link" href="/demos">Demos</a>
-        <a class="f-link" href="/#approach">Our Model</a>
       </div>
       <div data-contact-form data-reveal="fade">
         <h4>Contact</h4>
@@ -424,6 +619,7 @@
 </footer>
 <!-- /@shared:footer -->
 
-<script src="/assets/js/site.js?v=49045fdf" defer></script>
+<script src="/assets/js/site.js?v=18843cf2" defer></script>
+<script src="/assets/js/demo.js?v=29df923f" defer></script>
 </body>
 </html>

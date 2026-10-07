@@ -633,44 +633,6 @@
     });
   }
 
-  /* ------------------------------------------------------- power toggle --- */
-
-  doc.querySelectorAll("[data-switch]").forEach((widget) => {
-    const tabs = widget.querySelectorAll(".power-toggle button");
-    const toggle = widget.querySelector(".power-toggle");
-    const panels = widget.querySelectorAll(".switch-panel");
-    tabs.forEach((tab, idx) => {
-      tab.addEventListener("click", () => {
-        if (tab.getAttribute("aria-selected") === "true") return;
-        toggle.dataset.side = idx;
-        tabs.forEach((t, i) => t.setAttribute("aria-selected", String(i === idx)));
-        const incoming = panels[idx];
-        const outgoing = [...panels].find((p, i) => !p.hidden && i !== idx);
-        const showIncoming = () => {
-          incoming.hidden = false;
-          if (!REDUCED) {
-            incoming.style.animation = "none";
-            void incoming.offsetWidth;
-            incoming.style.animation = "";
-          }
-        };
-        if (outgoing && !REDUCED) {
-          outgoing.classList.add("is-leaving");
-          setTimeout(() => {
-            outgoing.classList.remove("is-leaving");
-            outgoing.hidden = true;
-            showIncoming();
-          }, 220);
-        } else {
-          panels.forEach((p, i) => {
-            if (i !== idx) p.hidden = true;
-          });
-          showIncoming();
-        }
-      });
-    });
-  });
-
   /* -------------------------------------------------------- insight chart -- */
 
   const insightChart = doc.querySelector("[data-insight-chart]");
@@ -699,57 +661,6 @@
       });
     } else {
       startChart();
-    }
-  }
-
-  /* -------------------------------------------------------- ring diagram -- */
-
-  const ring = doc.querySelector("[data-ring]");
-  if (ring) {
-    const segs = ring.querySelectorAll(".ring-svg .seg");
-    const items = ring.querySelectorAll(".ring-item");
-    const setHot = (key) => {
-      segs.forEach((s) => {
-        s.classList.toggle("is-hot", s.dataset.seg === key);
-        s.classList.toggle("is-dim", key !== null && s.dataset.seg !== key);
-      });
-      items.forEach((it) => it.classList.toggle("is-hot", it.dataset.seg === key));
-    };
-    if (IPAD) {
-      // Touch taps fire pointerleave immediately after pointerenter, so hover
-      // handlers never hold the highlight. Tap-to-select matches desktop intent.
-      [...segs, ...items].forEach((el) => {
-        el.addEventListener("click", () => setHot(el.dataset.seg));
-        el.addEventListener("focusin", () => setHot(el.dataset.seg));
-      });
-    } else {
-      [...segs, ...items].forEach((el) => {
-        el.addEventListener("pointerenter", () => setHot(el.dataset.seg));
-        el.addEventListener("pointerleave", () => setHot(null));
-        el.addEventListener("focusin", () => setHot(el.dataset.seg));
-        el.addEventListener("focusout", () => setHot(null));
-      });
-    }
-
-    // draw-in on first view
-    const circles = ring.querySelectorAll(".ring-svg .seg circle");
-    if (!REDUCED && "IntersectionObserver" in window) {
-      circles.forEach((c) => {
-        const len = c.getTotalLength ? c.getTotalLength() : 0;
-        if (!len) return;
-        const dash = c.getAttribute("stroke-dasharray");
-        c.dataset.finalDash = dash || "";
-        c.style.strokeDasharray = `0 ${len}`;
-      });
-      const rio = new IntersectionObserver(([en]) => {
-        if (!en.isIntersecting) return;
-        circles.forEach((c, i) => {
-          c.style.transition = `stroke-dasharray 1100ms cubic-bezier(0.45,0,0.25,1) ${i * 140}ms`;
-          c.style.strokeDasharray = c.dataset.finalDash;
-        });
-        rio.disconnect();
-      }, { threshold: 0.4 });
-      rio.observe(ring);
     }
   }
 
