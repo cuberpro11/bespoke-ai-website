@@ -1202,8 +1202,10 @@ ol.bv-margin__doc {
 .bv-gg__strip span { position: relative; padding-top: 0.5rem; border-top: 4px solid var(--warn); text-align: center; font-family: var(--mono); font-size: 0.7rem; color: var(--t-faint); }
 .bv-gg__strip span.is-own { border-top-color: var(--cobalt-bright); color: var(--t-dim); }
 .bv-gg__strip em { position: absolute; left: -2rem; right: -2rem; top: -1.5rem; font-style: normal; font-family: var(--sans); font-weight: 600; color: var(--cobalt-bright); }
-.bv-gg__cards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.8rem; margin-top: clamp(2.5rem, 5vw, 3.5rem) !important; }
-.bv-gg__card { padding: 1.2rem 1.15rem 1.3rem; border-radius: 14px; background: var(--white); border: 1px solid var(--line-light); border-top: 4px solid var(--own); }
+.bv-gg__cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.8rem; margin-top: clamp(2.5rem, 5vw, 3.5rem) !important; }
+/* three across, then two: five columns were too narrow for this much copy */
+.bv-gg__card { grid-column: span 2; padding: 1.2rem 1.15rem 1.3rem; border-radius: 14px; background: var(--white); border: 1px solid var(--line-light); border-top: 4px solid var(--own); }
+.bv-gg__card:nth-child(n + 4) { grid-column: span 3; }
 .bv-gg__score { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
 .bv-gg__score span { font-family: var(--serif); font-style: italic; font-size: 1.8rem; line-height: 1; color: color-mix(in srgb, var(--own) 60%, var(--white)); }
 .bv-gg__card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
@@ -1237,12 +1239,14 @@ ol.bv-rules { display: grid; gap: 0.7rem; }
   .bv-sl__top, .bv-ct__top, .bv-fn2__wrap { grid-template-columns: minmax(0, 1fr); }
   .bv-fn2 { position: static; }
   .bv-gg__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bv-gg__card, .bv-gg__card:nth-child(n + 4) { grid-column: auto; }
   .bv-gg__card:last-child { grid-column: 1 / -1; }
   .bv-sl__stubs { grid-template-columns: minmax(0, 1fr); }
   .bv-sl__stub, .bv-sl__stub:nth-child(n + 4) { grid-column: auto; }
 }
 @media (max-width: 640px) {
   .bv-gg__cards { grid-template-columns: minmax(0, 1fr); }
+  .bv-gg__card:last-child { grid-column: auto; }
   .bv-gg__pair { gap: 0.6rem; }
   .bv-gg__l { font-size: 0.95rem; }
   .bv-ct__yard { height: 13rem; }

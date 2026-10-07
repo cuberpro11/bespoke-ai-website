@@ -82,6 +82,20 @@
   status = 301
   force = true
 
+# Before batch 3 the real estate page lived here; skip the splat below so it
+# reaches its batch 4 home in one hop instead of two.
+[[redirects]]
+  from = "/general-services/real-estate"
+  to = "/custom-real-estate-software/residential-real-estate"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/general-services/real-estate.html"
+  to = "/custom-real-estate-software/residential-real-estate"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/general-services/*"
   to = "/custom-general-service-software/:splat"

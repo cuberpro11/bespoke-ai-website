@@ -10,7 +10,8 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-HUBS = ["/custom-legal-software", "/custom-financial-software", "/custom-edtech-software", "/custom-general-service-software"]
+HUBS = ["/custom-legal-software", "/custom-financial-software", "/custom-real-estate-software",
+        "/custom-edtech-software", "/custom-supply-chain-logistics-software", "/custom-general-service-software"]
 CROSS_PAIRS = [
     ("/custom-legal-software/documentation-automation", "/custom-general-service-software/document-automation"),
     ("/custom-legal-software/client-relations-management", "/custom-general-service-software/automated-email-response"),

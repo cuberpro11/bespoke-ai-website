@@ -3,13 +3,15 @@
 
 Also enforces the brand rules on every page, noindex pages included:
 titles end in "| Bespoke AI", meta descriptions start with "Bespoke AI",
-and the company is never called plain "Bespoke" ("bespoke" the adjective,
+both stay short enough that Google shows them whole (so the brand is never
+cut off), and the company is never called plain "Bespoke" ("bespoke" the adjective,
 e.g. "Bespoke build" or "Bespoke CRM solutions", is fine).
 
 Not used to serve or deploy the site.
 
     python3 tools/audit-seo.py
 """
+import html
 import os
 import re
 import sys
@@ -17,6 +19,8 @@ from collections import defaultdict
 
 BRAND = "Bespoke AI"
 TITLE_SUFFIX = " | " + BRAND
+# Google truncates longer titles and snippets, which would cut the brand off.
+TITLE_MAX, DESC_MAX = 60, 160
 # "Bespoke" used as the company: before a verb, a possessive, or on its own
 # (end of a tag, sentence, or label). Adjective uses are followed by a noun.
 BARE_BRAND = re.compile(
@@ -54,9 +58,13 @@ def main():
         brand_title = text(brand_title.group(1)) if brand_title else ""
         if not brand_title.endswith(TITLE_SUFFIX) or brand_title.count(BRAND) > 1:
             problems.append(f"{rel}: title {brand_title!r} must end in {TITLE_SUFFIX!r} (once)")
+        if len(html.unescape(brand_title)) > TITLE_MAX:
+            problems.append(f"{rel}: title {len(html.unescape(brand_title))} chars (max {TITLE_MAX})")
         brand_desc = re.search(r'<meta name="description" content="(.*?)">', src, re.S)
         if brand_desc and not brand_desc.group(1).startswith(BRAND):
             problems.append(f"{rel}: meta description must start with {BRAND!r}")
+        if brand_desc and len(html.unescape(brand_desc.group(1))) > DESC_MAX:
+            problems.append(f"{rel}: meta description {len(html.unescape(brand_desc.group(1)))} chars (max {DESC_MAX})")
         for m in BARE_BRAND.finditer(src):
             line = src.count("\n", 0, m.start()) + 1
             problems.append(f"{rel}:{line}: company called plain 'Bespoke' -> {BRAND!r}")
