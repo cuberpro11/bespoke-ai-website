@@ -989,6 +989,486 @@
     if (btn && next) next.focus();
   });
 
+  /* ---- homepage orbit: What we build ----
+     A small spring-physics graph. Five services ride the inner ring around
+     the core, each with one capability on the outer ring. Every bubble is
+     pulled toward its slot on a slowly turning ring, floats around it,
+     leans toward the pointer, and springs back when dragged, flung, or
+     knocked by a click on the core. The canvas draws a dot field that
+     swells under the pointer, the rings, the edges, and the data packets
+     that run from the core to each bubble (which pings when one lands).
+     Hover, focus, tap, or drag eases the rotation to a stop and opens a
+     card; the bubble and its neighbours stay lit while the rest dims. */
+  doc.querySelectorAll("[data-orbit]").forEach((stage) => {
+    const canvas = stage.querySelector(".orbit__canvas");
+    const ctx = canvas.getContext("2d");
+    const coreEl = stage.querySelector(".orbit__core");
+    const narrow = window.matchMedia("(max-width: 700px)");
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const TAU = Math.PI * 2;
+    const SPEED = TAU / 150; // one lap every two and a half minutes
+    const K = 40, DAMP = 7.2; // a slightly bouncy spring
+    const ACCENT = "74, 114, 240", HAIR = "172, 174, 182";
+    const core = { el: coreEl, hub: true, i: -1, x: 0, y: 0, vx: 0, vy: 0, hx: 0, hy: 0, r: 0, born: 0 };
+    const nodes = [...stage.querySelectorAll(".orbit__node")].map((el, k) => ({
+      el, k,
+      body: el.querySelector(".orbit__body"),
+      ball: el.querySelector(".orbit__ball"),
+      card: el.querySelector(".orbit__card"),
+      hub: el.dataset.kind === "hub",
+      i: Number(el.dataset.i),
+      x: 0, y: 0, vx: 0, vy: 0, hx: 0, hy: 0, r: 0, born: Infinity, ox: 0, oy: 0,
+    }));
+    const hubs = nodes.filter((n) => n.hub);
+    const leaves = nodes.filter((n) => !n.hub);
+    const all = [core, ...nodes];
+
+    // edges: the core feeds every service, and each service its capability
+    const edges = [];
+    hubs.forEach((h) => edges.push({ a: core, b: h }));
+    leaves.forEach((l) => edges.push({ a: hubs[l.i % hubs.length], b: l }));
+    edges.forEach((e) => { e.bend = e.a === core ? 0 : 1; e.next = edges.filter((f) => f.a === e.b); });
+    all.forEach((n) => {
+      n.nb = new Set([n]);
+      edges.forEach((e) => { if (e.a === n) n.nb.add(e.b); if (e.b === n) n.nb.add(e.a); });
+    });
+    nodes.forEach((n) => n.el.style.setProperty("--k", n.k));
+
+    const packets = [], ripples = [];
+    let nextPacket = 0, lastHub = -1, hotTimer = 0;
+    const pointer = { x: 0, y: 0, in: false, px: 0, py: 0 };
+    let W = 0, H = 0, cx = 0, cy = 0, dpr = 1, gap = 24, grid = 44;
+    let ringHub = { x: 0, y: 0 }, ringLeaf = { x: 0, y: 0 };
+    let t = 0, ts = 1, last = 0, clock = 0, raf = 0, onScreen = false, started = false;
+    let hovered = null, opened = null, dragging = null, press = null, suppressClick = false;
+
+    const focus = () => dragging || opened || hovered;
+
+    const measure = () => {
+      W = stage.clientWidth; H = stage.clientHeight; cx = W / 2; cy = H / 2;
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+      core.r = coreEl.offsetWidth / 2;
+      core.hx = cx; core.hy = cy;
+      core.bw = core.bt = core.bb = core.r;
+      nodes.forEach((n) => {
+        n.r = n.ball.offsetWidth / 2;
+        n.card.style.width = Math.min(296, W - 24) + "px";
+        // collision box: the bubble plus the label hanging under it
+        const label = n.el.querySelector(".orbit__label");
+        n.bw = Math.max(n.r, label.offsetWidth / 2);
+        n.bt = n.r;
+        n.bb = label.offsetTop + label.offsetHeight;
+      });
+      const small = narrow.matches;
+      const leafR = leaves.length ? leaves[0].r : 0;
+      gap = small ? 6 : 10;
+      grid = small ? 30 : 40;
+      ringHub = { x: W * (small ? 0.27 : 0.25), y: H * (small ? 0.25 : 0.265) };
+      ringLeaf = { x: Math.min(W * (small ? 0.39 : 0.42), W / 2 - leafR - (small ? 36 : 64)), y: H * (small ? 0.42 : 0.4) };
+    };
+
+    const home = (n) => {
+      const R = n.hub ? ringHub : ringLeaf;
+      const a = -Math.PI / 2 + (n.i / 5) * TAU + (n.hub ? 0 : TAU / 10) + t * SPEED;
+      let fx = 0, fy = 0;
+      if (!REDUCED) {
+        const A = n.hub ? 7 : 10;
+        fx = Math.sin(t * 0.55 + n.k * 1.9) * A + Math.sin(t * 0.31 + n.k) * A * 0.4;
+        fy = Math.cos(t * 0.47 + n.k * 2.3) * A + Math.sin(t * 0.23 + n.k * 0.7) * A * 0.4;
+      }
+      n.hx = cx + Math.cos(a) * R.x + fx;
+      n.hy = cy + Math.sin(a) * R.y + fy;
+    };
+
+    const step = (dt) => {
+      // ease the whole system to a stop while anything has focus
+      ts += ((focus() ? 0 : 1) - ts) * Math.min(1, dt * 6);
+      if (ts < 0.002) ts = 0;
+      t += dt * ts;
+      nodes.forEach(home);
+      // a dragged bubble tugs its neighbours, and theirs a little
+      const tug = new Map();
+      if (dragging) {
+        const dx = dragging.x - dragging.hx, dy = dragging.y - dragging.hy;
+        dragging.nb.forEach((m) => m !== dragging && tug.set(m, 0.3));
+        dragging.nb.forEach((m) => m.nb.forEach((q) => q !== dragging && !tug.has(q) && tug.set(q, 0.09)));
+        tug.forEach((f, m) => { m.ox = dx * f; m.oy = dy * f; });
+        const nx = dragging.x + (pointer.x - dragging.x) * Math.min(1, dt * 22);
+        const ny = dragging.y + (pointer.y - dragging.y) * Math.min(1, dt * 22);
+        dragging.vx = (nx - dragging.x) / dt; dragging.vy = (ny - dragging.y) / dt;
+        dragging.x = nx; dragging.y = ny;
+      }
+      all.forEach((n) => {
+        n.ax = n.ay = 0;
+        if (n === dragging) return;
+        if (clock < n.born) { n.x = core.x; n.y = core.y; n.vx = n.vy = 0; return; }
+        const tx = n.hx + (tug.has(n) ? n.ox : 0), ty = n.hy + (tug.has(n) ? n.oy : 0);
+        n.ax = (tx - n.x) * K - n.vx * DAMP;
+        n.ay = (ty - n.y) * K - n.vy * DAMP;
+        // lean toward the pointer, like filings near a magnet
+        if (pointer.in && !dragging && n !== core && fine.matches) {
+          const dx = pointer.x - n.x, dy = pointer.y - n.y, d = Math.hypot(dx, dy), R = 170;
+          if (d < R && d > 1) { const f = (1 - d / R) ** 2 * (n === hovered ? 12 : 7); n.ax += dx * f; n.ay += dy * f; }
+        }
+      });
+      // soft collisions keep bubbles and their labels from stacking; newborns fly free
+      for (let a = 0; a < all.length; a++) {
+        for (let b = a + 1; b < all.length; b++) {
+          const p = all[a], q = all[b];
+          if (clock < p.born + 1400 || clock < q.born + 1400) continue;
+          const ox = Math.min(p.x + p.bw, q.x + q.bw) - Math.max(p.x - p.bw, q.x - q.bw) + gap;
+          const oy = Math.min(p.y + p.bb, q.y + q.bb) - Math.max(p.y - p.bt, q.y - q.bt) + gap;
+          if (ox <= 0 || oy <= 0) continue;
+          const dx = q.x - p.x, dy = q.y + (q.bb - q.bt) / 2 - (p.y + (p.bb - p.bt) / 2), d = Math.hypot(dx, dy) || 1;
+          const f = Math.min(ox, oy, 40) * 70, ux = dx / d, uy = dy / d;
+          if (p !== dragging && p !== core) { p.ax -= ux * f; p.ay -= uy * f; }
+          if (q !== dragging) { q.ax += ux * f; q.ay += uy * f; }
+        }
+      }
+      all.forEach((n) => {
+        if (n === dragging || clock < n.born) return;
+        n.vx += n.ax * dt; n.vy += n.ay * dt;
+        n.x += n.vx * dt; n.y += n.vy * dt;
+      });
+      if (!dragging) nodes.forEach((n) => { n.ox *= 0.9; n.oy *= 0.9; });
+    };
+
+    // where the card opens: toward the middle of the stage, kept fully inside it
+    const placeCard = (n) => {
+      const cw = n.card.offsetWidth, ch = n.card.offsetHeight, pad = 12, g = 14;
+      const lift = n.r * 1.14 + g;
+      let top = n.below ? lift : -(lift + ch);
+      top = Math.min(Math.max(top, pad - n.y), H - pad - ch - n.y);
+      const left = Math.min(Math.max(-cw / 2, pad - n.x), W - pad - cw - n.x);
+      n.card.style.left = left.toFixed(1) + "px";
+      n.card.style.top = top.toFixed(1) + "px";
+      n.card.style.setProperty("--ox", (-left).toFixed(1) + "px");
+      n.card.style.setProperty("--oy", (n.below ? -g : ch + g).toFixed(1) + "px");
+      n.card.dataset.side = n.below ? "below" : "above";
+    };
+
+    // a point along an edge's gentle curve, trimmed to the bubbles' rims
+    const geom = (e) => {
+      const { a, b } = e;
+      const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1, ux = dx / d, uy = dy / d;
+      const ra = a.r * (a === core ? 1 : 1.02) + 4, rb = b.r + 4;
+      const x0 = a.x + ux * ra, y0 = a.y + uy * ra, x2 = b.x - ux * rb, y2 = b.y - uy * rb;
+      const len = Math.max(1, d - ra - rb), bend = len * 0.08 * e.bend;
+      return { x0, y0, x2, y2, x1: (x0 + x2) / 2 - uy * bend, y1: (y0 + y2) / 2 + ux * bend, len };
+    };
+    const at = (g, u) => {
+      const v = 1 - u;
+      return [v * v * g.x0 + 2 * v * u * g.x1 + u * u * g.x2, v * v * g.y0 + 2 * v * u * g.y1 + u * u * g.y2];
+    };
+
+    // a packet lands: the bubble pings, rocks a little, and sends a ripple through the dots
+    const land = (n, e) => {
+      ripples.push({ x: n.x, y: n.y, t: clock, r0: n.r * 1.05, strong: false });
+      if (n === core || focus()) return; // nothing moves while someone is reading
+      const g = e.g, d = Math.hypot(g.x2 - g.x0, g.y2 - g.y0) || 1;
+      n.vx += ((g.x2 - g.x0) / d) * 90; n.vy += ((g.y2 - g.y0) / d) * 90;
+      n.el.classList.remove("is-ping");
+      void n.el.offsetWidth;
+      n.el.classList.add("is-ping");
+    };
+    const send = (e) => packets.push({ e, u: 0 });
+
+    const draw = (dt) => {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      const f = focus();
+      const secs = clock / 1000;
+
+      // the dot field: hairline dots that swell and turn cobalt under the pointer and ripples
+      const live = ripples.map((r) => ({ ...r, rad: r.r0 + ((clock - r.t) / 1000) * (r.strong ? 560 : 120), a: 1 - (clock - r.t) / (r.strong ? 1100 : 650) }));
+      const reach = Math.hypot(W, H) * 0.5;
+      const ox = (W % grid) / 2, oy = (H % grid) / 2;
+      for (let gx = ox; gx <= W; gx += grid) {
+        for (let gy = oy; gy <= H; gy += grid) {
+          const dc = Math.hypot(gx - cx, (gy - cy) * 1.4);
+          const base = 0.22 * Math.max(0, 1 - (dc / reach) ** 2);
+          let glow = 0, x = gx, y = gy;
+          if (pointer.in && fine.matches) {
+            const dx = gx - pointer.x, dy = gy - pointer.y, d = Math.hypot(dx, dy);
+            if (d < 150) { const k = (1 - d / 150) ** 2; glow = k; if (d > 0.5) { x += (dx / d) * k * 7; y += (dy / d) * k * 7; } }
+          }
+          live.forEach((r) => { if (r.a > 0) { const band = Math.abs(Math.hypot(gx - r.x, gy - r.y) - r.rad); if (band < 22) glow = Math.max(glow, (1 - band / 22) * r.a * (r.strong ? 1 : 0.7)); } });
+          if (base < 0.01 && glow < 0.02) continue;
+          ctx.globalAlpha = Math.min(1, base + glow * 0.8);
+          ctx.fillStyle = glow > 0.05 ? `rgb(${ACCENT})` : `rgb(${HAIR})`;
+          const r = 0.9 + glow * 1.5;
+          ctx.fillRect(x - r, y - r, r * 2, r * 2);
+        }
+      }
+      for (let i = ripples.length - 1; i >= 0; i--) if (live[i].a <= 0) ripples.splice(i, 1);
+
+      // the rings
+      ctx.globalAlpha = f ? 0.55 : 1;
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = `rgba(${HAIR}, 0.16)`;
+      ctx.setLineDash([]);
+      ctx.beginPath(); ctx.ellipse(cx, cy, ringHub.x, ringHub.y, 0, 0, TAU); ctx.stroke();
+      ctx.setLineDash([3, 6]);
+      ctx.lineDashOffset = -t * 5;
+      ctx.strokeStyle = `rgba(${HAIR}, 0.13)`;
+      ctx.beginPath(); ctx.ellipse(cx, cy, ringLeaf.x, ringLeaf.y, 0, 0, TAU); ctx.stroke();
+      ctx.setLineDash([]);
+
+      // edges
+      edges.forEach((e) => {
+        const born = Math.max(e.a.born, e.b.born);
+        if (clock < born) { e.g = null; return; }
+        const grow = Math.min(1, (clock - born) / 600);
+        const g = geom(e);
+        const hot = !!f && (e.a === f || e.b === f);
+        e.hot = hot; e.g = g;
+        ctx.beginPath();
+        ctx.moveTo(g.x0, g.y0);
+        ctx.quadraticCurveTo(g.x0 + (g.x1 - g.x0) * grow, g.y0 + (g.y1 - g.y0) * grow, g.x0 + (g.x2 - g.x0) * grow, g.y0 + (g.y2 - g.y0) * grow);
+        if (hot) {
+          ctx.strokeStyle = `rgb(${ACCENT})`; ctx.lineWidth = 1.5; ctx.globalAlpha = 0.95;
+          ctx.shadowColor = `rgb(${ACCENT})`; ctx.shadowBlur = 10;
+        } else {
+          ctx.strokeStyle = `rgb(${HAIR})`; ctx.lineWidth = 1;
+          ctx.globalAlpha = (f ? 0.08 : 0.28) * grow;
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      });
+
+      // data packets run outward from the core; while something is in focus they only run on its edges
+      if (!REDUCED) {
+        nextPacket -= dt;
+        if (!f && ts > 0.5 && nextPacket <= 0 && hubs.every((h) => clock > h.born + 900)) {
+          let k; do { k = Math.floor(Math.random() * hubs.length); } while (k === lastHub && hubs.length > 1);
+          lastHub = k;
+          send(edges[k]);
+          nextPacket = 0.9 + Math.random() * 0.9;
+        }
+        hotTimer -= dt;
+        if (f && hotTimer <= 0) { edges.filter((e) => e.hot && e.g).forEach(send); hotTimer = 0.8; }
+        for (let i = packets.length - 1; i >= 0; i--) {
+          const p = packets[i], e = p.e;
+          if (!e.g || (f && !e.hot)) { packets.splice(i, 1); continue; }
+          p.u += (dt * 210) / Math.max(60, e.g.len);
+          if (p.u >= 1) {
+            packets.splice(i, 1);
+            land(e.b, e);
+            if (!f && Math.random() < 0.8) e.next.forEach(send);
+            continue;
+          }
+          for (let s = 6; s >= 0; s--) {
+            const uu = p.u - s * 0.022;
+            if (uu < 0) continue;
+            const [x, y] = at(e.g, uu);
+            ctx.globalAlpha = (1 - s / 7) * 0.9;
+            ctx.fillStyle = s ? `rgb(${ACCENT})` : "#ffffff";
+            ctx.beginPath(); ctx.arc(x, y, s ? 1.8 - s * 0.2 : 2.1, 0, TAU); ctx.fill();
+          }
+          const [x, y] = at(e.g, p.u);
+          const glow = ctx.createRadialGradient(x, y, 0, x, y, 10);
+          glow.addColorStop(0, `rgba(${ACCENT}, 0.7)`); glow.addColorStop(1, `rgba(${ACCENT}, 0)`);
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = glow;
+          ctx.beginPath(); ctx.arc(x, y, 10, 0, TAU); ctx.fill();
+        }
+      }
+
+      // ripples: a thin cobalt ring for each landing or core click
+      live.forEach((r) => {
+        if (r.a <= 0) return;
+        ctx.globalAlpha = r.a * r.a * (r.strong ? 0.7 : 0.4);
+        ctx.strokeStyle = `rgb(${ACCENT})`; ctx.lineWidth = r.strong ? 1.5 : 1;
+        ctx.beginPath(); ctx.arc(r.x, r.y, r.rad, 0, TAU); ctx.stroke();
+      });
+      ctx.globalAlpha = 1;
+    };
+
+    const render = (dt = 0) => {
+      coreEl.style.transform = `translate3d(${core.x.toFixed(2)}px, ${core.y.toFixed(2)}px, 0)`;
+      nodes.forEach((n) => {
+        n.el.style.transform = `translate3d(${n.x.toFixed(2)}px, ${n.y.toFixed(2)}px, 0)`;
+        // squash and stretch along the direction of travel
+        const sp = Math.hypot(n.vx, n.vy), s = Math.min(0.22, sp / 2600), a = Math.atan2(n.vy, n.vx);
+        n.body.style.transform = s > 0.004
+          ? `rotate(${a.toFixed(3)}rad) scale(${(1 + s).toFixed(3)}, ${(1 - s * 0.7).toFixed(3)}) rotate(${(-a).toFixed(3)}rad)`
+          : "";
+      });
+      if (opened) placeCard(opened);
+      draw(dt);
+    };
+
+    const tick = (now) => {
+      raf = 0;
+      clock = now;
+      const dt = last ? Math.min(1 / 30, (now - last) / 1000) : 1 / 60;
+      last = now;
+      nodes.forEach((n) => { if (clock >= n.born && !n.el.classList.contains("is-born")) n.el.classList.add("is-born"); });
+      step(dt / 2); step(dt / 2);
+      render(dt);
+      if (onScreen && !doc.hidden) raf = requestAnimationFrame(tick);
+    };
+    const run = () => {
+      if (REDUCED) { clock = performance.now(); render(); return; }
+      if (!raf && onScreen && started) { last = 0; raf = requestAnimationFrame(tick); }
+    };
+
+    const intro = () => {
+      if (started) return;
+      started = true;
+      const now = performance.now();
+      coreEl.classList.add("is-born");
+      if (REDUCED) {
+        nodes.forEach((n) => { n.born = 0; home(n); n.x = n.hx; n.y = n.hy; n.el.classList.add("is-born"); });
+      } else {
+        // hubs pop out of the core first, then the capabilities
+        nodes.forEach((n) => { n.born = now + 280 + (n.hub ? n.i * 120 : 760 + n.i * 95); });
+      }
+      run();
+    };
+
+    const light = () => {
+      const f = focus();
+      stage.classList.toggle("has-focus", !!f);
+      all.forEach((n) => n.el.classList.toggle("is-lit", !!f && f.nb.has(n)));
+    };
+    const close = (n = opened) => {
+      if (!n) return;
+      n.el.classList.remove("is-open");
+      n.ball.setAttribute("aria-expanded", "false");
+      if (opened === n) opened = null;
+      light(); run();
+    };
+    const open = (n) => {
+      if (opened === n || dragging) return;
+      if (opened) close(opened);
+      opened = n;
+      n.below = n.y < cy;
+      n.el.classList.add("is-open");
+      n.ball.setAttribute("aria-expanded", "true");
+      placeCard(n);
+      light(); run();
+    };
+
+    const local = (e) => {
+      const r = stage.getBoundingClientRect();
+      pointer.x = Math.min(Math.max(e.clientX - r.left, 0), W);
+      pointer.y = Math.min(Math.max(e.clientY - r.top, 0), H);
+    };
+    stage.addEventListener("pointermove", (e) => {
+      local(e);
+      if (e.pointerType !== "mouse") return;
+      pointer.in = true;
+      stage.classList.add("is-pointer");
+      stage.style.setProperty("--mx", pointer.x + "px");
+      stage.style.setProperty("--my", pointer.y + "px");
+      if (press && !dragging && Math.hypot(e.clientX - press.x, e.clientY - press.y) > 5 && !REDUCED) {
+        dragging = press.n;
+        close(dragging);
+        dragging.el.classList.add("is-dragging");
+        light();
+      }
+    });
+    stage.addEventListener("pointerleave", () => { pointer.in = false; stage.classList.remove("is-pointer"); });
+
+    const release = () => {
+      if (!press) return;
+      const n = dragging;
+      press = null;
+      if (!n) return;
+      dragging = null;
+      suppressClick = true;
+      n.el.classList.remove("is-dragging");
+      // a fling keeps its speed and springs home
+      const sp = Math.hypot(n.vx, n.vy), max = 2400;
+      if (sp > max) { n.vx *= max / sp; n.vy *= max / sp; }
+      hovered = null;
+      light();
+    };
+    window.addEventListener("pointerup", release);
+    window.addEventListener("pointercancel", release);
+
+    nodes.forEach((n) => {
+      n.el.addEventListener("pointerenter", (e) => {
+        if (e.pointerType !== "mouse" || dragging) return;
+        hovered = n;
+        open(n);
+      });
+      n.el.addEventListener("pointerleave", (e) => {
+        if (e.pointerType !== "mouse" || dragging === n) return;
+        if (hovered === n) hovered = null;
+        close(n);
+      });
+      n.ball.addEventListener("pointerdown", (e) => {
+        n.wasOpen = opened === n;
+        if (e.pointerType !== "mouse" || e.button !== 0) return;
+        e.preventDefault(); // no text selection or native drag while grabbing
+        press = { n, x: e.clientX, y: e.clientY };
+        n.ball.setPointerCapture(e.pointerId);
+        local(e);
+      });
+      n.ball.addEventListener("click", (e) => {
+        if (suppressClick) { suppressClick = false; return; }
+        if (e.detail === 0 || !fine.matches) {
+          // keyboard and touch toggle
+          const was = e.detail === 0 ? opened === n : n.wasOpen;
+          was ? close(n) : open(n);
+        } else {
+          open(n);
+        }
+      });
+      n.ball.addEventListener("focus", () => { if (n.ball.matches(":focus-visible")) open(n); });
+      n.ball.addEventListener("blur", () => { if (hovered !== n && opened === n) close(n); });
+    });
+    // tap anywhere else to close
+    doc.addEventListener("click", (e) => { if (opened && !opened.el.contains(e.target) && !fine.matches) close(); });
+    doc.addEventListener("keydown", (e) => { if (e.key === "Escape" && opened) { const n = opened; hovered = null; close(n); } });
+
+    // the core sends a shockwave that knocks every bubble outward
+    coreEl.addEventListener("click", () => {
+      if (REDUCED || !started) return;
+      ripples.push({ x: core.x, y: core.y, t: clock || performance.now(), r0: core.r, strong: true });
+      nodes.forEach((n) => {
+        const dx = n.x - core.x, dy = n.y - core.y, d = Math.hypot(dx, dy) || 1;
+        const kick = n.hub ? 620 : 520;
+        n.vx += (dx / d) * kick; n.vy += (dy / d) * kick;
+      });
+      coreEl.classList.remove("is-boing");
+      void coreEl.offsetWidth;
+      coreEl.classList.add("is-boing");
+    });
+
+    stage.classList.add("is-live");
+    measure();
+    core.x = cx; core.y = cy;
+    nodes.forEach((n) => { n.x = cx; n.y = cy; });
+    render();
+    let resizeRaf = 0;
+    window.addEventListener("resize", () => {
+      cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(() => {
+        const ocx = cx, ocy = cy;
+        measure();
+        all.forEach((n) => { n.x += cx - ocx; n.y += cy - ocy; });
+        if (REDUCED) nodes.forEach((n) => { home(n); n.x = n.hx; n.y = n.hy; });
+        core.x = cx; core.y = cy;
+        run();
+      });
+    });
+    doc.addEventListener("visibilitychange", () => { if (!doc.hidden) run(); });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([en]) => {
+        onScreen = en.isIntersecting;
+        if (onScreen && en.intersectionRatio >= 0.2) intro();
+        run();
+      }, { threshold: [0, 0.2, 0.4] }).observe(stage);
+    } else {
+      onScreen = true;
+      intro();
+    }
+  });
+
   /* ---- bespoke vs subscription: horizon slider (risk page) ----
      The figure ships drawn at Yr 5; dragging the horizon redraws both
      cumulative meters, the gap between them, and the break-even badge. */

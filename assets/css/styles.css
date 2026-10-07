@@ -5309,3 +5309,204 @@ ul.vt-card__list { list-style: none; margin: 0; padding: 0.6rem 0.9rem 0.9rem; d
   font-weight: 600;
   color: var(--cobalt);
 }
+
+/* ==========================================================================
+   36. HOMEPAGE: WHAT WE BUILD (orbit) + HOW WE DELIVER (path)
+   The orbit is a small spring-physics graph run by site.js ([data-orbit]).
+   Five services ride the inner ring around the core, each with one
+   capability on the outer ring. A dot field, the edges, and the data
+   packets that travel them are drawn on the canvas; the bubbles are DOM.
+   Hover, focus, tap, or drag eases the rotation to a stop and opens a card.
+   No JS: a list. Reduced motion: a still constellation.
+   ========================================================================== */
+.wwb { position: relative; background: radial-gradient(60% 55% at 50% 62%, rgba(36, 84, 216, 0.1), transparent 70%), var(--navy-950); overflow: hidden; }
+.wwb .h2 em { color: var(--cobalt-bright); }
+.wwb .section-head { position: relative; z-index: 2; margin-bottom: clamp(0rem, 1.2vw, 0.8rem); }
+.wwb__hint { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.1rem; padding: 0.45rem 0.95rem; border-radius: 999px; border: 1px solid var(--line-dark-strong); background: var(--surface-raised); font-size: 0.85rem; color: var(--t-dim); }
+.wwb__hint-dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--cobalt-bright); box-shadow: 0 0 0 0 rgba(74, 114, 240, 0.6); animation: wwb-ping 2.2s ease-out infinite; }
+@keyframes wwb-ping { 70%, 100% { box-shadow: 0 0 0 9px transparent; } }
+.wwb__hint-touch { display: none; }
+@media (hover: none) { .wwb__hint-fine { display: none; } .wwb__hint-touch { display: inline; } }
+
+.orbit {
+  --core: clamp(8.5rem, 12vw, 10rem);
+  --hub: clamp(4.4rem, 6vw, 5.25rem);
+  --leaf: clamp(2.9rem, 3.9vw, 3.4rem);
+  --spring: linear(0, 0.037, 0.13, 0.256, 0.397, 0.539, 0.672, 0.788, 0.886, 0.962, 1.019, 1.058, 1.082, 1.093, 1.094, 1.089, 1.079, 1.066, 1.052, 1.039, 1.027, 1.017, 1.008, 1.001, 0.997, 0.994, 0.992, 0.991, 0.991, 0.992, 0.993, 0.994, 0.995, 0.997, 0.998, 0.999, 1);
+  position: relative;
+  height: clamp(36rem, 47vw, 42rem);
+  max-width: 1200px;
+  margin: 0 auto;
+  touch-action: pan-y;
+  -webkit-user-select: none; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+@supports not (transition-timing-function: linear(0, 1)) { .orbit { --spring: cubic-bezier(0.3, 1.3, 0.5, 1); } }
+.orbit__canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+/* ---- the core: the brand's cobalt, with one slow ripple ---- */
+.orbit__core { position: absolute; left: 0; top: 0; z-index: 2; width: var(--core); height: var(--core); margin: calc(var(--core) / -2) 0 0 calc(var(--core) / -2); cursor: pointer; will-change: transform; transition: opacity 400ms; }
+.orbit__pulse { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(74, 114, 240, 0.45); animation: orbit-sonar 4.5s cubic-bezier(0.2, 0.6, 0.3, 1) infinite; pointer-events: none; }
+.orbit__sphere {
+  position: absolute; inset: 0;
+  display: grid; place-items: center; align-content: center; gap: 0.45rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 0%, var(--cobalt-bright) 0%, var(--cobalt) 55%, var(--cobalt-deep) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 0 0 10px rgba(36, 84, 216, 0.08), 0 0 90px -10px rgba(36, 84, 216, 0.75);
+  transition: transform 700ms var(--spring), opacity 500ms;
+}
+.orbit__sphere img { width: 38px; height: 38px; filter: brightness(0) invert(1); }
+.orbit__sphere b { font-family: var(--serif); font-weight: 450; font-size: clamp(1.2rem, 1.7vw, 1.45rem); line-height: 1; color: var(--white); }
+.orbit__core:hover .orbit__sphere { transform: scale(1.04); }
+.orbit__core.is-boing .orbit__sphere { animation: orbit-jelly 700ms ease both; }
+.orbit.is-live .orbit__core:not(.is-born) .orbit__sphere { transform: scale(0.5); opacity: 0; }
+.orbit.is-live .orbit__core:not(.is-born) .orbit__pulse { opacity: 0; }
+@keyframes orbit-sonar { from { transform: scale(1); opacity: 0.8; } to { transform: scale(2.2); opacity: 0; } }
+@keyframes orbit-jelly { 0% { scale: 1 1; } 22% { scale: 1.1 0.9; } 42% { scale: 0.94 1.06; } 62% { scale: 1.03 0.97; } 80% { scale: 0.99 1.01; } 100% { scale: 1 1; } }
+@keyframes orbit-spin { to { rotate: 1turn; } }
+
+/* ---- bubbles: hairline glass, cobalt when touched ---- */
+ul.orbit__nodes { list-style: none; margin: 0; padding: 0; }
+.orbit__node { --d: var(--hub); position: absolute; left: 0; top: 0; z-index: 3; width: 0; height: 0; will-change: transform; transition: opacity 450ms var(--ease-out); }
+.orbit__node--leaf { --d: var(--leaf); }
+.orbit__body { position: absolute; left: 0; top: 0; width: var(--d); height: var(--d); margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2); }
+.orbit__ball {
+  position: relative; display: grid; place-items: center;
+  width: 100%; height: 100%; padding: 0; border-radius: 50%;
+  border: 1px solid var(--line-dark-strong);
+  background: radial-gradient(circle at 50% 0%, var(--navy-800), var(--navy-900) 70%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 36px -18px rgba(0, 0, 0, 0.9);
+  color: var(--t-bright); font: inherit; cursor: pointer;
+  transform: scale(var(--s, 1));
+  transition: transform 600ms var(--spring), background-color 300ms, border-color 300ms, box-shadow 300ms, color 300ms;
+}
+.orbit__ball svg { position: relative; z-index: 1; width: 38%; height: 38%; pointer-events: none; }
+/* a short cobalt arc runs round each service: "there's something here" */
+.orbit__node--hub .orbit__ball::before { content: ""; position: absolute; inset: -1px; border-radius: 50%; padding: 1.5px; background: conic-gradient(from 0deg, transparent 0 70%, rgba(74, 114, 240, 0.9) 88%, transparent 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: orbit-spin 5s linear infinite; animation-delay: calc(var(--k, 0) * -1.1s); pointer-events: none; transition: opacity 300ms; }
+.orbit__node--leaf .orbit__ball { border-style: dashed; background: var(--navy-950); color: var(--t-dim); box-shadow: none; }
+/* the fill that floods in on hover */
+.orbit__ball::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 50% 0%, var(--cobalt-bright), var(--cobalt) 60%, var(--cobalt-deep)); opacity: 0; transform: scale(0.4); transition: opacity 260ms, transform 500ms var(--spring); }
+.orbit__ball:hover, .orbit__node.is-open .orbit__ball { --s: 1.12; color: var(--white); border-color: rgba(255, 255, 255, 0.2); border-style: solid; box-shadow: 0 0 0 6px rgba(36, 84, 216, 0.14), 0 18px 46px -12px rgba(36, 84, 216, 0.75); }
+.orbit__ball:hover::after, .orbit__node.is-open .orbit__ball::after { opacity: 1; transform: none; }
+.orbit__ball:hover::before, .orbit__node.is-open .orbit__ball::before { opacity: 0; }
+.orbit__node.is-open .orbit__ball { animation: orbit-jelly 640ms ease both; }
+.orbit__node.is-ping .orbit__ball { animation: orbit-ping 620ms ease both; }
+@keyframes orbit-ping { 30% { scale: 1.08; border-color: var(--cobalt-bright); } 100% { scale: 1; } }
+.orbit__node.is-dragging .orbit__ball { --s: 1.16; cursor: grabbing; }
+.orbit__ball:focus-visible { outline: 2px solid var(--cobalt-bright); outline-offset: 6px; }
+@media (hover: hover) and (pointer: fine) { .orbit.is-live .orbit__ball { cursor: grab; } }
+
+.orbit__label {
+  position: absolute; left: 0; top: calc(var(--d) / 2 + 0.65rem);
+  width: max-content; max-width: 10.5rem;
+  transform: translateX(-50%);
+  text-align: center; text-wrap: balance;
+  font-size: 0.88rem; font-weight: 500; line-height: 1.3; color: var(--t-bright);
+  text-shadow: 0 0 12px var(--navy-950), 0 0 4px var(--navy-950);
+  pointer-events: none;
+  transition: opacity 240ms, transform 450ms var(--spring);
+}
+.orbit__node--leaf .orbit__label { max-width: 8rem; font-size: 0.78rem; font-weight: 400; color: var(--t-dim); }
+.orbit__short { display: none; }
+.orbit__node.is-open .orbit__label, .orbit__node.is-dragging .orbit__label { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+
+/* ---- the card that opens out of a bubble ---- */
+.orbit__card {
+  position: absolute; left: -9rem; top: 4rem; z-index: 2;
+  width: 18.5rem;
+  padding: 1.05rem 1.15rem 1.15rem;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--navy-900) 94%, transparent);
+  border: 1px solid var(--line-dark-strong);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 30px 60px -24px rgba(0, 0, 0, 0.95);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  transform-origin: var(--ox, 50%) var(--oy, 0);
+  opacity: 0; visibility: hidden; transform: scale(0.4); pointer-events: none;
+  transition: opacity 160ms, transform 220ms var(--ease-io), visibility 0s 220ms;
+}
+.orbit__card::before { content: ""; position: absolute; left: 0; right: 0; height: 1.6rem; top: -1.6rem; } /* bridges the gap so the pointer can reach the card */
+.orbit__card[data-side="above"]::before { top: auto; bottom: -1.6rem; }
+.orbit__card::after { content: ""; position: absolute; left: 1.15rem; right: 1.15rem; top: -1px; height: 1px; background: linear-gradient(90deg, var(--cobalt-bright), transparent); }
+.orbit__node.is-open .orbit__card { opacity: 1; visibility: visible; transform: none; pointer-events: auto; transition: opacity 150ms, transform 560ms var(--spring), visibility 0s; }
+.orbit__tag { display: flex; align-items: center; gap: 0.55rem; margin: 0 0 0.5rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sky); }
+.orbit__tag::before { content: ""; width: 18px; height: 1px; background: var(--cobalt-bright); }
+.orbit__title { margin: 0 0 0.4rem; font-family: var(--sans); font-size: 1rem; font-weight: 600; line-height: 1.3; letter-spacing: 0; color: var(--t-bright); }
+.orbit__text { margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--t-dim); }
+.orbit__node.is-open .orbit__card > * { animation: orbit-rise 480ms var(--ease-out) both; }
+.orbit__node.is-open .orbit__title { animation-delay: 40ms; }
+.orbit__node.is-open .orbit__text { animation-delay: 80ms; }
+@keyframes orbit-rise { from { opacity: 0; transform: translateY(5px); } }
+
+/* ---- focus: light the neighbourhood, dim the rest ---- */
+.orbit.has-focus .orbit__node:not(.is-lit) { opacity: 0.25; }
+.orbit.has-focus .orbit__core:not(.is-lit) { opacity: 0.5; }
+.orbit__node.is-open, .orbit__node.is-dragging { z-index: 9 !important; }
+
+/* ---- intro: bubbles are born out of the core ---- */
+.orbit.is-live .orbit__node:not(.is-born) { opacity: 0; }
+.orbit.is-live .orbit__node:not(.is-born) .orbit__ball { --s: 0.2; }
+
+@media (max-width: 700px) {
+  .orbit { --core: 6.4rem; --hub: 3.5rem; --leaf: 2.55rem; height: clamp(30rem, 142vw, 36rem); }
+  .orbit__sphere { gap: 0.25rem; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 0 0 6px rgba(36, 84, 216, 0.08), 0 0 60px -10px rgba(36, 84, 216, 0.75); }
+  .orbit__sphere img { width: 26px; height: 26px; }
+  .orbit__sphere b { font-size: 1rem; }
+  .orbit__label { top: calc(var(--d) / 2 + 0.4rem); max-width: 6.5rem; font-size: 0.72rem; }
+  .orbit__node--leaf .orbit__label { font-size: 0.66rem; max-width: 5.5rem; }
+  .orbit__full { display: none; }
+  .orbit__short { display: inline; }
+  .orbit__card { padding: 0.85rem 0.95rem 0.95rem; border-radius: 12px; }
+  .orbit__title { font-size: 0.95rem; }
+  .orbit__text { font-size: 0.86rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wwb__hint-dot, .orbit__pulse, .orbit__node--hub .orbit__ball::before { animation: none; }
+  .orbit__pulse { display: none; }
+  .orbit__node.is-open .orbit__ball, .orbit__node.is-ping .orbit__ball, .orbit__core.is-boing .orbit__sphere { animation: none; }
+}
+
+/* no JS: a plain list of everything we build */
+.orbit:not(.is-live) { height: auto; }
+.orbit:not(.is-live) .orbit__canvas, .orbit:not(.is-live) .orbit__label, .orbit:not(.is-live) .orbit__pulse { display: none; }
+.orbit:not(.is-live) .orbit__core { position: relative; margin: 0 auto 2rem; cursor: default; }
+.orbit:not(.is-live) ul.orbit__nodes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+.orbit:not(.is-live) .orbit__node { position: static; display: flex; gap: 1rem; align-items: flex-start; width: auto; height: auto; padding: 1rem; border-radius: 14px; border: 1px solid var(--line-dark); background: var(--surface-raised); }
+.orbit:not(.is-live) .orbit__body { position: relative; flex: none; margin: 0; }
+.orbit:not(.is-live) .orbit__ball { cursor: default; }
+.orbit:not(.is-live) .orbit__card { position: static; width: auto; padding: 0; border: 0; background: none; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; opacity: 1; visibility: visible; transform: none; }
+.orbit:not(.is-live) .orbit__card::after { display: none; }
+@media (max-width: 620px) { .orbit:not(.is-live) ul.orbit__nodes { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- how we deliver: one connected path, six steps ---- */
+.hw { background: var(--paper); }
+.hw .h2 em { color: var(--cobalt); }
+.hw .section-head { max-width: 860px; }
+.hw .section-head .lede { margin-inline: auto; max-width: 46rem; }
+ol.hw-path { position: relative; isolation: isolate; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(0.8rem, 1.6vw, 1.4rem); counter-reset: hw; }
+.hw-path::before { content: ""; position: absolute; z-index: -1; left: calc(100% / 12); right: calc(100% / 12); top: 2.05rem; border-top: 2px solid color-mix(in srgb, var(--cobalt) 35%, transparent); }
+.hw-path::after { content: ""; position: absolute; z-index: -1; left: calc(100% / 12); top: 2.05rem; width: calc(100% - 100% / 6); border-top: 2px solid var(--cobalt); transform-origin: left; transform: scaleX(var(--hw-p, 1)); transition: transform 1600ms var(--ease-out) 200ms; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .hw-path[data-reveal]:not(.is-visible) { --hw-p: 0; }
+}
+.hw-step { position: relative; display: grid; justify-items: center; align-content: start; text-align: center; padding: 0 0.2rem; }
+.hw-step__node { position: relative; z-index: 1; display: grid; place-items: center; width: 4.1rem; height: 4.1rem; border-radius: 50%; color: var(--cobalt); background: var(--white); border: 2px solid var(--cobalt); box-shadow: 0 0 0 7px var(--paper); transition: transform var(--mid) var(--ease-out), background var(--fast), color var(--fast); }
+.hw-step:hover .hw-step__node { transform: translateY(-4px); background: var(--cobalt); color: var(--white); }
+.hw-step__n { margin-top: 1.1rem; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em; color: var(--cobalt); }
+.hw-step h3 { margin-top: 0.35rem; font-family: var(--serif); font-weight: 450; font-size: 1.32rem; line-height: 1.2; color: var(--ink-900); }
+.hw-step p { margin-top: 0.55rem; font-size: 0.93rem; line-height: 1.6; color: var(--ink-600); }
+.hw-step--launch .hw-step__node { background: var(--cobalt); color: var(--white); box-shadow: 0 0 0 7px var(--paper), 0 0 0 12px color-mix(in srgb, var(--cobalt) 18%, transparent); }
+.hw-step--launch h3 { color: var(--cobalt); }
+.hw-step--loop .hw-step__node { border-style: dashed; }
+.hw-step__tag { margin-top: 0.7rem; padding: 0.2rem 0.65rem; border-radius: 999px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cobalt); background: color-mix(in srgb, var(--cobalt) 9%, transparent); }
+.hw-start { margin-top: clamp(2.5rem, 5vw, 3.5rem); text-align: center; }
+@media (max-width: 1000px) {
+  ol.hw-path { grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 560px; margin: 0 auto; }
+  .hw-path::before, .hw-path::after { left: 2.05rem; right: auto; top: 2rem; bottom: 2rem; width: 0; border-top: 0; border-left: 2px solid color-mix(in srgb, var(--cobalt) 35%, transparent); }
+  .hw-path::after { border-left-color: var(--cobalt); transform-origin: top; transform: scaleY(var(--hw-p, 1)); height: auto; }
+  .hw-step { grid-template-columns: 4.1rem minmax(0, 1fr); column-gap: 1.2rem; justify-items: start; text-align: left; padding: 0 0 1.8rem; }
+  .hw-step__node { grid-row: span 4; }
+  .hw-step__n { margin-top: 0.3rem; }
+  .hw-step h3, .hw-step p, .hw-step__tag { grid-column: 2; }
+  .hw-step__tag { justify-self: start; }
+}
