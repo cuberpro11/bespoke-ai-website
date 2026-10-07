@@ -14,7 +14,7 @@
       navTasks: "Tasks",
       navTaskTypes: "Task types",
       navMessages: "Messages",
-      backDemos: "Bespoke demos",
+      backDemos: "Bespoke AI demos",
       brandName: "The Marlow",
       brandSub: "Fifth Avenue Operations",
       footer: "Rooms Division · v2.4",

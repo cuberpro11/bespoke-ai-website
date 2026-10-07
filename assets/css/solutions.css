@@ -988,7 +988,7 @@ ol.cp-checks { margin: 0; padding: 1.4rem 1.4rem 1.4rem 0; list-style: none; dis
 .ap-node.is-warn rect { stroke: #b9793b; fill: #fdf6ee; stroke-width: 1.6; }
 .ap-core__ring { fill: none; stroke: rgba(36, 84, 216, 0.25); stroke-width: 1; stroke-dasharray: 3 4; transform-origin: center; }
 .ap-core__disc { fill: var(--ink-900); }
-.ap-core__name { font-family: var(--serif); font-size: 15px; fill: var(--white); text-anchor: middle; }
+.ap-core__name { font-family: var(--serif); font-size: 13px; fill: var(--white); text-anchor: middle; }
 .ap-core__role { font-family: var(--mono); font-size: 8.5px; fill: var(--t-dim); text-anchor: middle; letter-spacing: 0.06em; }
 .ap-core.is-busy .ap-core__ring { stroke: var(--cobalt-bright); animation: ap-spin 2.4s linear infinite; }
 @keyframes ap-spin { to { transform: rotate(360deg); } }

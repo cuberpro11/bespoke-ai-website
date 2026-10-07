@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """Optional: per-page SEO audit (H1, unique title/description, canonical, JSON-LD).
 
+Also enforces the brand rules on every page, noindex pages included:
+titles end in "| Bespoke AI", meta descriptions start with "Bespoke AI",
+and the company is never called plain "Bespoke" ("bespoke" the adjective,
+e.g. "Bespoke build" or "Bespoke CRM solutions", is fine).
+
 Not used to serve or deploy the site.
 
     python3 tools/audit-seo.py
@@ -9,6 +14,16 @@ import os
 import re
 import sys
 from collections import defaultdict
+
+BRAND = "Bespoke AI"
+TITLE_SUFFIX = " | " + BRAND
+# "Bespoke" used as the company: before a verb, a possessive, or on its own
+# (end of a tag, sentence, or label). Adjective uses are followed by a noun.
+BARE_BRAND = re.compile(
+    r"\bBespoke\b(?! AI)(?='s\b|\s+(?:is|was|builds|has|helps|takes|will|engineers|"
+    r"costs|team|demos?)\b|[<.,;:!?\"]|\s+[\u2014\u2013])"
+    r"|About Bespoke\b(?! AI)"
+)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKIP_DIRS = {".git", "assets", "partials", "tools", "new-icons", "node_modules"}
@@ -34,6 +49,18 @@ def main():
     for path in pages():
         rel = os.path.relpath(path, ROOT)
         src = open(path, encoding="utf-8").read()
+
+        brand_title = re.search(r"<title>(.*?)</title>", src, re.S)
+        brand_title = text(brand_title.group(1)) if brand_title else ""
+        if not brand_title.endswith(TITLE_SUFFIX) or brand_title.count(BRAND) > 1:
+            problems.append(f"{rel}: title {brand_title!r} must end in {TITLE_SUFFIX!r} (once)")
+        brand_desc = re.search(r'<meta name="description" content="(.*?)">', src, re.S)
+        if brand_desc and not brand_desc.group(1).startswith(BRAND):
+            problems.append(f"{rel}: meta description must start with {BRAND!r}")
+        for m in BARE_BRAND.finditer(src):
+            line = src.count("\n", 0, m.start()) + 1
+            problems.append(f"{rel}:{line}: company called plain 'Bespoke' -> {BRAND!r}")
+
         if 'content="noindex' in src:
             continue
 
