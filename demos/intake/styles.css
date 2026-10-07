@@ -904,3 +904,8 @@ table { border-collapse: collapse; width: 100%; }
   }
   .case-item:active { transform: none; }
 }
+
+/* very narrow phones: the longer "Bespoke AI demos" back link leaves no room for the practice pill */
+@media (max-width: 400px) {
+  .topbar__titles h1 .pill--units { display: none; }
+}

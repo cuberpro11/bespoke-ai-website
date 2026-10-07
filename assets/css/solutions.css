@@ -3185,3 +3185,10 @@ dl.alc-greeks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
 @media (prefers-reduced-motion: reduce) {
   .fxd-blotter tbody tr:first-child td, .fxd-news li.is-new, .js .alc-panel.is-in { animation: none; }
 }
+
+/* 320px phones: let the comment citation wrap and tighten the reconciliation tables */
+@media (max-width: 360px) {
+  .ld-comment { flex-wrap: wrap; }
+  .ld-comment cite { flex: 1 1 100%; }
+  .ac-t th, .ac-t td { padding-left: 0.2rem; padding-right: 0.2rem; }
+}
