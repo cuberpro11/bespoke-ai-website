@@ -788,6 +788,140 @@ def scene_enrollment(s):
     s.paste_quad(page_tex(61, 520, 460, title="ADMITTED", seal=True, sign=True, base=0.74), letter)
     s.gd.polygon(s.P(letter), fill=v(0.5))
 
+
+def house(s, x, y, w, h, roof, val=0.2, lit=0.6, rnd=None):
+    """A gabled house whose bottom-left corner sits at (x, y)."""
+    rnd = rnd or random
+    s.poly([(x, y - h), (x + w, y - h), (x + w, y), (x, y)], val)
+    s.poly([(x - 14, y - h), (x + w / 2, y - h - roof), (x + w + 14, y - h)], val + 0.12)
+    s.line([(x - 14, y - h), (x + w / 2, y - h - roof), (x + w + 14, y - h)], 0.6, 3)
+    for k in range(2):
+        wx = x + w * (0.18 + k * 0.46)
+        on = rnd.random() < lit
+        s.rect((wx, y - h * 0.72, wx + w * 0.2, y - h * 0.42), 0.85 if on else 0.08)
+        if on:
+            s.gd.rectangle([wx * SS, (y - h * 0.8) * SS, (wx + w * 0.2) * SS, (y - h * 0.3) * SS], fill=v(0.5))
+    s.rect((x + w * 0.42, y - h * 0.38, x + w * 0.58, y), 0.12)
+
+
+def bubble(s, x, y, w, h, val, tail="left"):
+    s.rect((x, y, x + w, y + h), val, radius=22)
+    tx = x + 26 if tail == "left" else x + w - 26
+    s.poly([(tx - 12, y + h - 2), (tx + 12, y + h - 2), (tx - (18 if tail == "left" else -18), y + h + 22)], val)
+    for k in range(2):
+        s.rect((x + 22, y + 20 + k * 22, x + w - 22 - k * 40, y + 30 + k * 22), 0.3, radius=4)
+
+
+def scene_residential(s):
+    """Residential: a street of homes, a for-sale sign, and a lead texting back."""
+    rnd = random.Random(71)
+    s.light(1140, 420, 470, 0.55)
+    ground(s, 860, 0.13, 0.05)
+    for i, (x, w, h, roof) in enumerate([(560, 170, 150, 90), (760, 210, 190, 120), (1300, 190, 170, 110), (1520, 160, 150, 90)]):
+        house(s, x, 880, w, h, roof, 0.14 + i * 0.02, 0.5, rnd)
+    # yard sign
+    s.line([(1010, 900), (1010, 700)], 0.55, 6)
+    s.line([(1010, 712), (1150, 712)], 0.55, 5)
+    s.rect((1040, 726, 1140, 800), 0.75, radius=4)
+    s.text((1090, 763), "SOLD", 30, 0.12, "serif-b", anchor="mm")
+    # the phone, front and centre
+    ph = (1130, 230, 1370, 700)
+    s.rect((ph[0] - 10, ph[1] - 10, ph[2] + 10, ph[3] + 10), 0.08, radius=46)
+    s.rect(ph, 0.2, radius=38)
+    s.gd.rounded_rectangle([ph[0] * SS, ph[1] * SS, ph[2] * SS, ph[3] * SS], radius=38 * SS, fill=v(0.5))
+    bubble(s, 1150, 290, 180, 74, 0.62, "left")
+    bubble(s, 1170, 400, 180, 74, 0.9, "right")
+    bubble(s, 1150, 510, 160, 74, 0.62, "left")
+    s.ellipse((1230, 630, 1270, 670), 0.45)
+    ground(s, 960, 0.12, 0.08)
+
+
+def scene_feasibility(s):
+    """Feasibility & development ERP: a parcel plan, a tower crane, and a pro forma."""
+    s.light(1080, 420, 480, 0.55)
+    ground(s, 760, 0.12, 0.04)
+    # parcel grid in perspective
+    for r in range(5):
+        for c in range(6):
+            x0 = 640 + c * 150 - r * 40
+            y0 = 790 + r * 46
+            val = 0.45 if (r, c) in {(1, 2), (1, 3), (2, 2), (2, 3)} else 0.16 + 0.03 * ((r + c) % 2)
+            s.poly([(x0, y0), (x0 + 140, y0), (x0 + 100, y0 + 40), (x0 - 40, y0 + 40)], val, outline=0.4, width=1)
+    s.gd.polygon(s.P([(860, 836), (1140, 836), (1060, 918), (780, 918)]), fill=v(0.6))
+    # the building going up on the highlighted lots
+    for k in range(7):
+        y = 830 - k * 52
+        s.rect((880, y - 46, 1080, y), 0.2 + 0.02 * k, outline=0.55, width=2)
+        for c in range(5):
+            s.rect((894 + c * 38, y - 36, 916 + c * 38, y - 14), 0.55 if (c + k) % 3 else 0.12)
+    s.rect((880, 430, 1080, 466), 0.12, outline=0.5, width=2)
+    # tower crane
+    s.line([(1180, 900), (1180, 170)], 0.7, 8)
+    for k in range(14):
+        y = 900 - k * 52
+        s.line([(1168, y), (1192, y - 52)], 0.45, 2)
+    s.line([(760, 190), (1500, 190)], 0.75, 7)
+    s.line([(1180, 120), (900, 190)], 0.55, 3)
+    s.line([(1180, 120), (1440, 190)], 0.55, 3)
+    s.rect((1430, 196, 1500, 240), 0.35)
+    s.line([(980, 196), (980, 360)], 0.6, 2, glow=0.4)
+    s.rect((950, 360, 1010, 396), 0.7)
+    # the pro forma sheet
+    pf = [(1260, 500), (1500, 486), (1512, 820), (1270, 834)]
+    s.paste_quad(page_tex(33, 480, 680, title="PRO FORMA", highlight=3, base=0.72), pf)
+    s.gd.polygon(s.P(pf), fill=v(0.45))
+
+
+def scene_syndication(s):
+    """Property CRM & syndication: investors wired to one asset, with a capital stack."""
+    s.light(1100, 420, 480, 0.55)
+    ground(s, 900, 0.12, 0.05)
+    x, w, h = 1000, 220, 560
+    hub = (x + w / 2, 560)
+    people = [(640, 300, 0.7, 0.34), (600, 620, 0.8, 0.38), (760, 800, 0.6, 0.3), (1460, 250, 0.75, 0.36), (1480, 560, 0.8, 0.4)]
+    # wires first, so the tower sits in front of them
+    for px, py, sc, val in people:
+        s.line([(px, py + 60 * sc), hub], 0.3 + sc * 0.2, 2 + sc * 2, glow=0.25)
+    s.poly([(x + w, 340), (x + w + 50, 362), (x + w + 50, 900), (x + w, 900)], 0.08)
+    s.poly([(x, 340), (x + 50, 318), (x + w + 50, 318), (x + w, 340)], 0.32)
+    s.paste_quad(facade_tex(5, w, h, lit=0.45, cols=5), [(x, 340), (x + w, 340), (x + w, 900), (x, 900)])
+    s.gd.rectangle([x * SS, 340 * SS, (x + w) * SS, 900 * SS], fill=v(0.3))
+    for px, py, sc, val in people:
+        person(s, px, py, sc, val)
+    # capital stack: senior debt, mezzanine, equity
+    yb = 900
+    for hgt, val in [(170, 0.35), (110, 0.6), (70, 0.88)]:
+        s.rect((1320, yb - hgt, 1400, yb), val, outline=0.8, width=2)
+        yb -= hgt + 4
+
+
+def scene_realestate_hub(s):
+    """Real estate hub: towers, a crane, and a street of homes on one skyline."""
+    rnd = random.Random(19)
+    s.light(1100, 380, 500, 0.55)
+    ground(s, 900, 0.13, 0.05)
+    for i, (x, w, h, lit, cols) in enumerate([(700, 170, 560, 0.28, 5), (900, 210, 700, 0.45, 6), (1140, 160, 480, 0.25, 4)]):
+        top = 920 - h
+        s.poly([(x + w, top), (x + w + 40, top + 18), (x + w + 40, 920), (x + w, 920)], 0.07)
+        s.paste_quad(facade_tex(60 + i, int(w), int(h), lit=lit, cols=cols), [(x, top), (x + w, top), (x + w, 920), (x, 920)])
+        s.line([(x, top), (x + w, top)], 0.7, 3)
+    s.gd.rectangle([900 * SS, 220 * SS, 1110 * SS, 920 * SS], fill=v(0.3))
+    # crane over the skyline
+    s.line([(1360, 920), (1360, 230)], 0.65, 7)
+    for k in range(13):
+        y = 920 - k * 53
+        s.line([(1349, y), (1371, y - 53)], 0.42, 2)
+    s.line([(1040, 250), (1560, 250)], 0.72, 6)
+    s.line([(1360, 180), (1100, 250)], 0.5, 3)
+    s.line([(1360, 180), (1520, 250)], 0.5, 3)
+    s.line([(1180, 256), (1180, 420)], 0.6, 2, glow=0.4)
+    s.rect((1150, 420, 1210, 450), 0.7)
+    # homes in the foreground
+    for i, (x, w, h, roof) in enumerate([(560, 150, 130, 80), (1300, 170, 150, 90), (1490, 140, 120, 76)]):
+        house(s, x, 940, w, h, roof, 0.16 + i * 0.02, 0.6, rnd)
+    s.poly([(0, 940), (W, 940), (W, H), (0, H)], 0.1)
+
+
 SCENES = {
     "trading": scene_trading,
     "risk-management": scene_risk,
@@ -799,7 +933,11 @@ SCENES = {
     "automated-email-response": scene_email,
     "document-automation": scene_docauto,
     "knowledge-base-software": scene_kb,
-    "real-estate": scene_realestate,
+    "commercial-property-management-software": scene_realestate,
+    "residential-real-estate": scene_residential,
+    "property-feasibility-development-erp": scene_feasibility,
+    "property-crm-investor-relations": scene_syndication,
+    "custom-real-estate-software": scene_realestate_hub,
     "documentation-automation": scene_legaldoc,
     "workflow-automation": scene_workflow,
     "client-relations-management": scene_crm,

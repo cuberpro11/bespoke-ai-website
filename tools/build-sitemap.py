@@ -16,7 +16,7 @@ SKIP_FILES = {"404.html"}
 TODAY = datetime.date.today().isoformat()
 
 # Hubs first, then their children, then the rest — crawl order mirrors the IA.
-ORDER = ["/", "/custom-legal-software", "/custom-financial-software", "/custom-edtech-software", "/custom-general-service-software",
+ORDER = ["/", "/custom-legal-software", "/custom-financial-software", "/custom-real-estate-software", "/custom-edtech-software", "/custom-general-service-software",
          "/custom-software-development-team", "/demos", "/contact"]
 
 
