@@ -1125,6 +1125,137 @@ ol.bv-margin__doc {
 }
 
 /* ==========================================================================
+   SLOPE — Supply chain hub. A slope chart + ticket-stub benefits.
+   ========================================================================== */
+.bv-sl__top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(2.5rem, 6vw, 5rem); align-items: center; margin-bottom: clamp(3rem, 6vw, 4.5rem); }
+.bv-sl__top .section-head { margin-bottom: 0; }
+.bv-sl { margin: 0; display: grid; gap: 1rem; padding: clamp(1.25rem, 2.6vw, 1.9rem); border-radius: 18px; background: var(--paper); border: 1px solid var(--line-light); }
+.bv-sl .bv-title { margin: 0; }
+.bv-sl__svg { width: 100%; height: auto; overflow: visible; }
+.bv-sl__axis { stroke: var(--ink-900); stroke-width: 1; }
+.bv-sl__even { stroke: var(--own); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.bv-sl__evenl { font-size: 13px; font-weight: 600; fill: var(--own); }
+.bv-sl__l { fill: none; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.bv-sl__l--sub { stroke: var(--sub); }
+.bv-sl__l--own { stroke: var(--own); }
+.bv-sl__d { stroke: var(--paper); stroke-width: 2.5; }
+.bv-sl__d--sub { fill: var(--sub); }
+.bv-sl__d--own { fill: var(--own); }
+.bv-sl__y { font-family: var(--mono); font-size: 12px; fill: var(--ink-400); text-anchor: middle; }
+.bv-sl__end { font-size: 13px; font-weight: 600; text-anchor: end; }
+.bv-sl__end--sub { fill: var(--sub-ink); }
+.bv-sl__end--own { fill: var(--own); }
+.bv-sl__stubs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.9rem; }
+.bv-sl__stub { grid-column: span 2; display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); border-radius: 12px; background: var(--white); border: 1px solid var(--line-light); overflow: hidden; }
+.bv-sl__stub:nth-child(n + 4) { grid-column: span 3; }
+.bv-sl__no { display: grid; place-items: center; writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--white); background: var(--own); border-left: 2px dashed var(--white); }
+.bv-sl__stub > div { padding: 1.2rem 1.25rem 1.3rem; }
+.bv-sl__stub .bv-ico { margin-bottom: 0.8rem; }
+.bv-sl__stub h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+
+/* ==========================================================================
+   CONTAINERS — 3PL. Container stacks on a dock + bill-of-lading rows.
+   ========================================================================== */
+.bv-ct__top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(2.5rem, 6vw, 5rem); align-items: center; margin-bottom: clamp(3rem, 6vw, 4.5rem); }
+.bv-ct__top .section-head { margin-bottom: 0; }
+.bv-ct { margin: 0; display: grid; gap: 1rem; padding: clamp(1.25rem, 2.6vw, 1.9rem); border-radius: 18px; background: linear-gradient(to bottom, #eef1f7, var(--white)); border: 1px solid var(--line-light); }
+.bv-ct .bv-title { margin: 0; }
+.bv-ct__yard { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.5rem; align-items: end; height: 17rem; padding: 1.6rem 0.4rem 0; border-bottom: 6px solid #3a3d46; }
+.bv-ct__bay { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; align-items: end; height: 100%; }
+.bv-ct__bay--even { background: linear-gradient(to top, color-mix(in srgb, var(--own) 9%, transparent), transparent); border-radius: 8px 8px 0 0; }
+.bv-ct__stack { display: flex; flex-direction: column-reverse; gap: 2px; }
+.bv-ct__box { display: block; height: 1.45rem; border-radius: 2px; background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0 1px, transparent 1px 5px), var(--c); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18); }
+.bv-ct__stack--sub .bv-ct__box { --c: var(--sub); }
+.bv-ct__stack--sub .bv-ct__box:nth-child(3n) { --c: #b47a3a; }
+.bv-ct__stack--own .bv-ct__box { --c: var(--own); }
+.bv-ct__stack--own .bv-ct__box:nth-child(2n) { --c: var(--cobalt-deep); }
+.bv-ct__y { position: absolute; left: 0; right: 0; bottom: -1.9rem; text-align: center; font-family: var(--mono); font-size: 0.7rem; color: var(--ink-400); }
+.bv-ct__flag { position: absolute; left: -1rem; right: -1rem; top: -1.4rem; text-align: center; font-size: 0.68rem; font-weight: 600; color: var(--own); white-space: nowrap; }
+.bv-ct .bv-legend { margin-top: 1.5rem; }
+.bv-bl { width: 100%; border-collapse: collapse; border: 2px solid var(--ink-900); background: var(--white); }
+.bv-bl thead th { padding: 0.7rem 1rem; text-align: left; font-family: var(--mono); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); background: var(--ink-900); }
+.bv-bl td, .bv-bl tbody th { padding: 1.1rem 1rem; text-align: left; vertical-align: top; border-top: 1px solid var(--line-light-strong); }
+.bv-bl tbody th { width: 30%; font-family: var(--serif); font-weight: 450; font-size: 1.15rem; line-height: 1.25; color: var(--ink-900); border-left: 1px solid var(--line-light-strong); border-right: 1px solid var(--line-light-strong); }
+.bv-bl__no { width: 6rem; font-family: var(--mono); font-size: 0.78rem !important; color: var(--own) !important; }
+
+/* ==========================================================================
+   GAUGE — Supplier & risk. Two gauges + a year strip + scorecards.
+   ========================================================================== */
+.bv-gg { margin: 0 auto; max-width: 900px; display: grid; gap: 1.1rem; padding: clamp(1.4rem, 3vw, 2.2rem); border-radius: 24px; background: var(--navy-900); color: var(--t-bright); }
+.bv-gg .bv-title { margin: 0; color: var(--t-dim); }
+.bv-gg .bv-tag { color: var(--t-faint); border-color: var(--line-dark-strong); }
+.bv-gg .bv-keep { color: var(--t-dim); text-align: center; }
+.bv-gg .bv-keep b { color: var(--t-bright); }
+.bv-gg .bv-cap { color: var(--t-faint); text-align: center; }
+.bv-gg__pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 4vw, 3rem); }
+.bv-gg__one svg { width: 100%; height: auto; display: block; }
+.bv-gg__track { fill: none; stroke: var(--line-dark-strong); stroke-width: 16; stroke-linecap: round; }
+.bv-gg__val { fill: none; stroke-width: 16; stroke-linecap: round; }
+.bv-gg__one--sub .bv-gg__val { stroke: var(--warn); }
+.bv-gg__one--own .bv-gg__val { stroke: var(--cobalt-bright); }
+.bv-gg__needle { stroke: var(--t-bright); stroke-width: 3; stroke-linecap: round; }
+.bv-gg__hub { fill: var(--t-bright); }
+.bv-gg__l { margin-top: 0.4rem; text-align: center; font-family: var(--serif); font-size: 1.2rem; }
+.bv-gg__one--sub .bv-gg__l { color: var(--warn); }
+.bv-gg__one--own .bv-gg__l { color: var(--cobalt-bright); }
+.bv-gg__strip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; }
+.bv-gg__strip span { position: relative; padding-top: 0.5rem; border-top: 4px solid var(--warn); text-align: center; font-family: var(--mono); font-size: 0.7rem; color: var(--t-faint); }
+.bv-gg__strip span.is-own { border-top-color: var(--cobalt-bright); color: var(--t-dim); }
+.bv-gg__strip em { position: absolute; left: -2rem; right: -2rem; top: -1.5rem; font-style: normal; font-family: var(--sans); font-weight: 600; color: var(--cobalt-bright); }
+.bv-gg__cards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.8rem; margin-top: clamp(2.5rem, 5vw, 3.5rem) !important; }
+.bv-gg__card { padding: 1.2rem 1.15rem 1.3rem; border-radius: 14px; background: var(--white); border: 1px solid var(--line-light); border-top: 4px solid var(--own); }
+.bv-gg__score { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
+.bv-gg__score span { font-family: var(--serif); font-style: italic; font-size: 1.8rem; line-height: 1; color: color-mix(in srgb, var(--own) 60%, var(--white)); }
+.bv-gg__card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+.bv-gg__card p { font-size: 0.88rem !important; }
+
+/* ==========================================================================
+   FAN — ERP & retail. A forecast fan chart + automation-rule benefits.
+   ========================================================================== */
+.bv-fn2__wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2.5rem, 6vw, 5rem); align-items: start; }
+.bv-fn2 { position: sticky; top: calc(var(--nav-h) + 1.5rem); margin: 0; display: grid; gap: 1rem; padding: clamp(1.25rem, 2.6vw, 1.9rem); border-radius: 18px; background: var(--white); border: 1px solid var(--line-light); box-shadow: 0 30px 60px -40px rgba(12, 26, 58, 0.45); }
+.bv-fn2 .bv-title { margin: 0; }
+.bv-fn2__svg { width: 100%; height: auto; overflow: visible; }
+.bv-fn2__grid line { stroke: var(--line-light); }
+.bv-fn2__band--sub { fill: color-mix(in srgb, var(--sub) 22%, transparent); }
+.bv-fn2__band--own { fill: color-mix(in srgb, var(--own) 18%, transparent); }
+.bv-fn2__l { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.bv-fn2__l--sub { stroke: var(--sub); }
+.bv-fn2__l--own { stroke: var(--own); }
+.bv-fn2__even { stroke: var(--ink-900); stroke-width: 1; stroke-dasharray: 3 4; }
+.bv-fn2__evenl { font-size: 12px; font-weight: 600; fill: var(--ink-900); }
+.bv-fn2__y { font-family: var(--mono); font-size: 12px; fill: var(--ink-400); text-anchor: middle; }
+.bv-fn2__wrap .section-head { margin-bottom: 2rem; }
+ol.bv-rules { display: grid; gap: 0.7rem; }
+.bv-rule { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: 0.9rem; padding: 1.1rem 1.2rem; border-radius: 14px; background: var(--paper); }
+.bv-rule__sw { position: relative; width: 2.4rem; height: 1.35rem; margin-top: 0.15rem; border-radius: 999px; background: var(--own); }
+.bv-rule__sw i { position: absolute; top: 3px; right: 3px; width: calc(1.35rem - 6px); height: calc(1.35rem - 6px); border-radius: 50%; background: var(--white); }
+.bv-rule__n { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--own) !important; margin-bottom: 0.25rem; }
+.bv-rule h3 { font-size: 1.12rem; margin-bottom: 0.35rem; }
+
+@media (max-width: 960px) {
+  .bv-sl__top, .bv-ct__top, .bv-fn2__wrap { grid-template-columns: minmax(0, 1fr); }
+  .bv-fn2 { position: static; }
+  .bv-gg__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bv-gg__card:last-child { grid-column: 1 / -1; }
+  .bv-sl__stubs { grid-template-columns: minmax(0, 1fr); }
+  .bv-sl__stub, .bv-sl__stub:nth-child(n + 4) { grid-column: auto; }
+}
+@media (max-width: 640px) {
+  .bv-gg__cards { grid-template-columns: minmax(0, 1fr); }
+  .bv-gg__pair { gap: 0.6rem; }
+  .bv-gg__l { font-size: 0.95rem; }
+  .bv-ct__yard { height: 13rem; }
+  .bv-ct__box { height: 1.05rem; }
+  .bv-bl, .bv-bl tbody, .bv-bl tr, .bv-bl td, .bv-bl th { display: block; width: auto; }
+  .bv-bl thead { display: none; }
+  .bv-bl tr { padding: 0.8rem 0; border-top: 1px solid var(--line-light-strong); }
+  .bv-bl td, .bv-bl tbody th { border: 0 !important; padding: 0.2rem 1rem; }
+  .bv-sl__y, .bv-fn2__y { font-size: 16px; }
+  .bv-sl__end { display: none; }
+}
+
+/* ==========================================================================
    RESPONSIVE
    ========================================================================== */
 @media (max-width: 1100px) {

@@ -922,6 +922,135 @@ def scene_realestate_hub(s):
     s.poly([(0, 940), (W, 940), (W, H), (0, H)], 0.1)
 
 
+
+def container(s, x, y, w, h, val):
+    """A shipping container side: corrugated, with door bars."""
+    s.rect((x, y, x + w, y + h), val, outline=min(1, val + 0.3), width=2)
+    for k in range(1, int(w / 14)):
+        s.line([(x + k * 14, y + 4), (x + k * 14, y + h - 4)], max(0, val - 0.08), 2)
+
+
+def truck(s, x, y, sc, val):
+    s.rect((x, y - 90 * sc, x + 200 * sc, y), val, outline=val + 0.25, width=2)
+    s.poly([(x + 206 * sc, y - 64 * sc), (x + 250 * sc, y - 64 * sc), (x + 276 * sc, y - 34 * sc), (x + 276 * sc, y), (x + 206 * sc, y)], val + 0.08)
+    s.rect((x + 216 * sc, y - 56 * sc, x + 252 * sc, y - 34 * sc), 0.75)
+    for wx in (x + 40 * sc, x + 150 * sc, x + 236 * sc):
+        s.ellipse((wx - 18 * sc, y - 10 * sc, wx + 18 * sc, y + 26 * sc), 0.06, outline=0.5, width=3)
+
+
+def scene_supply_hub(s):
+    """Supply chain hub: a distribution centre, trucks at the docks, a container stack."""
+    s.light(1100, 400, 500, 0.55)
+    ground(s, 880, 0.13, 0.05)
+    # the distribution centre
+    s.poly([(620, 560), (1240, 560), (1240, 880), (620, 880)], 0.16)
+    s.poly([(600, 560), (930, 470), (1260, 560)], 0.26)
+    for k in range(6):
+        x = 650 + k * 98
+        s.rect((x, 720, x + 74, 880), 0.08 if k % 2 else 0.5, outline=0.6, width=2)
+        if k % 2 == 0:
+            s.gd.rectangle([x * SS, 700 * SS, (x + 74) * SS, 880 * SS], fill=v(0.45))
+    s.rect((660, 600, 1200, 640), 0.4)
+    s.text((930, 620), "DISTRIBUTION", 26, 0.12, "mono-b", anchor="mm")
+    # containers stacked to the right
+    cols = [0.55, 0.32, 0.7, 0.42, 0.62, 0.36]
+    for r in range(3):
+        for c in range(2):
+            container(s, 1290 + c * 120 - r * 6, 820 - r * 64, 116, 60, cols[(r * 2 + c) % 6])
+    # trucks backing in
+    truck(s, 420, 900, 0.9, 0.3)
+    truck(s, 1000, 960, 1.15, 0.38)
+
+
+def scene_3pl(s):
+    """3PL & WMS: pallet racking in perspective, a forklift, and a container ship."""
+    s.light(1080, 420, 480, 0.55)
+    ground(s, 860, 0.12, 0.05)
+    # racking
+    for bay in range(4):
+        x0 = 640 + bay * 150
+        s.line([(x0, 860), (x0, 300)], 0.55, 6)
+        s.line([(x0 + 140, 860), (x0 + 140, 300)], 0.55, 6)
+        for lvl in range(5):
+            y = 860 - lvl * 110
+            s.line([(x0, y), (x0 + 140, y)], 0.7, 5)
+            for p in range(2):
+                if (bay + lvl + p) % 4:
+                    px = x0 + 10 + p * 66
+                    s.rect((px, y - 80, px + 56, y - 6), 0.32 + 0.1 * ((bay + p) % 3), outline=0.6, width=2)
+                    s.rect((px + 18, y - 52, px + 38, y - 40), 0.85)
+    s.gd.rectangle([640 * SS, 300 * SS, 1240 * SS, 860 * SS], fill=v(0.22))
+    # forklift
+    s.rect((1290, 780, 1430, 900), 0.4, outline=0.7, width=2)
+    s.line([(1290, 640), (1290, 900)], 0.75, 6)
+    s.line([(1250, 880), (1290, 880)], 0.75, 5)
+    s.rect((1210, 800, 1280, 870), 0.6, outline=0.85, width=2)
+    for wx in (1320, 1410):
+        s.ellipse((wx - 26, 880, wx + 26, 932), 0.08, outline=0.6, width=4)
+    # ship on the horizon
+    s.poly([(1300, 330), (1520, 330), (1490, 380), (1320, 380)], 0.3)
+    for c in range(5):
+        container(s, 1320 + c * 36, 290, 34, 38, 0.4 + 0.08 * (c % 3))
+
+
+def scene_supplier_risk(s):
+    """Supplier & risk management: a multi-tier supplier network over a world grid."""
+    rnd = random.Random(23)
+    s.light(1100, 440, 520, 0.55)
+    # latitude / longitude grid
+    for k in range(9):
+        s.ellipse((620, 140 + k * 10, 1580, 860 - k * 10), None, outline=0.12 + 0.02 * k, width=1)
+    for k in range(7):
+        x = 640 + k * 150
+        s.line([(x, 160), (x + 30, 860)], 0.12, 1)
+    hub = (1100, 500)
+    tier1 = [(880, 340), (1320, 320), (900, 680), (1330, 690)]
+    tier2 = [(700, 240), (720, 470), (1500, 220), (1520, 470), (720, 800), (1500, 820), (1040, 190), (1160, 840)]
+    for t2 in tier2:
+        t1 = min(tier1, key=lambda p: (p[0] - t2[0]) ** 2 + (p[1] - t2[1]) ** 2)
+        s.line([t2, t1], 0.35, 2)
+    for t1 in tier1:
+        s.line([t1, hub], 0.6, 4, glow=0.35)
+    for x, y in tier2:
+        s.ellipse((x - 14, y - 14, x + 14, y + 14), 0.45, outline=0.7, width=2)
+    for i, (x, y) in enumerate(tier1):
+        s.ellipse((x - 26, y - 26, x + 26, y + 26), 0.7 if i != 3 else 0.95, outline=0.9, width=3)
+    # the flagged single point of failure
+    x, y = tier1[3]
+    s.ellipse((x - 54, y - 54, x + 54, y + 54), None, outline=0.85, width=3)
+    s.gd.ellipse([(x - 90) * SS, (y - 90) * SS, (x + 90) * SS, (y + 90) * SS], fill=v(0.7))
+    s.ellipse((hub[0] - 46, hub[1] - 46, hub[0] + 46, hub[1] + 46), 0.9)
+    s.gd.ellipse([(hub[0] - 120) * SS, (hub[1] - 120) * SS, (hub[0] + 120) * SS, (hub[1] + 120) * SS], fill=v(0.75))
+
+
+def scene_erp_retail(s):
+    """Supply chain ERP & retail: regional hub feeding storefronts, with a forecast."""
+    s.light(1100, 420, 500, 0.55)
+    ground(s, 860, 0.12, 0.05)
+    # storefronts
+    for i, x in enumerate((620, 1340)):
+        s.rect((x, 640, x + 220, 880), 0.18, outline=0.5, width=2)
+        for k in range(5):
+            s.poly([(x + k * 44, 640), (x + (k + 1) * 44, 640), (x + (k + 1) * 44 - 6, 690), (x + k * 44 - 6, 690)], 0.6 if k % 2 else 0.3)
+        s.rect((x + 20, 720, x + 120, 880), 0.55)
+        s.gd.rectangle([(x + 20) * SS, 720 * SS, (x + 120) * SS, 880 * SS], fill=v(0.5))
+        s.rect((x + 140, 760, x + 200, 880), 0.1)
+    # regional hub in the middle
+    s.poly([(900, 620), (1280, 620), (1280, 880), (900, 880)], 0.22)
+    s.poly([(880, 620), (1090, 540), (1300, 620)], 0.32)
+    for k in range(4):
+        s.rect((930 + k * 88, 760, 1000 + k * 88, 880), 0.45 if k % 2 == 0 else 0.1, outline=0.6, width=2)
+    # flows from hub to stores
+    for xs in (840, 1340):
+        s.line([(1090, 600), (xs, 600)], 0.6, 3, glow=0.4)
+    # forecast fan chart above the scene
+    base = [(700 + k * 60, 420 - k * 9 - (k % 3) * 8) for k in range(14)]
+    s.poly(base[7:] + [(p[0], p[1] - 40 - (i * 10)) for i, p in reversed(list(enumerate(base[7:])))], 0.25)
+    s.poly(base[7:] + [(p[0], p[1] + 40 + (i * 10)) for i, p in reversed(list(enumerate(base[7:])))], 0.25)
+    s.line(base, 0.9, 5, glow=0.6)
+    s.line([(1120, 250), (1120, 520)], 0.5, 2)
+
+
 SCENES = {
     "trading": scene_trading,
     "risk-management": scene_risk,
@@ -938,6 +1067,10 @@ SCENES = {
     "property-feasibility-development-erp": scene_feasibility,
     "property-crm-investor-relations": scene_syndication,
     "custom-real-estate-software": scene_realestate_hub,
+    "custom-supply-chain-logistics-software": scene_supply_hub,
+    "3pl-freight-warehouse-management-software": scene_3pl,
+    "supplier-risk-management-software": scene_supplier_risk,
+    "supply-chain-erp-retail-software": scene_erp_retail,
     "documentation-automation": scene_legaldoc,
     "workflow-automation": scene_workflow,
     "client-relations-management": scene_crm,
