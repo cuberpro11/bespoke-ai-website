@@ -1051,6 +1051,77 @@ def scene_erp_retail(s):
     s.line([(1120, 250), (1120, 520)], 0.5, 2)
 
 
+
+def window_tex(seed, kind, w=560, h=360):
+    """A browser window showing one kind of demo screen."""
+    rnd = random.Random(seed)
+    im, d = tex(w, h, 0.16)
+    d.rectangle([0, 0, w, 34], fill=v(0.3))
+    for k in range(3):
+        d.ellipse([14 + k * 20, 11, 26 + k * 20, 23], fill=v(0.7))
+    d.rounded_rectangle([100, 9, w - 100, 25], radius=8, fill=v(0.2))
+    d.rectangle([0, 34, 96, h], fill=v(0.12))
+    for k in range(5):
+        d.rounded_rectangle([14, 56 + k * 30, 82, 68 + k * 30], radius=4, fill=v(0.55 if k == 0 else 0.3))
+    x0, y0 = 116, 52
+    if kind == "chat":
+        d.rounded_rectangle([w - 260, y0, w - 20, y0 + 34], radius=12, fill=v(0.85))
+        d.rounded_rectangle([x0, y0 + 50, w - 120, y0 + 150], radius=10, fill=v(0.34))
+        for k in range(4):
+            d.line([(x0 + 16, y0 + 70 + k * 20), (x0 + 16 + rnd.randint(180, 300), y0 + 70 + k * 20)], fill=v(0.78), width=5)
+            d.ellipse([x0 + 330, y0 + 64 + k * 20, x0 + 342, y0 + 76 + k * 20], fill=v(0.9))
+        for k in range(3):
+            d.rounded_rectangle([x0, y0 + 168 + k * 40, w - 20, y0 + 198 + k * 40], radius=8, outline=v(0.5), width=2)
+    elif kind == "dash":
+        for k in range(3):
+            xx = x0 + k * 146
+            d.rounded_rectangle([xx, y0, xx + 132, y0 + 70], radius=8, fill=v(0.3))
+            d.line([(xx + 14, y0 + 22), (xx + 70, y0 + 22)], fill=v(0.55), width=4)
+            d.line([(xx + 14, y0 + 46), (xx + 100, y0 + 46)], fill=v(0.95), width=9)
+        base = y0 + 260
+        for k in range(14):
+            bh = rnd.randint(40, 160)
+            d.rectangle([x0 + 8 + k * 30, base - bh, x0 + 28 + k * 30, base], fill=v(0.75 if k == 11 else 0.45))
+    elif kind == "map":
+        for gx in range(x0, w, 36):
+            d.line([(gx, y0), (gx, h - 10)], fill=v(0.24), width=2)
+        for gy in range(y0, h, 36):
+            d.line([(x0, gy), (w - 10, gy)], fill=v(0.24), width=2)
+        pts = [(x0 + 30, h - 50), (x0 + 120, h - 120), (x0 + 210, h - 110), (x0 + 300, 150), (w - 50, 90)]
+        d.line(pts, fill=v(0.95), width=6, joint="curve")
+        for (px, py) in pts[::2]:
+            d.ellipse([px - 11, py - 11, px + 11, py + 11], fill=v(1), outline=v(0.3), width=3)
+    else:  # table
+        for k in range(8):
+            yy = y0 + k * 36
+            d.rectangle([x0, yy, w - 20, yy + 28], fill=v(0.24 if k % 2 else 0.2))
+            d.line([(x0 + 12, yy + 14), (x0 + 12 + rnd.randint(90, 160), yy + 14)], fill=v(0.7), width=5)
+            d.rounded_rectangle([w - 110, yy + 6, w - 40, yy + 22], radius=8, fill=v(0.85 if k in (1, 4) else 0.45))
+    return im
+
+
+def scene_demos(s):
+    """Demos: a fanned cascade of live app windows with a cursor in front."""
+    s.light(1080, 430, 520, 0.6)
+    wins = [
+        ("table", [(820, 150), (1300, 110), (1300, 420), (820, 430)], 0.55),
+        ("map", [(1150, 250), (1620, 230), (1620, 540), (1150, 545)], 0.7),
+        ("dash", [(700, 430), (1180, 400), (1180, 730), (700, 745)], 0.85),
+        ("chat", [(1010, 560), (1520, 540), (1520, 890), (1010, 900)], 1.0),
+    ]
+    for i, (kind, q, op) in enumerate(wins):
+        sh = [(x + 18, y + 22) for x, y in q]
+        s.poly(sh, 0.02)
+        s.paste_quad(window_tex(40 + i, kind), q, op)
+        s.line(q + [q[0]], 0.62 * op + 0.2, 2)
+    s.gd.rectangle([1010 * SS, 540 * SS, 1520 * SS, 900 * SS], fill=v(0.28))
+    # the cursor, clicking into the front window
+    cx, cy = 1290, 735
+    s.poly([(cx, cy), (cx, cy + 74), (cx + 18, cy + 56), (cx + 32, cy + 88), (cx + 44, cy + 82), (cx + 30, cy + 51), (cx + 54, cy + 50)], 0.95, outline=0.1, width=3)
+    for r in (30, 52):
+        s.ellipse((cx - r, cy - r, cx + r, cy + r), None, outline=0.55 if r == 30 else 0.3, width=3)
+
+
 SCENES = {
     "trading": scene_trading,
     "risk-management": scene_risk,
@@ -1076,6 +1147,7 @@ SCENES = {
     "client-relations-management": scene_crm,
     "student-information-systems": scene_sis,
     "enrollment-information-systems": scene_enrollment,
+    "demos": scene_demos,
 }
 
 

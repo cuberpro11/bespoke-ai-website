@@ -1860,6 +1860,159 @@
     });
   };
 
+  /* ================================================================ fx desk */
+  /* Two-way quotes tick, the matching side flashes, headlines arrive tagged
+     to a pair (which lights up), and new fills land on top of the blotter. */
+  VIZ.fxdesk = (root) => {
+    if (REDUCED) return;
+    const tiles = $$(".fxd-tile", root).map((el) => {
+      const dec = +el.dataset.dec;
+      const bid = +el.dataset.bid;
+      const [bidEl, askEl] = $$(".fxd-q", el);
+      const ask = +$(".fxd-q--ask", el).textContent.replace(/[^\d.]/g, "");
+      return { el, pair: el.dataset.pair, dec, bid, spread: ask - bid, bidEl, askEl, chg: $(".fxd-tile__chg", el) };
+    });
+    const clockEl = $(".fxd-clock", root);
+    const news = $(".fxd-news", root);
+    const blotter = $(".fxd-blotter tbody", root);
+    let secs = 13 * 3600 + 42 * 60 + 7;
+    const hhmmss = (s) => [Math.floor(s / 3600), Math.floor(s / 60) % 60, s % 60].map((n) => String(n).padStart(2, "0")).join(":");
+    const split = (v, dec) => {
+      const s = v.toFixed(dec);
+      return `<i>${s.slice(0, -3)}</i><b>${s.slice(-3, -1)}</b><sup>${s.slice(-1)}</sup>`;
+    };
+    const tick = (t) => {
+      const step = Math.pow(10, -t.dec) * Math.round(1 + Math.random() * 4) * (Math.random() < 0.5 ? -1 : 1);
+      t.bid += step;
+      $(".fxd-px", t.bidEl).innerHTML = split(t.bid, t.dec);
+      $(".fxd-px", t.askEl).innerHTML = split(t.bid + t.spread, t.dec);
+      const cls = step > 0 ? "is-up" : "is-down";
+      [t.bidEl, t.askEl].forEach((q) => { q.classList.remove("is-up", "is-down"); void q.offsetWidth; q.classList.add(cls); });
+      setTimeout(() => [t.bidEl, t.askEl].forEach((q) => q.classList.remove(cls)), 420);
+      const pct = parseFloat(t.chg.textContent) + (step > 0 ? 0.01 : -0.01);
+      t.chg.textContent = `${pct > 0 ? "+" : ""}${pct.toFixed(2)}%`;
+      t.chg.className = `fxd-tile__chg ${pct > 0 ? "is-up" : "is-down"}`;
+    };
+    const pool = [
+      ["Rate decision priced in; volatility eases", "EUR/USD"],
+      ["Retail sales print above forecast", "GBP/USD"],
+      ["Ministry comments on currency moves", "USD/JPY"],
+      ["Jobs data surprises to the upside", "AUD/USD"],
+      ["Desk note: options expiry at the New York cut", "EUR/USD"],
+      ["Bond yields climb after auction", "USD/JPY"],
+      ["Inflation expectations hold steady", "GBP/USD"],
+      ["Desk note: iron ore demand firms", "AUD/USD"],
+    ];
+    let k = 0;
+    const headline = () => {
+      const [text, pair] = pool[k++ % pool.length];
+      const li = doc.createElement("li");
+      li.className = "is-new";
+      li.innerHTML = `<time>${hhmmss(secs).slice(0, 5)}</time><p>${text}</p><span class="fxd-tag">${pair}</span>`;
+      news.prepend(li);
+      while (news.children.length > 4) news.lastElementChild.remove();
+      const t = tiles.find((x) => x.pair === pair);
+      if (t) { t.el.classList.add("is-news"); setTimeout(() => t.el.classList.remove("is-news"), 1400); }
+    };
+    const fill = () => {
+      const t = tiles[Math.floor(Math.random() * tiles.length)];
+      const buy = Math.random() < 0.55;
+      const amt = [1, 2, 3, 5, 10][Math.floor(Math.random() * 5)] * 1e6;
+      const tr = doc.createElement("tr");
+      tr.innerHTML = `<td>${hhmmss(secs)}</td><td class="${buy ? "is-buy" : "is-sell"}">${buy ? "Buy" : "Sell"}</td><td>${fmt(amt)}</td><td>${t.pair}</td><td>${(buy ? t.bid + t.spread : t.bid).toFixed(t.dec)}</td><td><span class="fxd-st is-working">Working</span></td>`;
+      blotter.prepend(tr);
+      while (blotter.children.length > 3) blotter.lastElementChild.remove();
+      setTimeout(() => { const st = $(".fxd-st", tr); st.classList.remove("is-working"); st.textContent = "Filled"; }, 1100);
+    };
+    let timers = [];
+    whenVisible(root, () => {
+      timers = [
+        setInterval(() => { tick(tiles[Math.floor(Math.random() * tiles.length)]); if (Math.random() < 0.5) tick(tiles[Math.floor(Math.random() * tiles.length)]); }, 650),
+        setInterval(() => { secs++; clockEl.textContent = hhmmss(secs); }, 1000),
+        setInterval(headline, 5200),
+        setInterval(fill, 3600),
+      ];
+    }, () => { timers.forEach(clearInterval); timers = []; });
+  };
+
+  /* ======================================================= algo console */
+  /* Crypto and Options tabs (auto-rotating until someone picks one). Crypto
+     PnL and sparklines tick; on Options the spot marker walks along the
+     iron condor's payoff at expiry. */
+  VIZ.algo = (root) => {
+    const tabs = $$(".alc-tab", root);
+    const panels = tabs.map((t) => doc.getElementById(t.getAttribute("aria-controls")));
+    let current = 0, chosen = false;
+    const show = (i, focus) => {
+      current = i;
+      tabs.forEach((t, j) => {
+        const on = j === i;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        panels[j].hidden = !on;
+        if (on) { panels[j].classList.remove("is-in"); void panels[j].offsetWidth; panels[j].classList.add("is-in"); }
+      });
+      if (focus) tabs[i].focus();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => { chosen = true; show(i); });
+      t.addEventListener("keydown", (e) => {
+        const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        chosen = true;
+        show((current + d + tabs.length) % tabs.length, true);
+      });
+    });
+    show(0);
+    if (REDUCED) return;
+
+    // crypto: PnL random walk and rolling sparklines
+    const rows = $$(".alc-crypto tbody tr", root).map((tr) => {
+      const pnl = $(".alc-pnl", tr);
+      const line = $(".alc-spark polyline", tr);
+      const ys = line.getAttribute("points").split(" ").map((p) => +p.split(",")[1]);
+      return { pnl, line, ys, v: +pnl.dataset.pnl, live: !$(".alc-st.is-paused", tr) };
+    });
+    const total = $(".alc-total", root);
+    const money = (v) => `${v < 0 ? "−" : "+"}${fmt(Math.abs(Math.round(v)))}`;
+    const tickCrypto = () => {
+      rows.forEach((r) => {
+        if (!r.live) return;
+        const d = (Math.random() - 0.42) * 420;
+        r.v += d;
+        r.pnl.textContent = money(r.v);
+        r.pnl.className = `alc-pnl ${r.v >= 0 ? "is-up" : "is-down"}`;
+        r.ys.shift();
+        r.ys.push(clamp(r.ys[r.ys.length - 1] - d / 40, 8, 92));
+        r.line.setAttribute("points", r.ys.map((y, i) => `${((i * 100) / (r.ys.length - 1)).toFixed(1)},${y.toFixed(1)}`).join(" "));
+      });
+      total.textContent = money(rows.reduce((s, r) => s + r.v, 0));
+    };
+
+    // options: the spot walks between the short strikes (and occasionally past them)
+    const payoff = (x) => 31 - Math.max(0, 4800 - x) + Math.max(0, 4700 - x) - Math.max(0, x - 5200) + Math.max(0, x - 5300);
+    const spotG = $(".alc-payoff__spot", root);
+    const dot = $(".alc-payoff__spot circle", root);
+    const spotTxt = $(".alc-spot b", root);
+    let spot = 5012;
+    const tickOptions = () => {
+      spot = clamp(spot + (Math.random() - 0.5) * 70 + (5000 - spot) * 0.08, 4740, 5260);
+      spotG.style.setProperty("--x", `${(((spot - 4600) / 800) * 300).toFixed(1)}px`);
+      dot.setAttribute("cy", (60 - (payoff(spot) / 80) * 50).toFixed(1));
+      spotTxt.textContent = fmt(Math.round(spot));
+    };
+
+    let timers = [];
+    whenVisible(root, () => {
+      timers = [
+        setInterval(tickCrypto, 1200),
+        setInterval(tickOptions, 1600),
+        setInterval(() => { if (!chosen && !root.matches(":hover")) show((current + 1) % tabs.length); }, 9000),
+      ];
+    }, () => { timers.forEach(clearInterval); timers = []; });
+  };
+
   /* @modules */
 
   /* ------------------------------------------------------------------ boot */

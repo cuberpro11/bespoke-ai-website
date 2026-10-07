@@ -3826,6 +3826,10 @@ body.nav-open .mobile-menu__panel { transform: none; }
   line-height: 1.75;
 }
 .prose-block b { color: var(--ink-900); }
+/* About: the narrative sits beside its heading so it shares the page's wide edge */
+.about-why { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); column-gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+.about-why .prose-block { margin-top: 0; }
+@media (max-width: 960px) { .about-why { grid-template-columns: minmax(0, 1fr); } .about-why .prose-block { margin-top: 1.5rem; } }
 .f-form__stack { margin-top: 0.7rem; }
 .f-form__submit { margin-top: 0.8rem; width: 100%; }
 .insight-featured--flush { padding-top: clamp(3rem, 6vw, 5rem); }
