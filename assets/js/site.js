@@ -192,9 +192,11 @@
       // Layout box, not getBoundingClientRect: the open animation scales the
       // panel, which would under-measure it on the first frame.
       if (panel.classList.contains("dropdown--mega")) {
+        // centered under the trigger, then nudged back inside the viewport
         const width = panel.offsetWidth;
         const maxLeft = Math.max(pad, window.innerWidth - pad - width);
-        const left = Math.min(Math.max(pad, (window.innerWidth - width) / 2), maxLeft);
+        const center = itemRect.left + itemRect.width / 2;
+        const left = Math.min(Math.max(pad, center - width / 2), maxLeft);
         const dx = left - itemRect.left - panel.offsetLeft;
         panel.style.translate = `${dx}px 0`;
         panel.style.setProperty("--dd-caret", `${itemRect.left + itemRect.width / 2 - left}px`);

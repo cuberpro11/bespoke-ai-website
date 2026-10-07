@@ -4731,18 +4731,18 @@ body[data-page="contact"] {
    ========================================================================== */
 
 .dropdown--mega {
-  /* One row of four columns, centered in the viewport. site.js (keepOnScreen)
-     places the strip and publishes the trigger position as --dd-caret so the
-     caret stays under "Solutions". */
+  /* Two rows of three category columns, centered under the Solutions tab.
+     site.js (keepOnScreen) centers the panel on the trigger, nudges it back
+     inside the viewport if needed, and publishes the trigger position as
+     --dd-caret so the caret stays under "Solutions". */
   left: 0;
   right: auto;
   translate: 0;
   transform-origin: var(--dd-caret, 50%) top;
   padding: 0.85rem;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-auto-flow: column;
-  width: min(68rem, calc(100vw - 2.5rem));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(52rem, calc(100vw - 2.5rem));
   min-width: 0;
   max-width: calc(100vw - 2.5rem);
   gap: 0.25rem;
@@ -4759,6 +4759,23 @@ body[data-page="contact"] {
   padding: 0.35rem 0.4rem 0.45rem;
   border-radius: 12px;
 }
+/* a hairline between the two rows of categories */
+.mega__col:nth-child(n + 4) {
+  position: relative;
+  margin-top: 0.55rem;
+  padding-top: 0.9rem;
+}
+.mega__col:nth-child(n + 4)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  /* reach into the 0.25rem column gaps so the three pieces read as one line */
+  left: -0.125rem;
+  right: -0.125rem;
+  border-top: 1px solid var(--line-dark-strong);
+}
+.mega__col:nth-child(4)::before { left: 0.65rem; }
+.mega__col:nth-child(6)::before { right: 0.65rem; }
 
 /* the column header doubles as the link to the category hub */
 .dropdown--mega .mega__hub {
@@ -4776,6 +4793,7 @@ body[data-page="contact"] {
 }
 .dropdown--mega .mega__hub b {
   font-size: 0.94rem;
+  line-height: 1.25;
 }
 
 /* neutralize the single-column divider/spacing rules from the base dropdown */
