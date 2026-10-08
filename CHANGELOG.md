@@ -1,5 +1,33 @@
 # Changelog
 
+## Batch 5 (October 2026)
+
+### Page titles and search snippets
+- All 32 public pages now use the client's new titles and meta descriptions, word for word. The social (og) tags match, and so does each page's structured-data description where it mirrored the old one. Page content and H1s are unchanged.
+- Titles no longer end in "| Bespoke AI". Eight of the new titles would go over 60 characters with it, and Google already shows the site name above each result. `tools/audit-seo.py` now checks that a title names the brand no more than once, is under 60 characters, and that descriptions still start with "Bespoke AI".
+- Two copy slips in the brief were corrected:
+  - The General Services hub title is "Custom AI-Integrated Automation Software" (the brief repeated the Real Estate title).
+  - The General Services Document Automation description says "document automation systems" (the brief repeated the Supply Chain ERP text).
+
+### Demos
+- The "What you'll see" label and text are gone from every demo card: on the Demos page, Knowledge Base, Client Relations, Workflow Automation, the Real Estate hub, and Commercial Property. The unused styles were removed too.
+- The Personal Injury Intake demo is now the **Legal Contact Management System**:
+  - New address: `/demos/legal-contact-management-software/`. It was moved, not recreated, and `/demos/crm/` 301-redirects to it.
+  - It can now be indexed. The `noindex` tag and the robots.txt block are gone, and it has a canonical link, social tags, breadcrumb structured data, a single H1, and a sitemap entry (now 33 URLs).
+  - The cards on the Demos and Client Relations pages read "View an example of a custom legal contact management system that Bespoke AI builds for law firms."
+  - Its title is now "Custom Legal Contact Management Software Example", matching the style of the client's other titles.
+  - An "About this example" section below the app explains what the system does in plain language and links to Contact and the Legal CRM page. Without it the page had very little text for Google to read.
+  - Its card shows `contacts.bespoke.ai` instead of `crm.bespoke.ai`, and its thumbnail files are now named `legal-contact-management.*`.
+- Still open: rebuilding the Knowledge Base demo from Figma. The client's link still asks visitors to sign in to Figma, so the design couldn't be viewed.
+
+### Residential Real Estate
+- A new "Start from where you are" section sits below the hero. It covers three ways Bespoke AI can help, each with its own small illustration:
+  - **Add:** build a new tool next to the current stack.
+  - **Replace:** swap out a rented platform.
+  - **Upgrade:** connect existing software to AI models through a secure API key.
+- A closing line leads into the residential details further down the page and links to Contact.
+- On laptop-width screens (about 1000–1200 px) the three cards' headings now line up, and the Replace illustration stacks old above new instead of squeezing side by side.
+
 ## Batch 4 (October 2026)
 
 ### Brand, titles and search snippets

@@ -3,16 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Personal Injury Intake System Demo | Bespoke AI</title>
-<meta name="description" content="Bespoke AI demo: a personal injury intake system — intake dashboard, lead scoring, AI-proposed actions, consultation booking, and integrations.">
-<meta name="robots" content="noindex, nofollow">
+<title>Custom Legal Contact Management Software Example</title>
+<meta name="description" content="Bespoke AI demo: a custom legal contact management system for law firms, with lead tracking, intake scoring, consultation booking, and integrations.">
+<link rel="canonical" href="https://getbespoke.ai/demos/legal-contact-management-software/">
+<meta property="og:title" content="Custom Legal Contact Management Software Example">
+<meta property="og:description" content="Bespoke AI demo: a custom legal contact management system for law firms, with lead tracking, intake scoring, consultation booking, and integrations.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://getbespoke.ai/demos/legal-contact-management-software/">
+<meta property="og:site_name" content="Bespoke AI">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://getbespoke.ai/assets/img/demos/legal-contact-management.jpg?v=2">
+<meta property="og:image:alt" content="Legal contact management demo dashboard showing total intake, conversion rate, pipeline value, and new leads by channel">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://getbespoke.ai/#organization",
+      "name": "Bespoke AI",
+      "url": "https://getbespoke.ai/",
+      "email": "contact@getbespoke.ai",
+      "logo": "https://getbespoke.ai/assets/img/bespoke-ai-logo.png"
+    },
+    {
+      "@type": "WebPage",
+      "name": "Legal Contact Management System Demo",
+      "url": "https://getbespoke.ai/demos/legal-contact-management-software/",
+      "description": "Bespoke AI demo: a custom legal contact management system for law firms, with lead tracking, intake scoring, consultation booking, and integrations.",
+      "publisher": { "@id": "https://getbespoke.ai/#organization" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://getbespoke.ai/" },
+        { "@type": "ListItem", "position": 2, "name": "Demos", "item": "https://getbespoke.ai/demos" },
+        { "@type": "ListItem", "position": 3, "name": "Legal Contact Management System", "item": "https://getbespoke.ai/demos/legal-contact-management-software/" }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
 <link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/favicon.png">
 <link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="stylesheet" href="styles.css?v=8">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -69,10 +108,11 @@
   </nav>
 
   <main class="main" id="main">
+    <h1 class="u-sr">Legal Contact Management System Demo</h1>
 
     <!-- ------------------------------------------------------ dashboard -- -->
     <section class="view" id="view-dashboard" role="tabpanel" aria-label="Dashboard">
-      <h1 class="page__title">Dashboard</h1>
+      <h2 class="page__title">Dashboard</h2>
 
       <div class="sectionhead">
         <div>
@@ -126,7 +166,7 @@
     <!-- -------------------------------------------------------- clients -- -->
     <section class="view u-hide" id="view-clients" role="tabpanel" aria-label="Clients">
       <div id="clientsList">
-        <h1 class="page__title">Clients</h1>
+        <h2 class="page__title">Clients</h2>
         <div id="clientSections"></div>
       </div>
       <div id="clientDetail" class="u-hide"></div>
@@ -139,7 +179,7 @@
           <span class="agent__mark" aria-hidden="true">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="3"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/></svg>
           </span>
-          <h1>AI Assistant</h1>
+          <h2>AI Assistant</h2>
           <p>Ask anything, or start from one of the actions below.</p>
         </div>
 
@@ -156,7 +196,7 @@
 
     <!-- --------------------------------------------------- integrations -- -->
     <section class="view u-hide" id="view-integrations" role="tabpanel" aria-label="Integrations">
-      <h1 class="page__title">Integrations</h1>
+      <h2 class="page__title">Integrations</h2>
 
       <section style="margin-bottom:22px" aria-label="Connected integrations">
         <div class="clientsec__head">
@@ -175,7 +215,7 @@
 
     <!-- ------------------------------------------------------- settings -- -->
     <section class="view u-hide" id="view-settings" role="tabpanel" aria-label="Settings">
-      <h1 class="page__title">Settings</h1>
+      <h2 class="page__title">Settings</h2>
 
       <div class="settings">
         <section class="card" aria-label="Account">
@@ -253,11 +293,42 @@
   </main>
 </div>
 
+<!-- Crawlable, human-readable summary of the demo: the app above is mostly
+     JS-rendered, so this is what search engines and skimmers actually read. -->
+<section class="about" aria-labelledby="aboutTitle">
+  <div class="about__inner">
+    <p class="about__kicker">About this example</p>
+    <h2 class="about__title" id="aboutTitle">A legal contact management system, built around one firm</h2>
+    <p class="about__lede">This is an example of the kind of custom contact management system Bespoke AI builds for law firms. Every call, email and web form lands in one place, gets a quick first read, and is ready for an attorney to act on. The firm owns the software outright, so there are no monthly per-seat fees.</p>
+
+    <div class="about__grid">
+      <div>
+        <h3>One inbox for every new contact</h3>
+        <p>Phone calls, emails and website forms all arrive in the same list, with the people who still need a reply flagged at the top.</p>
+      </div>
+      <div>
+        <h3>The best matters flagged first</h3>
+        <p>Each new contact is checked against the firm&rsquo;s own rules, like case type and estimated value, so high-value matters are marked and get a call back first.</p>
+      </div>
+      <div>
+        <h3>An assistant that does the first pass</h3>
+        <p>A built-in AI assistant summarizes what each person said, drafts a reply, and suggests consultation times from the firm&rsquo;s calendar.</p>
+      </div>
+      <div>
+        <h3>Works with the tools you already use</h3>
+        <p>It connects to practice management, email, calendars and document storage, so information moves on its own instead of being retyped.</p>
+      </div>
+    </div>
+
+    <p class="about__cta">Have something like this in mind for your firm? <a href="/contact">Tell us about it</a>, or read more about <a href="/custom-legal-software/client-relations-management">custom legal CRM software</a>.</p>
+  </div>
+</section>
+
 <div id="modalRoot"></div>
 <div id="toastRoot"></div>
 
-<script src="data.js?v=3" defer></script>
-<script src="app.js?v=4" defer></script>
+<script src="data.js?v=4" defer></script>
+<script src="app.js?v=5" defer></script>
 <script src="/assets/js/demo-back.js" defer></script>
 </body>
 </html>

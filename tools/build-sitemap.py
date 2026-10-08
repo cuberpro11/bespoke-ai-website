@@ -24,6 +24,10 @@ def url_for(rel):
     if rel == "index.html":
         return "/"
     if rel.endswith("/index.html"):
+        # Demo apps load their own files by relative path, so they live at
+        # the trailing-slash form (e.g. /demos/legal-contact-management-software/).
+        if rel.startswith("demos/") and rel.count("/") == 2:
+            return "/" + rel[: -len("index.html")]
         return "/" + rel[: -len("/index.html")]
     return "/" + rel[: -len(".html")]
 

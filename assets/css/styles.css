@@ -3446,24 +3446,6 @@ body.nav-open .mobile-menu__panel { transform: none; }
     transform: scale(calc(var(--shot-zoom, 1) * 1.025));
   }
 }
-.demo-preview p.demo-preview__see {
-  margin-top: 0.85rem;
-  padding-left: 0.85rem;
-  border-left: 2px solid color-mix(in srgb, var(--cobalt) 45%, transparent);
-  font-size: 0.92rem;
-  line-height: 1.55;
-  max-width: 56ch;
-}
-.demo-preview__see b {
-  display: block;
-  margin-bottom: 0.15rem;
-  font-family: var(--sans);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--cobalt);
-}
 .demo-preview .in-cat {
   font-family: var(--sans);
   font-size: 0.74rem;

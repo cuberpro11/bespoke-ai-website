@@ -154,6 +154,21 @@
   status = 301
   force = true
 
+# --------------------------------------------- renamed demo (batch 5, SEO)
+# The Personal Injury Intake demo became the Legal Contact Management demo
+# and is now indexable; its old /demos/crm/ address 301s to the new slug.
+[[redirects]]
+  from = "/demos/crm"
+  to = "/demos/legal-contact-management-software/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/demos/crm/*"
+  to = "/demos/legal-contact-management-software/:splat"
+  status = 301
+  force = true
+
 # ------------------------------------------------ .html -> extensionless URLs
 # Kept so old inbound links and indexed .html URLs land on the canonical form.
 # Internal links across the site are already written extensionless, so these

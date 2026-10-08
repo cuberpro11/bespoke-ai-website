@@ -53,6 +53,7 @@ input, textarea { font: inherit; }
 .skip-link:focus { left: 0; }
 
 .u-hide { display: none !important; }
+.u-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* ------------------------------------------------------------ app head -- */
 
@@ -348,7 +349,7 @@ input, textarea { font: inherit; }
 
 .detail__head { margin-bottom: 16px; }
 .detail__name { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.detail__name h1 { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+.detail__name h2 { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
 .detail__sub { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
 
 .panes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
@@ -506,7 +507,7 @@ input, textarea { font: inherit; }
   background: linear-gradient(135deg, #2563eb, #7c3aed);
   color: #fff;
 }
-.agent__hello h1 { margin: 0 0 6px; font-size: 24px; font-weight: 700; letter-spacing: -.02em; }
+.agent__hello h2 { margin: 0 0 6px; font-size: 24px; font-weight: 700; letter-spacing: -.02em; }
 .agent__hello p  { margin: 0; color: var(--muted); font-size: 14px; }
 
 .agent__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 20px; }
@@ -595,6 +596,44 @@ input, textarea { font: inherit; }
 }
 .toast--red { background: var(--red); }
 
+/* ------------------------------------------------- about this example -- */
+
+.about {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  padding: 56px 26px 64px;
+}
+.about__inner { max-width: 1040px; margin: 0 auto; }
+.about__kicker {
+  margin: 0 0 8px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.about__title { margin: 0; max-width: 640px; font-size: 26px; font-weight: 700; letter-spacing: -.02em; line-height: 1.2; }
+.about__lede { margin: 14px 0 0; max-width: 680px; color: var(--ink-soft); font-size: 15.5px; line-height: 1.6; }
+.about__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+.about__grid > div {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--canvas);
+}
+.about__grid h3 { margin: 0 0 6px; font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+.about__grid p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
+.about__cta { margin: 28px 0 0; color: var(--ink-soft); font-size: 14.5px; }
+.about__cta a { color: var(--blue); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.about__cta a:hover { color: var(--blue-deep); }
+
 /* ---------------------------------------------------------- responsive -- */
 
 @media (max-width: 1180px) {
@@ -604,6 +643,7 @@ input, textarea { font: inherit; }
   .modal__panes { grid-template-columns: minmax(0, 1fr); }
   .modal__right { border-left: 0; border-top: 1px solid var(--line); }
   .settings { columns: 1; max-width: 720px; }
+  .about__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 820px) {
@@ -616,11 +656,14 @@ input, textarea { font: inherit; }
   .agent__grid { grid-template-columns: minmax(0, 1fr); }
   .clientcard { flex-wrap: wrap; }
   .clientcard__value { text-align: left; }
+  .about { padding: 40px 16px 48px; }
+  .about__title { font-size: 22px; }
 }
 
 @media (max-width: 560px) {
   .kpis { grid-template-columns: minmax(0, 1fr); }
-  .page__title, .detail__name h1 { font-size: 19px; }
+  .page__title, .detail__name h2 { font-size: 19px; }
+  .about__grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (prefers-reduced-motion: reduce) {

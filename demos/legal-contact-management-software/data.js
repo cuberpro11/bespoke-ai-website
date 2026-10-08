@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BESPOKE — Personal Injury Intake System demo
+   Bespoke AI — Legal Contact Management System demo (formerly the Personal Injury Intake System)
    Mirrors the Figma "CRM Demo" prototype (Version 84).
    ========================================================================== */
 

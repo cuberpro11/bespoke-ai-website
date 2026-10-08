@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BESPOKE — Personal Injury Intake System demo
+   Bespoke AI — Legal Contact Management System demo (formerly the Personal Injury Intake System)
    Self-contained runtime. No build step, no network, no chart library.
    Mirrors the Figma "CRM Demo" prototype (Version 84).
    ========================================================================== */
@@ -433,7 +433,7 @@
       '<div class="detail__bar"><button class="backbtn" type="button" id="detailBack">' +
         '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>' +
         "All clients</button></div>" +
-      '<div class="detail__head"><div class="detail__name"><h1>' + esc(c.name) + "</h1>" +
+      '<div class="detail__head"><div class="detail__name"><h2>' + esc(c.name) + "</h2>" +
         statusPill(c) + highPill(c) + "</div>" +
         '<p class="detail__sub">' + esc(c.caseType) + " · " + esc(c.source) + " · " + esc(c.contacted) + "</p></div>" +
       '<div class="panes"><div>' +

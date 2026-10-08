@@ -2,10 +2,11 @@
 """Optional: per-page SEO audit (H1, unique title/description, canonical, JSON-LD).
 
 Also enforces the brand rules on every page, noindex pages included:
-titles end in "| Bespoke AI", meta descriptions start with "Bespoke AI",
-both stay short enough that Google shows them whole (so the brand is never
-cut off), and the company is never called plain "Bespoke" ("bespoke" the adjective,
-e.g. "Bespoke build" or "Bespoke CRM solutions", is fine).
+meta descriptions start with "Bespoke AI", titles name the brand at most once
+(batch 5 dropped the "| Bespoke AI" suffix: Google already shows the site name
+above each result), both stay short enough that Google shows them whole, and
+the company is never called plain "Bespoke" ("bespoke" the adjective, e.g.
+"Bespoke build" or "Bespoke CRM solutions", is fine).
 
 Not used to serve or deploy the site.
 
@@ -18,8 +19,7 @@ import sys
 from collections import defaultdict
 
 BRAND = "Bespoke AI"
-TITLE_SUFFIX = " | " + BRAND
-# Google truncates longer titles and snippets, which would cut the brand off.
+# Google truncates longer titles and snippets.
 TITLE_MAX, DESC_MAX = 60, 160
 # "Bespoke" used as the company: before a verb, a possessive, or on its own
 # (end of a tag, sentence, or label). Adjective uses are followed by a noun.
@@ -56,8 +56,10 @@ def main():
 
         brand_title = re.search(r"<title>(.*?)</title>", src, re.S)
         brand_title = text(brand_title.group(1)) if brand_title else ""
-        if not brand_title.endswith(TITLE_SUFFIX) or brand_title.count(BRAND) > 1:
-            problems.append(f"{rel}: title {brand_title!r} must end in {TITLE_SUFFIX!r} (once)")
+        if not brand_title:
+            problems.append(f"{rel}: empty <title>")
+        if brand_title.count(BRAND) > 1:
+            problems.append(f"{rel}: title {brand_title!r} names {BRAND!r} more than once")
         if len(html.unescape(brand_title)) > TITLE_MAX:
             problems.append(f"{rel}: title {len(html.unescape(brand_title))} chars (max {TITLE_MAX})")
         brand_desc = re.search(r'<meta name="description" content="(.*?)">', src, re.S)

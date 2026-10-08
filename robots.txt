@@ -1,9 +1,9 @@
 User-agent: *
 Allow: /
 
-# The interactive demo apps are illustrative prototypes, not indexable content.
+# The interactive demo apps are illustrative prototypes, not indexable content,
+# except /demos/legal-contact-management-software/, which is indexed (batch 5).
 # /demos itself is the public demos page and must stay crawlable.
-Disallow: /demos/crm/
 Disallow: /demos/dispatch/
 Disallow: /demos/document-automation/
 Disallow: /demos/hotel-operations/

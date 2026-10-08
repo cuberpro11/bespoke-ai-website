@@ -162,6 +162,107 @@ ol.rr-close__steps { list-style: none; margin: 0; padding: 1.1rem 1.3rem 0.4rem;
 .rr-close__portal { display: flex; justify-content: space-between; gap: 1rem; margin: 0 1.3rem 1.2rem; padding: 0.7rem 0.9rem; border-radius: 10px; border: 1px dashed var(--line-light-strong); font-size: 0.78rem; color: var(--ink-900); }
 .rr-close__portal span { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cobalt); }
 
+/* ---- add / replace / upgrade (.rx-*): broad "we build from your stack"
+   bridge between the hero and the residential pillars (batch 5 test) ---- */
+.rx-paths .h2 em { color: var(--cobalt); }
+.rx-paths .section-head { max-width: 860px; }
+.rx-paths__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1rem, 2vw, 1.5rem); }
+/* Each card spans four shared rows (art, number, heading, text), so the
+   headings line up across cards even when one illustration runs taller. */
+.rx-path {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  align-content: start;
+  container-type: inline-size;
+  padding: clamp(1.1rem, 2vw, 1.4rem) clamp(1.1rem, 2vw, 1.4rem) clamp(1.5rem, 3vw, 2rem);
+  border-radius: 22px;
+  background: var(--paper);
+  border: 1px solid var(--line-light);
+}
+.rx-path__n { margin: 1.5rem 0 0.6rem; font-family: var(--mono); font-size: 0.78rem; color: var(--cobalt); }
+.rx-path__n span { margin-left: 0.4rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-600); }
+.rx-path h3 { font-family: var(--serif); font-weight: 450; font-size: clamp(1.4rem, 2.1vw, 1.75rem); line-height: 1.15; color: var(--ink-900); }
+.rx-path h3 + p { margin-top: 0.75rem; font-size: 0.98rem; line-height: 1.65; color: var(--ink-600); }
+
+/* the little "stack" each card draws */
+.rx-art {
+  display: grid;
+  align-content: center;
+  gap: 0.45rem;
+  min-height: 15.5rem;
+  padding: 1.3rem;
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid var(--line-light);
+  background-image: radial-gradient(color-mix(in srgb, var(--cobalt) 14%, transparent) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+.rx-blk {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.6rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 10px;
+  background: var(--white);
+  border: 1px solid var(--line-light-strong);
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--ink-900);
+}
+.rx-blk small { display: block; font-size: 0.68rem; font-weight: 400; color: var(--ink-600); }
+.rx-blk--new {
+  border-color: var(--cobalt);
+  background: var(--cobalt);
+  color: var(--white);
+  box-shadow: 0 14px 28px -16px color-mix(in srgb, var(--cobalt) 80%, transparent);
+}
+.rx-blk--new small { color: color-mix(in srgb, var(--white) 78%, transparent); }
+.rx-blk--new i { font-style: normal; font-weight: 600; font-size: 1.05rem; line-height: 1; }
+.rx-art--add .rx-blk--new { margin-left: 1.4rem; margin-right: -0.4rem; }
+
+.rx-swap { display: grid; grid-template-columns: minmax(0, 1fr) 1.2rem minmax(0, 1fr); align-items: center; gap: 0.35rem; }
+.rx-swap .rx-blk { display: block; min-height: 3.6rem; }
+.rx-blk--old { border-style: dashed; color: var(--ink-600); background: color-mix(in srgb, var(--paper) 60%, var(--white)); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--cobalt) 55%, transparent); }
+.rx-blk--old small { text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--cobalt) 55%, transparent); }
+.rx-swap__arr { width: 1.2rem; height: 1.2rem; color: var(--cobalt); }
+/* narrow cards (laptop widths, before the grid stacks): old above new */
+@container (max-width: 340px) {
+  .rx-swap { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .rx-swap .rx-blk { width: 100%; min-height: 0; }
+  .rx-swap__arr { transform: rotate(90deg); }
+}
+
+.rx-art--up { justify-items: center; gap: 0; }
+.rx-art--up .rx-blk { justify-content: center; width: 100%; }
+.rx-blk--host { min-height: 3rem; }
+.rx-link { display: flex; flex-direction: column; align-items: center; }
+.rx-link::before,
+.rx-link::after { content: ""; height: 0.8rem; border-left: 2px dashed color-mix(in srgb, var(--cobalt) 55%, transparent); }
+.rx-link__tag { display: flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.7rem; border-radius: 999px; background: color-mix(in srgb, var(--cobalt) 9%, var(--white)); font-family: var(--mono); font-size: 0.7rem; color: var(--cobalt); }
+.rx-link__key { width: 1rem; height: 1rem; }
+.rx-art--up .rx-blk--ai { width: auto; min-width: 9rem; border-radius: 999px; }
+.rx-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; margin-top: 0.85rem; }
+.rx-chips b { padding: 0.25rem 0.6rem; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--cobalt) 30%, transparent); background: var(--white); font-size: 0.68rem; font-weight: 500; color: var(--ink-900); }
+
+.rx-paths__bridge { display: flex; align-items: flex-start; gap: 0.8rem; max-width: 760px; margin-top: clamp(2rem, 4vw, 3rem); font-size: 1.02rem; line-height: 1.6; color: var(--ink-600); }
+.rx-paths__bridge svg { flex: none; width: 1.3rem; height: 1.3rem; margin-top: 0.15rem; color: var(--cobalt); }
+.rx-paths__bridge a { color: var(--cobalt); font-weight: 500; }
+
+/* the new piece settles into place once its card is revealed */
+@media (prefers-reduced-motion: no-preference) {
+  .js .rx-path .rx-blk--new { opacity: 0; transform: translateX(14px); transition: opacity 500ms ease-out 350ms, transform 650ms var(--ease-out) 350ms; }
+  .js .rx-path.is-visible .rx-blk--new { opacity: 1; transform: none; }
+}
+
+@media (max-width: 1000px) {
+  .rx-paths__grid { grid-template-columns: minmax(0, 1fr); row-gap: 1rem; max-width: 560px; }
+  .rx-path { grid-row: auto; grid-template-rows: none; }
+  .rx-art { min-height: 0; }
+}
+
 /* ====================================================== SECURITY BAND ==== */
 .vx-sec__grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
 .vx-sec .section-head { margin-bottom: 2rem; }
