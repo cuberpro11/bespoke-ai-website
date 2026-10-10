@@ -130,6 +130,30 @@
   - Hyphenated titles stay whole on the cards too.
 - The sitemap has 41 URLs: the Insights page plus seven articles.
 
+### Phase 5: "Start from where you are" on the six Finance pages
+- **A new section sits right below the hero** on the Finance hub, Wealth Management, Risk Management, Compliance, Trading and Accounting pages. It follows the pattern of the Residential Real Estate test section.
+  - It has the "Start from where you are" kicker, a page-specific headline and intro, and three paths: **Add something new**, **Replace what isn't working** and **Upgrade what you already have** (connecting existing tools to AI models through APIs).
+  - It ends with a line leading into the detailed sections below, with a link to Contact.
+- **The copy is plain and page-specific.** Each page uses its own examples:
+  - client letters for advisors;
+  - covenant early warnings for risk teams;
+  - regulatory-change monitors for compliance;
+  - pre-trade checks for trading desks;
+  - bank-to-ledger tie-outs for auditors.
+- **Each page has its own design, and each one makes the three headings stand out.**
+  - **Finance hub, "Keep what works. Fix what doesn't."** Binder-divider tabs. Each heading sits on a solid tab in its own shade of blue, with "For example" notes underneath.
+  - **Wealth Management, "Build on the platforms your advisors already trust."** A client-statement layout under a double rule. The headings are marked with a gold highlighter that sweeps in, and each line item shows what changes.
+  - **Risk Management, "Strengthen your risk stack without starting over."** Cards on a grey band. Each heading has a thick heat-coloured rule, and a before/after meter shows what moves.
+  - **Compliance, "Compliance that fits the controls you already have."** Case-file folders. Each heading is a rubber stamp that lands on scroll, with verified-style checkmarks below.
+  - **Trading, "Improve the desk without stopping the desk."** A scrolling ticker tape above three order tickets. Each heading leads with a coloured market glyph, and each ticket has a status line.
+  - **Accounting, "Keep your method. Lose the busywork."** A single workpaper with ruled lines and a red margin. The three sections are referenced A-1 to A-3, and each heading has the accountant's double underline and a red tickmark.
+- **Layout**
+  - The three cards' headings line up even when one wraps to two lines.
+  - Every design stacks to one column on phones, with no sideways scrolling at 320 px.
+  - With reduced motion turned on, everything shows its finished state.
+- **Hub kicker rule.** The Finance hub hid the first kicker under its hero (an older rule for hub pages). The new section is exempt from that rule, so its kicker shows. The rule still applies to the section that used to come first.
+- **New file:** `assets/css/paths.css`, used by service pages. Residential Real Estate keeps its original version.
+
 ## Batch 5 (October 2026)
 
 ### Page titles and search snippets

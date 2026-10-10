@@ -36,6 +36,7 @@ ASSET_PATHS = (
     "assets/js/solutions.js",
     "assets/css/insights.css",
     "assets/js/insights.js",
+    "assets/css/paths.css",
 )
 
 

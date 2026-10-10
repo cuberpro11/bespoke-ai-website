@@ -227,11 +227,17 @@ section { scroll-margin-top: calc(var(--nav-h) + 12px); }
 .section-head--center { margin-inline: auto; text-align: center; }
 .section-head .lede { margin-top: 1.4rem; }
 
-/* Hub pages only: hide the redundant kicker that sat flush under the hero. */
-body[data-page="legal"] .hero + .section .section-head > .kicker,
-body[data-page="finance"] .hero + .section .section-head > .kicker,
-body[data-page="edtech"] .hero + .section .section-head > .kicker,
-body[data-page="general-services"] .hero + .section .section-head > .kicker {
+/* Hub pages only: hide the redundant kicker that sat flush under the hero.
+   The batch 6 "Start from where you are" section (.sp) now comes first and
+   keeps its kicker; the rule still applies to the section that follows it. */
+body[data-page="legal"] .hero + .section:not(.sp) .section-head > .kicker,
+body[data-page="finance"] .hero + .section:not(.sp) .section-head > .kicker,
+body[data-page="edtech"] .hero + .section:not(.sp) .section-head > .kicker,
+body[data-page="general-services"] .hero + .section:not(.sp) .section-head > .kicker,
+body[data-page="legal"] .hero + .sp + .section .section-head > .kicker,
+body[data-page="finance"] .hero + .sp + .section .section-head > .kicker,
+body[data-page="edtech"] .hero + .sp + .section .section-head > .kicker,
+body[data-page="general-services"] .hero + .sp + .section .section-head > .kicker {
   display: none;
 }
 

@@ -29,6 +29,7 @@ WATCH = (
     "assets/css/insights.css",
     "assets/js/insights.js",
     "insights/articles.json",
+    "assets/css/paths.css",
 )
 
 _lock = threading.Lock()
