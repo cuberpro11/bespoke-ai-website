@@ -66,6 +66,35 @@
   - Related articles now fill in: Finance, Trading and Risk Management point to one another.
 - The sitemap has 37 URLs.
 
+### Phase 3: the Law Firms and AI-detection articles
+- **"Best Practices for Using AI in Law Firms"** is at `/insights/best-practices-for-using-ai-in-law-firms/`, labelled Legal and AI Usage Best Practices. Its button is "Explore Legal Services", which goes to the Legal page.
+  - **NDA drafting (the requested looping design).** Matter details fill in, the conflict check clears, and a mutual NDA writes itself section by section from the firm's template, with each filled-in variable highlighted. It ends "Draft ready for attorney review".
+  - **The Mata v. Avianca "Landmark Caution" paragraph is a taped yellow sticky note,** as requested.
+  - **Private vs. public AI (requested).** Two side-by-side diagrams with moving data dots:
+    - In the public chat tool, a client file flows out to model training, vendor logs and other users' answers.
+    - In the closed-loop setup, everything stays inside the firm's private cloud. The outside model provider is reached over an encrypted, zero-retention link, and the path to training is blocked.
+  - **Extras:**
+    - three "where AI helps" tiles (drafting, intake, discovery) that jump to each paragraph;
+    - "Realization rate" and "Ethical wall" key terms;
+    - a pull quote;
+    - a four-point "The short version" checklist of the safeguards.
+  - **Copy fix:** a stray double space in "law firms  to" in the call to action.
+- **"How to Detect AI-Generated Content"** is at `/insights/how-to-detect-ai-generated-content/`, labelled AI Usage Best Practices. Its buttons are "View Demos" (to the Demos page) and "Contact Us".
+  - **Uniform vs. varied writing (requested).** An AI-style paragraph and a human paragraph sit side by side. Each has a bar for every sentence's word count: 13, 13, 13, 14 against 3, 24, 3, 20, 3. Below them are the variation (±0.4 vs. ±9.4 words) and the burstiness. Both paragraphs were written for the example.
+  - **"Guess the next word" panel** for perplexity: illustrative odds for "budget", "report" and "picnic".
+  - **"What a reviewer looks for" cards** for legal, finance and education.
+  - **A "Did you know?"** on the 2023 Stanford study, in which detectors flagged more than half of essays by non-native English speakers as AI-written.
+  - **A pull quote.**
+  - **The closing call to action is the article's own last section,** "Building Grounded AI Systems with Bespoke AI". As requested, "law", "finance" and "education" link to their service pages.
+- **Shared improvements**
+  - The closing call-to-action body can now run to more than one paragraph.
+  - Hyphenated words in a title ("AI-Generated") no longer break across lines.
+- With five articles live, the related lists now pair them sensibly:
+  - Law Firms ↔ Finance and Detecting AI;
+  - Detecting AI ↔ Finance and Law Firms;
+  - Finance ↔ Forex, Risk and Law Firms.
+- The sitemap has 39 URLs.
+
 ## Batch 5 (October 2026)
 
 ### Page titles and search snippets

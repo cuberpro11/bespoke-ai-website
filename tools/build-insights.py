@@ -170,11 +170,16 @@ def article_head(a, labels):
     return meta_block(a["seo_title"], a["description"], url, "article", graph)
 
 
+def nowrap_hyphens(text):
+    """Keep hyphenated words ("AI-Generated") whole so a huge title never breaks at the hyphen."""
+    return re.sub(r"(\S+-\S+)", r'<span class="ins-nowrap">\1</span>', text)
+
+
 def article_header(a, labels):
     # "Main title: subtitle" renders the subtitle as a smaller second line
     main, colon, sub = a["title"].partition(": ")
     # the colon stays in the text (hidden visually) so the heading still reads as one title
-    title = esc(main) + (f'<span class="ins-title__colon">: </span><span class="ins-title__sub">{esc(sub)}</span>' if colon else "")
+    title = nowrap_hyphens(esc(main)) + (f'<span class="ins-title__colon">: </span><span class="ins-title__sub">{esc(sub)}</span>' if colon else "")
     lines = [
         '<nav class="ins-crumbs" aria-label="Breadcrumb"><a href="/insights/">Insights</a></nav>',
         f'<p class="ins-chips">{"".join(chips(a, labels))}</p>',
@@ -205,7 +210,7 @@ def article_end(a, articles, labels):
         '  <div class="ins-end__cta">',
         '    <p class="ins-end__kicker">Work with Bespoke AI</p>',
         f'    <h2 class="ins-end__title" id="ins-end-title">{esc(c["heading"])}</h2>',
-        f'    <p class="ins-end__body">{c["body"]}</p>',
+        *[f'    <p class="ins-end__body">{para}</p>' for para in c["body"].split("\n\n")],
         '    <div class="ins-end__actions">',
         f'      <a class="btn btn--primary" href="{c["primary"]["href"]}">{esc(c["primary"]["text"])} {ARROW}</a>',
         f'      <a class="btn btn--ghost" href="{c["secondary"].get("href", "/contact")}">{esc(c["secondary"]["text"])}</a>',
