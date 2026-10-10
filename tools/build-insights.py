@@ -18,7 +18,8 @@ everything else in articles.json.
 
 Related articles: other articles sharing a topic label come first, then ones
 in the same family (Trading and Risk Management sit under Finance), then ones
-that only share a generic label such as AI Usage Best Practices.
+that only share a generic label such as AI Usage Best Practices. Ties go to
+the articles that follow this one on the hub, wrapping around.
 
 Articles carry no dates, visible or in JSON-LD, so they stay evergreen.
 
@@ -76,6 +77,7 @@ def related(a, articles, labels):
     mine = [l for l in a["labels"] if not labels[l].get("generic")]
     mine_generic = [l for l in a["labels"] if labels[l].get("generic")]
     fams = {family(l) for l in mine}
+    me = articles.index(a)
     scored = []
     for i, b in enumerate(articles):
         if b is a:
@@ -86,7 +88,9 @@ def related(a, articles, labels):
         score += 10 * len(fams & {family(l) for l in theirs})
         score += 1 * len(set(mine_generic) & set(b["labels"]))
         if score:
-            scored.append((-score, i, b))
+            # ties rotate from this article's own position, so a broad label
+            # like AI Usage Best Practices spreads links across every article
+            scored.append((-score, (i - me) % len(articles), b))
     scored.sort(key=lambda t: (t[0], t[1]))
     return [b for _, _, b in scored[:RELATED_MAX]]
 
@@ -228,7 +232,7 @@ def article_end(a, articles, labels):
                 '      <li class="ins-rel__item">',
                 f'        <a class="ins-rel__link" href="{url_of(b).replace(BASE, "")}">',
                 f'          <span class="ins-rel__chips">{"".join(chips(b, labels, "ins-chip ins-chip--sm", False))}</span>',
-                f'          <span class="ins-rel__title">{esc(b["title"])}</span>',
+                f'          <span class="ins-rel__title">{nowrap_hyphens(esc(b["title"]))}</span>',
                 f'          <span class="ins-rel__more">Read the article {ARROW}</span>',
                 "        </a>",
                 "      </li>",
@@ -287,7 +291,7 @@ def hub_cards(articles, labels):
             f'  <a class="ins-card__link" href="/insights/{a["slug"]}/">',
             f'    <span class="ins-card__n">{n:02d}</span>',
             f'    <span class="ins-card__chips">{"".join(chips(a, labels, "ins-chip ins-chip--sm", False))}</span>',
-            f'    <h2 class="ins-card__title">{esc(a["title"])}</h2>',
+            f'    <h2 class="ins-card__title">{nowrap_hyphens(esc(a["title"]))}</h2>',
             f'    <p class="ins-card__blurb">{esc(a["blurb"])}</p>',
             f'    <span class="ins-card__more">Read the article {ARROW}</span>',
             "  </a>",

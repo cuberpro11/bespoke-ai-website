@@ -81,7 +81,8 @@
 
   const fmt = (el, v) => {
     const dec = Number(el.dataset.dec || 0);
-    return `${el.dataset.pre || ""}${v.toFixed(dec)}${el.dataset.post || ""}`;
+    const num = v.toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec });
+    return `${el.dataset.pre || ""}${num}${el.dataset.post || ""}`;
   };
 
   /* Hand-written figure behaviours. Each returns { start, stop }; the static

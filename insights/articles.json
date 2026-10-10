@@ -166,6 +166,54 @@
       }
     },
     {
+      "slug": "best-practices-for-using-ai-in-law-firms",
+      "title": "Best Practices for Using AI in Law Firms",
+      "seo_title": "Best Practices for Using AI in Law Firms",
+      "description": "Bespoke AI outlines common ways lawyers and solo practitioners can safely, and ethically, use AI at their practices.",
+      "dek": "Where AI saves lawyers real time, why public chat tools put privilege at risk, and the safeguards that keep a firm’s use of AI ethical.",
+      "blurb": "Drafting, intake and discovery are where AI earns its keep in legal practice. Here is how to get those gains without risking privilege or accuracy.",
+      "labels": [
+        "legal",
+        "ai-best-practices"
+      ],
+      "cta": {
+        "heading": "Build Custom, Secure Legal Software with Bespoke AI",
+        "body": "Bespoke AI enables law firms to integrate AI into their current tech stacks by building new platforms, replacing legacy software, or upgrading current tools. All of our products utilize enterprise-grade security and are completely void of annual subscriptions or seat-based pricing.",
+        "primary": {
+          "text": "Explore Legal Services",
+          "href": "/custom-legal-software/"
+        },
+        "secondary": {
+          "text": "Contact Us",
+          "href": "/contact"
+        }
+      }
+    },
+    {
+      "slug": "how-educational-institutions-can-use-ai",
+      "title": "How Educational Institutions Can Use AI",
+      "seo_title": "How Educational Institutions Can Use AI",
+      "description": "Bespoke AI outlines common ways educational institutions are benefiting from AI along with how to use AI ethically and safely.",
+      "dek": "What AI looks like in practice for administrators, admissions teams, teachers and students, and the privacy rules every school has to respect.",
+      "blurb": "From district budgets to admissions shortlists, early warnings for teachers and guided feedback for students, plus the FERPA and COPPA rules that come with it.",
+      "labels": [
+        "edtech",
+        "ai-best-practices"
+      ],
+      "cta": {
+        "heading": "Engineering Custom EdTech Solutions with Bespoke AI",
+        "body": "Bespoke AI enables educational institutions to integrate AI into their current tech stacks by building new platforms, replacing legacy software, or upgrading current tools. All of our products utilize enterprise-grade security and privacy and are completely void of annual subscriptions or seat-based pricing. Qualified nonprofits often receive special discounts as well.",
+        "primary": {
+          "text": "Explore EdTech Services",
+          "href": "/custom-edtech-software/"
+        },
+        "secondary": {
+          "text": "Schedule a Call",
+          "href": "/contact"
+        }
+      }
+    },
+    {
       "slug": "understanding-the-forex-market",
       "title": "Understanding the Forex Market: Everything You Need to Know About Foreign Exchange",
       "seo_title": "Understanding the Forex Market",
@@ -210,30 +258,6 @@
       }
     },
     {
-      "slug": "best-practices-for-using-ai-in-law-firms",
-      "title": "Best Practices for Using AI in Law Firms",
-      "seo_title": "Best Practices for Using AI in Law Firms",
-      "description": "Bespoke AI outlines common ways lawyers and solo practitioners can safely, and ethically, use AI at their practices.",
-      "dek": "Where AI saves lawyers real time, why public chat tools put privilege at risk, and the safeguards that keep a firm’s use of AI ethical.",
-      "blurb": "Drafting, intake and discovery are where AI earns its keep in legal practice. Here is how to get those gains without risking privilege or accuracy.",
-      "labels": [
-        "legal",
-        "ai-best-practices"
-      ],
-      "cta": {
-        "heading": "Build Custom, Secure Legal Software with Bespoke AI",
-        "body": "Bespoke AI enables law firms to integrate AI into their current tech stacks by building new platforms, replacing legacy software, or upgrading current tools. All of our products utilize enterprise-grade security and are completely void of annual subscriptions or seat-based pricing.",
-        "primary": {
-          "text": "Explore Legal Services",
-          "href": "/custom-legal-software/"
-        },
-        "secondary": {
-          "text": "Contact Us",
-          "href": "/contact"
-        }
-      }
-    },
-    {
       "slug": "how-to-detect-ai-generated-content",
       "title": "How to Detect AI-Generated Content",
       "seo_title": "How to Detect AI-Generated Content",
@@ -252,6 +276,29 @@
         },
         "secondary": {
           "text": "Contact Us",
+          "href": "/contact"
+        }
+      }
+    },
+    {
+      "slug": "how-nonprofits-can-use-ai-for-social-good",
+      "title": "How Nonprofits Can Use AI for Social Good",
+      "seo_title": "How Nonprofits Can Use AI for Social Good",
+      "description": "Bespoke AI outlines ways that nonprofits can use AI for social good. The answer: speeding up the work that nonprofits already do.",
+      "dek": "No futuristic systems required: how mission-driven teams use AI to find answers, query their data and write funder reports faster, and how to protect the people they serve.",
+      "blurb": "Source-cited research, plain-English data questions and grant reports drafted from real program data, with the privacy and bias safeguards vulnerable communities deserve.",
+      "labels": [
+        "ai-best-practices"
+      ],
+      "cta": {
+        "heading": "Responsible Engineering for Mission-Driven Organizations",
+        "body": "Bespoke AI enables nonprofits to integrate AI into their current tech stacks by building new platforms, replacing legacy software, or upgrading current tools. All of our products utilize enterprise-grade security and privacy. We assist mission-driven organizations with special discounts and all of our products are completely void of annual subscriptions or seat-based pricing.",
+        "primary": {
+          "text": "Explore Custom Software Solutions",
+          "href": "/custom-general-service-software/"
+        },
+        "secondary": {
+          "text": "Schedule an Architecture Call",
           "href": "/contact"
         }
       }

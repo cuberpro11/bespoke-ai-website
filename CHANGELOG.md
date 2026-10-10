@@ -95,6 +95,41 @@
   - Finance ↔ Forex, Risk and Law Firms.
 - The sitemap has 39 URLs.
 
+### Phase 4: the Education and Nonprofits articles (all seven articles live)
+- **"How Educational Institutions Can Use AI"** is at `/insights/how-educational-institutions-can-use-ai/`, labelled EdTech and AI Usage Best Practices. Its buttons are "Explore EdTech Services" (to the EdTech page) and "Schedule a Call".
+  - **Four requested looping designs, one per persona:**
+    - **Administrator:** the Q3 facilities-spend question is answered with a campus-by-campus budget vs. actual table. Two campuses are flagged as more than 15% over, with an AI summary of why. It follows the article's own prompt, which is about high school campuses.
+    - **Enrollment officer:** transcripts, test scores and aid forms are parsed, then applicants are ranked on GPA, SAT, AP and match score. Five are marked "Invite" and one gets a "Second read".
+    - **Educator:** a class roster shows attendance, the last five homework submissions and quiz averages against each student's baseline. Student A is highlighted, the article's exact early-warning message types out, and a 1-on-1 gets booked.
+    - **Student:** a writing coach gives thesis and transition feedback on a history paragraph. When asked to "just rewrite it", it declines in guided mode and asks a question instead.
+  - **Links (as requested):** "AI-integrated Student Information Systems", "AI-driven enrollment software" and "Integrated Learning Management Systems" link to their service pages.
+  - **Extras:**
+    - four persona tiles that jump to each section;
+    - the administrator prompt as a quoted callout;
+    - side-by-side "misaligned vs. constructive usage" cards;
+    - FERPA / COPPA glossary tiles;
+    - a "Did you know?" (FERPA dates from 1974);
+    - an "Always signed off by a person" checklist.
+  - **Copy fix:** "deployed properly.." now has a single period.
+- **"How Nonprofits Can Use AI for Social Good"** is at `/insights/how-nonprofits-can-use-ai-for-social-good/`, labelled AI Usage Best Practices. Its buttons are "Explore Custom Software Solutions" (to the General Services page) and "Schedule an Architecture Call" (to Contact).
+  - **Three requested looping designs:**
+    - **Document search with sources (RAG):** the Region X clean-water question returns four initiatives, each linked to its source report, plus a summary.
+    - **Conversational data query:** the aid-package question becomes visible SQL. A this-month vs. Q1 average bar chart for four northern centers follows, then a summary.
+    - **Grant report:** a funder report assembles section by section (program summary, outcomes against grant targets, budget reconciliation, a chart of people reached by quarter) and is matched to the foundation's template.
+  - **Extras:**
+    - Find / Ask / Report tiles;
+    - the research prompt as a quoted callout;
+    - a "RAG" key term;
+    - a pull quote;
+    - a beneficiary-data safeguards checklist.
+- **The Insights page now lists all seven articles.** The three vertical overviews (Finance, Law Firms, Education) come first, then Forex, Corporate Governance Risk, Detecting AI and Nonprofits.
+- **Related articles now spread across every article.** When the only shared label is "AI Usage Best Practices", the pick rotates from each article's own place on the Insights page instead of always choosing the first three.
+- **Mockup polish**
+  - Counted numbers now show thousands separators (1,240).
+  - Tables no longer push a figure wider than the screen on small phones.
+  - Hyphenated titles stay whole on the cards too.
+- The sitemap has 41 URLs: the Insights page plus seven articles.
+
 ## Batch 5 (October 2026)
 
 ### Page titles and search snippets
