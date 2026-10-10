@@ -154,6 +154,20 @@
 - **Hub kicker rule.** The Finance hub hid the first kicker under its hero (an older rule for hub pages). The new section is exempt from that rule, so its kicker shows. The rule still applies to the section that used to come first.
 - **New file:** `assets/css/paths.css`, used by service pages. Residential Real Estate keeps its original version.
 
+### Phase 6: "Start from where you are" on the Legal and Real Estate pages
+- **The same section now sits below the hero on eight more pages:** the Legal hub, Documentation Automation, Workflow Automation, Client Relations Management, the Real Estate hub, Commercial Property Management, Property Feasibility and Property CRM & Syndication. Residential Real Estate keeps its original version.
+- **Each page has its own headline, plain-language copy with examples from its field, and its own design.** The three headings stand out in a different way on each page:
+  - **Legal hub, "Keep your practice running. Change only what needs changing."** Pleading paper with numbered lines and a red double margin rule. The headings are small-capital section titles under large italic Roman numerals (I, II, III).
+  - **Documentation Automation, "Better drafts, from the templates you already trust."** Three contract clauses. Each heading is a highlighted merge field in ⟦brackets⟧, and a redline shows what's struck and what's inserted.
+  - **Workflow Automation, "Smoother matters, without changing how your firm works."** A process track that draws itself across, with three step nodes. The headings sit in raised chips under each node. On phones it becomes a vertical track.
+  - **Client Relations Management, "Sign more clients with the tools you already have."** A CRM pipeline board. The headings are column headers with a coloured top edge and a count, and each column has a lead card that drops in.
+  - **Real Estate hub, "New tools, better tools or smarter tools."** A blueprint plan on a drafting grid. Each heading is lettered like a room name, with a dimension line.
+  - **Commercial Property Management, "Build on the systems your buildings already run on."** A stacking plan: three floors of one building under a roof, each with a window band and floor number. The headings sit on a coloured slab edge.
+  - **Property Feasibility, "Better numbers from the models you already run."** A pro-forma spreadsheet with column letters, row numbers and formula-style results. Each heading sits in a selected (outlined) cell with a fill handle.
+  - **Property CRM & Syndication, "Raise, report and retain on the systems you already use."** Property signs hanging from a post arm. Each heading is painted on the board, with a New / Replaced / Upgraded rider strip below. The signs swing into place on scroll.
+- **The closing lines point to what each page shows next.** Where the next section is a working demo (Workflow, Client Relations, Commercial), the line says so.
+- **Checks:** every page was checked at 320, 390, 820 and 1440 px, with no sideways scrolling. With reduced motion turned on, everything shows its finished state.
+
 ## Batch 5 (October 2026)
 
 ### Page titles and search snippets

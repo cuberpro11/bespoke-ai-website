@@ -344,3 +344,360 @@ ul.sp-ticks { display: grid; gap: 0.4rem; }
   .js .sp-sheet.is-visible .sp-ref h3 i { opacity: 1; transform: none; }
 }
 @media (max-width: 900px) { .sp-sheet__cols { grid-template-columns: minmax(0, 1fr); } }
+
+/* --------------------------------------------------------------------------
+   Legal hub: pleading paper. Numbered lines down the left margin, a double
+   rule, and Roman-numeral headings in small capitals.
+   -------------------------------------------------------------------------- */
+.sp-plead {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  border: 1px solid var(--line-light);
+  border-radius: 6px;
+  background: #fdfcf8;
+  box-shadow: 0 26px 50px -38px rgba(20, 20, 30, 0.45);
+  overflow: hidden;
+}
+ol.sp-plead__lines {
+  display: grid;
+  grid-auto-rows: 1fr;
+  padding: 1.4rem 0;
+  border-right: 3px double color-mix(in srgb, #b42318 55%, transparent);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--ink-400);
+  text-align: center;
+}
+.sp-plead__body { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1.5rem, 3vw, 3rem); padding: clamp(1.6rem, 3vw, 2.6rem) clamp(1.4rem, 3vw, 2.8rem); }
+.sp-count { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 1rem; }
+.sp-count h3 {
+  display: grid;
+  align-content: end;
+  gap: 0.35rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--ink-900);
+  font-family: var(--serif);
+  font-weight: 500;
+  font-variant: small-caps;
+  font-size: clamp(1.5rem, 2.3vw, 1.9rem);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--ink-900);
+}
+.sp-count__n { font-family: var(--serif); font-style: italic; font-variant: normal; font-size: 2.2rem; line-height: 1; color: var(--cobalt); }
+.sp-count p { font-family: var(--serif); font-size: 1.08rem; line-height: 1.7; color: #3a3a40; }
+@media (max-width: 900px) {
+  .sp-plead__body { grid-template-columns: minmax(0, 1fr); row-gap: 2rem; }
+  .sp-count { grid-row: auto; grid-template-rows: none; }
+  .sp-plead { grid-template-columns: 2.2rem minmax(0, 1fr); }
+}
+
+/* --------------------------------------------------------------------------
+   Documentation Automation: contract clauses. Headings are merge fields in
+   brackets, and a redline shows what goes in and what comes out.
+   -------------------------------------------------------------------------- */
+.sp-clauses { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1rem, 2vw, 1.5rem); }
+.sp-clause {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  align-content: start;
+  row-gap: 0.9rem;
+  padding: clamp(1.3rem, 2.2vw, 1.7rem);
+  border: 1px solid var(--line-light);
+  border-radius: 6px;
+  background: #fdfcf9;
+  box-shadow: 0 1px 0 var(--line-light), 0 18px 34px -30px rgba(20, 20, 30, 0.5);
+}
+.sp-clause__no { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-600); }
+.sp-clause h3 { font-family: var(--serif); font-weight: 450; font-size: clamp(1.4rem, 2.1vw, 1.7rem); line-height: 1.25; color: var(--cobalt-deep); }
+.sp-clause h3 span {
+  padding: 0.05em 0.25em;
+  border-radius: 4px;
+  background: #dfe6fb;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.sp-clause h3 span::before { content: "\27E6"; margin-right: 0.15em; color: var(--cobalt); }
+.sp-clause h3 span::after { content: "\27E7"; margin-left: 0.15em; color: var(--cobalt); }
+.sp-redline { display: flex; flex-wrap: wrap; gap: 0.3rem 0.6rem; padding: 0.6rem 0.75rem; border-left: 2px solid #b42318; background: #fbf3f1; font-size: 0.86rem; }
+.sp-redline del { color: #b42318; text-decoration-thickness: 1.5px; }
+.sp-redline ins { text-decoration: none; border-bottom: 1.5px solid #1d6b4f; color: #1d6b4f; font-weight: 500; }
+.sp-clause > p:last-child { font-size: 0.98rem; line-height: 1.65; color: var(--ink-600); }
+@media (max-width: 900px) {
+  .sp-clauses { grid-template-columns: minmax(0, 1fr); max-width: 560px; row-gap: 1rem; }
+  .sp-clause { grid-row: auto; grid-template-rows: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Workflow Automation: a process track. Three step nodes sit on one line
+   that draws itself across; the headings hang off the nodes.
+   -------------------------------------------------------------------------- */
+ol.sp-track { --g: clamp(1.5rem, 3vw, 3rem); position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--g); padding-top: 0.4rem; }
+ol.sp-track::before {
+  content: "";
+  position: absolute;
+  left: 1.6rem; right: calc((100% - 2 * var(--g)) / 3 - 1.6rem); top: calc(0.4rem + 1.6rem - 1.5px);
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--cobalt), var(--cobalt-deep));
+  transform-origin: left;
+}
+.sp-node { position: relative; display: grid; gap: 0.7rem; align-content: start; }
+.sp-node__dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3.2rem; height: 3.2rem;
+  border-radius: 50%;
+  border: 3px solid var(--paper-2);
+  background: var(--cobalt);
+  color: #fff;
+  box-shadow: 0 0 0 1px var(--cobalt);
+}
+.sp-node:nth-child(2) .sp-node__dot { background: var(--cobalt-deep); box-shadow: 0 0 0 1px var(--cobalt-deep); }
+.sp-node:nth-child(3) .sp-node__dot { background: var(--navy-900); box-shadow: 0 0 0 1px var(--navy-900); }
+.sp-node__dot svg { width: 1.2rem; height: 1.2rem; }
+.sp-node__k { margin-top: 0.6rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cobalt); }
+.sp-node h3 {
+  justify-self: start;
+  padding: 0.5rem 0.9rem 0.55rem;
+  border-radius: 10px;
+  background: var(--white);
+  border: 1px solid var(--line-light-strong);
+  box-shadow: 0 10px 22px -18px rgba(20, 30, 70, 0.5);
+  font-family: var(--serif);
+  font-weight: 450;
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  line-height: 1.15;
+  color: var(--ink-900);
+}
+.sp-node > p:last-child { font-size: 0.98rem; line-height: 1.65; color: var(--ink-600); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .sp-track::before { transform: scaleX(0); transition: transform 1200ms var(--ease-out) 200ms; }
+  .js .sp-track.is-visible::before { transform: none; }
+  .js .sp-track .sp-node__dot { transform: scale(0.4); opacity: 0; transition: transform 420ms cubic-bezier(0.2, 1.4, 0.4, 1), opacity 260ms ease-out; }
+  .js .sp-track .sp-node:nth-child(1) .sp-node__dot { transition-delay: 250ms; }
+  .js .sp-track .sp-node:nth-child(2) .sp-node__dot { transition-delay: 750ms; }
+  .js .sp-track .sp-node:nth-child(3) .sp-node__dot { transition-delay: 1250ms; }
+  .js .sp-track.is-visible .sp-node__dot { transform: none; opacity: 1; }
+}
+@media (max-width: 900px) {
+  ol.sp-track { grid-template-columns: minmax(0, 1fr); max-width: 560px; gap: 2rem; padding-left: 4.4rem; }
+  ol.sp-track::before { left: 1.6rem; right: auto; top: 0.4rem; bottom: 2rem; width: 3px; height: auto; transform-origin: top; }
+  .sp-node__dot { position: absolute; left: -4.4rem; top: 0; }
+  .sp-node__k { margin-top: 0.8rem; }
+  .js .sp-track::before { transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Client Relations Management: a CRM pipeline. Three kanban columns; the
+   headings are the column headers with a coloured top edge and count.
+   -------------------------------------------------------------------------- */
+.sp-board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(0.8rem, 1.6vw, 1.2rem); padding: clamp(0.8rem, 1.6vw, 1.2rem); border-radius: 18px; background: var(--paper-2); }
+.sp-col {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  align-content: start;
+  row-gap: 0.9rem;
+  padding: 0 0.9rem 1.2rem;
+  border-radius: 12px;
+  background: var(--paper);
+  border-top: 4px solid var(--col);
+}
+.sp-col--add { --col: #2f8f6b; }
+.sp-col--replace { --col: #d4a03c; }
+.sp-col--upgrade { --col: var(--cobalt); }
+.sp-col__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.6rem; padding: 1rem 0.2rem 0.2rem; }
+.sp-col__head h3 { font-family: var(--sans); font-weight: 650; font-size: clamp(1.12rem, 1.6vw, 1.3rem); line-height: 1.25; letter-spacing: -0.015em; color: var(--ink-900); }
+.sp-col__head span { flex: none; display: grid; place-items: center; min-width: 1.6rem; height: 1.6rem; padding: 0 0.4rem; border-radius: 999px; background: color-mix(in srgb, var(--col) 16%, transparent); font-family: var(--mono); font-size: 0.72rem; color: var(--col); }
+.sp-card {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: 10px;
+  background: var(--white);
+  border: 1px solid var(--line-light);
+  box-shadow: 0 8px 18px -14px rgba(20, 20, 40, 0.4);
+}
+.sp-card b { font-weight: 600; font-size: 0.95rem; color: var(--ink-900); }
+.sp-card span { font-size: 0.82rem; color: var(--ink-600); }
+.sp-card i { justify-self: start; margin-top: 0.35rem; padding: 0.1rem 0.45rem; border-radius: 5px; background: color-mix(in srgb, var(--col) 14%, transparent); font-family: var(--mono); font-style: normal; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--col); }
+.sp-col > p { padding: 0 0.2rem; font-size: 0.96rem; line-height: 1.62; color: var(--ink-600); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .sp-col .sp-card { transform: translateY(-14px) rotate(-1.5deg); opacity: 0; transition: transform 520ms var(--ease-out) 300ms, opacity 300ms ease-out 300ms; }
+  .js .sp-col.is-visible .sp-card { transform: none; opacity: 1; }
+}
+@media (max-width: 900px) {
+  .sp-board { grid-template-columns: minmax(0, 1fr); max-width: 560px; row-gap: 0.8rem; }
+  .sp-col { grid-row: auto; grid-template-rows: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Real Estate hub: a blueprint. Three rooms on a drafting grid with
+   dimension lines; headings are lettered like a plan.
+   -------------------------------------------------------------------------- */
+.sp-plan {
+  --bp: #1d3f9e;
+  padding: clamp(1.2rem, 2.6vw, 2rem);
+  border-radius: 10px;
+  background-color: var(--bp);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+  color: #e6edff;
+}
+.sp-plan__title { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(230, 237, 255, 0.7); }
+.sp-plan__rooms { display: grid; grid-template-columns: 1.15fr 1fr 1fr; border: 2.5px solid #e6edff; }
+.sp-room { position: relative; display: grid; align-content: start; gap: 0.8rem; padding: clamp(1.3rem, 2.4vw, 2rem); }
+.sp-room + .sp-room { border-left: 2.5px solid #e6edff; }
+.sp-room__tag { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(230, 237, 255, 0.65); }
+.sp-room h3 {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+/* dimension line under each room name */
+.sp-room h3::after {
+  content: "";
+  display: block;
+  height: 9px;
+  margin-top: 0.55rem;
+  border-left: 1px solid rgba(230, 237, 255, 0.8);
+  border-right: 1px solid rgba(230, 237, 255, 0.8);
+  background: linear-gradient(rgba(230, 237, 255, 0.8), rgba(230, 237, 255, 0.8)) center / 100% 1px no-repeat;
+}
+.sp-room p:last-child { font-size: 0.97rem; line-height: 1.65; color: rgba(230, 237, 255, 0.88); }
+@media (max-width: 900px) {
+  .sp-plan__rooms { grid-template-columns: minmax(0, 1fr); }
+  .sp-room + .sp-room { border-left: 0; border-top: 2.5px solid #e6edff; }
+}
+
+/* --------------------------------------------------------------------------
+   Commercial Property: a stacking plan. Three floors of one building; each
+   floor plate carries its heading on the slab edge.
+   -------------------------------------------------------------------------- */
+.sp-tower { position: relative; max-width: 1080px; padding: 0 clamp(0rem, 2vw, 1.5rem); }
+.sp-tower__roof { height: 18px; margin: 0 6%; border-radius: 6px 6px 0 0; background: var(--navy-900); }
+.sp-floor {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 0.9fr) minmax(0, 1.4fr);
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2.4rem);
+  padding: clamp(1.1rem, 2vw, 1.6rem) clamp(1.1rem, 2.4vw, 2rem);
+  /* a band of windows along the top of each floor plate */
+  background:
+    repeating-linear-gradient(90deg, #d5ddf2 0 30px, transparent 30px 38px) 0 0 / 100% 7px no-repeat,
+    var(--white);
+  border: 2px solid var(--navy-900);
+  border-top-width: 0;
+}
+.sp-tower__roof + .sp-floor { border-top-width: 2px; }
+.sp-floor__lvl { display: grid; justify-items: start; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-600); }
+.sp-floor__lvl b { font-family: var(--serif); font-weight: 400; font-size: 2.4rem; line-height: 1; letter-spacing: 0; color: var(--cobalt); }
+.sp-floor h3 {
+  padding: 0.55rem 0.85rem;
+  border-left: 6px solid var(--cobalt);
+  background: color-mix(in srgb, var(--cobalt) 8%, var(--white));
+  font-family: var(--serif);
+  font-weight: 450;
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  line-height: 1.15;
+  color: var(--ink-900);
+}
+.sp-floor:nth-of-type(2) h3 { border-left-color: var(--cobalt-deep); }
+.sp-floor:nth-of-type(3) h3 { border-left-color: var(--navy-900); }
+.sp-floor > p:last-child { font-size: 0.97rem; line-height: 1.6; color: var(--ink-600); }
+.sp-tower__ground { height: 10px; margin: 0 -2%; border-radius: 0 0 4px 4px; background: repeating-linear-gradient(135deg, var(--ink-600) 0 2px, transparent 2px 7px); opacity: 0.5; }
+@media (max-width: 860px) {
+  .sp-floor { grid-template-columns: 3.4rem minmax(0, 1fr); align-items: start; }
+  .sp-floor > p:last-child { grid-column: 2; }
+  .sp-floor__lvl b { font-size: 1.8rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Property Feasibility: a pro-forma spreadsheet. Column letters, row
+   numbers, and each heading sits in a selected (outlined) cell.
+   -------------------------------------------------------------------------- */
+.sp-grid { border: 1px solid #cfd6cf; border-radius: 6px; background: var(--white); overflow: hidden; font-size: 0.97rem; }
+.sp-grid__cols, .sp-row { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr) minmax(0, 1.6fr) minmax(0, 0.9fr); }
+.sp-grid__cols span { padding: 0.35rem; border-right: 1px solid #dfe5df; border-bottom: 1px solid #cfd6cf; background: #f1f4f1; font-family: var(--mono); font-size: 0.72rem; text-align: center; color: var(--ink-600); }
+.sp-row > * { padding: clamp(0.9rem, 1.8vw, 1.3rem) clamp(0.9rem, 1.8vw, 1.3rem); border-right: 1px solid #dfe5df; border-bottom: 1px solid #dfe5df; }
+.sp-row:last-child > * { border-bottom: 0; }
+.sp-row__n { display: grid; place-items: center; padding: 0 !important; background: #f1f4f1; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-600); }
+.sp-row h3 {
+  position: relative;
+  align-self: stretch;
+  font-family: var(--serif);
+  font-weight: 450;
+  font-size: clamp(1.3rem, 1.9vw, 1.6rem);
+  line-height: 1.15;
+  color: var(--ink-900);
+  background: #eef7f0;
+  outline: 2px solid #1f7a4d;
+  outline-offset: -2px;
+}
+/* the fill handle in the selected cell's corner */
+.sp-row h3::after { content: ""; position: absolute; right: -4px; bottom: -4px; width: 7px; height: 7px; background: #1f7a4d; border: 1px solid #fff; }
+.sp-row > p:not([class]) { line-height: 1.6; color: var(--ink-600); }
+.sp-row__out { display: grid; align-content: center; gap: 0.3rem; font-size: 0.9rem; color: var(--ink-900); }
+.sp-row__out b { font-family: var(--mono); font-weight: 400; font-size: 0.74rem; color: #1f7a4d; }
+@media (max-width: 860px) {
+  .sp-grid__cols { display: none; }
+  .sp-row { grid-template-columns: 2.2rem minmax(0, 1fr); }
+  .sp-row__n { grid-row: span 3; }
+  .sp-row > p { grid-column: 2; }
+}
+
+/* --------------------------------------------------------------------------
+   Property CRM & Syndication: hanging signs. Each heading is painted on a
+   sign board that hangs from a post arm, with a rider strip below.
+   -------------------------------------------------------------------------- */
+.sp-signs { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1rem, 2.4vw, 2rem); padding-top: 1.6rem; }
+/* the post arm the signs hang from */
+.sp-signs::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 8px; border-radius: 4px; background: var(--navy-900); }
+.sp-sign { position: relative; display: grid; grid-row: span 2; grid-template-rows: subgrid; align-content: start; row-gap: 1.2rem; transform-origin: 50% -1.6rem; }
+/* the two chains from the arm to the board */
+.sp-sign::before {
+  content: "";
+  position: absolute;
+  left: 18%; right: 18%; top: -1.6rem;
+  height: 1.6rem;
+  border-left: 2px dashed var(--ink-600);
+  border-right: 2px dashed var(--ink-600);
+}
+.sp-sign__board {
+  display: flex;
+  flex-direction: column;
+  min-height: 9.5rem;
+  border: 3px solid var(--navy-900);
+  border-radius: 6px;
+  background: var(--white);
+  overflow: hidden;
+}
+.sp-sign h3 { display: grid; place-items: center; flex: 1; padding: 1.3rem 1.2rem; font-family: var(--sans); font-weight: 700; font-size: clamp(1.35rem, 2vw, 1.65rem); line-height: 1.15; letter-spacing: -0.02em; text-align: center; color: var(--navy-900); }
+.sp-sign__rider { padding: 0.45rem; background: var(--rider); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; text-align: center; color: #fff; }
+.sp-sign--add { --rider: #2f8f6b; }
+.sp-sign--replace { --rider: #c2410c; }
+.sp-sign--upgrade { --rider: var(--cobalt); }
+.sp-sign > p { font-size: 0.98rem; line-height: 1.65; color: var(--ink-600); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .sp-sign { transform: rotate(-4deg); transition: transform 900ms cubic-bezier(0.3, 1.6, 0.5, 1) 200ms; }
+  .js .sp-sign:nth-child(2) { transform: rotate(3deg); }
+  .js .sp-sign.is-visible { transform: none; }
+}
+@media (max-width: 900px) {
+  .sp-signs { grid-template-columns: minmax(0, 1fr); max-width: 520px; row-gap: 2.6rem; }
+  .sp-signs::before { display: none; }
+  .sp-sign { grid-row: auto; grid-template-rows: none; }
+  .sp-sign::before { display: none; }
+}
