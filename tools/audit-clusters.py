@@ -32,7 +32,8 @@ def links(url):
         s = fh.read()
     if '<main id="main">' in s:
         s = s.split('<main id="main">')[1].split("</main>")[0]
-    return {m.split("#")[0] for m in re.findall(r'href="(/[^"]*)"', s)}
+    # hubs are linked with their trailing slash (/custom-legal-software/)
+    return {m.split("#")[0].rstrip("/") or "/" for m in re.findall(r'href="(/[^"]*)"', s)}
 
 
 def main():
@@ -80,7 +81,7 @@ def main():
         problems.append(f"homepage missing {miss}")
 
     with open(os.path.join(ROOT, "partials/footer.html"), encoding="utf-8") as fh:
-        foot = {m.split("#")[0] for m in re.findall(r'href="(/[^"]*)"', fh.read())}
+        foot = {m.split("#")[0].rstrip("/") or "/" for m in re.findall(r'href="(/[^"]*)"', fh.read())}
     fmiss = [h for h in HUBS if h not in foot]
     print(f"FOOTER   -> {len(HUBS) - len(fmiss)}/{len(HUBS)} hubs"
           + (f"   MISSING {fmiss}" if fmiss else ""))

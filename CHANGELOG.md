@@ -1,5 +1,44 @@
 # Changelog
 
+## Batch 6 (October 2026)
+
+### Phase 1: Ozzy's photo, the Insights section, and the first article
+- **About:** Ozzy's photo was rebuilt from his original portrait. The previous version had stretched, smeared shoulders from an earlier resize. It is now scaled to match the rest of the team, with plain black edges and no AI-generator watermark.
+- **Insights is back,** under its new name.
+  - "Insights" appears in the header (desktop and mobile) after About, and in the footer's Company column.
+  - The listing page is `/insights/`. Its title is "Insights on AI", with the client's description.
+  - The six old Industry Analysis articles were already off the site and out of the sitemap (removed in September). Their old addresses (`/articles/…`) and `/insights.html` now 301-redirect to the new listing instead of the homepage.
+- **Labels.** Every article carries one or more labels taken from the service pages (Finance, Trading, Risk Management, Legal, EdTech and so on), plus "AI Usage Best Practices".
+  - The listing page shows each article's labels, and the topic buttons filter the list. Links like `/insights/#finance` open it already filtered.
+  - Clicking a label on an article goes to that filtered list.
+  - Each article ends with up to three related articles. Ones that share a topic label come first, then ones in the same family (e.g. Trading and Risk Management sit under Finance), then ones that share only "AI Usage Best Practices". The related list fills in automatically as the other articles go live.
+- **Article layout.** Articles are meant to look different from the service pages. They have:
+  - warm paper, with a solid nav bar instead of a dark hero;
+  - a very large centered title with a subheader underneath;
+  - serif body text in one reading column;
+  - an "In this article" list on wide screens;
+  - numbered sections;
+  - "Did you know?", "Key term" and pull-quote callouts;
+  - live product mockups as figures.
+  - The figures loop like a GIF but stay sharp: questions type themselves out and numbers count up. They only play while on screen, and visitors with reduced motion turned on see the finished frame.
+  - Articles have no dates, view counts, author names or photos, or share buttons.
+- **Closing call to action.** Every article ends with the same block: the article's own header and subheader, a service button chosen for that article, a Contact button, and the related articles.
+- **First article:** "How Artificial Intelligence Is Used in Finance", at `/insights/how-artificial-intelligence-is-used-in-finance/`. It is labelled Finance and AI Usage Best Practices.
+  - It has three animated figures: finding a figure with its sources, a tax vs. FX earnings analysis, and a client allocation chart with a summary.
+  - The vertical headings link to their service pages. Banking and Insurance have no service page, so they are not linked.
+  - Its button is "Explore Fintech Services", which goes to the Finance page.
+  - One copy fix: "when it encounters a gap in its context" is now "when they encounter a gap in their context", to agree with "AI models".
+- **Technical SEO**
+  - Each article carries BlogPosting JSON-LD: headline, description, url and mainEntityOfPage equal to the canonical, Bespoke AI as author and publisher, section and keywords taken from the labels, and part of the Insights blog. There are deliberately no dates, so Google doesn't show one.
+  - The listing page carries Blog JSON-LD. Both page types have breadcrumbs.
+  - Insights addresses end with a trailing slash.
+  - The six category hubs and `/demos` now use their trailing-slash address everywhere: canonical, social tags, structured data, sitemap, internal links and redirects. Netlify already redirects the bare address to the slash version, so before this change every hub link and its canonical went through an extra redirect.
+- **Tooling**
+  - New `insights/articles.json` holds every article's titles, description, labels and call to action.
+  - New `tools/build-insights.py` stamps the head tags, header, contents list, call to action and related list into each article, and the filters and cards into the listing page. Netlify runs it on deploy, and the local preview server reruns it when the JSON changes.
+  - `tools/audit-seo.py` now also checks each article's BlogPosting fields, rejects any date, and requires a trailing slash on folder pages' canonicals.
+  - The sitemap has 35 URLs.
+
 ## Batch 5 (October 2026)
 
 ### Page titles and search snippets

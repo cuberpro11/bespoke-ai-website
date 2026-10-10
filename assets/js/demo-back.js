@@ -3,7 +3,7 @@
 (function () {
   "use strict";
 
-  var FALLBACK = "/demos";
+  var FALLBACK = "/demos/";
 
   function returnHref() {
     try {

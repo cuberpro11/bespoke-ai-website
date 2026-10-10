@@ -16,19 +16,19 @@ SKIP_FILES = {"404.html"}
 TODAY = datetime.date.today().isoformat()
 
 # Hubs first, then their children, then the rest — crawl order mirrors the IA.
+# Folders are listed by their first path segment (no trailing slash).
 ORDER = ["/", "/custom-legal-software", "/custom-financial-software", "/custom-real-estate-software", "/custom-edtech-software", "/custom-supply-chain-logistics-software", "/custom-general-service-software",
-         "/custom-software-development-team", "/demos", "/contact"]
+         "/custom-software-development-team", "/demos", "/insights", "/contact"]
 
 
 def url_for(rel):
     if rel == "index.html":
         return "/"
     if rel.endswith("/index.html"):
-        # Demo apps load their own files by relative path, so they live at
-        # the trailing-slash form (e.g. /demos/legal-contact-management-software/).
-        if rel.startswith("demos/") and rel.count("/") == 2:
-            return "/" + rel[: -len("index.html")]
-        return "/" + rel[: -len("/index.html")]
+        # Netlify 301s a folder's bare URL to its trailing-slash form, so hubs
+        # (/custom-legal-software/), demo apps and Insights articles are all
+        # listed with the slash they are actually served at.
+        return "/" + rel[: -len("index.html")]
     return "/" + rel[: -len(".html")]
 
 
@@ -47,7 +47,7 @@ def sort_key(entry):
     url = entry[0]
     parent = "/" + url.strip("/").split("/")[0] if url != "/" else "/"
     rank = ORDER.index(parent) if parent in ORDER else len(ORDER)
-    return (rank, url.count("/"), url)
+    return (rank, url.rstrip("/").count("/"), url)
 
 
 def main():

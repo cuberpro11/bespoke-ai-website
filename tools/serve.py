@@ -17,6 +17,7 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SYNC = os.path.join(ROOT, "tools", "sync-shared.py")
+INSIGHTS = os.path.join(ROOT, "tools", "build-insights.py")
 WATCH = (
     "partials/nav.html",
     "partials/footer.html",
@@ -25,6 +26,9 @@ WATCH = (
     "assets/js/demo.js",
     "assets/css/solutions.css",
     "assets/js/solutions.js",
+    "assets/css/insights.css",
+    "assets/js/insights.js",
+    "insights/articles.json",
 )
 
 _lock = threading.Lock()
@@ -47,6 +51,7 @@ def refresh_shared():
         current = sources_mtime()
         if current <= _last_sources:
             return
+        subprocess.check_call([sys.executable, INSIGHTS, "--quiet"])
         subprocess.check_call([sys.executable, SYNC, "--quiet"])
         _last_sources = sources_mtime()
 

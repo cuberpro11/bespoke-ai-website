@@ -8,7 +8,7 @@
   var I18N = window.HOTEL_I18N;
 
   function demoReturnHref() {
-    var fallback = "/demos";
+    var fallback = "/demos/";
     try {
       if (!document.referrer) return fallback;
       var url = new URL(document.referrer);

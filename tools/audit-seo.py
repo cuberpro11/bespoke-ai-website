@@ -13,6 +13,7 @@ Not used to serve or deploy the site.
     python3 tools/audit-seo.py
 """
 import html
+import json
 import os
 import re
 import sys
@@ -43,6 +44,37 @@ def pages():
 
 def text(tag_html):
     return re.sub(r"<[^>]+>", "", tag_html).strip()
+
+
+def blogposting_problems(src, canonical):
+    """Insights articles: valid BlogPosting pointing at the canonical, no dates."""
+    out = []
+    graph = []
+    for block in re.findall(r'<script type="application/ld\+json">(.*?)</script>', src, re.S):
+        try:
+            data = json.loads(block)
+        except ValueError as e:
+            out.append(f"JSON-LD does not parse ({e})")
+            continue
+        graph += data.get("@graph", [data])
+    posts = [n for n in graph if n.get("@type") == "BlogPosting"]
+    if len(posts) != 1:
+        return out + [f"{len(posts)} BlogPosting nodes (want 1)"]
+    post = posts[0]
+    for key in ("headline", "description", "url", "mainEntityOfPage", "image",
+                "author", "publisher", "articleSection", "keywords", "isPartOf"):
+        if not post.get(key):
+            out.append(f"BlogPosting missing {key!r}")
+    if post.get("url") != canonical:
+        out.append(f"BlogPosting url {post.get('url')!r} != canonical {canonical!r}")
+    if (post.get("mainEntityOfPage") or {}).get("@id") != canonical:
+        out.append("BlogPosting mainEntityOfPage does not match the canonical")
+    if len(post.get("headline", "")) > 110:
+        out.append("BlogPosting headline over 110 characters")
+    # articles are evergreen: no publish/modified dates anywhere
+    if re.search(r'"date(Published|Modified|Created)"|<time\b', src):
+        out.append("carries a date; Insights articles are undated")
+    return out
 
 
 def main():
@@ -93,8 +125,13 @@ def main():
             problems.append(f"{rel}: meta description {len(desc)} chars (want 70-320)")
         if not canon:
             problems.append(f"{rel}: no canonical")
-        if "BreadcrumbList" not in ld and rel.count(os.sep) >= 1 and not rel.startswith("articles"):
+        if "BreadcrumbList" not in ld and rel.count(os.sep) >= 1:
             problems.append(f"{rel}: no BreadcrumbList JSON-LD")
+        # folder pages (hubs, Insights) are served at their trailing-slash URL
+        if canon and rel.endswith(os.sep + "index.html") and not canon.group(1).endswith("/"):
+            problems.append(f"{rel}: canonical {canon.group(1)!r} should end with '/'")
+        if rel.startswith("insights" + os.sep) and rel.count(os.sep) == 2:
+            problems += [f"{rel}: {p}" for p in blogposting_problems(src, canon.group(1) if canon else "")]
 
         if title:
             titles[title].append(rel)

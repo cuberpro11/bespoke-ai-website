@@ -1,8 +1,9 @@
 [build]
   publish = "."
-  # Stamp nav/footer from partials/ and regenerate sitemap.xml so a deploy
-  # cannot ship stale shared markup even if those scripts were not run locally.
-  command = "python3 tools/sync-shared.py && python3 tools/build-sitemap.py"
+  # Stamp Insights pages from insights/articles.json, nav/footer from
+  # partials/, and regenerate sitemap.xml so a deploy cannot ship stale shared
+  # markup even if those scripts were not run locally.
+  command = "python3 tools/build-insights.py && python3 tools/sync-shared.py && python3 tools/build-sitemap.py"
 
 # ---------------------------------------------------------------- canonical host
 [[redirects]]
@@ -18,13 +19,13 @@
 # goes through a redirect chain. Children are swept up by the splat rules.
 [[redirects]]
   from = "/finance"
-  to = "/custom-financial-software"
+  to = "/custom-financial-software/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/finance.html"
-  to = "/custom-financial-software"
+  to = "/custom-financial-software/"
   status = 301
   force = true
 
@@ -36,13 +37,13 @@
 
 [[redirects]]
   from = "/legal"
-  to = "/custom-legal-software"
+  to = "/custom-legal-software/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/legal.html"
-  to = "/custom-legal-software"
+  to = "/custom-legal-software/"
   status = 301
   force = true
 
@@ -54,13 +55,13 @@
 
 [[redirects]]
   from = "/edtech"
-  to = "/custom-edtech-software"
+  to = "/custom-edtech-software/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/edtech.html"
-  to = "/custom-edtech-software"
+  to = "/custom-edtech-software/"
   status = 301
   force = true
 
@@ -72,13 +73,13 @@
 
 [[redirects]]
   from = "/general-services"
-  to = "/custom-general-service-software"
+  to = "/custom-general-service-software/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/general-services.html"
-  to = "/custom-general-service-software"
+  to = "/custom-general-service-software/"
   status = 301
   force = true
 
@@ -104,13 +105,13 @@
 
 [[redirects]]
   from = "/law"
-  to = "/custom-legal-software"
+  to = "/custom-legal-software/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/law.html"
-  to = "/custom-legal-software"
+  to = "/custom-legal-software/"
   status = 301
   force = true
 
@@ -122,13 +123,13 @@
 
 [[redirects]]
   from = "/professional-services"
-  to = "/custom-general-service-software"
+  to = "/custom-general-service-software/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/professional-services.html"
-  to = "/custom-general-service-software"
+  to = "/custom-general-service-software/"
   status = 301
   force = true
 
@@ -199,27 +200,21 @@
 
 [[redirects]]
   from = "/demos.html"
-  to = "/demos"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/insights"
-  to = "/"
+  to = "/demos/"
   status = 301
   force = true
 
 [[redirects]]
   from = "/insights.html"
-  to = "/"
+  to = "/insights/"
   status = 301
   force = true
 
-# The original articles were retired; send old links home until the
-# Industry Analysis section is rebuilt.
+# The original 2026 articles were retired; batch 6 relaunched the section as
+# Insights, so old article links land on the new listing.
 [[redirects]]
   from = "/articles/*"
-  to = "/"
+  to = "/insights/"
   status = 301
   force = true
 
