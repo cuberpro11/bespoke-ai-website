@@ -1,35 +1,144 @@
 {
   "_readme": "Source of truth for the Insights section. tools/build-insights.py stamps each article's <head>, header, contents list and closing call to action, plus the hub's filters and cards, from this file. Labels mirror the service pages; an article can carry several. The first label is the article's primary topic. 'generic' labels (AI Usage Best Practices) only count after topic labels when picking related articles. Order in 'articles' is the order on the hub.",
   "labels": {
-    "finance": { "name": "Finance", "url": "/custom-financial-software/" },
-    "wealth-management": { "name": "Wealth Management", "url": "/custom-financial-software/wealth-management", "parent": "finance" },
-    "risk-management": { "name": "Risk Management", "url": "/custom-financial-software/risk-management", "parent": "finance" },
-    "compliance": { "name": "Compliance", "url": "/custom-financial-software/compliance", "parent": "finance" },
-    "trading": { "name": "Trading", "url": "/custom-financial-software/trading", "parent": "finance" },
-    "accounting": { "name": "Accounting", "url": "/custom-financial-software/accounting", "parent": "finance" },
-    "legal": { "name": "Legal", "url": "/custom-legal-software/" },
-    "documentation-automation": { "name": "Documentation Automation", "url": "/custom-legal-software/documentation-automation", "parent": "legal" },
-    "workflow-automation": { "name": "Workflow Automation", "url": "/custom-legal-software/workflow-automation", "parent": "legal" },
-    "client-relations-management": { "name": "Client Relations Management", "url": "/custom-legal-software/client-relations-management", "parent": "legal" },
-    "real-estate": { "name": "Real Estate", "url": "/custom-real-estate-software/" },
-    "residential-real-estate": { "name": "Residential Real Estate", "url": "/custom-real-estate-software/residential-real-estate", "parent": "real-estate" },
-    "commercial-property-management": { "name": "Commercial Property Management", "url": "/custom-real-estate-software/commercial-property-management-software", "parent": "real-estate" },
-    "property-feasibility": { "name": "Property Feasibility", "url": "/custom-real-estate-software/property-feasibility-development-erp", "parent": "real-estate" },
-    "property-crm": { "name": "Property CRM & Syndication", "url": "/custom-real-estate-software/property-crm-investor-relations", "parent": "real-estate" },
-    "edtech": { "name": "EdTech", "url": "/custom-edtech-software/" },
-    "learning-management-systems": { "name": "Learning Management Systems", "url": "/custom-edtech-software/learning-management-systems", "parent": "edtech" },
-    "student-information-systems": { "name": "Student Information Systems", "url": "/custom-edtech-software/student-information-systems", "parent": "edtech" },
-    "enrollment-information-systems": { "name": "Enrollment Information Systems", "url": "/custom-edtech-software/enrollment-information-systems", "parent": "edtech" },
-    "supply-chain": { "name": "Supply Chains & Logistics", "url": "/custom-supply-chain-logistics-software/" },
-    "3pl-freight-warehouse": { "name": "3PL, Freight & Warehouse Management", "url": "/custom-supply-chain-logistics-software/3pl-freight-warehouse-management-software", "parent": "supply-chain" },
-    "supplier-risk": { "name": "Supplier & Risk Management", "url": "/custom-supply-chain-logistics-software/supplier-risk-management-software", "parent": "supply-chain" },
-    "supply-chain-erp": { "name": "Supply Chain ERP & Retail", "url": "/custom-supply-chain-logistics-software/supply-chain-erp-retail-software", "parent": "supply-chain" },
-    "general-services": { "name": "General Services", "url": "/custom-general-service-software/" },
-    "document-automation": { "name": "Document Automation", "url": "/custom-general-service-software/document-automation", "parent": "general-services" },
-    "api-integrations": { "name": "API Integrations", "url": "/custom-general-service-software/api-integrations", "parent": "general-services" },
-    "knowledge-base": { "name": "Knowledge Base Software", "url": "/custom-general-service-software/knowledge-base-software", "parent": "general-services" },
-    "automated-email-response": { "name": "Automated Email Response", "url": "/custom-general-service-software/automated-email-response", "parent": "general-services" },
-    "ai-best-practices": { "name": "AI Usage Best Practices", "generic": true }
+    "finance": {
+      "name": "Finance",
+      "url": "/custom-financial-software/"
+    },
+    "wealth-management": {
+      "name": "Wealth Management",
+      "url": "/custom-financial-software/wealth-management",
+      "parent": "finance"
+    },
+    "risk-management": {
+      "name": "Risk Management",
+      "url": "/custom-financial-software/risk-management",
+      "parent": "finance"
+    },
+    "compliance": {
+      "name": "Compliance",
+      "url": "/custom-financial-software/compliance",
+      "parent": "finance"
+    },
+    "trading": {
+      "name": "Trading",
+      "url": "/custom-financial-software/trading",
+      "parent": "finance"
+    },
+    "accounting": {
+      "name": "Accounting",
+      "url": "/custom-financial-software/accounting",
+      "parent": "finance"
+    },
+    "legal": {
+      "name": "Legal",
+      "url": "/custom-legal-software/"
+    },
+    "documentation-automation": {
+      "name": "Documentation Automation",
+      "url": "/custom-legal-software/documentation-automation",
+      "parent": "legal"
+    },
+    "workflow-automation": {
+      "name": "Workflow Automation",
+      "url": "/custom-legal-software/workflow-automation",
+      "parent": "legal"
+    },
+    "client-relations-management": {
+      "name": "Client Relations Management",
+      "url": "/custom-legal-software/client-relations-management",
+      "parent": "legal"
+    },
+    "real-estate": {
+      "name": "Real Estate",
+      "url": "/custom-real-estate-software/"
+    },
+    "residential-real-estate": {
+      "name": "Residential Real Estate",
+      "url": "/custom-real-estate-software/residential-real-estate",
+      "parent": "real-estate"
+    },
+    "commercial-property-management": {
+      "name": "Commercial Property Management",
+      "url": "/custom-real-estate-software/commercial-property-management-software",
+      "parent": "real-estate"
+    },
+    "property-feasibility": {
+      "name": "Property Feasibility",
+      "url": "/custom-real-estate-software/property-feasibility-development-erp",
+      "parent": "real-estate"
+    },
+    "property-crm": {
+      "name": "Property CRM & Syndication",
+      "url": "/custom-real-estate-software/property-crm-investor-relations",
+      "parent": "real-estate"
+    },
+    "edtech": {
+      "name": "EdTech",
+      "url": "/custom-edtech-software/"
+    },
+    "learning-management-systems": {
+      "name": "Learning Management Systems",
+      "url": "/custom-edtech-software/learning-management-systems",
+      "parent": "edtech"
+    },
+    "student-information-systems": {
+      "name": "Student Information Systems",
+      "url": "/custom-edtech-software/student-information-systems",
+      "parent": "edtech"
+    },
+    "enrollment-information-systems": {
+      "name": "Enrollment Information Systems",
+      "url": "/custom-edtech-software/enrollment-information-systems",
+      "parent": "edtech"
+    },
+    "supply-chain": {
+      "name": "Supply Chains & Logistics",
+      "url": "/custom-supply-chain-logistics-software/"
+    },
+    "3pl-freight-warehouse": {
+      "name": "3PL, Freight & Warehouse Management",
+      "url": "/custom-supply-chain-logistics-software/3pl-freight-warehouse-management-software",
+      "parent": "supply-chain"
+    },
+    "supplier-risk": {
+      "name": "Supplier & Risk Management",
+      "url": "/custom-supply-chain-logistics-software/supplier-risk-management-software",
+      "parent": "supply-chain"
+    },
+    "supply-chain-erp": {
+      "name": "Supply Chain ERP & Retail",
+      "url": "/custom-supply-chain-logistics-software/supply-chain-erp-retail-software",
+      "parent": "supply-chain"
+    },
+    "general-services": {
+      "name": "General Services",
+      "url": "/custom-general-service-software/"
+    },
+    "document-automation": {
+      "name": "Document Automation",
+      "url": "/custom-general-service-software/document-automation",
+      "parent": "general-services"
+    },
+    "api-integrations": {
+      "name": "API Integrations",
+      "url": "/custom-general-service-software/api-integrations",
+      "parent": "general-services"
+    },
+    "knowledge-base": {
+      "name": "Knowledge Base Software",
+      "url": "/custom-general-service-software/knowledge-base-software",
+      "parent": "general-services"
+    },
+    "automated-email-response": {
+      "name": "Automated Email Response",
+      "url": "/custom-general-service-software/automated-email-response",
+      "parent": "general-services"
+    },
+    "ai-best-practices": {
+      "name": "AI Usage Best Practices",
+      "generic": true
+    }
   },
   "articles": [
     {
@@ -39,12 +148,65 @@
       "description": "Bespoke AI outlines common ways finance firms are benefiting from AI along with how to use AI ethically and safely.",
       "dek": "The three everyday jobs AI now does for financial teams, the verticals feeling it most, and the guardrails that keep client data and figures trustworthy.",
       "blurb": "Finding a single figure across thousands of filings, running analysis in seconds and drafting client-ready charts, plus the security and accuracy rules that come with them.",
-      "labels": ["finance", "ai-best-practices"],
+      "labels": [
+        "finance",
+        "ai-best-practices"
+      ],
       "cta": {
         "heading": "Modernizing Your Financial Operations with Bespoke AI",
         "body": "Bespoke AI enables financial institutions to integrate AI into their current tech stacks by building new platforms, replacing legacy software, or upgrading current tools. All of our products utilize enterprise-grade security and are completely void of annual subscriptions or seat-based pricing.",
-        "primary": { "text": "Explore Fintech Services", "href": "/custom-financial-software/" },
-        "secondary": { "text": "Contact Us", "href": "/contact" }
+        "primary": {
+          "text": "Explore Fintech Services",
+          "href": "/custom-financial-software/"
+        },
+        "secondary": {
+          "text": "Contact Us",
+          "href": "/contact"
+        }
+      }
+    },
+    {
+      "slug": "understanding-the-forex-market",
+      "title": "Understanding the Forex Market: Everything You Need to Know About Foreign Exchange",
+      "seo_title": "Understanding the Forex Market",
+      "description": "Bespoke AI outlines the basics around what Foreign Exchange (Forex or FX) trading is and how desks can take advantage of it.",
+      "blurb": "How currency pairs, pips, spreads and leverage work, what moves exchange rates, and the risk habits professional trading desks rely on.",
+      "labels": [
+        "trading"
+      ],
+      "cta": {
+        "heading": "Engineer Custom Financial & Trading Platforms with Bespoke AI",
+        "body": "Bespoke AI enables trading desks to integrate AI into their current tech stacks by building new platforms, replacing legacy software, or upgrading current tools. All of our products utilize enterprise-grade security and are completely void of annual subscriptions or seat-based pricing.",
+        "primary": {
+          "text": "More on Trading",
+          "href": "/custom-financial-software/trading"
+        },
+        "secondary": {
+          "text": "Contact Us",
+          "href": "/contact"
+        }
+      }
+    },
+    {
+      "slug": "types-of-risk-in-corporate-governance",
+      "title": "Types of Risk in Corporate Governance: Building an Enterprise Risk Framework",
+      "seo_title": "Types of Risk in Corporate Governance",
+      "description": "Bespoke AI outlines the most common types of risk finance officers will face in corporate governance settings.",
+      "blurb": "Enterprise, operational, currency and liquidity risk explained, with the oversight structures boards use to keep each one in check.",
+      "labels": [
+        "risk-management"
+      ],
+      "cta": {
+        "heading": "Build Custom Risk Management Systems with Bespoke AI",
+        "body": "Bespoke AI enables risk officers to integrate AI into their current tech stacks by building new platforms, replacing legacy software, or upgrading current tools. All of our products utilize enterprise-grade security and are completely void of annual subscriptions or seat-based pricing.",
+        "primary": {
+          "text": "Risk Management Services",
+          "href": "/custom-financial-software/risk-management"
+        },
+        "secondary": {
+          "text": "Contact Us",
+          "href": "/contact"
+        }
       }
     }
   ]

@@ -3,10 +3,14 @@
    product mockups inside article figures.
 
    FX timeline: a figure's data-timeline lists how long each step lasts (ms).
-   Elements with data-at="n" appear at step n; data-type text types itself out
-   over its step; data-count numbers count up. After the last step the figure
-   fades and starts over. Figures only run while on screen and the tab is
-   visible; with reduced motion they show their finished frame and stay still.
+   Elements with data-at="n" appear at step n (and leave again after step m
+   with data-until="m"); data-active="a b" marks an always-visible element
+   .is-active from step a to b; data-type text types itself out over its
+   step; data-count numbers count up. After the last step the figure fades
+   and starts over. data-module="name" adds a hand-written behaviour (see
+   MODULES) that runs alongside, or instead of, a timeline. Figures only run
+   while on screen and the tab is visible; with reduced motion they show
+   their finished frame and stay still.
    ========================================================================== */
 (() => {
   "use strict";
@@ -70,8 +74,9 @@
   /* -------------------------------------------------------------- fx -- */
 
   const stepOf = (el) => {
-    const host = el.closest("[data-at]");
-    return host ? Number(host.dataset.at) : 0;
+    const host = el.closest("[data-at], [data-active]");
+    if (!host) return 0;
+    return Number(host.dataset.at ?? host.dataset.active.split(" ")[0]);
   };
 
   const fmt = (el, v) => {
@@ -79,9 +84,97 @@
     return `${el.dataset.pre || ""}${v.toFixed(dec)}${el.dataset.post || ""}`;
   };
 
+  /* Hand-written figure behaviours. Each returns { start, stop }; the static
+     markup is the still frame, so stop() can leave things as they are. */
+  const MODULES = {
+    // FX desk: watchlist prices tick and new orders stream into the blotter
+    blotter(fx) {
+      const rows = [...fx.querySelectorAll("[data-pair]")].map((row) => ({
+        row,
+        pair: row.dataset.pair,
+        pip: Number(row.dataset.pip),
+        spread: Number(row.dataset.spread),
+        open: Number(row.dataset.bid),
+        bid: Number(row.dataset.bid),
+      }));
+      const list = fx.querySelector(".fx-orders");
+      const orders = JSON.parse(fx.querySelector("[data-orders]").textContent);
+      const dp = (r) => Math.round(-Math.log10(r.pip)) + 1;
+      const quote = (v, places) => {
+        const str = v.toFixed(places);
+        return `${str.slice(0, -3)}<b>${str.slice(-3, -1)}</b><sup>${str.slice(-1)}</sup>`;
+      };
+      const paint = (r, dir) => {
+        const places = dp(r);
+        const ask = r.bid + r.spread * r.pip;
+        r.row.querySelector("[data-q=bid]").innerHTML = quote(r.bid, places);
+        r.row.querySelector("[data-q=ask]").innerHTML = quote(ask, places);
+        const chg = (r.bid - r.open) / r.pip;
+        const c = r.row.querySelector("[data-q=chg]");
+        c.textContent = `${chg > 0 ? "+" : chg < 0 ? "\u2212" : ""}${Math.abs(chg).toFixed(1)}`;
+        c.classList.toggle("is-up", chg > 0);
+        c.classList.toggle("is-down", chg < 0);
+        if (dir) {
+          r.row.classList.remove("is-up", "is-down");
+          void r.row.offsetWidth;
+          r.row.classList.add(dir > 0 ? "is-up" : "is-down");
+        }
+      };
+      let clock = 14 * 3600 + 32 * 60 + 5;
+      let n = 0;
+      let tickT = null;
+      let orderT = null;
+      const tickPrices = () => {
+        rows.forEach((r) => {
+          if (Math.random() > 0.55) return;
+          const move = (Math.floor(Math.random() * 7) - 3) * 0.1 + (Math.random() < 0.5 ? -0.1 : 0.1);
+          // drift back toward the open so prices wander but never run away
+          const pull = ((r.open - r.bid) / r.pip) * 0.08;
+          const d = Math.round((move + pull) * 10) / 10;
+          if (!d) return;
+          r.bid += d * r.pip;
+          paint(r, d);
+        });
+      };
+      const hms = (t) => [Math.floor(t / 3600) % 24, Math.floor(t / 60) % 60, t % 60].map((v) => String(v).padStart(2, "0")).join(":");
+      const addOrder = () => {
+        const o = orders[n % orders.length];
+        n += 1;
+        clock += 4 + Math.floor(Math.random() * 18);
+        const r = rows.find((x) => x.pair === o.pair);
+        const px = o.side === "Buy" ? r.bid + r.spread * r.pip : r.bid;
+        const li = doc.createElement("li");
+        li.className = `fx-order is-new is-${o.side.toLowerCase()}`;
+        li.innerHTML = `<span class="fx-order__t">${hms(clock)}</span><span class="fx-order__side">${o.side}</span>` +
+          `<span class="fx-order__pair">${o.pair}</span><span class="fx-order__lots">${o.lots.toFixed(1)}</span>` +
+          `<span class="fx-order__px">${px.toFixed(dp(r))}</span><span class="fx-order__st">Working</span>`;
+        list.prepend(li);
+        setTimeout(() => {
+          const st = li.querySelector(".fx-order__st");
+          st.textContent = "Filled";
+          li.classList.add("is-filled");
+        }, 900 + Math.random() * 700);
+        while (list.children.length > 6) list.lastElementChild.remove();
+      };
+      rows.forEach((r) => paint(r, 0));
+      return {
+        start() {
+          tickT = setInterval(tickPrices, 850);
+          orderT = setInterval(addOrder, 2300);
+        },
+        stop() {
+          clearInterval(tickT);
+          clearInterval(orderT);
+        },
+      };
+    },
+  };
+
   function Fx(fx) {
-    const steps = fx.dataset.timeline.trim().split(/\s+/).map(Number);
+    const mod = MODULES[fx.dataset.module] ? MODULES[fx.dataset.module](fx) : null;
+    const steps = (fx.dataset.timeline || "").trim().split(/\s+/).filter(Boolean).map(Number);
     const shown = [...fx.querySelectorAll("[data-at]")];
+    const active = [...fx.querySelectorAll("[data-active]")];
     const types = [...fx.querySelectorAll("[data-type]")];
     const counts = [...fx.querySelectorAll("[data-count]")];
     types.forEach((el) => { el.dataset.full = el.textContent; });
@@ -92,13 +185,20 @@
     let running = false;
 
     const finish = () => {
-      shown.forEach((el) => el.classList.add("is-on"));
+      // the still frame: everything that is on at the last step
+      const last = steps.length - 1;
+      shown.forEach((el) => el.classList.toggle("is-on", !(Number(el.dataset.until ?? 1e9) < last)));
+      active.forEach((el) => {
+        const [a, b] = el.dataset.active.split(" ").map(Number);
+        el.classList.toggle("is-active", a <= last && last <= (b ?? a));
+      });
       types.forEach((el) => { el.textContent = el.dataset.full; el.classList.remove("is-typing"); });
       counts.forEach((el) => { el.textContent = fmt(el, Number(el.dataset.count)); });
     };
 
     const reset = () => {
       shown.forEach((el) => el.classList.remove("is-on"));
+      active.forEach((el) => el.classList.remove("is-active"));
       types.forEach((el) => { el.textContent = ""; el.classList.remove("is-typing"); });
       counts.forEach((el) => { el.textContent = fmt(el, 0); });
     };
@@ -131,7 +231,14 @@
     };
 
     const enter = (k, g) => {
-      shown.forEach((el) => { if (Number(el.dataset.at) === k) el.classList.add("is-on"); });
+      shown.forEach((el) => {
+        if (Number(el.dataset.at) === k) el.classList.add("is-on");
+        if (Number(el.dataset.until) === k - 1) el.classList.remove("is-on");
+      });
+      active.forEach((el) => {
+        const [a, b] = el.dataset.active.split(" ").map(Number);
+        el.classList.toggle("is-active", a <= k && k <= (b ?? a));
+      });
       types.forEach((el) => { if (stepOf(el) === k) type(el, steps[k], g); });
       counts.forEach((el) => { if (stepOf(el) === k) count(el, g); });
     };
@@ -154,10 +261,39 @@
       timer = setTimeout(tick, steps[step]);
     };
 
+    // Reserve the tallest step's height so the article below never jumps
+    // while a figure expands and collapses (the news panel does both).
+    const win = fx.querySelector(".fx-win");
+    const measure = () => {
+      if (!win || !steps.length) return;
+      fx.classList.add("is-measuring");
+      win.style.minHeight = "";
+      const keep = { on: shown.filter((el) => el.classList.contains("is-on")), act: active.filter((el) => el.classList.contains("is-active")), text: types.map((el) => el.textContent) };
+      let tallest = 0;
+      steps.forEach((_, k) => {
+        shown.forEach((el) => el.classList.toggle("is-on", Number(el.dataset.at) <= k && !(Number(el.dataset.until ?? 1e9) < k)));
+        active.forEach((el) => {
+          const [a, b] = el.dataset.active.split(" ").map(Number);
+          el.classList.toggle("is-active", a <= k && k <= (b ?? a));
+        });
+        types.forEach((el) => { el.textContent = stepOf(el) <= k ? el.dataset.full : ""; });
+        tallest = Math.max(tallest, win.offsetHeight);
+      });
+      shown.forEach((el) => el.classList.toggle("is-on", keep.on.includes(el)));
+      active.forEach((el) => el.classList.toggle("is-active", keep.act.includes(el)));
+      types.forEach((el, i) => { el.textContent = keep.text[i]; });
+      win.style.minHeight = `${tallest}px`;
+      void win.offsetHeight;
+      fx.classList.remove("is-measuring");
+    };
+    this.measure = measure;
+
     this.start = () => {
       if (running) return;
       running = true;
       gen += 1;
+      if (mod) mod.start();
+      if (!steps.length) return;
       reset();
       fx.classList.remove("is-fading");
       step = -1;
@@ -169,14 +305,16 @@
       running = false;
       gen += 1;
       clearTimeout(timer);
+      if (mod) mod.stop();
     };
 
     if (REDUCED || !("IntersectionObserver" in window)) {
-      finish();
+      if (steps.length) finish();
       return;
     }
     fx.classList.add("is-live");
-    reset();
+    if (steps.length) reset();
+    measure();
   }
 
   const figs = [...doc.querySelectorAll("[data-fx]")].map((el) => ({ el, fx: new Fx(el), seen: false }));
@@ -190,6 +328,13 @@
       });
     }, { threshold: 0.35 });
     figs.forEach((f) => io.observe(f.el));
+    let rz = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(rz);
+      rz = setTimeout(() => figs.forEach((f) => f.fx.measure()), 200);
+    });
+    // web fonts change line wrapping, so measure again once they are in
+    if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(() => figs.forEach((f) => f.fx.measure()));
     doc.addEventListener("visibilitychange", () => {
       figs.forEach((f) => {
         if (doc.hidden) f.fx.stop();

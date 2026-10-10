@@ -171,12 +171,18 @@ def article_head(a, labels):
 
 
 def article_header(a, labels):
-    return "\n".join([
+    # "Main title: subtitle" renders the subtitle as a smaller second line
+    main, colon, sub = a["title"].partition(": ")
+    # the colon stays in the text (hidden visually) so the heading still reads as one title
+    title = esc(main) + (f'<span class="ins-title__colon">: </span><span class="ins-title__sub">{esc(sub)}</span>' if colon else "")
+    lines = [
         '<nav class="ins-crumbs" aria-label="Breadcrumb"><a href="/insights/">Insights</a></nav>',
         f'<p class="ins-chips">{"".join(chips(a, labels))}</p>',
-        f'<h1 class="ins-title">{esc(a["title"])}</h1>',
-        f'<p class="ins-dek">{esc(a["dek"])}</p>',
-    ])
+        f'<h1 class="ins-title">{title}</h1>',
+    ]
+    if a.get("dek"):
+        lines.append(f'<p class="ins-dek">{esc(a["dek"])}</p>')
+    return "\n".join(lines)
 
 
 H2 = re.compile(r'<h2 id="([^"]+)"[^>]*>(.*?)</h2>', re.S)

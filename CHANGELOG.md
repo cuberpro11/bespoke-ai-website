@@ -39,6 +39,33 @@
   - `tools/audit-seo.py` now also checks each article's BlogPosting fields, rejects any date, and requires a trailing slash on folder pages' canonicals.
   - The sitemap has 35 URLs.
 
+### Phase 2: the Forex and Corporate Governance Risk articles
+- **"Understanding the Forex Market: Everything You Need to Know About Foreign Exchange"** is at `/insights/understanding-the-forex-market/`, labelled Trading. Its button is "More on Trading", which goes to the Trading page.
+  - **Trading screen (the requested looping design).** A watchlist of major, minor and exotic pairs with ticking bid/ask prices (in big-figure/pip style) next to an order blotter. New buy and sell orders arrive and change from Working to Filled.
+  - **News tab with "AI Insights" (requested).** An unemployment report, a euro area inflation release and a Bank of Japan decision open one at a time. Each shows a short AI note on how it may move currencies, with up/down chips per pair.
+  - **Extras:**
+    - a "$9T+ traded per day" callout, sourced to the BIS Triennial Survey 2025;
+    - a 24-hour session timeline (Sydney, Tokyo, London, New York) that highlights the London–New York overlap;
+    - a "reading a currency pair" explainer;
+    - Pip / Spread / Lot glossary tiles;
+    - a "Margin" key term with a worked 20:1 example;
+    - a "Did you know?" on the 1–2% per-position rule of thumb.
+  - **Copy fix:** "if the EUR/USD pair trading at" is now "is trading at".
+- **"Types of Risk in Corporate Governance: Building an Enterprise Risk Framework"** is at `/insights/types-of-risk-in-corporate-governance/`, labelled Risk Management. Its button is "Risk Management Services", which goes to the Risk Management page.
+  - **Enterprise-wide risk diagram.** Remade from the client's reference graphic, with the same structure and labels: Enterprise-Wide Risk Governance branching into Operational Risk, Treasury & Financial Risk and Liquidity Management. The connectors draw in on scroll, and each branch links to its section. On phones it becomes a vertical rail.
+  - **Refinery operational-risk dashboard (requested).** People on site vs. unavailable, processes, systems and security, and external events (an approaching storm, heat, a late delivery). It shows an overall risk level and ends with an AI summary of what to tackle first.
+  - **Funding vs. asset liquidity diagram (requested "remake").** On one side, a six-week cash-in/cash-out chart where the running cash position dips below zero, with starting cash, lowest point and recovery week. On the other, a ladder from cash to real estate showing time to turn into cash and the discount if sold in a hurry. The original image never arrived, so this was designed from the article text.
+  - **Extras:**
+    - the three FX exposures as cards along a short-to-long horizon;
+    - a "Forward contract" key term;
+    - a "Did you know?" on the quick (acid-test) and cash ratios.
+  - Its headings already carry their own numbers, so the automatic "§ 01" section labels are switched off for this article.
+- **Shared improvements**
+  - A title with a colon now shows the part after the colon as a smaller italic line under the main title. The heading still reads as one title to screen readers and search engines.
+  - The figures now hold a steady height for their whole loop, so the article text below them never jumps.
+  - Related articles now fill in: Finance, Trading and Risk Management point to one another.
+- The sitemap has 37 URLs.
+
 ## Batch 5 (October 2026)
 
 ### Page titles and search snippets
