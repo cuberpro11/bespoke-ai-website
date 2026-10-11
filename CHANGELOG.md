@@ -181,6 +181,16 @@
   - **Supply Chain ERP & Retail, "Run the business on systems that finally connect."** Printed receipts with torn edges. Each heading is printed reversed out of a black bar, followed by line items (e.g. "Per-seat fees ...... $0.00").
 - **Checks:** every page was checked at 320, 390, 820 and 1440 px, with no sideways scrolling. With reduced motion turned on, everything shows its finished state.
 
+### Phase 8: "Start from where you are" on the General Services pages
+- **The last five service pages now have the section:** the General Services hub, Document Automation, API Integrations, Knowledge Base Software and Automated Email Response. All 27 service pages are now covered (Residential Real Estate keeps its original version), and no two share a design.
+- **Each page has its own design:**
+  - **General Services hub, "Switch on what helps. Keep what already works."** A settings panel. Each heading is a setting name, with a toggle that switches on as you scroll.
+  - **Document Automation, "Faster documents, from the templates you already use."** Three dog-eared template pages. Each heading sits in a labelled "Title" form field, with a "Draft · Page 1 of 3" footer.
+  - **API Integrations, "Get your systems talking, without replacing all of them."** A dark code editor. Each path is a function block (`add()`, `replace()`, `upgrade()`) with line numbers and a coloured rule beside the heading.
+  - **Knowledge Base Software, "Find answers faster in what your team already knows."** A search page. A search bar reads "Where should we start?", and each heading is a blue result title under its breadcrumb.
+  - **Automated Email Response, "Answer every email from the inbox you already use."** An inbox with three unread messages. Each heading is the bold subject line under the sender and time, and the messages arrive one by one.
+- **Checks:** every page was checked at 320, 390, 820 and 1440 px, with no sideways scrolling.
+
 ## Batch 5 (October 2026)
 
 ### Page titles and search snippets
