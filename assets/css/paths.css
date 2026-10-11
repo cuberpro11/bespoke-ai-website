@@ -701,3 +701,376 @@ ol.sp-track::before {
   .sp-sign { grid-row: auto; grid-template-rows: none; }
   .sp-sign::before { display: none; }
 }
+
+/* --------------------------------------------------------------------------
+   EdTech hub: a chalkboard in a wooden frame. Headings are chalk-white
+   italic with a hand-drawn chalk underline.
+   -------------------------------------------------------------------------- */
+.sp-board-chalk {
+  padding: clamp(1.6rem, 3.4vw, 2.8rem) clamp(1.4rem, 3.4vw, 2.8rem) 0;
+  border: 12px solid #8a5a32;
+  border-radius: 8px;
+  background:
+    radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.06), transparent 60%),
+    #24352d;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.45), 0 26px 50px -34px rgba(30, 20, 10, 0.6);
+  color: rgba(240, 244, 236, 0.9);
+}
+.sp-chalk__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.4rem, 3.4vw, 3rem); padding-bottom: clamp(1.4rem, 3vw, 2.4rem); }
+.sp-chalk h3 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.55rem, 2.4vw, 2rem);
+  line-height: 1.12;
+  color: #f7f8f2;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.5), 0 0 6px rgba(255, 255, 255, 0.12);
+}
+/* a slightly wobbly chalk underline */
+.sp-chalk h3::after {
+  content: "";
+  display: block;
+  width: 72%;
+  height: 8px;
+  margin-top: 0.5rem;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M2 5 C40 2 70 7 110 4 S170 2 198 5' fill='none' stroke='%23f2f4ec' stroke-opacity='.75' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+}
+.sp-chalk:nth-child(2) h3::after { width: 64%; }
+.sp-chalk p { margin-top: 1rem; font-size: 1rem; line-height: 1.7; color: rgba(236, 240, 232, 0.82); }
+.sp-chalk__ledge { position: relative; height: 16px; margin: 0 calc(-1 * clamp(1.4rem, 3.4vw, 2.8rem)); background: #a06d42; box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.15); }
+.sp-chalk__ledge i { position: absolute; top: -7px; height: 7px; border-radius: 3px; background: #f4f4ee; }
+.sp-chalk__ledge i:first-child { left: 14%; width: 44px; }
+.sp-chalk__ledge i:last-child { left: 22%; width: 30px; background: #f2c94c; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .sp-board-chalk .sp-chalk h3::after { clip-path: inset(0 100% 0 0); transition: clip-path 900ms var(--ease-out); }
+  .js .sp-board-chalk .sp-chalk:nth-child(1) h3::after { transition-delay: 400ms; }
+  .js .sp-board-chalk .sp-chalk:nth-child(2) h3::after { transition-delay: 700ms; }
+  .js .sp-board-chalk .sp-chalk:nth-child(3) h3::after { transition-delay: 1000ms; }
+  .js .sp-board-chalk.is-visible .sp-chalk h3::after { clip-path: inset(0 0 0 0); }
+}
+@media (max-width: 900px) { .sp-chalk__cols { grid-template-columns: minmax(0, 1fr); } }
+
+/* --------------------------------------------------------------------------
+   Learning Management: course modules. Each card is a module with a
+   progress bar; the heading is the module title.
+   -------------------------------------------------------------------------- */
+.sp-mods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1rem, 2vw, 1.5rem); }
+.sp-mod {
+  display: grid;
+  grid-row: span 5;
+  grid-template-rows: subgrid;
+  align-content: start;
+  row-gap: 0.85rem;
+  padding: clamp(1.3rem, 2.2vw, 1.7rem);
+  border: 1px solid var(--line-light);
+  border-radius: 16px;
+  background: var(--paper);
+}
+.sp-mod__top { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-600); }
+.sp-mod__top span:first-child { color: var(--cobalt); }
+.sp-mod__bar { display: block; height: 6px; border-radius: 3px; background: color-mix(in srgb, var(--cobalt) 12%, transparent); overflow: hidden; }
+.sp-mod__bar i { display: block; height: 100%; width: var(--p); border-radius: 3px; background: linear-gradient(90deg, var(--cobalt-bright), var(--cobalt)); }
+.sp-mod h3 {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  background: var(--white);
+  border: 1px solid var(--line-light);
+  font-family: var(--sans);
+  font-weight: 650;
+  font-size: clamp(1.15rem, 1.7vw, 1.35rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--ink-900);
+}
+ul.sp-mod__lessons { display: grid; gap: 0.35rem; }
+.sp-mod__lessons li { position: relative; padding-left: 1.6rem; font-size: 0.88rem; color: var(--ink-900); }
+.sp-mod__lessons li::before { content: "\25B6"; position: absolute; left: 0; top: 0.15rem; display: grid; place-items: center; width: 1.05rem; height: 1.05rem; border-radius: 50%; background: color-mix(in srgb, var(--cobalt) 14%, transparent); font-size: 0.45rem; color: var(--cobalt); }
+.sp-mod > p:last-child { font-size: 0.96rem; line-height: 1.62; color: var(--ink-600); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .sp-mod .sp-mod__bar i { width: 0; transition: width 1100ms var(--ease-out) 300ms; }
+  .js .sp-mod.is-visible .sp-mod__bar i { width: var(--p); }
+}
+@media (max-width: 900px) {
+  .sp-mods { grid-template-columns: minmax(0, 1fr); max-width: 560px; row-gap: 1rem; }
+  .sp-mod { grid-row: auto; grid-template-rows: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Student Information: ruled index cards with a red title line and a
+   punched hole; the heading is written on the title line.
+   -------------------------------------------------------------------------- */
+.sp-icards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1rem, 2vw, 1.5rem); }
+.sp-icard {
+  position: relative;
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  align-content: start;
+  row-gap: 0;
+  padding: 1.1rem clamp(1.2rem, 2vw, 1.5rem) 1.4rem;
+  border-radius: 4px;
+  background-color: #fffef9;
+  box-shadow: 0 1px 2px rgba(20, 20, 40, 0.12), 0 18px 34px -26px rgba(20, 20, 40, 0.45);
+}
+.sp-icard:nth-child(1) { transform: rotate(-0.8deg); }
+.sp-icard:nth-child(3) { transform: rotate(0.7deg); }
+/* punched hole */
+.sp-icard::before { content: ""; position: absolute; left: 50%; bottom: 0.7rem; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: var(--white); box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25); }
+.sp-icard__no { justify-self: end; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-400); }
+.sp-icard h3 {
+  align-self: end;
+  padding: 0.5rem 0 0.45rem;
+  border-bottom: 2px solid #e05252;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.4rem, 2.1vw, 1.75rem);
+  line-height: 1.12;
+  color: #12306f;
+}
+.sp-icard p:last-child { padding: 0.5rem 0 1.6rem; background: repeating-linear-gradient(transparent 0 27px, #cfdcf3 27px 28px) 0 0.5rem / 100% calc(100% - 1.6rem) no-repeat; font-size: 0.98rem; line-height: 28px; color: #2d3340; }
+@media (max-width: 900px) {
+  .sp-icards { grid-template-columns: minmax(0, 1fr); max-width: 560px; row-gap: 1.2rem; }
+  .sp-icard { grid-row: auto; grid-template-rows: none; transform: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   Enrollment: envelopes. Each card has a folded flap and a wax seal; the
+   heading is the letter's title.
+   -------------------------------------------------------------------------- */
+.sp-letters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1rem, 2vw, 1.5rem); }
+.sp-letter {
+  position: relative;
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  align-content: start;
+  row-gap: 1rem;
+  padding: 7rem clamp(1.3rem, 2.2vw, 1.7rem) 1.6rem;
+  border: 1px solid #e3dccb;
+  border-radius: 8px;
+  background: #faf6ec;
+  overflow: hidden;
+}
+.sp-letter__flap {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 4.4rem;
+  background: #efe6d0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.sp-letter__flap::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 94%, rgba(0, 0, 0, 0.06)); }
+.sp-letter__seal {
+  position: absolute;
+  left: 50%; top: 3.1rem;
+  display: grid;
+  place-items: center;
+  width: 2.8rem; height: 2.8rem;
+  margin-left: -1.4rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #c9474a, #8f1f24 70%);
+  box-shadow: 0 0 0 3px rgba(143, 31, 36, 0.25), 0 4px 8px rgba(80, 10, 10, 0.35);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: rgba(255, 230, 225, 0.9);
+}
+.sp-letter h3 {
+  align-self: end;
+  text-align: center;
+  font-family: var(--serif);
+  font-weight: 450;
+  font-size: clamp(1.45rem, 2.2vw, 1.8rem);
+  line-height: 1.12;
+  color: #3a1d14;
+}
+.sp-letter h3::after { content: ""; display: block; width: 3rem; height: 1px; margin: 0.8rem auto 0; background: #c9a77a; }
+.sp-letter p { font-family: var(--serif); font-size: 1.04rem; line-height: 1.65; color: #4a4038; text-align: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .sp-letter .sp-letter__seal { transform: scale(1.6); opacity: 0; transition: transform 380ms cubic-bezier(0.2, 1.4, 0.4, 1) 450ms, opacity 200ms ease-out 450ms; }
+  .js .sp-letter.is-visible .sp-letter__seal { transform: none; opacity: 1; }
+}
+@media (max-width: 900px) {
+  .sp-letters { grid-template-columns: minmax(0, 1fr); max-width: 520px; row-gap: 1.2rem; }
+  .sp-letter { grid-row: auto; grid-template-rows: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Supply Chain hub: shipping containers. Each heading is stencilled on a
+   corrugated container door with its container code and locking bars.
+   -------------------------------------------------------------------------- */
+.sp-yard { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1rem, 2vw, 1.5rem); }
+.sp-box { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 1.1rem; }
+.sp-box--a { --steel: #1f4fbf; }
+.sp-box--b { --steel: #b5532a; }
+.sp-box--c { --steel: #24624a; }
+.sp-box__door {
+  position: relative;
+  display: grid;
+  align-content: space-between;
+  gap: 1.2rem;
+  min-height: 12rem;
+  padding: 1.1rem 1.3rem 1.2rem;
+  border: 5px solid color-mix(in srgb, var(--steel) 70%, #000);
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.09) 0 10px, rgba(0, 0, 0, 0.1) 10px 13px, transparent 13px 22px),
+    var(--steel);
+  color: #fff;
+  overflow: hidden;
+}
+.sp-box__code { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; color: rgba(255, 255, 255, 0.82); }
+.sp-box h3 {
+  position: relative;
+  max-width: 85%;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+.sp-box__bars { position: absolute; right: 1rem; top: 0.9rem; bottom: 0.9rem; display: flex; gap: 7px; }
+.sp-box__bars i { width: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.45); }
+.sp-box > p { font-size: 0.98rem; line-height: 1.65; color: var(--ink-600); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .sp-box .sp-box__door { transform: translateX(-24px); opacity: 0; transition: transform 700ms var(--ease-out), opacity 400ms ease-out; }
+  .js .sp-box.is-visible .sp-box__door { transform: none; opacity: 1; }
+}
+@media (max-width: 900px) {
+  .sp-yard { grid-template-columns: minmax(0, 1fr); max-width: 560px; row-gap: 1.4rem; }
+  .sp-box { grid-row: auto; grid-template-rows: none; }
+  .sp-box__door { min-height: 9rem; }
+}
+
+/* --------------------------------------------------------------------------
+   3PL & Warehouse: rack labels. Three yellow location labels clipped to an
+   orange pallet-rack beam, each with its heading and a barcode.
+   -------------------------------------------------------------------------- */
+.sp-rack { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1rem, 2vw, 1.5rem); padding-top: 1.1rem; }
+.sp-rack__beam { position: absolute; left: -1%; right: -1%; top: 0; height: 2.4rem; border-radius: 3px; background: linear-gradient(#f07a24, #d9601a); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15); }
+.sp-rack__beam::before { content: ""; position: absolute; inset: 0.6rem 0.8rem auto; height: 6px; background: radial-gradient(circle, rgba(0, 0, 0, 0.35) 2px, transparent 2.5px) 0 0 / 22px 6px repeat-x; }
+.sp-bay { position: relative; display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 1.2rem; }
+.sp-label {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.9rem 1.1rem 1rem;
+  border-radius: 3px;
+  background: #ffd84a;
+  color: #14140f;
+  box-shadow: 0 10px 20px -12px rgba(60, 40, 0, 0.5);
+}
+.sp-label__loc { font-family: var(--mono); font-weight: 600; font-size: 0.82rem; letter-spacing: 0.1em; }
+.sp-label h3 { font-family: var(--sans); font-weight: 800; font-size: clamp(1.25rem, 1.9vw, 1.55rem); line-height: 1.12; letter-spacing: -0.02em; text-transform: uppercase; }
+.sp-label__code {
+  display: block;
+  height: 30px;
+  background: repeating-linear-gradient(90deg, #14140f 0 2px, transparent 2px 4px, #14140f 4px 5px, transparent 5px 8px, #14140f 8px 11px, transparent 11px 12px, #14140f 12px 13px, transparent 13px 16px);
+}
+.sp-bay > p { font-size: 0.98rem; line-height: 1.65; color: var(--ink-600); }
+@media (max-width: 900px) {
+  .sp-rack { grid-template-columns: minmax(0, 1fr); max-width: 520px; row-gap: 1.6rem; padding-top: 0; }
+  .sp-rack__beam { display: none; }
+  .sp-bay { grid-row: auto; grid-template-rows: none; }
+  .sp-label { border-top: 10px solid #e06a1e; }
+}
+
+/* --------------------------------------------------------------------------
+   Supplier Risk: gauge dials. Each card leads with a half-circle gauge;
+   the heading sits under it on a tinted plate.
+   -------------------------------------------------------------------------- */
+.sp-dials { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1rem, 2vw, 1.5rem); }
+.sp-dial {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  justify-items: center;
+  align-content: start;
+  row-gap: 1.1rem;
+  padding: clamp(1.4rem, 2.4vw, 1.9rem);
+  border-radius: 18px;
+  background: var(--white);
+  border: 1px solid var(--line-light);
+  text-align: center;
+}
+.sp-dial__gauge { position: relative; display: grid; justify-items: center; width: 11rem; height: 5.9rem; padding-top: 2.6rem; }
+.sp-dial__arc {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 11rem;
+  border-radius: 50%;
+  background: conic-gradient(from -90deg, var(--tone) calc(var(--v) * 180deg), color-mix(in srgb, var(--ink-900) 8%, transparent) 0 180deg, transparent 0);
+  -webkit-mask: radial-gradient(circle, transparent 54%, #000 55%);
+  mask: radial-gradient(circle, transparent 54%, #000 55%);
+}
+.sp-dial__gauge b { font-family: var(--serif); font-weight: 450; font-size: 1.4rem; line-height: 1; color: var(--ink-900); }
+.sp-dial__gauge em { font-style: normal; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-600); }
+.sp-dial h3 {
+  align-self: start;
+  padding: 0.55rem 0.9rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--tone) 12%, var(--white));
+  font-family: var(--serif);
+  font-weight: 450;
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  line-height: 1.15;
+  color: var(--ink-900);
+}
+.sp-dial > p { font-size: 0.97rem; line-height: 1.62; color: var(--ink-600); }
+/* the gauge sweeps from empty to its value (browsers without @property just show the value) */
+@property --sweep { syntax: "<number>"; inherits: true; initial-value: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .sp-dial .sp-dial__arc { background: conic-gradient(from -90deg, var(--tone) calc(var(--sweep) * 180deg), color-mix(in srgb, var(--ink-900) 8%, transparent) 0 180deg, transparent 0); transition: --sweep 1200ms var(--ease-out) 300ms; }
+  .js .sp-dial.is-visible .sp-dial__arc { --sweep: var(--v); }
+}
+@media (max-width: 900px) {
+  .sp-dials { grid-template-columns: minmax(0, 1fr); max-width: 520px; row-gap: 1rem; }
+  .sp-dial { grid-row: auto; grid-template-rows: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Supply Chain ERP & Retail: printed receipts with torn edges. Each heading
+   is printed reversed out of a black bar.
+   -------------------------------------------------------------------------- */
+.sp-receipts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1rem, 2.4vw, 2rem); align-items: start; }
+.sp-receipt {
+  position: relative;
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 1rem;
+  padding: 1.4rem 1.4rem 2.2rem;
+  background: #fffefb;
+  font-family: var(--mono);
+  color: #22222a;
+  box-shadow: 0 1px 2px rgba(20, 20, 30, 0.1);
+}
+/* torn zig-zag bottom edge */
+.sp-receipt::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -9px;
+  height: 10px;
+  background:
+    linear-gradient(135deg, #fffefb 50%, transparent 50%) 0 0 / 14px 10px repeat-x,
+    linear-gradient(225deg, #fffefb 50%, transparent 50%) 0 0 / 14px 10px repeat-x;
+  filter: drop-shadow(0 1px 0 rgba(20, 20, 30, 0.08));
+}
+.sp-receipt:nth-child(2) { margin-top: 1.4rem; }
+.sp-receipt__top { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; color: #6a6a72; border-bottom: 1px dashed #c9c9cf; padding-bottom: 0.8rem; }
+.sp-receipt h3 { align-self: start; padding: 0.5rem 0.7rem; background: #17171c; font-family: var(--mono); font-weight: 600; font-size: clamp(0.98rem, 1.4vw, 1.12rem); line-height: 1.3; letter-spacing: 0.02em; text-transform: uppercase; color: #fff; }
+.sp-receipt > p { font-family: var(--sans); font-size: 0.95rem; line-height: 1.62; color: var(--ink-600); }
+dl.sp-receipt__lines { display: grid; gap: 0.35rem; margin: 0; padding-top: 0.8rem; border-top: 1px dashed #c9c9cf; font-size: 0.8rem; }
+/* item ........ value, with dot leaders */
+.sp-receipt__lines div { display: flex; align-items: baseline; gap: 0.5rem; }
+.sp-receipt__lines dt { flex: none; white-space: nowrap; }
+.sp-receipt__lines div::before { content: ""; order: 1; flex: 1; border-bottom: 1px dotted #9a9aa2; transform: translateY(-3px); }
+.sp-receipt__lines dd { order: 2; margin: 0; font-weight: 600; white-space: nowrap; }
+.sp-receipt__lines .is-total { margin-top: 0.3rem; padding-top: 0.5rem; border-top: 2px solid #22222a; font-size: 0.86rem; font-weight: 600; }
+@media (max-width: 900px) {
+  .sp-receipts { grid-template-columns: minmax(0, 1fr); max-width: 480px; row-gap: 1.2rem; }
+  .sp-receipt { grid-row: auto; grid-template-rows: none; }
+  .sp-receipt:nth-child(2) { margin-top: 0; }
+}

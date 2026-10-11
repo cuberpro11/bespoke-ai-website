@@ -168,6 +168,19 @@
 - **The closing lines point to what each page shows next.** Where the next section is a working demo (Workflow, Client Relations, Commercial), the line says so.
 - **Checks:** every page was checked at 320, 390, 820 and 1440 px, with no sideways scrolling. With reduced motion turned on, everything shows its finished state.
 
+### Phase 7: "Start from where you are" on the EdTech and Supply Chain pages
+- **The section now sits below the hero on eight more pages:** the EdTech hub, Learning Management Systems, Student Information Systems, Enrollment Information Systems, the Supply Chains & Logistics hub, 3PL/Freight/Warehouse, Supplier & Risk Management, and Supply Chain ERP & Retail.
+- **Each page has its own design that makes the three headings stand out:**
+  - **EdTech hub, "Better systems for your school, starting with the ones you have."** A chalkboard in a wooden frame. The headings are written in chalk, with hand-drawn underlines that sketch in on scroll.
+  - **Learning Management Systems, "Keep your courses. Give them a better home."** Three course modules with filling progress bars. The headings are module titles with two "lessons" listed under each.
+  - **Student Information Systems, "One record for every student, without starting from scratch."** Ruled index cards with a red title line and a punched hole. Each heading is written on the title line.
+  - **Enrollment Information Systems, "From inquiry to enrolled, on the systems you already use."** Envelopes with a folded flap and a wax seal (A / R / U) that presses on as you scroll. Each heading is the letter's title.
+  - **Supply Chains & Logistics hub, "Move more freight without ripping out your stack."** Three shipping containers. Each heading is stencilled on a corrugated door with a container code and locking bars, and the containers slide in.
+  - **3PL, Freight & Warehouse, "A better warehouse, with the systems already on the floor."** Yellow rack location labels clipped to an orange pallet-rack beam. Each label has a location code, the heading and a barcode.
+  - **Supplier & Risk Management, "Know your suppliers better, with the data you already have."** Gauge dials that sweep up to their value. Each heading sits on a tinted plate under its gauge.
+  - **Supply Chain ERP & Retail, "Run the business on systems that finally connect."** Printed receipts with torn edges. Each heading is printed reversed out of a black bar, followed by line items (e.g. "Per-seat fees ...... $0.00").
+- **Checks:** every page was checked at 320, 390, 820 and 1440 px, with no sideways scrolling. With reduced motion turned on, everything shows its finished state.
+
 ## Batch 5 (October 2026)
 
 ### Page titles and search snippets
