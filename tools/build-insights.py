@@ -19,7 +19,12 @@ everything else in articles.json.
 Related articles: other articles sharing a topic label come first, then ones
 in the same family (Trading and Risk Management sit under Finance), then ones
 that only share a generic label such as AI Usage Best Practices. Ties go to
-the articles that follow this one on the hub, wrapping around.
+the articles that follow this one on the hub, wrapping around. If fewer than
+RELATED_MAX articles match at all, the rest of the row is filled in hub order
+so every article ends with a full row.
+
+Hub filters count an article under its labels' parents too, so "Finance"
+lists the Trading and Risk Management articles as well.
 
 Articles carry no dates, visible or in JSON-LD, so they stay evergreen.
 
@@ -86,13 +91,30 @@ def related(a, articles, labels):
         score = 0
         score += 100 * len(set(mine) & set(theirs))
         score += 10 * len(fams & {family(l) for l in theirs})
+        # a family match counts a little more when it is the other article's main topic
+        if not labels[b["labels"][0]].get("generic") and family(b["labels"][0]) in fams:
+            score += 5
         score += 1 * len(set(mine_generic) & set(b["labels"]))
         if score:
             # ties rotate from this article's own position, so a broad label
             # like AI Usage Best Practices spreads links across every article
             scored.append((-score, (i - me) % len(articles), b))
     scored.sort(key=lambda t: (t[0], t[1]))
-    return [b for _, _, b in scored[:RELATED_MAX]]
+    picks = [b for _, _, b in scored[:RELATED_MAX]]
+    # too few matches: fill the row in hub order so no article ends on a gap
+    rest = sorted((b for b in articles if b is not a and b not in picks),
+                  key=lambda b: (articles.index(b) - me) % len(articles))
+    return picks + rest[:RELATED_MAX - len(picks)]
+
+
+def with_parents(a, labels):
+    """An article's labels plus their parents, for hub filtering."""
+    out = []
+    for lid in a["labels"]:
+        for l in (lid, labels[lid].get("parent")):
+            if l and l not in out:
+                out.append(l)
+    return out
 
 
 # ----------------------------------------------------------------- snippets --
@@ -273,7 +295,7 @@ def hub_head(articles):
 def hub_filters(articles, labels):
     counts = {}
     for a in articles:
-        for l in a["labels"]:
+        for l in with_parents(a, labels):
             counts[l] = counts.get(l, 0) + 1
     used = [l for l in labels if l in counts]
     out = [f'<button class="ins-filter" type="button" data-filter="all" aria-pressed="true">All <span>{len(articles)}</span></button>']
@@ -287,7 +309,7 @@ def hub_cards(articles, labels):
     out = []
     for n, a in enumerate(articles, 1):
         out += [
-            f'<li class="ins-card" data-labels="{" ".join(a["labels"])}">',
+            f'<li class="ins-card" data-labels="{" ".join(with_parents(a, labels))}">',
             f'  <a class="ins-card__link" href="/insights/{a["slug"]}/">',
             f'    <span class="ins-card__n">{n:02d}</span>',
             f'    <span class="ins-card__chips">{"".join(chips(a, labels, "ins-chip ins-chip--sm", False))}</span>',

@@ -208,7 +208,7 @@
           "href": "/custom-edtech-software/"
         },
         "secondary": {
-          "text": "Schedule a Call",
+          "text": "Contact Us",
           "href": "/contact"
         }
       }
@@ -265,7 +265,10 @@
       "dek": "The statistical signals detectors look for, how to check AI-written work in law, finance and education, and where automated scores fall short.",
       "blurb": "How AI detectors actually work, what to look for in legal, financial and academic writing, and why a detector score should never be the final word.",
       "labels": [
-        "ai-best-practices"
+        "ai-best-practices",
+        "legal",
+        "finance",
+        "edtech"
       ],
       "cta": {
         "heading": "Building Grounded AI Systems with Bespoke AI",
@@ -288,7 +291,8 @@
       "dek": "No futuristic systems required: how mission-driven teams use AI to find answers, query their data and write funder reports faster, and how to protect the people they serve.",
       "blurb": "Source-cited research, plain-English data questions and grant reports drafted from real program data, with the privacy and bias safeguards vulnerable communities deserve.",
       "labels": [
-        "ai-best-practices"
+        "ai-best-practices",
+        "general-services"
       ],
       "cta": {
         "heading": "Responsible Engineering for Mission-Driven Organizations",
@@ -298,7 +302,7 @@
           "href": "/custom-general-service-software/"
         },
         "secondary": {
-          "text": "Schedule an Architecture Call",
+          "text": "Contact Us",
           "href": "/contact"
         }
       }

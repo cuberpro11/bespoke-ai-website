@@ -212,6 +212,28 @@
 - **Tooling:** `sync-shared.py --check`, `build-insights.py --check`, `audit-seo.py`, `check-links.py` and `audit-clusters.py` all pass.
 - **Not testable locally:** the Netlify redirects can only be confirmed after deploy. A quick check is to open `getbespoke.ai/articles/anything` and `getbespoke.ai/insights.html` and confirm both land on `/insights/`.
 
+### Follow-up: review fixes
+- **Insights topic filters now include sub-topics.** "Finance" lists the Trading and Risk Management articles as well, so it shows 4 articles instead of 1. The chips on each card still show the article's own labels.
+- **Every article ends with three related articles.** Forex and Risk previously showed only two. When too few articles match, the row fills up in listing order. Ties now favour articles whose main topic is in the same family.
+- **More labels:**
+  - "How to Detect AI-Generated Content" is also labelled Legal, Finance and EdTech, since it has a section on each.
+  - "How Nonprofits Can Use AI for Social Good" is also labelled General Services, the page its button links to.
+- **Contact button:** the EdTech and Nonprofits articles now say "Contact Us", matching the other five articles and the brief's "Contact can always be the same". They previously said "Schedule a Call" and "Schedule an Architecture Call".
+- **Accessibility:** the topic filter group's label attribute was misspelled (`aria-labeledby`), so screen readers didn't announce it. It's now `aria-labelledby`.
+- **"Start from where you are" copy pass** on all 26 pages:
+  - Each opening paragraph now describes the reader's situation instead of listing add / replace / upgrade, which the three cards right below already cover.
+  - The "Upgrade" cards vary their wording but still say the connection is made through APIs. The identical sentence now appears on 9 pages, down from 25.
+  - Repeated per-user / per-seat pricing complaints were trimmed where they weren't specific to the page.
+  - Jargon swapped for plain words:
+    - "tickmark" → "flags anything that doesn't line up" (Accounting)
+    - "covenant breaches" → "borrowers at risk of breaking their loan terms" (Risk)
+    - "LPs" → "investors" (Property CRM)
+    - "pro forma" → "financial model" (Feasibility)
+    - "accessorial fees" → "extra service fees" (3PL)
+    - "rent roll" → "rent schedule" (Commercial)
+    - "KYC" → "client checks" (Compliance)
+- **About:** removed the AI-generator sparkle watermark from the bottom-right corner of Abir's photo.
+
 ## Batch 5 (October 2026)
 
 ### Page titles and search snippets
