@@ -2,6 +2,12 @@
 
 ## Batch 6 (October 2026)
 
+**In short:**
+- **Insights:** the Industry Analysis section is back as **Insights**, with seven new articles. It has labels and topic filters, related articles, a shared closing call to action per article, and BlogPosting structured data.
+- **Start from where you are:** every service page (27 pages) now has a section under the hero covering the three ways Bespoke AI helps: add something new, replace what isn't working, and upgrade what you already have. Each page has its own design.
+- **About:** Ozzy's photo is fixed.
+- **Trailing slashes:** the category hubs and Demos now use their trailing-slash addresses everywhere, which removes a redirect hop.
+
 ### Phase 1: Ozzy's photo, the Insights section, and the first article
 - **About:** Ozzy's photo was rebuilt from his original portrait. The previous version had stretched, smeared shoulders from an earlier resize. It is now scaled to match the rest of the team, with plain black edges and no AI-generator watermark.
 - **Insights is back,** under its new name.
@@ -190,6 +196,21 @@
   - **Knowledge Base Software, "Find answers faster in what your team already knows."** A search page. A search bar reads "Where should we start?", and each heading is a blue result title under its breadcrumb.
   - **Automated Email Response, "Answer every email from the inbox you already use."** An inbox with three unread messages. Each heading is the bold subject line under the sender and time, and the messages arrive one by one.
 - **Checks:** every page was checked at 320, 390, 820 and 1440 px, with no sideways scrolling.
+
+### Phase 9: Final QA
+- **Full crawl.** Every page in the sitemap, plus the 404 page and the five noindex demo apps, was loaded at 1440, 820, 390, 360 and 320 px (47 pages × 5 widths). There was no horizontal overflow, no console errors, no failed requests and no broken images.
+- **Animated figures.** All 19 article figures were checked:
+  - With motion on, each one starts when it scrolls into view and cycles through its steps. The Forex news panel steps through all three headlines, and the trading desk keeps adding orders.
+  - With reduced motion turned on, each one shows its complete final frame, with every element and all text visible.
+- **Structured data.** Every page's JSON-LD parses, and every `@id` reference resolves.
+  - The seven BlogPosting entries each have a headline matching the H1, a url and mainEntityOfPage matching the trailing-slash canonical, Bespoke AI as author and publisher, an image, a section and keywords from their labels, and a link to the Insights blog.
+  - No `datePublished` or `dateModified` appears anywhere.
+- **Sitemap and redirects**
+  - The sitemap has 41 URLs, including `/insights/` and the seven articles, all with trailing slashes. No `/articles/` URLs remain.
+  - `/articles/*` and `/insights.html` 301 to `/insights/`.
+  - robots.txt allows `/insights/`.
+- **Tooling:** `sync-shared.py --check`, `build-insights.py --check`, `audit-seo.py`, `check-links.py` and `audit-clusters.py` all pass.
+- **Not testable locally:** the Netlify redirects can only be confirmed after deploy. A quick check is to open `getbespoke.ai/articles/anything` and `getbespoke.ai/insights.html` and confirm both land on `/insights/`.
 
 ## Batch 5 (October 2026)
 
