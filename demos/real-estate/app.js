@@ -30,6 +30,7 @@
     tenantQuery: "",
     tenantBorough: "All",
     ledgerCategory: "All",
+    ledgerStatus: "All",
     autopilot: true,
     spend: 150,
     rating: 4.5,
@@ -146,6 +147,10 @@
       critical = '<div class="unit-pop__alert unit-pop__alert--urgent"><b>Emergency · ' + esc(e.category) + " · " + esc(e.ticket) + "</b>" + esc(e.issue) + "</div>";
     } else if (a) {
       critical = '<div class="unit-pop__alert unit-pop__alert--warn"><b>Lease</b>' + esc(a.note) + "</div>";
+    } else if (pastDueFor(t.unit).length) {
+      var pd = pastDueFor(t.unit)[0];
+      critical = '<div class="unit-pop__alert unit-pop__alert--warn"><b>Past due · ' + esc(pd.id) + "</b>" +
+                 money(pd.amount) + " to " + esc(pd.vendor) + ", " + dueNote(pd).sub + "</div>";
     } else if (t.notes) {
       critical = '<div class="unit-pop__alert"><b>Note</b>' + esc(t.notes) + "</div>";
     }
@@ -401,7 +406,8 @@
 
   function emergencyFor(unit) { return D.emergencies.filter(function (e) { return e.unit === unit; })[0]; }
   function attentionFor(unit) { return D.attention.filter(function (a) { return a.unit === unit; })[0]; }
-  function ledgerFor(unit) { return D.ledger.filter(function (r) { return r.unit.indexOf(unit + " ") === 0; }); }
+  function ledgerFor(unit) { return sortedLedger().filter(function (r) { return r.unit.indexOf(unit + " ") === 0; }); }
+  function pastDueFor(unit) { return ledgerFor(unit).filter(function (r) { return r.status === "past_due"; }); }
 
   function building(t) { return t.address.split(",")[0]; }
 
@@ -559,6 +565,11 @@
       critical.push('<div class="alert alert--warn"><div class="alert__top"><span class="badge badge--warn">Lease</span></div>' +
         '<p class="alert__text">' + esc(a.note) + "</p></div>");
     }
+    pastDueFor(t.unit).forEach(function (r) {
+      critical.push('<div class="alert alert--warn"><div class="alert__top"><span class="badge badge--pastdue">Past due</span>' +
+        '<span class="alert__ticket">' + esc(r.id) + " · " + money(r.amount) + "</span></div>" +
+        '<p class="alert__text">' + esc(r.vendor) + ": " + esc(r.description) + ". The invoice is " + dueNote(r).sub + ".</p></div>");
+    });
     if (t.notes) {
       critical.push('<div class="alert"><div class="alert__top"><span class="badge badge--note">Note</span></div>' +
         '<p class="alert__text">' + esc(t.notes) + "</p></div>");
@@ -569,10 +580,12 @@
 
     var historyHtml = history.length
       ? '<table class="table table--mini"><tbody>' + history.map(function (r) {
-          return "<tr><td class=\"dim nowrap\">" + esc(r.date) + "</td>" +
+          var due = dueNote(r);
+          return '<tr class="lrow lrow--' + LEDGER_STATUS[r.status].badge + '"><td class="nowrap"><div class="rowstack ldue"><span>' + due.main + "</span>" +
+                   (due.sub ? "<small>" + due.sub + "</small>" : "") + "</div></td>" +
                  '<td><div class="rowstack"><span>' + esc(r.vendor) + "</span><small>" + esc(r.description) + "</small></div></td>" +
                  '<td class="num">' + money(r.amount) + "</td>" +
-                 '<td><span class="badge badge--paid">Paid</span></td></tr>';
+                 "<td>" + statusBadge(r) + "</td></tr>";
         }).join("") + "</tbody></table>"
       : '<p class="profile__clear">No expenses logged for this unit.</p>';
 
@@ -738,6 +751,79 @@
 
   /* -------------------------------------------------------------- ledger -- */
 
+  var LEDGER_STATUS = {
+    past_due: { label: "Past due", badge: "pastdue" },
+    upcoming: { label: "Upcoming", badge: "upcoming" },
+    paid:     { label: "Paid",     badge: "paid" }
+  };
+  var STATUS_RANK = { past_due: 0, upcoming: 1, paid: 2 };
+
+  // mm/dd/yyyy → whole days since the epoch, so date maths never drifts
+  function dayNum(mdy) {
+    var p = mdy.split("/").map(Number);
+    return Date.UTC(p[2], p[0] - 1, p[1]) / 864e5;
+  }
+  var TODAY = dayNum(D.asOf.split("-").slice(1).concat(D.asOf.split("-")[0]).join("/"));
+
+  function shortDate(mdy) {
+    var p = mdy.split("/").map(Number);
+    return MONTHS[p[0] - 1] + " " + p[1];
+  }
+
+  function statusBadge(r) {
+    var ls = LEDGER_STATUS[r.status];
+    return '<span class="badge badge--' + ls.badge + '">' + ls.label + "</span>";
+  }
+
+  // "9 days overdue" / "in 4 days" / "Paid Jun 15"
+  function dueNote(r) {
+    if (r.status === "paid") { return { main: "Paid " + shortDate(r.date), sub: "" }; }
+    var d = dayNum(r.due) - TODAY;
+    if (r.status === "past_due") {
+      var late = -d;
+      return { main: "Due " + shortDate(r.due), sub: late + (late === 1 ? " day" : " days") + " overdue" };
+    }
+    return { main: "Due " + shortDate(r.due), sub: d === 0 ? "today" : d === 1 ? "tomorrow" : "in " + d + " days" };
+  }
+
+  function sortedLedger() {
+    return D.ledger.slice().sort(function (a, b) {
+      if (a.status !== b.status) { return STATUS_RANK[a.status] - STATUS_RANK[b.status]; }
+      if (a.status === "paid") { return dayNum(b.date) - dayNum(a.date); }
+      return dayNum(a.due) - dayNum(b.due);
+    });
+  }
+
+  function sum(rows) { return rows.reduce(function (n, r) { return n + r.amount; }, 0); }
+  function byStatus(st) { return D.ledger.filter(function (r) { return r.status === st; }); }
+
+  function renderLedgerSummary() {
+    var past = byStatus("past_due"), up = sortedLedger().filter(function (r) { return r.status === "upcoming"; });
+    var paid = byStatus("paid");
+    var oldest = past.reduce(function (m, r) { return Math.max(m, TODAY - dayNum(r.due)); }, 0);
+    var tiles = [
+      { key: "past_due", label: "Past due", rows: past, note: past.length ? "Oldest " + oldest + " days overdue" : "Nothing overdue" },
+      { key: "upcoming", label: "Upcoming", rows: up, note: up.length ? "Next due " + shortDate(up[0].due) : "Nothing scheduled" },
+      { key: "paid", label: "Paid", rows: paid, note: "Since " + shortDate(paid.map(function (r) { return r.date; }).sort(function (a, b) { return dayNum(a) - dayNum(b); })[0]) }
+    ];
+    $("#ledgerSummary").innerHTML = tiles.map(function (t) {
+      return '<button type="button" class="lsum lsum--' + LEDGER_STATUS[t.key].badge + (state.ledgerStatus === t.key ? " is-active" : "") +
+             '" data-status="' + t.key + '" aria-pressed="' + (state.ledgerStatus === t.key ? "true" : "false") + '">' +
+               '<span class="lsum__label">' + t.label + ' <span class="lsum__count">' + t.rows.length + "</span></span>" +
+               '<span class="lsum__value">' + money(sum(t.rows)).replace(".00", "") + "</span>" +
+               '<span class="lsum__note">' + t.note + "</span>" +
+             "</button>";
+    }).join("");
+    $$("#ledgerSummary .lsum").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-status");
+        state.ledgerStatus = state.ledgerStatus === k ? "All" : k;
+        renderLedgerSummary();
+        renderLedger();
+      });
+    });
+  }
+
   function renderLedgerChips() {
     var cats = ["All"].concat(D.categories);
     $("#ledgerChips").innerHTML = cats.map(function (c) {
@@ -755,26 +841,34 @@
   }
 
   function renderLedger() {
-    var rows = D.ledger.filter(function (r) {
-      return state.ledgerCategory === "All" || r.category === state.ledgerCategory;
+    var rows = sortedLedger().filter(function (r) {
+      return (state.ledgerCategory === "All" || r.category === state.ledgerCategory) &&
+             (state.ledgerStatus === "All" || r.status === state.ledgerStatus);
     });
 
+    if (!rows.length) {
+      $("#ledgerBody").innerHTML = '<tr><td colspan="7" class="dim">No entries match those filters.</td></tr>';
+      return;
+    }
+
     $("#ledgerBody").innerHTML = rows.map(function (r) {
-      return "<tr>" +
-               '<td class="mono">' + esc(r.id) + "</td>" +
-               '<td class="dim">' + esc(r.date) + "</td>" +
-               '<td class="dim">' + esc(r.unit) + "</td>" +
-               "<td>" + esc(r.category) + "</td>" +
-               '<td><div class="rowstack"><span>' + esc(r.vendor) + "</span><small>" + esc(r.description) + "</small></div></td>" +
-               '<td class="num">' + money(r.amount) + "</td>" +
-               '<td><span class="badge badge--paid">Paid</span></td>' +
+      var code = r.unit.split(" ")[0];
+      var apt = (r.unit.match(/\((.*)\)/) || [])[1] || "";
+      var due = dueNote(r);
+      return '<tr class="lrow lrow--' + LEDGER_STATUS[r.status].badge + '">' +
+               '<td><div class="rowstack"><span class="lid">' + esc(r.id) + "</span><small>" + esc(r.date) + "</small></div></td>" +
+               '<td><div class="rowstack"><a class="tlink lunit" href="#tenant/' + esc(code) + '">' + esc(code) + "</a><small>" + esc(apt) + "</small></div></td>" +
+               '<td><span class="cat cat--' + r.category.toLowerCase() + '">' + esc(r.category) + "</span></td>" +
+               '<td><div class="rowstack"><span class="lvendor">' + esc(r.vendor) + "</span><small>" + esc(r.description) + "</small></div></td>" +
+               '<td><div class="rowstack ldue"><span>' + due.main + "</span>" + (due.sub ? "<small>" + due.sub + "</small>" : "") + "</div></td>" +
+               '<td class="num lamount">' + money(r.amount) + "</td>" +
+               "<td>" + statusBadge(r) + "</td>" +
              "</tr>";
     }).join("");
   }
 
   function renderPaidTotal() {
-    var total = D.ledger.reduce(function (sum, r) { return sum + r.amount; }, 0);
-    $("#paidTotal").textContent = "$" + total.toLocaleString("en-US");
+    $("#paidTotal").textContent = "$" + sum(byStatus("paid")).toLocaleString("en-US");
   }
 
   /* ----------------------------------------------------------- autopilot -- */
@@ -885,6 +979,7 @@
   renderStatusKey();
   renderTenantTabs();
   renderTenants();
+  renderLedgerSummary();
   renderLedgerChips();
   renderLedger();
   renderPaidTotal();

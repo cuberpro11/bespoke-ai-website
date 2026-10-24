@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=7">
+<link rel="stylesheet" href="styles.css?v=8">
 <script>document.documentElement.classList.add("js");</script>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -149,18 +149,21 @@
     <section class="view u-hide" id="view-ledger" role="tabpanel" aria-label="Expense Ledger">
       <h1 class="page__title">Expense Ledger</h1>
 
-      <div class="chips" id="ledgerChips" style="margin-bottom:18px" role="group" aria-label="Filter by job category"></div>
+      <div class="lsums" id="ledgerSummary" role="group" aria-label="Filter by payment status"></div>
 
-      <section class="panel" style="padding-left:0;padding-right:0" aria-label="Expense entries">
+      <div class="chips" id="ledgerChips" style="margin-bottom:14px" role="group" aria-label="Filter by job category"></div>
+
+      <section class="panel lpanel" aria-label="Expense entries">
         <div class="tablewrap">
-          <table class="table">
+          <table class="table table--ledger">
+            <colgroup><col class="c-entry"><col class="c-unit"><col class="c-cat"><col><col class="c-due"><col class="c-amt"><col class="c-status"></colgroup>
             <thead>
               <tr>
                 <th>Entry</th>
-                <th>Date</th>
                 <th>Unit</th>
                 <th>Category</th>
                 <th>Vendor &amp; work</th>
+                <th>Due</th>
                 <th class="num">Amount</th>
                 <th>Status</th>
               </tr>
@@ -252,8 +255,8 @@
   </main>
 </div>
 
-<script src="data.js?v=2" defer></script>
-<script src="app.js?v=6" defer></script>
+<script src="data.js?v=3" defer></script>
+<script src="app.js?v=7" defer></script>
 <script src="/assets/js/demo-back.js" defer></script>
 </body>
 </html>

@@ -97,7 +97,9 @@ window.RE_DATA = (function () {
     { unit: "BK-102", tenant: "Sarah Jenkins",    note: "Lease ends 14 Sep 2026 — renewal offer sent, awaiting reply." }
   ];
 
-  // 15 historical entries across the five job categories. Totals $3,295.00.
+  // 15 paid entries across the five job categories (totals $3,295.00), then
+  // open invoices: past due and upcoming as of AS_OF. Paid rows default
+  // their status below.
   var LEDGER = [
     { id: "EXP-1005", date: "06/03/2026", unit: "MN-102 (Apt 1B)", category: "Electrical", vendor: "Gotham Electric LLC",             description: "Replaced tripping breaker in main panel",              amount: 295 },
     { id: "EXP-1006", date: "06/05/2026", unit: "BX-201 (Apt 4F)", category: "Plumbing",   vendor: "Borough Plumbing & Drain",        description: "Snaked bathroom stack and reseated toilet flange",  amount: 210 },
@@ -113,8 +115,18 @@ window.RE_DATA = (function () {
     { id: "EXP-1003", date: "06/28/2026", unit: "QN-202 (Apt 4F)", category: "Handyman",   vendor: "Dave's Multi-Service Handyman",   description: "Reattached fallen kitchen cabinet door and repaired hinges", amount: 85 },
     { id: "EXP-1014", date: "06/30/2026", unit: "MN-803 (Apt 5A)", category: "Electrical", vendor: "Gotham Electric LLC",             description: "Replaced hallway fixture and dimmer switch",        amount: 185 },
     { id: "EXP-1015", date: "07/01/2026", unit: "QN-203 (Apt 5B)", category: "Plumbing",   vendor: "Borough Plumbing & Drain",        description: "Repaired leaking radiator valve",                   amount: 370 },
-    { id: "EXP-1004", date: "07/02/2026", unit: "BX-101 (Apt 3B)", category: "Locksmith",  vendor: "Central Locksmiths NYC",          description: "Replaced front entrance deadbolt and cut 3 new keys", amount: 110 }
+    { id: "EXP-1004", date: "07/02/2026", unit: "BX-101 (Apt 3B)", category: "Locksmith",  vendor: "Central Locksmiths NYC",          description: "Replaced front entrance deadbolt and cut 3 new keys", amount: 110 },
+
+    { id: "EXP-1018", date: "05/20/2026", unit: "QN-302 (Apt 6D)", category: "Handyman",   vendor: "Staten Fast Handyman & Locksmith",description: "Replaced broken window sash cord",                  amount: 145, status: "past_due", due: "06/19/2026" },
+    { id: "EXP-1016", date: "05/28/2026", unit: "BX-202 (Apt 2A)", category: "Plumbing",   vendor: "Borough Plumbing & Drain",        description: "Replaced cracked kitchen sink trap",                amount: 225, status: "past_due", due: "06/27/2026" },
+    { id: "EXP-1017", date: "06/02/2026", unit: "MN-401 (Apt 4A)", category: "HVAC",       vendor: "Empire Mechanical & HVAC",        description: "Repaired thermostat wiring and reset zone valve",   amount: 310, status: "past_due", due: "07/02/2026" },
+    { id: "EXP-1022", date: "07/01/2026", unit: "MN-601 (Apt 2E)", category: "HVAC",       vendor: "Metro HVAC & Heating Services",   description: "Seasonal AC tune-up for the building",              amount: 540, status: "upcoming", due: "07/20/2026" },
+    { id: "EXP-1019", date: "07/03/2026", unit: "BK-301 (Apt 3A)", category: "Plumbing",   vendor: "Brooklyn Pipe Pro",               description: "Kitchen faucet leak repair (TKT-101 quote)",        amount: 185, status: "upcoming", due: "07/10/2026" },
+    { id: "EXP-1020", date: "07/04/2026", unit: "MN-302 (Apt 3B)", category: "Electrical", vendor: "Gotham Electric LLC",             description: "Replace sparking outlet (TKT-102 quote)",           amount: 320, status: "upcoming", due: "07/12/2026" },
+    { id: "EXP-1021", date: "07/05/2026", unit: "QN-103 (Apt 3A)", category: "Locksmith",  vendor: "Central Locksmiths NYC",          description: "Lockout and cylinder replacement (TKT-103 quote)",  amount: 120, status: "upcoming", due: "07/08/2026" }
   ];
+
+  LEDGER.forEach(function (r) { if (!r.status) { r.status = "paid"; } });
 
   var VENDORS = [
     { id: "V-001", name: "Brooklyn Pipe Pro",                specialty: "Plumber",     rate: "$140/hr",      rating: 4.9 },
