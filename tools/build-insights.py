@@ -311,6 +311,8 @@ def hub_cards(articles, labels):
         out += [
             f'<li class="ins-card" data-labels="{" ".join(with_parents(a, labels))}">',
             f'  <a class="ins-card__link" href="/insights/{a["slug"]}/">',
+            *([f'    <img class="ins-card__img" src="/assets/img/hero/{a["image"]}.jpg" alt="" width="1536" height="1024" loading="lazy" decoding="async">']
+              if a.get("image") else []),
             f'    <span class="ins-card__n">{n:02d}</span>',
             f'    <span class="ins-card__chips">{"".join(chips(a, labels, "ins-chip ins-chip--sm", False))}</span>',
             f'    <h2 class="ins-card__title">{nowrap_hyphens(esc(a["title"]))}</h2>',
