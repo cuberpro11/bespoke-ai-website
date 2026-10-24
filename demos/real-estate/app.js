@@ -112,17 +112,19 @@
     grid.innerHTML = rows.map(function (t) {
       var st = D.status[t.status] || D.status.clean;
       var cls = emergencyFor(t.unit) ? " is-emergency" : t.status !== "clean" ? " is-active" : "";
+      var emergency = cls === " is-emergency";
       return '<a class="unit' + cls + '" href="#tenant/' + esc(t.unit) + '" data-unit="' + esc(t.unit) + '"' +
                ' style="--st:' + st.dot + '" aria-describedby="unitPop"' +
-               ' aria-label="' + esc(t.unit + ", " + t.name + ", " + st.label + (cls === " is-emergency" ? ", active emergency" : "")) + '">' +
+               ' aria-label="' + esc(t.unit + ", " + t.name + ", " + st.label + (emergency ? ", active emergency" : "")) + '">' +
                '<span class="unit__dot" style="background:' + st.dot + '"></span>' +
                '<span class="unit__id">' + esc(t.unit) + "</span>" +
                '<span class="unit__name">' + esc(t.first) + "</span>" +
+               (emergency ? '<span class="unit__flag">Emergency</span>' : "") +
              "</a>";
     }).join("");
   }
 
-  /* One shared popover follows the cursor over a tile (or sits under it on
+  /* One shared popover sits beside the hovered tile (or under it on
      keyboard focus) with the tenant's details. Touch skips it: a tap opens
      the profile straight away. */
 
@@ -182,14 +184,21 @@
     popUnit = null;
   }
 
-  // place the box near (x, y), flipping to stay inside the viewport
-  function placePop(x, y, below) {
-    var gap = 14;
+  // Keep the card next to the tile so the hover lift stays visible.
+  function placePop(tile, anchorY) {
+    var rect = tile.getBoundingClientRect();
+    var gap = 12;
     var w = pop.offsetWidth, h = pop.offsetHeight;
     var vw = document.documentElement.clientWidth, vh = window.innerHeight;
-    var left = x + gap, top = below ? y : y + gap;
-    if (left + w > vw - 8) { left = Math.max(8, x - gap - w); }
-    if (top + h > vh - 8) { top = Math.max(8, (below ? below : y) - gap - h); }
+    var left = rect.right + gap;
+    var top = anchorY - 16;
+    if (left + w > vw - 8) { left = rect.left - gap - w; }
+    if (left < 8) {
+      left = Math.max(8, Math.min(rect.left, vw - w - 8));
+      top = rect.bottom + gap;
+      if (top + h > vh - 8) { top = rect.top - gap - h; }
+    }
+    top = Math.max(8, Math.min(top, vh - h - 8));
     pop.style.left = left + "px";
     pop.style.top = top + "px";
   }
@@ -202,7 +211,7 @@
       var tile = e.target.closest(".unit");
       if (!tile) { hidePop(); return; }
       showPop(tile);
-      placePop(e.clientX, e.clientY);
+      placePop(tile, e.clientY);
     });
     grid.addEventListener("mouseleave", hidePop);
   }
@@ -211,8 +220,7 @@
     var tile = e.target.closest(".unit");
     if (!tile || !tile.matches(":focus-visible")) { return; }
     showPop(tile);
-    var rect = tile.getBoundingClientRect();
-    placePop(rect.left - 14, rect.bottom + 8, rect.top);
+    placePop(tile, tile.getBoundingClientRect().top + 16);
   });
   grid.addEventListener("focusout", hidePop);
   window.addEventListener("scroll", hidePop, { passive: true });
@@ -579,14 +587,14 @@
     }
 
     var historyHtml = history.length
-      ? '<table class="table table--mini"><tbody>' + history.map(function (r) {
+      ? '<div class="tablewrap"><table class="table table--mini"><tbody>' + history.map(function (r) {
           var due = dueNote(r);
           return '<tr class="lrow lrow--' + LEDGER_STATUS[r.status].badge + '"><td class="nowrap"><div class="rowstack ldue"><span>' + due.main + "</span>" +
                    (due.sub ? "<small>" + due.sub + "</small>" : "") + "</div></td>" +
                  '<td><div class="rowstack"><span>' + esc(r.vendor) + "</span><small>" + esc(r.description) + "</small></div></td>" +
                  '<td class="num">' + money(r.amount) + "</td>" +
                  "<td>" + statusBadge(r) + "</td></tr>";
-        }).join("") + "</tbody></table>"
+        }).join("") + "</tbody></table></div>"
       : '<p class="profile__clear">No expenses logged for this unit.</p>';
 
     var chips = suggestions(t).map(function (sug) {

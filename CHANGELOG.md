@@ -1,5 +1,57 @@
 # Changelog
 
+## Batch 7 (October 2026)
+
+**In short:**
+- **Real Estate demo:** lighter header, tighter layouts, tenant profiles with AI outreach, hover details on the live monitor, and an expense ledger that shows past-due and upcoming invoices.
+- **Insights:** new subheader, the "Bespoke AI / Insights" line removed, artwork on every article card, and the featured card's blurb centred.
+
+### Phase 1: Real Estate demo layout
+- **Header:** the top bar is white with a thin line underneath. The left sidebar stays dark blue.
+- **Dashboard:** the four widgets at the top (Total Portfolio, Active Tickets, Total Paid Ledger, AI Autopilot Mode) have a maximum width, so they no longer stretch across wide screens.
+- **AI Autopilot:** the Spend & Scope, Tenant Outreach, Vendor Pool and Escalation sections have a maximum width too.
+- **"Back to all demos"** at the bottom is gone. The back button in the header stays.
+- **Tenants:** Borough and Status now sit right next to Address instead of far off to the right.
+- **Total Paid Ledger** is now worked out from the ledger itself instead of being a fixed number.
+
+### Phase 2: Tenant profiles and AI outreach
+- **Every tenant has a profile.** Clicking a row in the tenant list, or an Active Emergencies / Needs Attention card, opens it. Each profile has its own address, so the browser's Back button works.
+- A profile shows contact details (phone, email, address), the lease (move-in date, lease end, rent, time as a tenant), critical details (active emergencies in red, lease and payment issues in amber, notes) and the unit's expense history.
+- **Reach out with AI:** choose Text, Email or Phone, then type what the AI should say or tap one of the suggested prompts. The suggestions change with the situation: an emergency, a lease renewal or a routine check-in.
+  - The AI writes a draft that can be edited before sending.
+  - Sending adds it to an outreach activity log. A phone call shows a short call transcript.
+  - Like the rest of the demo, this is simulated and nothing is actually sent.
+- Tenants now have email addresses, move-in dates and rent, made up for the demo.
+
+### Phase 3: Live monitor hover details and emergencies
+- **Hovering over a unit** lifts the tile and shows a pop-up with the tenant's name, address, phone, email, move-in date, lease end and status, plus any critical detail: an emergency, a lease note, a past-due invoice or a tenant note.
+- **Clicking a unit** opens that tenant's profile.
+- Keyboard users get the same pop-up when they Tab to a tile. On phones, a tap goes straight to the profile.
+- **Active emergencies** (BK-301, MN-302, QN-103) are highlighted in red with a pulsing ring, and the status key has an "Active emergency" entry.
+
+### Phase 4: Expense ledger
+- **Past-due and upcoming invoices.** There are 3 past-due invoices ($680) and 4 upcoming ones ($1,165) next to the 15 paid entries. The upcoming ones include the quotes for the three open emergency tickets.
+- **Summary tiles** at the top show Past due, Upcoming and Paid, each with a total, a count and a short note. Clicking a tile filters the table.
+- **Easier to read:**
+  - tighter columns;
+  - bold vendor names with the work described underneath;
+  - a coloured tag for each job category;
+  - larger amounts for open invoices;
+  - "N days overdue" or "in N days" under each due date.
+- **Badges:** Paid is soft green, Upcoming is blue and Past due is solid red. Past-due rows also have a red edge and are listed first.
+- Unit codes in the ledger link to the tenant's profile. Past-due invoices also appear on the tenant's profile and in the dashboard pop-up.
+
+### Phase 5: Insights
+- **Subheader** now reads "Plain-language guides on how law firms, financial institutions and schools can safely put AI to work."
+- **"Bespoke AI / Insights"** above the title is gone.
+- **Article cards** now show the illustration from the matching service page as a band across the top. It fades out before the text starts, so the text stays easy to read. The featured card has the illustration on its right side.
+- **Featured article** (How Artificial Intelligence Is Used in Finance): the subheader text is now in the middle of the card instead of the bottom-right corner.
+
+### Phase 6: Final check
+- The Insights page and every Real Estate demo view (Dashboard, Tenants, Expense Ledger, AI Autopilot and two tenant profiles) were checked at 1440, 820, 390, 360 and 320 px wide. There is no sideways scrolling, and no console errors, failed requests or broken images.
+- Tenant profiles no longer overflow on 320 px phones.
+- The Real Estate demo thumbnail was retaken to show the new white header and the emergency highlighting.
+
 ## Batch 6 (October 2026)
 
 **In short:**
