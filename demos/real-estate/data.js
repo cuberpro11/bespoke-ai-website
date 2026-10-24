@@ -127,14 +127,58 @@ window.RE_DATA = (function () {
     { id: "V-008", name: "Staten Fast Handyman & Locksmith", specialty: "Handyman",    rate: "$85/hr",       rating: 4.5 }
   ];
 
+  // The demo's "today": the ledger and lease notes are written as of this date.
+  var AS_OF = "2026-07-06";
+
+  var BASE_RENT = { Brooklyn: 3300, Manhattan: 4200, Queens: 2700, Bronx: 2100 };
+
+  // Lease ends that the attention notes above already state.
+  var LEASE_END = { "BK-101": "2026-08-31", "BK-102": "2026-09-14" };
+
+  var NOTES = {
+    "BK-101": "Prefers a phone call over text for anything lease-related.",
+    "BK-301": "Works nights; texts after 2 PM get the fastest reply.",
+    "MN-302": "Young child at home; treat electrical issues as top priority.",
+    "QN-103": "Spanish is the preferred language for calls.",
+    "MN-701": "Building super holds a spare key on file.",
+    "BX-101": "Asked for email receipts for every payment."
+  };
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+  // Deterministic lease terms: move-in on the 1st, yearly renewals, lease
+  // runs to the last day of the month before the move-in anniversary.
+  function lease(i, unit) {
+    var month = (i * 5) % 12 + 1;
+    var year = 2020 + (i * 3) % 6;
+    var moveIn = year + "-" + pad(month) + "-01";
+    var end = LEASE_END[unit];
+    if (!end) {
+      var y = 2026;
+      var last = new Date(Date.UTC(y, month - 1, 0));
+      if (last.toISOString().slice(0, 10) <= AS_OF) { last = new Date(Date.UTC(y + 1, month - 1, 0)); }
+      end = last.toISOString().slice(0, 10);
+    }
+    return { moveIn: moveIn, leaseEnd: end };
+  }
+
+  function email(name) {
+    return name.toLowerCase().replace(/[^a-z ]/g, "").trim().replace(/\s+/g, ".") + "@example.com";
+  }
+
   var CATEGORIES = ["Plumbing", "HVAC", "Electrical", "Handyman", "Locksmith"];
   var BOROUGHS = ["All", "Brooklyn", "Manhattan", "Queens", "Bronx"];
 
   return {
-    tenants: TENANTS.map(function (r) {
+    asOf: AS_OF,
+    tenants: TENANTS.map(function (r, i) {
+      var l = lease(i, r[0]);
       return {
         unit: r[0], name: r[1], phone: r[2], address: r[3],
-        borough: r[4], status: r[5], first: r[1].split(" ")[0]
+        borough: r[4], status: r[5], first: r[1].split(" ")[0],
+        email: email(r[1]), moveIn: l.moveIn, leaseEnd: l.leaseEnd,
+        rent: BASE_RENT[r[4]] + ((i * 37) % 9) * 50,
+        notes: NOTES[r[0]] || ""
       };
     }),
     status: STATUS,

@@ -55,8 +55,10 @@
 
   function setView(view) {
     state.view = view;
+    // a tenant profile lives under the Tenants section
+    var navView = view === "tenant" ? "tenants" : view;
     $$(".sidenav__item").forEach(function (btn) {
-      var on = btn.getAttribute("data-view") === view;
+      var on = btn.getAttribute("data-view") === navView;
       btn.classList.toggle("is-active", on);
       btn.setAttribute("aria-selected", on ? "true" : "false");
     });
@@ -67,7 +69,10 @@
   }
 
   $$(".sidenav__item").forEach(function (btn) {
-    btn.addEventListener("click", function () { setView(btn.getAttribute("data-view")); });
+    btn.addEventListener("click", function () {
+      if (location.hash) { history.replaceState(null, "", location.pathname + location.search); }
+      setView(btn.getAttribute("data-view"));
+    });
   });
 
   /* ----------------------------------------------------------- dashboard -- */
@@ -165,7 +170,7 @@
   }
 
   function tenantCard(t, tone, badge, title, detail) {
-    return '<article class="tcard tcard--' + tone + '">' +
+    return '<a class="tcard tcard--' + tone + '" href="#tenant/' + esc(t.unit) + '">' +
              '<header class="tcard__top">' +
                '<span class="tcard__unit">' + esc(t.unit) + "</span>" +
                '<span class="tcard__boro">' + esc(t.borough) + "</span>" +
@@ -178,7 +183,7 @@
                '<span class="tcard__phone">' + phoneIcon() + esc(t.phone) + "</span>" +
                '<span class="tcard__addr">' + esc(t.address) + "</span>" +
              "</footer>" +
-           "</article>";
+           "</a>";
   }
 
   function sectionHead(title, count, id) {
@@ -220,9 +225,9 @@
     if (all.length) {
       var rows = all.map(function (t) {
         var st = D.status[t.status] || D.status.clean;
-        return "<tr>" +
+        return '<tr class="is-link" data-unit="' + esc(t.unit) + '">' +
                  '<td class="mono">' + esc(t.unit) + "</td>" +
-                 '<td class="strong">' + esc(t.name) + "</td>" +
+                 '<td class="strong"><a class="tlink" href="#tenant/' + esc(t.unit) + '">' + esc(t.name) + "</a></td>" +
                  '<td class="dim nowrap">' + esc(t.phone) + "</td>" +
                  '<td class="dim">' + esc(t.address) + "</td>" +
                  "<td>" + esc(t.borough) + "</td>" +
@@ -257,9 +262,382 @@
     if (target) { target.scrollIntoView({ behavior: "smooth", block: "start" }); }
   });
 
+  // whole roster row opens the profile; the name link carries keyboard access
+  $("#tenantSections").addEventListener("click", function (e) {
+    var row = e.target.closest("tr[data-unit]");
+    if (row && !e.target.closest("a")) { location.hash = "tenant/" + row.getAttribute("data-unit"); }
+  });
+
   $("#tenantSearch").addEventListener("input", function (e) {
     state.tenantQuery = e.target.value;
     renderTenants();
+  });
+
+  /* ------------------------------------------------------ tenant profile -- */
+
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var OFFICE_PHONE = "+1 (212) 555-0100";
+  var CHANNELS = {
+    Phone: { verb: "Start AI call", label: "AI call" },
+    Text:  { verb: "Send text",     label: "AI text" },
+    Email: { verb: "Send email",    label: "AI email" }
+  };
+
+  // yyyy-mm-dd → "Mar 1, 2023" without timezone drift
+  function fmtDate(iso) {
+    var p = iso.split("-");
+    return MONTHS[Number(p[1]) - 1] + " " + Number(p[2]) + ", " + p[0];
+  }
+
+  function monthsBetween(a, b) {
+    var x = a.split("-").map(Number), y = b.split("-").map(Number);
+    return (y[0] - x[0]) * 12 + (y[1] - x[1]) - (y[2] < x[2] ? 1 : 0);
+  }
+
+  function tenure(t) {
+    var m = monthsBetween(t.moveIn, D.asOf);
+    var yrs = Math.floor(m / 12), mos = m % 12;
+    var out = [];
+    if (yrs) { out.push(yrs + (yrs === 1 ? " yr" : " yrs")); }
+    if (mos || !yrs) { out.push(mos + (mos === 1 ? " mo" : " mos")); }
+    return out.join(" ");
+  }
+
+  function emergencyFor(unit) { return D.emergencies.filter(function (e) { return e.unit === unit; })[0]; }
+  function attentionFor(unit) { return D.attention.filter(function (a) { return a.unit === unit; })[0]; }
+  function ledgerFor(unit) { return D.ledger.filter(function (r) { return r.unit.indexOf(unit + " ") === 0; }); }
+
+  function building(t) { return t.address.split(",")[0]; }
+
+  // Seed history so a profile with an open ticket already shows the AI at work.
+  state.activity = {};
+  D.emergencies.forEach(function (e) {
+    var t = byUnit(e.unit);
+    state.activity[e.unit] = [{
+      channel: "Text", when: "Jul 5, 9:14 PM",
+      body: "Hi " + t.first + ", we got your report about the " + e.category.toLowerCase() +
+            " issue (" + e.ticket + "). " + e.vendor + " has been contacted and we'll confirm a visit window shortly."
+    }];
+  });
+
+  /* Turn a manager's instruction ("let them know the boiler is off Thursday")
+     into tenant-facing words ("Just letting you know the boiler is off Thursday"). */
+  function phrase(guide) {
+    var g = guide.trim().replace(/[.!\s]+$/, "");
+    if (!g) { return ""; }
+    var rules = [
+      [/^(?:please\s+)?(?:let|tell) (?:them|the tenant|him|her) know (?:that )?/i, "Just letting you know "],
+      [/^(?:please\s+)?remind (?:them|the tenant|him|her) (?:that )?/i, "A quick reminder: "],
+      [/^(?:please\s+)?ask (?:them|the tenant|him|her) (?:if|whether) /i, "Could you let us know if "],
+      [/^(?:please\s+)?ask (?:them|the tenant|him|her) to /i, "Could you please "],
+      [/^(?:please\s+)?ask (?:them|the tenant|him|her) (?:for )?/i, "Could you share "],
+      [/^(?:please\s+)?tell (?:them|the tenant|him|her) to /i, "Please "],
+      [/^(?:please\s+)?tell (?:them|the tenant|him|her) (?:that )?/i, ""],
+      [/^(?:please\s+)?confirm /i, "We'd like to confirm "],
+      [/^(?:please\s+)?apologi[sz]e (?:for )?/i, "We're sorry about "],
+      [/^(?:please\s+)?thank (?:them|the tenant|him|her) (?:for )?/i, "Thank you for "]
+    ];
+    var asked = false;
+    for (var i = 0; i < rules.length; i++) {
+      if (rules[i][0].test(g)) {
+        asked = /^Could you/.test(rules[i][1]);
+        g = g.replace(rules[i][0], rules[i][1]);
+        break;
+      }
+    }
+    g = g.replace(/\bthey're\b/gi, "you're").replace(/\bthey are\b/gi, "you are")
+         .replace(/\bthem\b/gi, "you").replace(/\btheir\b/gi, "your").replace(/\bthey\b/gi, "you");
+    g = g.charAt(0).toUpperCase() + g.slice(1);
+    return g + (asked ? "?" : ".");
+  }
+
+  var SAFETY = {
+    Plumbing: "Tell them to close the shut-off valve under the sink until the plumber arrives",
+    Electrical: "Tell them to switch off that circuit at the breaker and keep clear of the outlet",
+    Locksmith: "Tell them the locksmith will call 10 minutes before arriving"
+  };
+
+  function suggestions(t) {
+    var e = emergencyFor(t.unit);
+    if (e) {
+      return [
+        "Let them know " + e.vendor + " is booked for today between 2 and 4 PM",
+        "Ask them to send a photo of the " + e.category.toLowerCase() + " issue",
+        SAFETY[e.category] || "Tell them a technician has been booked and we'll confirm the time"
+      ];
+    }
+    if (attentionFor(t.unit)) {
+      return [
+        "Remind them the renewal packet is due by the end of the month",
+        "Ask them if they'd like a call to talk through renewal terms",
+        "Thank them for being a tenant since " + fmtDate(t.moveIn).split(" ").pop()
+      ];
+    }
+    return [
+      "Let them know the boiler will be serviced Thursday from 9 AM to noon",
+      "Ask them if anything in the apartment needs attention",
+      "Confirm their rent receipt for July was emailed"
+    ];
+  }
+
+  function draftFor(t, channel, guide) {
+    var e = emergencyFor(t.unit);
+    var msg = phrase(guide) || phrase(suggestions(t)[0]);
+    var ticket = !e ? "" : msg.indexOf(e.vendor) > -1
+      ? "This is about your " + e.category.toLowerCase() + " ticket " + e.ticket + "."
+      : "Your " + e.category.toLowerCase() + " ticket " + e.ticket + " is open and " + e.vendor + " is assigned.";
+
+    if (channel === "Text") {
+      return "Hi " + t.first + ", this is the AI assistant for " + building(t) + " management. " +
+             msg + (ticket ? " " + ticket : "") + " Reply here or call " + OFFICE_PHONE + " with any questions.";
+    }
+    if (channel === "Email") {
+      return "Subject: " + (e ? e.ticket + " update for " : "A note for ") + t.unit + "\n\n" +
+             "Hi " + t.first + ",\n\n" + msg + (ticket ? "\n\n" + ticket : "") +
+             "\n\nIf anything changes, just reply to this email or call us at " + OFFICE_PHONE + ".\n\n" +
+             "Best,\n" + building(t) + " management\n(sent by our AI assistant)";
+    }
+    return "Opening: Hi " + t.first + ", this is the AI assistant calling for " + building(t) + " management. Is now a good time?\n" +
+           "Message: " + msg + "\n" +
+           (ticket ? "If asked about the repair: " + ticket + "\n" : "") +
+           "Close: Confirm the best callback number, thank them, and log the outcome.";
+  }
+
+  function nowLabel() {
+    var d = new Date();
+    var h = d.getHours(), m = d.getMinutes();
+    return "Today, " + ((h % 12) || 12) + ":" + (m < 10 ? "0" : "") + m + (h < 12 ? " AM" : " PM");
+  }
+
+  function callTranscript(t, draft) {
+    var msg = (draft.match(/^Message: (.*)$/m) || [])[1] || "";
+    return [
+      ["AI", "Hi " + t.first + ", this is the AI assistant calling for " + building(t) + " management. Is now a good time?"],
+      [t.first, "Sure, go ahead."],
+      ["AI", msg],
+      [t.first, "Okay, that works. Thanks for letting me know."],
+      ["AI", "Great, I've noted that on your file. Have a good day!"]
+    ];
+  }
+
+  function activityItem(a) {
+    var body = a.transcript
+      ? '<ol class="transcript">' + a.transcript.map(function (l) {
+          return '<li><b>' + esc(l[0]) + ":</b> " + esc(l[1]) + "</li>";
+        }).join("") + "</ol>"
+      : '<p class="activity__body">' + esc(a.body).replace(/\n/g, "<br>") + "</p>";
+    return '<li class="activity__item activity__item--' + a.channel.toLowerCase() + '">' +
+             '<div class="activity__head"><span class="activity__chan">' + esc(CHANNELS[a.channel].label) + "</span>" +
+             '<span class="activity__when">' + esc(a.when) + "</span>" +
+             (a.outcome ? '<span class="activity__outcome">' + esc(a.outcome) + "</span>" : "") + "</div>" +
+             body + "</li>";
+  }
+
+  function renderActivity(unit) {
+    var list = state.activity[unit] || [];
+    $("#activityList").innerHTML = list.length
+      ? list.map(activityItem).join("")
+      : '<li class="activity__empty">No outreach yet. Drafts you send appear here.</li>';
+  }
+
+  function infoRow(label, value) {
+    return '<div class="kv"><dt>' + label + "</dt><dd>" + value + "</dd></div>";
+  }
+
+  function renderProfile(t) {
+    var st = D.status[t.status] || D.status.clean;
+    var e = emergencyFor(t.unit);
+    var a = attentionFor(t.unit);
+    var history = ledgerFor(t.unit);
+    var initials = t.name.split(" ").map(function (w) { return w.charAt(0); }).slice(0, 2).join("");
+
+    var critical = [];
+    if (e) {
+      critical.push('<div class="alert alert--urgent"><div class="alert__top"><span class="badge badge--urgent">Emergency</span>' +
+        '<span class="alert__ticket">' + esc(e.ticket) + " · " + esc(e.category) + "</span></div>" +
+        '<p class="alert__text">' + esc(e.issue) + "</p>" +
+        '<p class="alert__meta">Stage: ' + esc(D.status[e.stage].label) + " · Vendor: " + esc(e.vendor) +
+        " · Quote: " + money(e.quote) + "</p></div>");
+    }
+    if (a) {
+      critical.push('<div class="alert alert--warn"><div class="alert__top"><span class="badge badge--warn">Lease</span></div>' +
+        '<p class="alert__text">' + esc(a.note) + "</p></div>");
+    }
+    if (t.notes) {
+      critical.push('<div class="alert"><div class="alert__top"><span class="badge badge--note">Note</span></div>' +
+        '<p class="alert__text">' + esc(t.notes) + "</p></div>");
+    }
+    if (!critical.length) {
+      critical.push('<p class="profile__clear">No open issues for this unit.</p>');
+    }
+
+    var historyHtml = history.length
+      ? '<table class="table table--mini"><tbody>' + history.map(function (r) {
+          return "<tr><td class=\"dim nowrap\">" + esc(r.date) + "</td>" +
+                 '<td><div class="rowstack"><span>' + esc(r.vendor) + "</span><small>" + esc(r.description) + "</small></div></td>" +
+                 '<td class="num">' + money(r.amount) + "</td>" +
+                 '<td><span class="badge badge--paid">Paid</span></td></tr>';
+        }).join("") + "</tbody></table>"
+      : '<p class="profile__clear">No expenses logged for this unit.</p>';
+
+    var chips = suggestions(t).map(function (sug) {
+      return '<button type="button" class="chip chip--prompt" data-prompt="' + esc(sug) + '">' + esc(sug) + "</button>";
+    }).join("");
+
+    $("#profile").innerHTML =
+      '<header class="profile__head' + (e ? " is-emergency" : "") + '">' +
+        '<span class="profile__avatar" aria-hidden="true">' + esc(initials) + "</span>" +
+        '<div class="profile__id">' +
+          '<h1 class="page__title profile__name">' + esc(t.name) + "</h1>" +
+          '<p class="profile__sub"><span class="mono">' + esc(t.unit) + "</span> · " + esc(t.borough) +
+          ' · <span class="tstatus"><i style="background:' + st.dot + '"></i>' + esc(st.label) + "</span></p>" +
+        "</div>" +
+        (e ? '<span class="profile__flag">Active emergency</span>' : "") +
+      "</header>" +
+
+      '<div class="profile__grid">' +
+        '<div class="profile__col">' +
+          '<section class="panel"><h2 class="panel__title">Contact</h2><dl class="kvs">' +
+            infoRow("Phone", esc(t.phone)) +
+            infoRow("Email", esc(t.email)) +
+            infoRow("Address", esc(t.address)) +
+          "</dl></section>" +
+          '<section class="panel"><h2 class="panel__title">Lease</h2><dl class="kvs kvs--3">' +
+            infoRow("Move-in", fmtDate(t.moveIn)) +
+            infoRow("Lease ends", fmtDate(t.leaseEnd)) +
+            infoRow("Rent", money(t.rent).replace(".00", "") + "<small>/mo</small>") +
+          "</dl><p class=\"panel__sub\">Tenant for " + tenure(t) + "</p></section>" +
+          '<section class="panel"><h2 class="panel__title">Critical details</h2><div class="alerts">' + critical.join("") + "</div></section>" +
+          '<section class="panel"><h2 class="panel__title">Expense history</h2>' + historyHtml + "</section>" +
+        "</div>" +
+
+        '<div class="profile__col">' +
+          '<section class="panel outreach" aria-label="AI outreach">' +
+            '<h2 class="panel__title">Reach out with AI</h2>' +
+            '<p class="panel__sub">Tell the AI what to say. It drafts the message for you to review before anything goes out.</p>' +
+            '<div class="segmented" id="outreachSeg" role="group" aria-label="Channel">' +
+              '<button type="button" class="is-active" data-val="Text">Text</button>' +
+              '<button type="button" data-val="Email">Email</button>' +
+              '<button type="button" data-val="Phone">Phone</button>' +
+            "</div>" +
+            '<p class="outreach__to" id="outreachTo"></p>' +
+            '<label class="field__label" for="outreachGuide">What should the AI say?</label>' +
+            '<textarea class="textarea" id="outreachGuide" rows="3" placeholder="e.g. Let them know the plumber arrives tomorrow between 9 and 11 AM"></textarea>' +
+            '<div class="chips outreach__chips">' + chips + "</div>" +
+            '<button type="button" class="btn btn--primary" id="outreachDraft">Draft with AI</button>' +
+            '<div class="outreach__draft u-hide" id="outreachDraftBox">' +
+              '<label class="field__label" for="outreachText">AI draft <span class="field__hint">Edit before sending</span></label>' +
+              '<textarea class="textarea textarea--draft" id="outreachText" rows="7"></textarea>' +
+              '<div class="outreach__actions">' +
+                '<button type="button" class="btn btn--primary" id="outreachSend">Send text</button>' +
+                '<button type="button" class="btn" id="outreachDiscard">Discard</button>' +
+              "</div>" +
+            "</div>" +
+            '<p class="outreach__status" id="outreachStatus" role="status" aria-live="polite"></p>' +
+          "</section>" +
+          '<section class="panel"><h2 class="panel__title">Outreach activity</h2><ol class="activity" id="activityList"></ol></section>' +
+        "</div>" +
+      "</div>";
+
+    wireOutreach(t);
+    renderActivity(t.unit);
+  }
+
+  function wireOutreach(t) {
+    var channel = "Text";
+    var guide = $("#outreachGuide");
+    var box = $("#outreachDraftBox");
+    var text = $("#outreachText");
+    var status = $("#outreachStatus");
+
+    function syncChannel() {
+      $("#outreachTo").textContent = "To " + (channel === "Email" ? t.email : t.phone);
+      $("#outreachSend").textContent = CHANNELS[channel].verb;
+      $("#outreachDraft").textContent = channel === "Phone" ? "Draft call script" : "Draft with AI";
+    }
+
+    wireSegmented("outreachSeg", function (v) {
+      channel = v;
+      syncChannel();
+      if (!box.classList.contains("u-hide")) { text.value = draftFor(t, channel, guide.value); }
+    });
+
+    $$(".chip--prompt", $("#profile")).forEach(function (c) {
+      c.addEventListener("click", function () { guide.value = c.getAttribute("data-prompt"); guide.focus(); });
+    });
+
+    $("#outreachDraft").addEventListener("click", function () {
+      var btn = this;
+      btn.disabled = true;
+      btn.textContent = "Drafting…";
+      status.textContent = "";
+      var quick = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      setTimeout(function () {
+        text.value = draftFor(t, channel, guide.value);
+        box.classList.remove("u-hide");
+        btn.disabled = false;
+        syncChannel();
+        text.focus();
+      }, quick ? 0 : 650);
+    });
+
+    $("#outreachDiscard").addEventListener("click", function () {
+      box.classList.add("u-hide");
+      status.textContent = "Draft discarded.";
+    });
+
+    $("#outreachSend").addEventListener("click", function () {
+      var draft = text.value.trim();
+      if (!draft) { return; }
+      var entry = { channel: channel, when: nowLabel() };
+      if (channel === "Phone") {
+        entry.transcript = callTranscript(t, draft);
+        entry.outcome = "Completed · 1:08";
+      } else {
+        entry.body = draft;
+        entry.outcome = channel === "Text" ? "Delivered" : "Sent";
+      }
+      (state.activity[t.unit] = state.activity[t.unit] || []).unshift(entry);
+      renderActivity(t.unit);
+      box.classList.add("u-hide");
+      guide.value = "";
+      status.textContent = channel === "Phone"
+        ? "Call completed. The transcript is in the activity log."
+        : CHANNELS[channel].label + " sent to " + t.first + ".";
+    });
+
+    syncChannel();
+  }
+
+  /* ------------------------------------------------------------- routing -- */
+
+  state.returnView = "tenants";
+  state.inAppProfile = false;
+
+  function route() {
+    var m = location.hash.match(/^#tenant\/([A-Z]{2}-\d{3})$/);
+    var t = m && byUnit(m[1]);
+    if (t) {
+      if (state.view !== "tenant") { state.returnView = state.inAppProfile ? state.view : "tenants"; }
+      $("#profileBackLabel").textContent = state.returnView === "dashboard" ? "Back to Dashboard" : "Back to Tenants";
+      renderProfile(t);
+      setView("tenant");
+      return true;
+    }
+    if (state.view === "tenant") { setView(state.returnView); }
+    return false;
+  }
+
+  window.addEventListener("hashchange", function () {
+    state.inAppProfile = true;
+    route();
+  });
+
+  $("#profileBack").addEventListener("click", function (e) {
+    e.preventDefault();
+    if (state.inAppProfile) { history.back(); return; }
+    history.replaceState(null, "", location.pathname + location.search);
+    setView(state.returnView);
   });
 
   /* -------------------------------------------------------------- ledger -- */
@@ -419,4 +797,5 @@
   renderVendors();
   syncAutopilot();
   setView("dashboard");
+  route();
 })();
