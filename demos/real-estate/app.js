@@ -55,6 +55,7 @@
 
   function setView(view) {
     state.view = view;
+    if (typeof hidePop === "function") { hidePop(); }
     // a tenant profile lives under the Tenants section
     var navView = view === "tenant" ? "tenants" : view;
     $$(".sidenav__item").forEach(function (btn) {
@@ -109,14 +110,108 @@
 
     grid.innerHTML = rows.map(function (t) {
       var st = D.status[t.status] || D.status.clean;
-      var active = t.status !== "clean";
-      return '<div class="unit' + (active ? " is-active" : "") + '" title="' + esc(t.name + " — " + st.label) + '">' +
+      var cls = emergencyFor(t.unit) ? " is-emergency" : t.status !== "clean" ? " is-active" : "";
+      return '<a class="unit' + cls + '" href="#tenant/' + esc(t.unit) + '" data-unit="' + esc(t.unit) + '"' +
+               ' style="--st:' + st.dot + '" aria-describedby="unitPop"' +
+               ' aria-label="' + esc(t.unit + ", " + t.name + ", " + st.label + (cls === " is-emergency" ? ", active emergency" : "")) + '">' +
                '<span class="unit__dot" style="background:' + st.dot + '"></span>' +
                '<span class="unit__id">' + esc(t.unit) + "</span>" +
                '<span class="unit__name">' + esc(t.first) + "</span>" +
-             "</div>";
+             "</a>";
     }).join("");
   }
+
+  /* One shared popover follows the cursor over a tile (or sits under it on
+     keyboard focus) with the tenant's details. Touch skips it: a tap opens
+     the profile straight away. */
+
+  var pop = document.createElement("div");
+  pop.className = "unit-pop";
+  pop.id = "unitPop";
+  pop.setAttribute("role", "tooltip");
+  pop.hidden = true;
+  document.body.appendChild(pop);
+  var popUnit = null;
+
+  function popRow(label, value) {
+    return '<div class="unit-pop__row"><dt>' + label + "</dt><dd>" + esc(value) + "</dd></div>";
+  }
+
+  function fillPop(t) {
+    var st = D.status[t.status] || D.status.clean;
+    var e = emergencyFor(t.unit);
+    var a = attentionFor(t.unit);
+    var critical = "";
+    if (e) {
+      critical = '<div class="unit-pop__alert unit-pop__alert--urgent"><b>Emergency · ' + esc(e.category) + " · " + esc(e.ticket) + "</b>" + esc(e.issue) + "</div>";
+    } else if (a) {
+      critical = '<div class="unit-pop__alert unit-pop__alert--warn"><b>Lease</b>' + esc(a.note) + "</div>";
+    } else if (t.notes) {
+      critical = '<div class="unit-pop__alert"><b>Note</b>' + esc(t.notes) + "</div>";
+    }
+    pop.innerHTML =
+      '<div class="unit-pop__head"><span class="unit-pop__unit">' + esc(t.unit) + "</span>" +
+        '<span class="tstatus"><i style="background:' + st.dot + '"></i>' + esc(st.label) + "</span></div>" +
+      '<p class="unit-pop__name">' + esc(t.name) + "</p>" +
+      '<dl class="unit-pop__rows">' +
+        popRow("Address", t.address) +
+        popRow("Phone", t.phone) +
+        popRow("Email", t.email) +
+        popRow("Move-in", fmtDate(t.moveIn)) +
+        popRow("Lease ends", fmtDate(t.leaseEnd)) +
+      "</dl>" + critical +
+      '<p class="unit-pop__hint">Click to open the full profile</p>';
+    pop.classList.toggle("is-emergency", !!e);
+  }
+
+  function showPop(tile) {
+    var unit = tile.getAttribute("data-unit");
+    if (unit !== popUnit) { fillPop(byUnit(unit)); popUnit = unit; }
+    pop.hidden = false;
+    requestAnimationFrame(function () { pop.classList.add("is-shown"); });
+  }
+
+  function hidePop() {
+    pop.classList.remove("is-shown");
+    pop.hidden = true;
+    popUnit = null;
+  }
+
+  // place the box near (x, y), flipping to stay inside the viewport
+  function placePop(x, y, below) {
+    var gap = 14;
+    var w = pop.offsetWidth, h = pop.offsetHeight;
+    var vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    var left = x + gap, top = below ? y : y + gap;
+    if (left + w > vw - 8) { left = Math.max(8, x - gap - w); }
+    if (top + h > vh - 8) { top = Math.max(8, (below ? below : y) - gap - h); }
+    pop.style.left = left + "px";
+    pop.style.top = top + "px";
+  }
+
+  var canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var grid = $("#unitGrid");
+
+  if (canHover) {
+    grid.addEventListener("mousemove", function (e) {
+      var tile = e.target.closest(".unit");
+      if (!tile) { hidePop(); return; }
+      showPop(tile);
+      placePop(e.clientX, e.clientY);
+    });
+    grid.addEventListener("mouseleave", hidePop);
+  }
+
+  grid.addEventListener("focusin", function (e) {
+    var tile = e.target.closest(".unit");
+    if (!tile || !tile.matches(":focus-visible")) { return; }
+    showPop(tile);
+    var rect = tile.getBoundingClientRect();
+    placePop(rect.left - 14, rect.bottom + 8, rect.top);
+  });
+  grid.addEventListener("focusout", hidePop);
+  window.addEventListener("scroll", hidePop, { passive: true });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { hidePop(); } });
 
   function renderStatusKey() {
     var key = $("#statusKey");
@@ -124,7 +219,8 @@
       var st = D.status[k];
       return '<span class="statuskey__item"><i style="background:' + st.dot + '"></i>' + esc(st.label) + "</span>";
     }).join("");
-    key.innerHTML = '<span class="statuskey__label">Status key</span>' + items;
+    key.innerHTML = '<span class="statuskey__label">Status key</span>' + items +
+      '<span class="statuskey__item statuskey__item--emergency"><i></i>Active emergency</span>';
   }
 
   $("#unitSearch").addEventListener("input", function (e) {
