@@ -227,14 +227,15 @@
                  '<td class="dim">' + esc(t.address) + "</td>" +
                  "<td>" + esc(t.borough) + "</td>" +
                  '<td><span class="tstatus"><i style="background:' + st.dot + '"></i>' + esc(st.label) + "</span></td>" +
+                 '<td aria-hidden="true"></td>' +
                "</tr>";
       }).join("");
 
       out.push('<section class="tsec" aria-label="All tenants">' +
                sectionHead("All Tenants", all.length + " of " + D.tenants.length) +
                '<div class="panel tpanel"><div class="tablewrap"><table class="table table--roster">' +
-                 '<colgroup><col class="c-unit"><col class="c-name"><col class="c-phone"><col><col class="c-boro"><col class="c-status"></colgroup>' +
-                 "<thead><tr><th>Unit</th><th>Tenant</th><th>Contact</th><th>Address</th><th>Borough</th><th>Status</th></tr></thead>" +
+                 '<colgroup><col class="c-unit"><col class="c-name"><col class="c-phone"><col class="c-addr"><col class="c-boro"><col class="c-status"><col class="c-spacer"></colgroup>' +
+                 "<thead><tr><th>Unit</th><th>Tenant</th><th>Contact</th><th>Address</th><th>Borough</th><th>Status</th><th aria-hidden=\"true\"></th></tr></thead>" +
                  "<tbody>" + rows + "</tbody></table></div></div></section>");
     }
 
@@ -295,6 +296,11 @@
                '<td><span class="badge badge--paid">Paid</span></td>' +
              "</tr>";
     }).join("");
+  }
+
+  function renderPaidTotal() {
+    var total = D.ledger.reduce(function (sum, r) { return sum + r.amount; }, 0);
+    $("#paidTotal").textContent = "$" + total.toLocaleString("en-US");
   }
 
   /* ----------------------------------------------------------- autopilot -- */
@@ -407,6 +413,7 @@
   renderTenants();
   renderLedgerChips();
   renderLedger();
+  renderPaidTotal();
   renderCategories();
   renderEscalations();
   renderVendors();
